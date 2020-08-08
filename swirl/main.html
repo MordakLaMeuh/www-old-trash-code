@@ -303,8 +303,8 @@ var NodeServer = function(ip,port_Order) {
 
 	var serverType = { 			// 1-L'utilisation de l'API crypto passe forcément pas une page HTTPS sur la dernière version de chrome
 		ssl	: false,			// 2-Aucune regression de sécurité n'est possible, si la page source est HTTPS le serveur node doit etre SSL aussi.
-		ws	: 'ws://'+ip+':'+(port_Order+80)+'/',
-		wss	: 'wss://'+ip+':'+(port_Order+443)+'/'
+		ws	: 'ws://'+ip+':'+(port_Order+81)+'/',
+		wss	: 'wss://'+ip+':'+(port_Order+444)+'/'
 	};
 	var addr=(serverType.ssl || location.protocol == 'https:')?serverType.wss:serverType.ws;
 

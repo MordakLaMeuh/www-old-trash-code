@@ -1,0 +1,10 @@
+{
+  "name": "swirl",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "ip": "^1.1.5",
+    "math": "0.0.3",
+    "ws": "^7.3.1"
+  }
+}
