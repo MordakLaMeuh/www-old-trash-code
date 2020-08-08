@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+</head>
+<body>
+</body>
+<script>
+var poulet = function(A, B) {
+	this.name=A;
+	this.age=B;
+	this.STR = function() {
+		return 'le ' +this.name+' est cuit';
+	}
+}
+
+var bark = function() {
+	console.log(this.name+': woouf wouuuf !');
+}
+var A = new poulet('Pierre',32);
+var B = new poulet('Rgoer',22);
+
+console.log(A.STR());
+
+poulet.prototype.bark = bark;
+A.bark();
+B.bark();
+
+console.log(A.bark == B.bark);
+
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>Helios System-WebRTC P2P Sharing File Interface</title>
+	<link rel="shortcut icon" href="images/ours.png">
+</head>
+<body>
+</body>
+<script>
+var mother = (function() {
+	function instanceConstructor(x) {
+		this.x = x;										// this rend l'attribut accessible aux objets filles. Il devient un attribut public banal de l'objet fille, accessible par this.
+		var y = 45;										// y reste une variable privée à l'objet mère ! impossible d'y acceder depuis la fille.
+		this.mugir = function(){ console.log('meuuuuh'); } 			// Idem la fonction avec this devient public de l'objet fille ! tout comme un attribut avec this.
+		var aboyer = function(){ console.log('wouf wouf !'); }
+		eternuer = function(){console.log('atchoum !');}			// Sans var ni this, la fonction est accessible à la mère et aux filles. mais pas depuis le 'main'
+		Z=567;										// Atribut sans var ni this, se comporte comme la fonction précédente. accessible mère & fille seulement.
+		console.log('constructeur mère appelé');
+		aboyer();										// La fonction dans la mère déclarée avec var peut s'invoquer à l'intèrieur d'elle même seulement !
+		eternuer();
+		console.log('valeur de Z='+Z);
+		this.changeZ = function() {Z=3;}
+		this.getZ = function() {console.log(Z);}
+		this.getR = function() {console.log(this.R);}				// Accede à la variable de la fille.
+	}
+	return instanceConstructor;
+})();
+
+var objA = (function() {
+	function instanceConstructor(z) {
+		mother.call(this,z);
+		this.R = 'roger';			// Avec et seulement avec this, R sera accessible à la maman.
+		this.getValue = function(){ console.log('value:'+this.y); }
+		eternuer();
+		//this.aboyer(); OR aboyer(); tout court est une ERREURE, aboyer est une fonction provée à la mère.
+		console.log('valeur de Z depuis fille='+Z);				// ATTENTION AUX COLLISIONS ! Si la variable avait été petit z, c'est la valeur en entrée qui aurait été prise en compte et non celle de maman
+	}
+	return instanceConstructor;
+})();
+	
+var objB = (function() {
+	function instanceConstructor(z) {
+		this.R = 'polux';	
+		mother.call(this,z);
+		this.getValue = function(){ console.log('value:'+this.x); }
+	}
+	return instanceConstructor;
+})();
+
+var A = new objA(11);
+var B = new objB(23);
+
+console.log(A.x);
+
+console.log(this.x);			// Que ce soit avec this. ou x tout court, x est innacessible directement sans invocation de l'objet.
+
+A.getValue();
+B.getValue();
+
+A.mugir();
+//A.aboyer();
+//A.eternuer();
+//console.log(A.Z);
+A.getZ();
+B.changeZ();			// CREER UNE COLLISION DUE AU FAIT QUE Z N'EST DEFINI NI AVEC VAR, NI AVEC THIS !!!
+A.getZ();
+
+var ZZZ = function(){console.log('meuh meuh meuh');} 
+A.getUser = ZZZ;
+
+A.getUser();
+//B.getUser();
+
+A.getR();
+B.getR();
+
+</script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">			<!-- media Query portables -->
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>Helios System-WebRTC P2P Sharing File Interface</title>
+	
+	<link rel="shortcut icon" href="images/ours.png">
+</head>
+<style>
+body { margin: 0px; padding: 0px; }
+#conteiner
+{
+	overflow:hidden;
+	height: 30vh;
+}
+#red
+{
+	background-color: red;
+}
+#blue
+{
+	background-color: blue;
+}
+#green
+{
+	background-color: green;
+}
+.tab {display: table-cell; width: 34vw; table-layout: fixed;}
+#back {
+	background-color: purple;
+	height: 10vh;
+}
+img {
+  vertical-align:middle;
+  height: 50px;
+
+}
+#meuh { background-color: yellow; 
+	 }
+</style>
+<script type="text/javascript">
+<!--//
+gk=window.Event?1:0; // navigateurs Gecko ou IE
+D=document;
+
+function ctrl(e)
+{
+el=gk?e.target:event.srcElement; //objet sous la souris
+if(!el.tagName)el=el.parentNode; // noeud #text
+defaultStatus=el.id
+console.log(el.id);
+}
+
+D.onmousemove=ctrl
+//-->
+</script>
+<body>
+</body>
+<div id='conteiner'>
+<div id='red' class='tab'>
+Block 1 <br>
+Ce sont des choses qui arrivent <br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</div>
+<div id='blue' class='tab'>
+Block 2 <br>
+Les carotes sont cuites
+</div>
+<div id='green' class='tab'>
+Block 3 <br>
+</div>
+</div>
+<div id='back'>
+Ice ma 4eme DIV !
+bla bla
+</div>
+<div id='meuh'>
+<img src="images/ours.png" alt="" />Texte 1 à aligner <br>
+<img src="images/ours.png" alt="" />Texte 2 à aligner
+</div>
+</html>

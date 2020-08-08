@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr-FR">					<!-- Bloque le clic droit - l'evenement sera saisi par JS et JS seulement -->
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Easy Bookmark with Foxy">
+	<meta name="author" content="secret">
+	
+	<title>Entrelacement I</title>
+	
+	<!-- <link rel='stylesheet' id='DOM'  href='foxybookmark.css' type='text/css' media='all' /> -->
+	<link rel="shortcut icon" href="ours.png">
+</head>
+
+<body> 
+<style>
+* { margin: 0px; padding: 0px; }
+body { background-color: black; }
+H3 { text-decoration: underline; }
+
+#urlAreaDom {
+	width:100vw;
+	position:absolute;
+	/*overflow:scroll;*/
+}
+.boxLine {
+	width:100vw;
+	position:absolute;
+	transition-duration: 3s;
+	z-index:10;
+}
+.red 		{ background-color: red; 	}
+.orange  	{ background-color: orange;  	}
+.yellow  	{ background-color: yellow;  	}
+.green     	{ background-color: #228B22; 	}
+.blue 	     	{ background-color: #1E90FF; 	}
+.darkMagenta 	{ background-color: #8B008B; 	} 
+.blueViolet  	{ background-color: #8A2BE2; 	}
+
+#header		{ width: 100vw; height: 15vh; background-color: black; color:white;}
+#footer		{ width: 100vw; height: 15vh; position:fixed; top: 85vh; background-color: black; color:white;}
+
+</style>
+<div id='header'>	
+<H3>Entrelacement I</H3><br>
+Gestion, sélection et inversion des lignes précise avec mouvements harmonieux. <br>
+Entrelacement lignes Version 1 utilisant mousedown/mouseup en paramètre event sans AREA. <br>
+L'absence d'aire précise rend l'utilisation avec mouseMove impossible.
+</div>
+
+<div id='urlAreaDom'>
+
+</div>
+
+<div id='footer'>
+<br>
+Fonctions principales:<br>
+- mouseDetection: Détecte la position souris et renvoit l'élément pointé, class, id etc...<br>
+- select and slide elements: Gestion des translations entre chaques éléments.<br>
+</div>
+
+<script>
+var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENVOYER LA DIV COURANTE	***/
+	var mouseConstructor = function(){
+		this.mouse_X = null;
+		this.mouse_Y = null;
+		this.element = null;
+		this.id = null;
+		this.class = null;
+		SUPER = this;
+		var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE -- console.log('_isGecko vaut:'+_isGecko);
+	
+		var evalMouse = function(e) {
+			var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris				
+				
+			SUPER.id = element.parentNode.id;
+			SUPER.class = element.className;
+			SUPER.element = element;
+			//Description du bug recontré: Dans le cas d'une balise <p>, <span>, <img> etc... HTML quoi, on doit remonter...
+			//... au parent. Dans le cas ou la souris pointe déjà sur une <div>, on ne fait que renvoyer l'id de la div pointée.
+			/*
+			if (e.target.tagName != 'DIV')	SUPER.id=element.parentNode.id;
+			else		 		SUPER.id=element.id;
+			*/
+			SUPER.mouse_X = e.pageX;
+			SUPER.mouse_Y = e.pageY;
+			//console.log('Xmouse='+SUPER.mouse_X +' Ymouse='+SUPER.mouse_Y+' ID:'+SUPER.id+' parentClass:'+SUPER.class);
+		}	
+		console.log('activation de la détéction souris');
+		document.onmousemove=evalMouse;
+	}
+	return mouseConstructor;
+})();
+var mouse = new mouseFonctions();
+
+var urlAreaDOM = document.getElementById('urlAreaDom');
+
+/*** VERSION CLASSIQUE AVEC MOUSEDOWN/MOUSEUP sans optimisation AREA ***/
+
+elementList=new Array();
+var drawElement = (function()
+{
+	var elementObjet = function(element,location)
+	{
+		this.element=element;
+		this.location=location;
+	}
+	var createElement = function(size,list)
+	{
+		for (var i=0;i<list.length; i++)
+		{
+			console.log("création d\'un element:");
+			var element = document.createElement('div');
+			element.className  = 'boxLine '+list[i];
+			element.style.top  = size*i+'vh';
+			element.style.height = size+'vh';
+			urlAreaDOM.appendChild(element);
+			
+			var j = new elementObjet(element,size*i);
+			elementList.push(j);
+		}
+	}
+	return createElement;
+})();
+
+var colorList = new Array('red','orange','yellow','green','blue','darkMagenta','blueViolet');
+var x = new drawElement(10,colorList);
+
+var currentElement;
+urlAreaDOM .addEventListener('mousedown',function(e){
+	currentElement = mouse.element;
+	var mouseUpListener = function(e) {
+		if (currentElement == mouse.element) 	console.log('egality - nobydy\'s move');
+		else 	{
+			console.log('inegal - Preparing to MOVE !');
+			var z1, z2 =0;
+			
+			for (var z=0; z<elementList.length; z++)
+			{
+				if ( currentElement 	== elementList[z].element) 	z1=z;
+				if ( mouse.element 	== elementList[z].element)	z2=z;
+			}
+			console.log('detemination du vh de l\'element courant:'+elementList[z1].location);
+			console.log('detemination du vh de l\'element mouse:'+elementList[z2].location);
+			
+			var tempLocation = elementList[z1].location;
+			elementList[z1].location=elementList[z2].location;
+			elementList[z2].location=tempLocation;
+			
+			currentElement.style.top = elementList[z1].location+'vh';
+			mouse.element.style.top = elementList[z2].location+'vh';
+			
+			var j = mouse.element; 
+			var k = currentElement;
+			j.style.opacity, k.style.opacity = 0;
+			setTimeout(function(){j.style.opacity = 1; k.style.opacity = 1;},1500);	
+		}
+		urlAreaDOM .removeEventListener('mouseup',mouseUpListener,false);
+	}
+	e.preventDefault();
+	urlAreaDOM .addEventListener('mouseup',mouseUpListener,false);	
+},false);
+
+</script>
+</body>
+</html>

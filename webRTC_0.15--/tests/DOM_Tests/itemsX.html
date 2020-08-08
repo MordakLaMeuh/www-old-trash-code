@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">			<!-- media Query portables -->
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>Helios System-WebRTC P2P Sharing File Interface</title>
+	
+	<link rel="shortcut icon" href="images/ours.png">
+</head>
+<style>
+body {
+	overflow-y: hidden;
+}
+#contener_header            /* Le conteiner contiens la balise <H1> et l'image #play_pause_button, le signifier RELATIVE permettra aux contenant de tenir dedans ! */
+{
+display: inline-block;
+    width:30%;
+    height: 300px;
+    border: none;
+   /* top: 20px;
+    left: 20px;*/
+    /*position: relative;*/
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    list-style: none;
+}
+#axx
+{
+display: inline-block;
+    width:30%;
+    height: 300px;
+    border: none;
+    right: 20px;
+   /* top: 20px;
+    left: 20px;*/
+    /*position: relative;*/
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    list-style: none;
+}
+.line
+{
+   /* position: absolute; */   /* Le bouton est en position ABSOLUTE à l'intèrieur de son conteiner. */
+   /* top: 20px;
+    left: 20px;
+    border: none; */  
+}
+li {
+    display: inline;
+    list-style: none; /* pour enlever les puces sur IE7 */
+    margin: 10px;
+}
+li a {
+    display: inline-block;
+    width: 100px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background: #999;
+} 
+A1,A2{
+	display: inline-block;
+}
+td /* Toutes les cellules des tableaux... */
+{
+    border: 1px solid black; /* auront une bordure de 1px */
+} 
+#scroll{
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    border: 1px solid black;
+    text-align: justify;
+    padding: 5px;
+}
+</style>
+
+<body>
+<ul>
+    <li><a href="#">Item 1</a></li>
+    <li><a href="#">Item 2</a></li>
+    <li><a href="#">Item 3</a></li>
+    <li><a href="#">Item 4</a></li>
+</ul>
+<div id='contener_header'>
+	<span class='line'>Ce sont des choses qui arrivent<br></span>
+	<span class='line'>Et pourquoi donc pas ?<br></span>
+	<span class='line'>Seigneur Gardakan, vous avez un postèrieur<br></span>
+</div>
+<!--
+<div id='axx'>
+<table>
+   <tr>
+       <th>Titre du film</th>
+       <th>Pour enfants ?</th>
+       <th>Pour adolescents ?</th>
+   </tr>
+   <tr>
+       <td>Massacre à la tronçonneuse</td>
+       <td >Non, trop violent</td>
+       <td>Oui</td>
+   </tr>
+   <tr>
+       <td>Les bisounours font du ski</td>
+       <td>Oui, adapté</td>
+       <td>Pas assez violent...</td>
+   </tr>
+   <tr>
+       <td>Lucky Luke, seul contre tous</td>
+       <td colspan="2">Pour toute la famille !</td>
+   </tr>
+</table> 
+</div>
+</div>
+<span class='A1'><br>Ceci est un test<span><span class='A2'>TEST !</span>
+</div>
+<table>
+   <tr>
+       <td>Carmen</td>
+       <td>33 ans</td>
+       <td>Espagne</td>
+   </tr>
+   <tr>
+       <td>Michelle</td>
+       <td>26 ans</td>
+       <td>États-Unis</td>
+   </tr>
+</table> -->
+
+<div id="scroll">
+    L'ornithorynque (Ornithorhynchus anatinus) est une petite espèce de mammifère semi-aquatique endémique de l'est de l'Australie, y
+    compris en Tasmanie. C'est l'une des cinq espèces de l'ordre des monotrèmes, les seuls mammifères qui pondent des ?ufs au lieu de
+    donner naissance à des petits vivants (les quatre autres espèces sont des échidnés). C'est la seule espèce survivante de la famille
+    des Ornithorhynchidae et du genre Ornithorhynchus bien qu'un grand nombre de fragments d'espèces fossiles de cette famille et de ce
+    genre aient été découvertes.
+    <br /><br />
+    L'apparence bizarre de ce mammifère pondant des ?ufs, muni d'aiguillons venimeux, à bec de canard, à queue de castor et à pattes
+    de loutre a fortement surpris les premiers explorateurs qui l'ont découvert et bon nombre de naturalistes européens ont cru à une
+    plaisanterie. C'est l'un des rares mammifères venimeux : le mâle porte un aiguillon sur les pattes postérieures qui peut libérer du
+    venin capable d'infliger de vives douleurs à un être humain. Les traits originaux de l'ornithorynque en font un sujet d'études
+    important pour connaître l'évolution des espèces animales et en ont fait un des symboles de l'Australie : il a été utilisé comme
+    mascotte pour de nombreux évènements nationaux et il figure au verso de la pièce de 20 centimes (cents) australiens.
+</div>
+<a href="javascript:;" onmousedown="scroll(-1);" onmouseup="scroll(0);">up</a>
+&nbsp;&nbsp;
+<a href="javascript:;" onmousedown="scroll(+1);" onmouseup="scroll(0);">down</a>
+
+</body>
+
+<script>  
+var speed = 0; //détermine le sens de défilement (1, -1 ou 0 pour l'arrêt)
+function scroll(to_scroll, no_speed_change){
+    if(!no_speed_change) speed = to_scroll; //on ne modifie pas la vitesse si la fonction a été appelée par elle-même pour éviter une boucle infinie
+    if(speed !=0){
+        document.getElementById('scroll').scrollTop += (speed*10); //le défilement se fait par 10px
+        console.log('emportement');
+        //setTimeout('scroll('+to_scroll+', '+true+')', 10);
+    }
+}
+function MouseWheelHandler(e) {
+
+	console.log('meuh');
+	// cross-browser wheel delta
+	//var e = window.event || e; // old IE support
+	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+	console.log(delta);
+	if (delta > 0) 	scroll(-1);
+	else			scroll(+1);
+	return false;
+}
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+ 
+function mugir()
+{
+	alert(this);
+}
+//if (document.getElementById('scroll').attachEvent) //if IE (and Opera depending on user setting)
+//    document.getElementById('scroll').attachEvent("on"+mousewheelevt, function(){alert('meuh');})
+//else if (document.getElementById('scroll').addEventListener) //WC3 browsers
+   // document.getElementById('scroll').addEventListener(mousewheelevt, MouseWheelHandler, false)
+if (document.body.attachEvent) //if IE (and Opera depending on user setting)
+   document.body.attachEvent("on"+mousewheelevt, function(){alert('meuh');})
+else if (document.body.addEventListener) //WC3 browsers
+   document.body.addEventListener(mousewheelevt, mugir, false)
+   
+document.getElementById('scroll').onmouseover=function(){document.body.removeEventListener(mousewheelevt, mugir, false)}
+document.getElementById('scroll').onmouseout =function(){document.body.addEventListener(mousewheelevt, mugir, false)}
+</script>
+</html>

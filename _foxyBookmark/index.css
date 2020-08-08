@@ -1,0 +1,50 @@
+*
+{
+    padding: 0;
+    margin: 0;
+}
+body
+{
+    position: relative;
+    background:#0000FE;
+}
+H1
+{
+  color:red;
+  margin-left: 15px;
+}
+li,ul
+{
+  cursor: copy;
+  color:#00FF00;
+  font-size: 130%;
+}
+
+#backgroundImage
+{
+    display:none;
+    position:absolute;
+}
+#frame
+{
+    display: none;
+    float: right; 
+    /*position:absolute;*/
+}
+#navigation {
+  width: 200px;
+  /*list-style: none;*/
+  margin-left: 10px;
+  color:green;
+}
+#extendBookmarkBouton
+{
+  position: absolute;
+  margin-left: 20px;
+  color: #F04512;
+  cursor: ew-resize;
+}
+#menu
+{
+  position: absolute;
+}

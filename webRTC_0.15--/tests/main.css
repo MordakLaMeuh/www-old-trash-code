@@ -1,0 +1,91 @@
+* {  }
+
+body {
+background:#eee;
+margin:0;
+padding:0;
+}
+
+#bloc {
+	width: 40vw;
+	height: 10vh;
+	background-color: yellow;
+}
+#main_content {
+overflow:hidden;
+height:30vh;
+width:60vw;
+border: solid 1px red;
+/*position: absolute;*/
+
+/*
+position:absolute;
+left:5vw;
+top:5vh;*/
+}
+
+#main2
+{
+overflow:hidden;
+width: 20vw;
+height: 40vh;
+float: right;
+right: 0;
+border: solid 1px blue;
+position: absolute;
+
+}
+
+.ssb_up {
+background:transparent url(images/icon-arrow-up.png);
+background-repeat: no-repeat;
+cursor:pointer;
+position:absolute;		/* before absolute */
+right:0;
+top:0;
+}
+
+.ssb_down {
+background:transparent url(images/icon-arrow-down.png);
+bottom:0;
+cursor:pointer;
+position:absolute;
+right:0;
+}
+
+.ssb_sb {
+background:transparent url(images/middle.png);
+cursor:pointer;
+position:absolute;
+right:0;
+}
+
+.ssb_st {
+background:transparent url(images/back.png);
+cursor:pointer;
+height:100vh;
+position:absolute;
+right:0;
+top:0;
+}
+
+#test
+{
+	overflow:hidden;
+	height:30vh;
+	left:10vw;
+	position:absolute;
+	top:50vh;
+	width:60vw;
+	border: solid 1px red;
+}
+
+#main3
+{
+	overflow:hidden;
+	height:20vh;
+	position:absolute;
+	width:60vw;
+	border: solid 2px black;
+}
+

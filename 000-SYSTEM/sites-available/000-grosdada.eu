@@ -1,0 +1,67 @@
+<VirtualHost *:80> 
+        ServerName www.grosdada.eu
+	ServerAlias grosdada.eu	
+	Redirect / https://www.grosdada.eu/ 
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+# <VirtualHost _default_:443>
+<VirtualHost *:443>
+	ServerAdmin webmaster@localhost
+
+	ServerName https://www.grosdada.eu
+        ServerAlias https://grosdada.eu
+
+	DocumentRoot /var/www/pachyderme_box/
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	<Directory "/usr/lib/cgi-bin">
+		AllowOverride None
+		Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	SSLEngine on 
+	SSLProtocol all -SSLv2
+	SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM 
+	
+	SSLCertificateFile /home/certificats/grosdada.eu.crt 
+	SSLCertificateKeyFile /home/certificats/grosdada.eu.key 
+	SSLCertificateChainFile /home/certificats/sub.class1.server.ca.pem
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/ssl_access.log combined
+
+	<FilesMatch "\.(cgi|shtml|phtml|php)$">
+		SSLOptions +StdEnvVars
+	</FilesMatch>
+	<Directory /usr/lib/cgi-bin>
+		SSLOptions +StdEnvVars
+	</Directory>
+
+	BrowserMatch "MSIE [2-6]" \
+		nokeepalive ssl-unclean-shutdown \
+		downgrade-1.0 force-response-1.0
+	# MSIE 7 and newer should be able to use keepalive
+	BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+</VirtualHost>
+</IfModule>
+
+

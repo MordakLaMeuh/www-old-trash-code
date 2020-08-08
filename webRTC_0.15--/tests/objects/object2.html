@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>Helios System-WebRTC P2P Sharing File Interface</title>
+	<link rel="shortcut icon" href="images/ours.png">
+</head>
+<body>
+</body>
+<script>
+var myObject = {				// Dans la déclaration inline, muObject est déjà un objet, il n'y a pas de constructeur possible donc pas de nex, myObject est un objet unique -> cf.structure.
+ a : 1,					// Ce sont des variables publics, des 'this'
+ b : 2,
+ sum : function() {
+  return this.a + this.b;
+ }
+};
+console.log(myObject.sum());
+console.log(myObject.a);
+
+var Dog = function(race) { 	 	 // defining Dog constructor
+ var race = race;
+ var canidé=true;			     	// Déclaré avec var, c'est une variable privée.
+ this.hasTail = true;			 // defining a property
+ this.bark = function() {		 // defining a method property
+	console.log("wouf wouf - méthode");
+ }
+ this.getRace = function() {
+	console.log(race);
+ }
+}
+
+medor=new Dog('caniche');
+console.log(medor.hasTail);
+medor.bark();
+medor.getRace();
+
+var bobby = new Dog();
+var rex = new Dog();
+
+console.log(bobby == rex);
+console.log(bobby.bark == rex.bark)
+
+var Dog2 = function(taille) {
+	var taille = taille;
+}; // declaring constructor
+Dog2.prototype;     	  // prints "{}" : prototype exists and is empty
+
+
+
+Dog2.prototype.bark = function() { // Une propriété rajouté sur le prototype du constructeur devient disponible sur les instances : : defining a method on the Dog prototype
+ console.log("wouf wouf-proto");
+ console.log('je pèse '+this.taille+' kg');
+};
+
+roger = new Dog2(34);
+roger.bark();
+
+var felix = new Dog2(67);
+felix.bark();
+
+console.log(roger == felix);
+console.log(roger.bark == felix.bark);
+
+var instance = (function(){
+	// statics variables...
+	function instanceConstuctor(id) {
+		var ID=id;
+		this.getId = function() console.log("id:"+ID);
+		
+	}
+	return instanceConstuctor;
+})();
+
+var A = new instance(4);
+var B = new instance(7);
+
+A.getId();
+B.getId();
+
+instance.prototype.bark = function() console.log('woof woof');
+
+A.bark();
+B.bark();
+
+var send = function() {
+	this.hulk = function() console.log('banane');
+}
+	
+A.bark();
+
+var mother = function(i) {
+	console.log('cration de l objet mere');
+	this.T = 34;
+	this.a = 43;
+	this.b = 22;
+	var Z = 99;
+	this.sleep = function() { console.log('ma'+Z); console.log('zzzzz zzzz zzzz'); }
+	this.getZ = function () {  }
+	this.setZ = function (x) { Z=x; }
+	
+	//alert(i);
+}
+
+var lolo = function(id) {
+	this.a = id;
+	this.hulk = function() console.log('meuuuuuh');
+	this.getA = function() console.log(this.b);
+	this.getT = function() console.log(this.T);
+}
+
+var toto = function() {
+}
+
+lolo.prototype = new mother();
+toto.prototype = new mother();
+
+var G = new lolo(11);
+var H = new toto(44);
+
+G.T = 987;
+
+G.getT();
+
+G.sleep();
+
+G.setZ(65);
+
+G.sleep();
+
+H.setZ(40);
+
+H.sleep();
+
+var K = new lolo(0);
+var Y = new toto(43);
+
+K.setZ(2939);
+K.sleep();
+
+var momo = function(id) {
+
+}
+
+momo.prototype = new mother();
+
+G.sleep();
+
+var idT = function() {
+	this.a=4
+	this.setA = function(x) { a=x; }
+	this.getA = function() { console.log('moi:'+this.a); }
+}
+
+var gre = new idT;
+
+gre.getA();
+
+</script>
+</html>

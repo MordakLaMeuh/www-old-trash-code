@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<title>id souris</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
+<script type="text/javascript">
+<!--//
+gk=window.Event?1:0; // navigateurs Gecko ou IE
+D=document;
+
+function ctrl(e)
+{
+el=gk?e.target:event.srcElement; //objet sous la souris
+if(!el.tagName)el=el.parentNode; // noeud #text
+defaultStatus=el.id
+console.log(el.id);
+}
+
+D.onmousemove=ctrl
+//-->
+</script>
+</head>
+<body>
+
+<div id="pop1" class="pp">
+<h1 id="h1">infobulle !</h1>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum in mauris vel ipsum viverra tincidunt. </p>
+<p>venenatis et, elementum et, sapien. Donec nonummy. Vestibulum condimentum</p>
+<img id="im1" src="http://css.alsacreations.com/xmedia/exemples/popup/image.gif" alt="image d'exemple" />
+<p id="ptitext" >regarder la barre de status. </p>
+</div>
+
+</body>
+</html>

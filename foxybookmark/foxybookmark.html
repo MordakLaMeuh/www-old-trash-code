@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr-FR">					<!-- Bloque le clic droit - l'evenement sera saisi par JS et JS seulement -->
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Easy Bookmark with Foxy">
+	<meta name="author" content="secret">
+	
+	<title>Foxy Bookmark</title>
+	
+	<link rel='stylesheet' id='DOM'  href='foxybookmark.css' type='text/css' media='all' /> 
+	<link rel="shortcut icon" href="ours.png">
+</head>
+
+<body> 						
+
+<div>
+	
+	<button class='headButton' id="boutonOpenAll">Affichage de tous les favoris</button>
+	<button class='headButton' id="boutonCloseAll">Fermeture de Tous les favoris</button> 
+	<!--<form name='google' method='POST' action="javascript:googleSearch()"> -->
+	<form name='google' method='POST' action="javascript:googleSearch()">
+	GOOGLE SEARCH <input id="rechercheGoogle" 	spellcheck='false' autocomplete='off' type="text" size='30' name="rechercheGoogle">
+		      <input type='submit' id='googleButton' value='GO !' >
+	</form>  	
+</div>
+<!--
+<form name='entry' method='POST' action="javascript:submit()">
+	site url: <input id="url" 	spellcheck='false' autocomplete='off' type="text" size='40' name="url">
+	comments: <input id="comment" 	spellcheck='false' autocomplete='off' type="text" size='40' name="comment">
+	<input type='submit' id='urlButton' value='nouvelle URL' onclick='submit()'>
+</form> 
+
+-->
+
+<textarea id='urlArea' type='texte' placeholder='Enter url here'>		</textarea>
+
+<textarea id='commentArea' type='texte' placeholder='Enter comments here'>	</textarea>
+
+<button id="urlButton" onclick='submit()'>Inscription de l'url</button> 
+
+<style>
+.line 
+{
+	width:100vw;
+	height: 3vh;
+	background-color: white;
+	border-bottom: solid 1px black;
+}
+.checkBox
+{
+	float: left;
+	width: 4vw;
+	height: inherit;
+	background-color: red;
+}
+.url
+{
+	float: left;
+	width: 21vw;
+	height: inherit;
+	background-color: blue;
+}
+.comment
+{
+	float: left;
+	width: 75vw;
+	height: inherit;
+	background-color: yellow;
+}
+</style>
+<div id='urlList'>
+<!--
+<div class='line'>
+	<div class='checkBox'></div>
+	<div class='url'>CASE 1</div>
+	<div class='comment'></div>
+</div>
+<div class='line'> 
+	<div class='checkBox'></div>
+	<div class='url'>CASE 2</div>
+	<div class='comment'></div>
+</div>
+<div class='line'> 
+	<div class='checkBox'></div>
+	<div class='url'>CASE 3</div>
+	<div class='comment'></div>
+</div>
+<div class='line'> 
+	<div class='checkBox'></div>
+	<div class='url'>CASE 4</div>
+	<div class='comment'></div>
+</div> -->
+</div>
+
+<style>
+.box 
+{
+	position:fixed;
+	width:100vw;
+	height:1vh;
+	background-color: red;
+	top: 0px;
+	transition-duration: 3s;
+}
+/*
+.box:hover
+{
+	top: 100px;
+}	*/
+</style>
+
+<div id='banane' class='box'>	</div>
+
+<script> 
+
+(function() {
+    var originalSetInterval = window.setInterval;
+
+    window.setInterval = function(fn, delay, runImmediately) {
+	//alert(fn);
+        if(runImmediately) fn();
+        originalSetInterval(fn, delay);
+    };
+})();	
+var z = 0;
+//document.getElementById('banane').style.top = (z=(z==500)?0:500)+'px'
+var j=setInterval(function(){document.getElementById('banane').style.top = (z=(z==500)?0:500)+'px'},3000,true);
+</script>
+
+<script>
+var draw = function() 
+{
+	var urlList = new Array();
+	this.create = function(content) 
+	{
+		this.content = content;
+		var location = document.createElement('div');
+		location.className = 'line';
+		document.getElementById('urlList').appendChild(location);
+		
+		var i = document.createElement('div');
+		i.className = 'checkBox';
+		location.appendChild(i);
+		
+		var j = document.createElement('div');
+		j.className = 'url';
+		j.appendChild(document.createTextNode(content));
+		location.appendChild(j);
+		
+		var k = document.createElement('div');
+		k.className = 'comment';
+		location.appendChild(k);
+		
+		// Quand la souris sort, l'id parentNode n'est plus égale à urlList
+		// Utilisation de mousemove peut-être plus avisé ?
+		var mouseUpListener = function(e) {
+			console.log('break');
+			console.log('className:'+mouse.class);
+			if (mouse.element.parentNode == location) console.log('Quittant sur égalité');
+			else 					  
+			{
+					//document.getElementById('urlList').removeChild(location);
+				
+				document.getElementById('urlList').insertBefore(location,mouse.element.parentNode);
+				console.log('Quittant sur INEGAL');
+			}
+			document.getElementById('urlList').removeEventListener('mouseup',mouseUpListener,false);
+		}
+		
+		location.addEventListener('mousedown',function(e){
+			console.log('global mouseDOWN. elmt='+mouse.element);
+			if (mouse.element.parentNode == location) console.log('EGALITE');
+			else 			      		  console.log('NON EGAL');
+			
+			document.getElementById('urlList').addEventListener('mouseup',mouseUpListener,false);
+			
+			e.preventDefault();
+		},false);
+		
+		/*
+		location.addEventListener('mouseup',function(e){
+			console.log('break');
+			console.log('className:'+mouse.class);
+			if (mouse.element.parentNode == location) console.log('Quittant sur égalité');
+			else 					  console.log('Quittant sur INEGAL');	
+		},false);
+		*/
+	}
+	console.log('Creating...');
+}
+var i = new draw();
+i.create('http://interactjs.io/');
+i.create('CASE 2');
+i.create('CASE 3');
+i.create('CASE 4');
+
+
+
+
+/*
+	document.body.addEventListener('mousedown',function(e){
+		if (e.button == 0)	console.log('NEW');
+	},false);	*/
+</script>
+
+<script>
+//var urlList = new Array('http://www.finalclap.com/','http://www.google.fr','http://realityrevisited.eu','https://grosdada.eu');
+	var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENVOYER LA DIV COURANTE	***/
+		var mouseConstructor = function(){
+			this.mouse_X = null;
+			this.mouse_Y = null;
+			this.id = null;
+			this.class = null;
+			SUPER = this;
+			var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE -- console.log('_isGecko vaut:'+_isGecko);
+	
+			var evalMouse = function(e) {
+				var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris				
+				
+				//console.log('targer:'+e.target+' parentNode:'+e.target.parentNode+' id:'+e.target.parentNode.id+' tagname:'+e.target.tagName+ ' reId:'+e.target.parentNode.id+ 'tag:'+e.target.tagName+' secondID:'+e.target.id);
+				SUPER.id = element.id;
+				SUPER.class = element.parentNode.className;
+				SUPER.element = element;
+				//console.log('superID:'+SUPER.id);
+				//Description du bug recontré: Dans le cas d'une balise <p>, <span>, <img> etc... HTML quoi, on doit remonter...
+				//... au parent. Dans le cas ou la souris pointe déjà sur une <div>, on ne fait que renvoyer l'id de la div pointée.
+				/*
+				if (e.target.tagName != 'DIV')	SUPER.id=element.parentNode.id;
+				else		 				SUPER.id=element.id;
+				*/
+				SUPER.mouse_X = e.pageX;
+				SUPER.mouse_Y = e.pageY;
+				//console.log('Xmouse='+SUPER.mouse_X +' Ymouse='+SUPER.mouse_Y+' ID:'+SUPER.id+' parentClass:'+SUPER.class);
+			}	
+			console.log('activation de la détéction souris');
+			document.onmousemove=evalMouse;
+		}
+		return mouseConstructor;
+	})();
+	
+var manageScroll = function() {			/*** FONCTION CONFIGUREE POUR EXCLURE DES DIVS A NE PAS SCROLLER. ***/
+	console.log('module personalised scrolling activé :'+mouse.id);
+	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+		
+	var scroll = function (direction) {
+		document.getElementById(mouse.id).scrollTop += (direction*20); //le défilement se fait par 10px
+		//setTimeout('scroll('+to_scroll+', '+true+')', 10);
+	}
+	var MouseWheelHandler = function(e) {
+			// INTEROGATION de mouse.id à savoir si l'on a envie qu'elle pointe sur une div dont on veut le scroll.
+		//if (mouse.id != 'consoleTab' && mouse.id != 'chatTab' && mouse.id != 'files') return;
+			
+		var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+		if (delta > 0) 	scroll(-1);
+		else			scroll(+1); 
+		
+		e.preventDefault();
+		return false;
+	}
+	document.addEventListener(mousewheelevt, MouseWheelHandler, false);
+}
+	
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+} 
+
+var bookMarks = function()
+{
+	var urlList = new Array();
+	
+	var addUrl = function(url,comment)
+	{
+		this.id = null;
+		this.url = url;
+		this.comment = comment;
+		
+		this.location = document.createElement('p');
+		this.location.draggable = true; 
+		this.location.ondragstart= 'drag(event)';
+		this.location.appendChild(document.createTextNode(url+' : '+comment));
+		
+		document.body.appendChild(this.location);
+	}
+	
+	
+	this.createFavorite = function(url,comment) 
+	{ 
+		var favorite = new addUrl(url,comment);
+		urlList.push(favorite);
+		
+		var listener = function(e) {
+			window.open(favorite.url);
+			favorite.location.removeEventListener('click',listener,false);
+		}
+		
+		favorite.location.addEventListener('click',listener,false);
+		
+		/*
+		var mouseDownListener = function(e) {
+			switch (e.button)
+			{
+				case 2:
+					favorite.location.removeEventListener('mousedown',mouseDownListener,false);
+					favorite.location.removeEventListener('click',listener,false);
+					document.body.removeChild(favorite.location);
+					break;
+				case 1:
+					break;
+				default:
+					break;
+			}
+		}	*/
+		
+		var urlDeletionListener = function(e) {
+			console.log('detournement && inhibition du contextmenu');
+			favorite.location.removeEventListener('click',listener,false);
+			favorite.location.removeEventListener('contextmenu',urlDeletionListener,false);
+			document.body.removeChild(favorite.location);
+			e.preventDefault();	
+		}
+		
+		favorite.location.addEventListener('contextmenu',urlDeletionListener,false);
+		
+		//favorite.location.addEventListener('mousedown',mouseDownListener,false);
+														
+		console.log('New Entry:'+urlList[urlList.length-1].url+' * '+urlList[urlList.length-1].comment);
+	}
+	
+	
+	this.displayAllUrl = function()
+	{
+		for (var i=0; i<urlList.length; i++) urlList[i].id = window.open(urlList[i].url,urlList[i].url);
+	}
+	
+	this.closeAllUrl = function()
+	{
+		for (var i=0; i<urlList.length; i++) urlList[i].id.close();
+	}
+	
+
+	//document.body.appendChild(document.createElement("H1")).appendChild(document.createTextNode('BookMarks Ready.'));
+}
+
+var i = new bookMarks();
+i.createFavorite('http://www.google.fr','moteur de recherche de base');
+i.createFavorite('http://www.finalclap.com','un site qui claque');
+i.createFavorite('http://realityrevisited.eu','site d\'un gros Lolo');
+i.createFavorite('https://grosdada.eu','A cheval sur mon Dada, quand il trotte, il fait des pets.');
+i.createFavorite('https://openclassrooms.com/courses/dynamisez-vos-sites-web-avec-javascript/les-evenements-24','evenements JS');
+i.createFavorite('http://www.thewindowsclub.com/force-links-to-open-in-background-firefox-chrome','astuce new tab I');
+i.createFavorite('http://winaero.com/blog/four-ways-to-open-a-new-firefox-tab-in-the-background/','astuce new tab II');
+i.createFavorite('http://winaero.com/blog/firefox-41-is-out-here-are-all-the-major-changes/','firefox 41 news features');
+i.createFavorite('http://bioris.free.fr/ni-reseau-ni-maitre/','ni réseau, ni maitre');
+i.createFavorite('https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/','index of firefox versions');
+i.createFavorite('https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener','gestion events');
+i.createFavorite('https://developer.mozilla.org/en-US/docs/Web/CSS/cursor','cursor CSS');
+//i.createFavorite('','');
+
+var submit = function() {
+	var url = document.getElementById('urlArea').value;
+	document.getElementById('urlArea').value = null;
+	var comment = document.getElementById('commentArea').value;
+	document.getElementById('commentArea').value = null;
+	i.createFavorite(url,comment);
+}
+
+var bouton = document.getElementById("boutonOpenAll");
+bouton.addEventListener("click", function(){i.displayAllUrl();},false);
+
+var bouton = document.getElementById("boutonCloseAll");
+bouton.addEventListener("click", function(){i.closeAllUrl();},false);
+
+// choix entre version américaine && francaise
+var googleSearch = function()
+{
+	var i = document.getElementById('rechercheGoogle');
+	window.open('https://www.google.fr/?gws_rd=ssl#q='+i.value);
+	i.value = null;
+	i.focus();
+}
+
+var mouse = new mouseFonctions();
+var Z = new manageScroll();
+
+//setTimeout(function(){console.log(document.getElementById('baba').value);},2000);
+
+//document.getElementById('baba').addEventListener('select',function(e){alert('meuh');},false);
+</script>
+
+    </body>
+</html>

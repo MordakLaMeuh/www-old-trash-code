@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>Helios System-WebRTC P2P Sharing File Interface</title>
+	
+	<link rel='stylesheet' id='DOM'  href='dom.css' type='text/css' media='all' /> 
+	<link rel="shortcut icon" href="images/ours.png">
+</head>
+<body class='hideOverflow'>
+
+<div id='toolbar'>
+  <!-- ------------------------------------------------------- -->
+  <img class='menuItem' src="images/Elephant-icon.png" alt="..."/>
+  <img class='menuItem' src="images/Dolphin-icon.png" alt="..."/>
+  <img class='menuItem' src="images/Panda-icon.png" alt="..."/>
+  <img class='menuItem' src="images/Hippopotamus-icon.png" alt="..;"/>
+</div>
+
+<div id='header'>
+	<bouton onclick="RTCstart();"><img src='images/bouton_on.gif' alt='on' class='imgBoutons'/></bouton>
+	<bouton onclick="RTCstop();"> <img src='images/bouton_off.gif' alt='off' class='imgBoutons'/><bouton>
+	<H1>HELIOS SUBSYSTEM : P2P FILE TRANSFERT</H1>
+</div>
+<div id='connectTab' class='hideOverflow'> 
+        <video id='video' autoplay='true'>
+            <source src='video/La_bataille_de_Farador.webm' type='video/webm' />
+        </video>
+</div>
+<div id='consoleTab' class='hideOverflow'>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</div>
+<div id='statusTab' class='hideOverflow'> 
+	<img src='images/frontNational.jpg' alt='FN' class='FN' />
+</div>
+<div id='fileTab'> 
+	<label for="file-upload" class="file-upload">
+			Select file
+	</label>
+	<input id="file-upload" type="file"/>
+	<div id='fileTitle'  class='hideOverflow'> 
+	<H2>Liste des fichiers</H2> 
+	</div>
+
+	<div id='files' class='hideOverflow'>
+		<bouton class='sharingButton' onclick=''>Share</bouton><p>The rocky horror picture show.mpg</p>
+		<bouton class='downloadButton' onclick=''>Download</bouton><p>La cages aux folles.avi</p>
+		<bouton class='downloadButton' onclick=''>Download</bouton><p>Les valseuses.mpg</p>
+		<bouton class='downloadButton' onclick=''>Download</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton onclick=''><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem-ipsum-dolor-sit-met,-consectetur-adipiscing-elit,-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua.-Ut-enim-ad</p>
+		<bouton onclick=''><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem ipsum dolor sit met, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton class='sharingButton' onclick=''>Share</bouton><p>Aie my balls.avi</p>
+		<bouton class='sharingButton' onclick=''>Share</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton class='sharingButton' onclick=''>Share</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton class='downloadButton' onclick=''>DOWNLOAD</bouton><p>C.R.A.Z.Y.avi</p>
+		<bouton class='downloadButton' onclick=''>DOWNLOAD</bouton><p>La bataille de Farador.mp4</p>
+		<bouton class='downloadButton' onclick=''>DOWNLOAD</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton onclick=''><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem-ipsum-dolor-sit-met,-consectetur-adipiscing-elit,-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua.-Ut-enim-ad</p>
+		<bouton onclick=''><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem ipsum dolor sit met, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton class='sharingButton' onclick=''>SHARE</bouton><p>Les valseuses.mpg</p>
+		<bouton class='sharingButton' onclick=''>SHARE</bouton><p>95 fois pour cent, la femme s'emmerde en baisant.mp3</p>
+		<bouton class='sharingButton' onclick=''>SHARE</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+		<bouton class='sharingButton' onclick=''>SHARE</bouton><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+	</div>
+</div>
+
+<div id='chatTitle'><H2><b>Micro-chatbox P2P des pachydermes</b></H2></div>
+<div id='chatTab' class='hideOverflow'></div>
+<div id='postTab' class='hideOverflow'> 
+	<img class='elePHPant' src='images/elephant.gif' alt='elephant' onclick='DOM.sendMsg()'/>
+	<form name='postChatbox' method='POST' action='javascript:DOM.sendMsg()'>
+		<input name='line_send' id='send_box' spellcheck='false' autocomplete='off' type='text'>
+            <input type='button' id='bouton_send_chat' value='OK' onclick='DOM.sendMsg()'>
+      </form>
+</div>
+
+</body>
+
+<script type="text/javascript">
+var mainDOM = function() {
+	var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENVOYER LA DIV COURANTE	***/
+		var mouseConstructor = function(){
+			this.mouse_X = null;
+			this.mouse_Y = null;
+			this.id = null;
+			SUPER = this;
+			var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE -- console.log('_isGecko vaut:'+_isGecko);
+	
+			var evalMouse = function(e) {
+				var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris				
+				
+				//console.log('targer:'+e.target+' parentNode:'+e.target.parentNode+' id:'+e.target.parentNode.id+' tagname:'+e.target.tagName+ ' reId:'+e.target.parentNode.id+ 'tag:'+e.target.tagName+' secondID:'+e.target.id);
+				//SUPER.id = element.id;
+				//console.log('superID:'+SUPER.id);
+				//Description du bug recontré: Dans le cas d'une balise <p>, <span>, <img> etc... HTML quoi, on doit remonter...
+				//... au parent. Dans le cas ou la souris pointe déjà sur une <div>, on ne fait que renvoyer l'id de la div pointée.
+				
+				if (e.target.tagName != 'DIV')	SUPER.id=element.parentNode.id;
+				else		 				SUPER.id=element.id;
+				
+				SUPER.mouse_X = e.pageX;
+				SUPER.mouse_Y = e.pageY;
+				//console.log('Xmouse='+SUPER.mouse_X +' Ymouse='+SUPER.mouse_Y+' ID:'+SUPER.id);
+			}	
+			console.log('activation de la détéction souris');
+			document.onmousemove=evalMouse;
+		}
+		return mouseConstructor;
+	})();
+	
+	var manageScroll = function() {			/*** FONCTION CONFIGUREE POUR EXCLURE DES DIVS A NE PAS SCROLLER. ***/
+		console.log('module personalised scrolling activé :'+mouse.id);
+		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+		
+		var scroll = function (direction) {
+			document.getElementById(mouse.id).scrollTop += (direction*20); //le défilement se fait par 10px
+			//setTimeout('scroll('+to_scroll+', '+true+')', 10);
+		}
+		var MouseWheelHandler = function(e) {
+			// INTEROGATION de mouse.id à savoir si l'on a envie qu'elle pointe sur une div dont on veut le scroll.
+			if (mouse.id != 'consoleTab' && mouse.id != 'chatTab' && mouse.id != 'files') return;
+			
+			var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+			if (delta > 0) 	scroll(-1);
+			else			scroll(+1); 
+			return false;
+		}
+		document.addEventListener(mousewheelevt, MouseWheelHandler, false);
+	}
+	
+	var toolbar = function() {
+		var toolbar = document.getElementById("toolbar");		// DOM générale - var. globale.
+		var menuItem = toolbar.getElementsByClassName("menuItem")	// DOM générale	- var. globale.
+		var itemManager = (function()					// GESTION DE LA BARRE D'OUTIL:
+		{
+			var unselectedColorItem 	= 'rgb(200, 100, 0)';			// Couleur du menu déssélectionné.		
+			var selectedColorItem		= 'rgb(255, 255,   0)';			// Couleur du menu selectionné.
+			var i;								// Variable à la con.
+			var state;								// Aide à renvoyer l'état de la comande, enable or disable.
+			var item = new Array();						// Ici seront définies les différentes taches propres à chaque menu
+			item[0] = function(state) { console.log("Lancement des routines de l'item 1. - Etat on-off="+state);}
+			item[1] = function(state) { console.log("Lancement des routines de l'item 2. - Etat on-off="+state);}
+			item[2] = function(state) { console.log("Lancement des routines de l'item 3. - Etat on-off="+state);}
+			item[3] = function(state) { console.log("Lancement des routines de l'item 4. - Etat on-off="+state);}
+		
+			function selectItem(itemObj){
+				for (i=0; i<menuItem.length; i++) if(itemObj == menuItem[i]) break;	
+			
+				if (itemObj.style.borderColor == unselectedColorItem)	{ itemObj.style.borderColor=selectedColorItem;   state=true;  } 
+				else									{ itemObj.style.borderColor=unselectedColorItem; state=false; }
+				item[i](state);           
+			}
+			
+			for (i=0; i<menuItem.length; i++)	 				// Création des contours des menus selon la couleur unselected et association des events clics de souris.
+			{	
+				menuItem[i].style.borderColor = unselectedColorItem;
+				menuItem[i].onclick=function(){selectItem(this)};
+			}
+			return function(){ /* Ici pourront figurer des fonctions pouvant être appelées par le programme de facon globale et jouant sur les items style unselected All par exemple.*/
+				alert("C'est un gros Lolo qui fait des petits avec un gros Thibaud.");
+			};
+		})();
+		/***  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ***/
+		//var toolbarWidthLimit=toolbar.offsetWidth; 						// GESTION DE L'ECRAN ET DES EVENTS SOURIS
+	}
+	this.displayMsg = (function () {
+		var chatTab = document.getElementById('chatTab');
+		var animal = new Array('elephant1','elephant2','elephant3','elephant4','elephant5','elephant6','vache1','vache2','cochon1');
+		
+		function find_animal() {return "animal/" + animal[Math.floor(Math.random() * 9)] + ".ogg";}
+		
+		var msg;
+		var soundAnimal = document.createElement("Audio");
+		return function(user,message) {
+			if (message) {
+				switch (message) 		{
+					case '/kick':
+						msg="<span class='commentChatbox'>Au loin, l'on entend crier un animal</span><br>";
+						soundAnimal.src = find_animal();
+						soundAnimal.play();
+						break;
+					case '/roll':
+						var nbr = Math.floor(Math.random() * 7);
+						if (nbr)	msg="<span class='commentChatbox'>"+user+" lance les dés et obtient "+nbr+"</span><br>";
+						else		msg="<span class='commentChatbox'>"+user+" lance les dés et obtient "+nbr+" ! Mouhaha !</span><br>";
+						break;		
+					default:
+						msg="<span class='userSpeakChatbox'>"+user+':</span>'+message+'<br>';
+						break;	}
+				chatTab.innerHTML+=msg;
+				chatTab.scrollTop=10000;
+			}
+		}
+	})();
+	this.sendMsg = (function () {
+		var user = 'mordak';
+		var sendBox = document.getElementById('send_box');
+		return function() {
+			var message = sendBox.value;
+			if (message) {	
+			// Fonction envoyer message à rédiger ici vers JS profond.
+				this.displayMsg(user,message);
+				sendBox.value='';
+			}
+			sendBox.focus();	
+		}
+	})();
+	var mouse = new mouseFonctions();
+	var X = new toolbar();
+	var Z = new manageScroll();
+}
+var DOM = new mainDOM();
+
+var RTCstart = function() { console.log('starting RTC');}
+var RTCstop = function()  { console.log('disable RTC');}
+</script>
+

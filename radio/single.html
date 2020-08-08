@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radionomy - acidbarrett</title>
+
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="/css/exportable.css" />
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+
+	<script type="text/javascript" src="/js/jquery.min.js?v26032015"></script>
+	<script type="text/javascript" src="/js/jquery.jplayer.min.js?v26032015"></script>
+	<script type="text/javascript" src="/js/common.js?v26032015"></script>
+	<script type="text/javascript" src="/js/radionomy.player.js?v26032015"></script>
+	<script type="text/javascript" src="/js/player.js?v26032015"></script>
+</head>
+<body>
+	
+
+<div id="playerMobile">
+		<div id="bgblur" style="background: url('https://i.radionomy.com/document/radios/4/4390/43907549-8ae1-46b2-a982-125e044a3687.s300.jpg');"></div>
+		<div id="cover" style="background-image:url('https://i.radionomy.com/document/radios/4/4390/43907549-8ae1-46b2-a982-125e044a3687.s300.jpg');"></div>
+
+	<nav>
+		<ul>
+			<li>
+				<a id="shareButton" href="#">
+					<svg viewBox="-2 -12 75 75" height="20" width="20"><path fill="#FFFFFF" d="M48,39.26c-2.377,0-4.515,1-6.033,2.596L24.23,33.172c0.061-0.408,0.103-0.821,0.103-1.246c0-0.414-0.04-0.818-0.098-1.215  l17.711-8.589c1.519,1.609,3.667,2.619,6.054,2.619c4.602,0,8.333-3.731,8.333-8.333c0-4.603-3.731-8.333-8.333-8.333  s-8.333,3.73-8.333,8.333c0,0.414,0.04,0.817,0.098,1.215l-17.711,8.589c-1.519-1.609-3.666-2.619-6.054-2.619  c-4.603,0-8.333,3.731-8.333,8.333c0,4.603,3.73,8.333,8.333,8.333c2.377,0,4.515-1,6.033-2.596l17.737,8.684  c-0.061,0.407-0.103,0.821-0.103,1.246c0,4.603,3.731,8.333,8.333,8.333s8.333-3.73,8.333-8.333C56.333,42.99,52.602,39.26,48,39.26  z" /></svg>
+				</a>
+			</li>
+			<li>
+				<a id="detachButton" href="#">
+					<svg viewBox="0 0 480 480" height="20" width="20"><path fill="#FFFFFF" d="M352,377.9H102.4V198.2h57.5c0,0,14.1-19.7,42.7-38.2H83.2c-10.6,0-19.2,8.5-19.2,19.1v217.9c0,10.5,8.6,19.1,19.2,19.1   h288c10.6,0,19.2-8.5,19.2-19.1V288L352,319.4V377.9z M320,224v63.9l128-95.5L320,96v59.7C165.2,155.7,160,320,160,320   C203.8,248.5,236,224,320,224z" /></svg>
+				</a>
+			</li>
+			<li>
+				<a id="favoriteButton" href="#">
+					<svg viewBox="-13 -19.5 92 87" width="20" height="20"><path fill="transparent" stroke="#FFF" stroke-width="7" d="M32.979,60.078c0,0,30.655-31.454,31.765-36.255c0.979-4.243,1.33-11.35-2.079-15.882	c-2.411-3.534-6.486-7.609-13.554-7.567c-9.147,0.054-16.132,7.775-16.132,7.775S26.618,0,17.18,0	C10.583,0.333,4.486,4.268,2.36,7.887c-3.418,5.861-2.587,11.682-0.868,16.186C3.141,28.497,32.979,60.078,32.979,60.078z" /></svg>
+				</a>
+			</li>
+				<li class="logo">
+					<a href="http://www.radionomy.com" target="_blank" id="logo">
+						<svg width="15px" height="15px" viewBox="0 0 558.3 560">
+							<g>
+								<path fill="#111" d="M488.8,395.3c0,51.9-42.3,94.2-94.2,94.2H165.1c-51.9,0-94.2-42.3-94.2-94.2V165.9
+							c0-51.9,42.3-94.2,94.2-94.2h229.4c51.9,0,94.2,42.3,94.2,94.2V395.3z M394.6,2.1H165.1C74.8,2.1,1.4,75.6,1.4,165.9v229.4
+							C1.4,485.6,74.8,559,165.1,559h229.4c90.3,0,163.8-73.5,163.8-163.8V165.9C558.3,75.6,484.9,2.1,394.6,2.1" />
+								<path fill="#111" d="M359.3,177.2c-3.9-1.3-11.8-2.2-20.5-2.2c-26.6,0-43.2,11.3-57.6,36.6h-1.7v-17c0-9.6-4.4-14-13.5-14h-31.4
+							c-8.3,0-12.6,4.4-12.6,14v196.8c0,9.6,4.4,14,12.6,14h33.2c9.2,0,13.5-4.4,13.5-14v-87.7c0-43.2,14.4-77.2,51.5-77.2
+							c11.8,0,17.5,2.2,23.1,2.2c7.4,0,11.3-3.1,11.3-11.8v-26.6C367.2,181.6,364.1,179,359.3,177.2" />
+							</g>
+						</svg>
+					</a>
+				</li>
+		</ul>
+	</nav>
+
+
+	<div id="play">
+		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		<div id="jp_container_1" class="jp-audio-stream" role="application" aria-label="media player">
+			<div class="jp-type-single">
+				<div class="jp-gui jp-interface">
+					<div class="jp-controls">
+						<div class="jp-play sun" tabindex="0" style="background-color: green;"><div class="dot"></div></div>
+						<svg class="svgPlay" width="87" height="87" viewBox="0 0 100 100">
+							<circle id="bg" cx="0" cy="0" r="50" transform="translate(50,50)" fill="#000000" fill-opacity="0.95" class="full" />
+							<polygon id="play" points="0 100,90 50,0 0,22 50" transform="translate(32,29) scale(0.45)" fill="#ffffff" />
+						</svg>
+						<svg class="svgStop" width="87" height="87" viewBox="0 0 100 100" style="visibility: hidden">
+							<circle id="bg" cx="0" cy="0" r="50" transform="translate(50,50)" fill="#000000" fill-opacity="0.95" />
+							<polygon id="play" points="0 0, 83 0, 83 83, 0 83" transform="translate(32,32) scale(0.45)" fill="#ffffff" />
+						</svg>
+
+							<div id="volume">
+								<div class="volumebar"></div>
+								<div class="volumecurrent"></div>
+								<div class="volumeslider"></div>
+							</div>
+					</div>
+				</div>
+				<div class="jp-details">
+					<div class="jp-title" aria-label="title">&nbsp;</div>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>
+	</div> <!-- play -->
+
+	<div id="info">
+			<a href="/en/radio/acidbarrett" id="radio" target="_blank">acidbarrett</a>
+		
+		<p class="artist" style="display: none;"><a href="/en/radio/acidbarrett" target="_blank"><span></span></a></p>
+		<p class="track" style="display: none;"><a href="/en/radio/acidbarrett" target="_blank"><span></span></a></p>
+	</div>
+
+
+	<div id="share" style="display:none;">
+		<a href="#" class="close"><img src="/images/icons/icon-close.png" height="25" width="25"></a>
+		<p>Share this radio station</p>
+		<a href="/en/radio/acidbarrett/facebook" class="facebook" target="_blank">Facebook</a>
+		<a href="/en/radio/acidbarrett/twitter" class="twitter" target="_blank">Twitter</a>
+		
+	</div>
+
+	<div id="export" style="display:none;">
+		<!-- exportable generated code + config here -->
+	</div>
+
+	<div id="fav" style="display:none;">
+		<a href="#" class="close"><img src="/images/icons/icon-close.png" height="25" width="25"></a>
+		<div class="favContent">
+			<p>You must be signed in to modify your favorites</p>
+			<a href="#" class="signin">Sign in</a>
+			<a href="https://accounts.radionomy.com/account/register" class="signup" target="_blank">Register</a>
+		</div>
+	</div>
+
+	<div id="ts" style="display:none;">
+		<a href="#" class="close"><img src="/images/icons/icon-close.png" height="25" width="25"></a>
+		<div class="sync300250"></div>
+		<div class="sync300250"></div>
+		<div class="sync300250"></div>
+	</div>
+
+</div>
+
+
+<script>
+	var pOptions = ParseQueryString(window.location.href);
+
+	currentStream = { "mp3": "http://listen.radionomy.com/acidbarrett", "title": "acidbarrett", "isFavorite": false, "url": "acidbarrett", "logo": "https://i.radionomy.com/document/radios/4/4390/43907549-8ae1-46b2-a982-125e044a3687.s300.jpg", "song": " - ", "radioUID": "43907549-8ae1-46b2-a982-125e044a3687" };
+
+	$(Ready);
+</script>
+
+
+	
+
+
+<div style="display: none;" class="init">
+	<script type="text/javascript">
+		var scheme = 'https';
+
+		var language = 'en';
+		var controller = 'radio';
+		var action = 'export';
+
+		var fullUrl = '%2fen%2fradio%2facidbarrett%2fexport%2f%3fversion%3d1.1%26url%3dacidbarrett%26type%3dmobile%26autoplay%3d0%26volume%3d50%26color1%3d%2523000000%26color2%3d%2523ffffff%26language%3den';
+		var currentUrl = controller + '/' + action;
+
+		var isAuthenticated = false;
+
+		var radioScrollEnabled = false;
+
+		var hostUrl = 'https://www.radionomy.com';
+		var accountUrl = 'https://accounts.radionomy.com';
+
+		var adText = 'Advertising';
+	</script>
+</div>
+
+	
+	<script>
+	(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+		m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-2800126-32', 'auto');
+	ga('send', 'pageview');
+
+	</script>
+</body>
+</html>

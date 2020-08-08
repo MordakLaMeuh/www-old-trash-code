@@ -1,0 +1,49 @@
+FIREFOX 34: (server side)
+**********************************************************************************************************************************************************************************************
+
+"réponse recue: {"type":"offer","sdp":"v=0\r\no=Mozilla-SIPUA-31.7.0 7621 0 IN IP4 0.0.0.0\r\ns=SIP Call\r\nt=0 0\r\n
+a=ice-ufrag:7bd1ecbc\r\na=ice-pwd:19cc1e0dc35a0e14f82999f6c99df3a1\r\n
+a=fingerprint:sha-256 D0:AC:FB:08:C5:3E:C4:C4:C3:E3:C2:A4:6B:33:6C:25:2F:E2:CC:AC:2A:D9:28:EA:AC:03:63:BD:89:B0:AF:86\r\n
+m=application 62685 DTLS/SCTP 5000\r\nc=IN IP4 92.95.150.72\r\na=sctpmap:5000 webrtc-datachannel 256\r\na=setup:actpass\r\na=candidate:0 1 UDP 2128609535 192.168.1.29 62685 typ host\r\n
+
+a=candidate:1 1 UDP 1692467199 92.95.150.72 62685 typ srflx raddr 192.168.1.29 rport 62685\r\n"}" webrtc-data.io.js:416
+
+"reception de ice_candidate{"candidate":"candidate:4077567720 1 udp 2122260223 192.168.1.10 40641 typ host generation 0","sdpMid":"data","sdpMLineIndex":0}"
+
+"rtc.receiveOffer: setRemoteDescription success - calling sendAnswer!" webrtc-data.io.js:421
+
+"rtc.sendAnswer: Envoi une réponse à l'offre justement recue." webrtc-data.io.js:432
+
+"rtc.sendAnswer: setLocalDescription Success calling send_answer." webrtc-data.io.js:437
+
+"réponse envoyée: {"eventName":"send_answer","data":{"socketId":"50606538-acf6-f45e-793d-a9b869c32910","sdp":"{\"type\":\"answer\",\"sdp\":\"v=0\\r\\n
+o=Mozilla-SIPUA-34.0 17225 0 IN IP4 0.0.0.0\\r\\ns=SIP Call\\r\\nt=0 0\\r\\na=ice-ufrag:134af110\\r\\n
+a=ice-pwd:09eb3395478ff97388a9e138df9f430c\\r\\na=fingerprint:sha-256 38:AA:12:3C:EB:82:C3:90:E8:83:C1:F7:BD:A1:78:A9:7C:F2:DD:B8:95:93:71:91:8C:6A:2F:08:B8:B2:65:0E\\r\\n
+m=application 9 DTLS/SCTP 5000\\r\\nc=IN IP4 0.0.0.0\\r\\na=sctpmap:5000 webrtc-datachannel 256\\r\\na=setup:active\\r\\n\"}"}}"
+
+**********************************************************************************************************************************************************************************************
+FIREFOX 31: (server side)
+**********************************************************************************************************************************************************************************************
+
+"réponse recue: {"type":"offer","sdp":"v=0\r\no=Mozilla-SIPUA-31.7.0 21107 0 IN IP4 0.0.0.0\r\ns=SIP Call\r\nt=0 0\r\n
+a=ice-ufrag:50929569\r\na=ice-pwd:87bab3fc9eddebea0293a28f07f29aef\r\n
+a=fingerprint:sha-256 E3:A9:B4:31:77:84:E3:8C:2F:E9:BC:50:FA:50:29:9E:9C:69:E9:22:7D:AD:16:2F:CE:FE:01:C5:64:78:38:B8\r\n
+m=application 61269 DTLS/SCTP 5000\r\nc=IN IP4 92.95.150.72\r\na=sctpmap:5000 webrtc-datachannel 256\r\na=setup:actpass\r\na=candidate:0 1 UDP 2128609535 192.168.1.29 61269 typ host\r\n
+
+a=candidate:1 1 UDP 1692467199 92.95.150.72 61269 typ srflx raddr 192.168.1.29 rport 61269\r\n"}" webrtc-data.io.js:416
+
+"rtc.receiveOffer: setRemoteDescription success - calling sendAnswer!" webrtc-data.io.js:421
+
+"rtc.sendAnswer: Envoi une réponse à l'offre justement recue." webrtc-data.io.js:432
+
+"rtc.sendAnswer: setLocalDescription Success calling send_answer." webrtc-data.io.js:437
+
+"reception de ice_candidate{"candidate":"candidate:4077567720 1 udp 2122260223 192.168.1.10 34878 typ host generation 0","sdpMid":"data","sdpMLineIndex":0}"
+
+"réponse envoyée: {"eventName":"send_answer","data":{"socketId":"e14c2c27-3bd8-008e-4f44-93148376a3f7","sdp":"{\"type\":\"answer\",\"sdp\":\"v=0\\r\\n
+o=Mozilla-SIPUA-31.7.0 19138 0 IN IP4 0.0.0.0\\r\\ns=SIP Call\\r\\nt=0 0\\r\\na=ice-ufrag:77f73ff6\\r\\n
+a=ice-pwd:b6e59ee0e131239d7bf1e58176cfe1da\\r\\na=fingerprint:sha-256 77:BB:41:41:B3:C5:22:22:FB:BC:4C:79:8E:61:CD:77:A6:FD:18:C5:27:30:D6:74:B4:A4:1C:A0:E0:F3:81:51\\r\\n
+m=application 45271 DTLS/SCTP 5000\\r\\nc=IN IP4 79.80.127.71\\r\\na=sctpmap:5000 webrtc-datachannel 256\\r\\na=setup:active\\r\\n
+
+a=candidate:0 1 UDP 2122187007 192.168.1.10 51547 typ host\\r\\na=candidate:1 1 UDP 1686044671 79.80.127.71 51547 typ srflx raddr 192.168.1.10 rport 51547\\r\\n
+a=candidate:2 1 UDP 2122252543 10.100.0.2 45271 typ host\\r\\na=candidate:3 1 UDP 1686110207 79.80.127.71 45271 typ srflx raddr 10.100.0.2 rport 45271\\r\\n\"}"}}"

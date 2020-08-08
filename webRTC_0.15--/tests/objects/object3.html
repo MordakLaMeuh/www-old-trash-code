@@ -1,0 +1,67 @@
+<script>
+function MaClasseMere(parametre1, parametre2) { 
+
+    this.attribut1 = parametre1; 
+
+    this.attribut2 = parametre2; 
+
+    var A = 65;
+    this.setA = function(x) { A=x; }
+    this.getA = function() { console.log('valeur de A='+A); }
+
+    this.methode = function() { 
+
+        console.log("[methode] Attributs: " + this.attribut1 + ", " + this.attribut2); 
+
+    } 
+
+} 
+
+ 
+
+function MaClasse(parametre1, parametre2, parametre3) { 
+
+    MaClasseMere.call(this, parametre1, parametre2); 
+
+    this.attribut3 = parametre3; 
+
+    this.uneMethode = function() { 
+
+        console.log("[uneMethode] Attributs: " + this.attribut1 
+
+                       + ", " + this.attribut2 + ", " + this.attribut3); 
+    } 
+    this.hulk = function() {
+	alert(A);
+    }
+} 
+function classic(parametre1, parametre2, parametre3) { 
+	MaClasseMere.call(this, parametre1, parametre2); 
+}
+
+ 
+
+var obj = new MaClasse("34", "45", "99"); 
+
+var obj2 =  new MaClasse("1", "1", "1"); 
+obj.methode();
+
+// Affiche les valeurs des attributs attribut1 et attribut2 
+
+obj.uneMethode(); 
+
+obj.getA();
+obj.setA(11);
+obj.getA();
+
+var obj3 =  new MaClasse("1", "1", "1"); 
+var obj4 = new classic("2", "3", "4"); 
+
+obj4.setA(199);
+
+obj.getA();
+obj4.getA();
+obj3.setA(12345);
+
+obj.getA();
+</script>

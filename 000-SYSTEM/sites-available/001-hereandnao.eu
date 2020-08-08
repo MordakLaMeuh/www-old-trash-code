@@ -1,0 +1,6 @@
+<VirtualHost *:80>
+    DocumentRoot /var/www/hereandnao/
+    ServerName www.hereandnao.eu
+    ServerAlias hereandnao.eu
+</VirtualHost>
+

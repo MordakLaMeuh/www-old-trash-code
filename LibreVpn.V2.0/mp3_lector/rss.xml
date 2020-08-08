@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ofmlabs.org</title>
+    <link>http://ofmlabs.org/</link>
+    <atom:link href="http://ofmlabs.org/rss.xml" rel="self" type="application/rss+xml" />
+    <description>official.fm labs blog</description>
+    <language>en-us</language>
+    <pubDate>Sun, 01 Jun 2014 04:55:28 -0700</pubDate>
+    <lastBuildDate>Sun, 01 Jun 2014 04:55:28 -0700</lastBuildDate>
+
+    
+    <item>
+      <title>Moving on: the end of Official.fm Labs and the beginning of Audiocogs</title>
+      <link>http://ofmlabs.org/articles/2013/03/18/moving-on/</link>
+      <pubDate>Mon, 18 Mar 2013 00:00:00 -0700</pubDate>
+      <author></author>
+      <guid>http://ofmlabs.org/articles/2013/03/18/moving-on</guid>
+      <description>&lt;p&gt;At Official.fm Labs, we set to change the face of web audio and push the boundaries of what you can do in a browser. With developers around both Europe and the USA, we developed a &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;cross-browser audio framework&lt;/a&gt;, and ported audio decoders to allow pure JavaScript playback. We take great pride in the fact that we’ve made it possible to play &lt;a href=&quot;https://github.com/audiocogs/jsmad&quot;&gt;MP3&lt;/a&gt;, &lt;a href=&quot;https://github.com/audiocogs/aac.js&quot;&gt;AAC&lt;/a&gt;, &lt;a href=&quot;https://github.com/audiocogs/alac.js&quot;&gt;ALAC&lt;/a&gt; and &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC&lt;/a&gt; in modern browsers without any plugins. We &lt;a href=&quot;https://speakerdeck.com/nddrylliog/jsmad-what-why-how-jsconf-eu-2012&quot;&gt;spoke at conferences&lt;/a&gt; and worked on &lt;a href=&quot;https://github.com/audiocogs/pitch.js&quot;&gt;fun projects&lt;/a&gt; at music hack days.&lt;/p&gt;
+
+&lt;p&gt;However, as time passed, several members have left to pursue other work interests, and it has become incresingly difficult to take up the web audio challenge. We have decided that it is time to move on, but while Official.fm Labs is no more, many of its former members will continue to contribute to our open source projects in their spare time. We have moved our Github repositories to a new Audiocogs group, and you can see all of our open source projects at &lt;a href=&quot;http://github.com/audiocogs&quot;&gt;http://github.com/audiocogs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We would like to thank all the people who made this fantastic adventure possible: Official.fm Labs founder Amos Wenger, Music Hack Day organizers, fellow developers, and many others. We could not have achieved what we did if we hadn’t stood on the shoulders of giants. We would also like to thank our parent company Official.fm for funding our efforts to make web audio better, and for letting us pursue and develop cutting edge web technology.&lt;/p&gt;
+
+&lt;p&gt;We are looking forward to continuing our open source work through Audiocogs in the future, and continuing to make audio on the web better. Please help us by contributing and using our code, and of course, reporting bugs.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Adding AAC.js to Our Codecs Arsenal</title>
+      <link>http://ofmlabs.org/articles/2012/07/09/adding-aac-js/</link>
+      <pubDate>Mon, 09 Jul 2012 00:00:00 -0700</pubDate>
+      <author>Devon Govett (@devongovett)</author>
+      <guid>http://ofmlabs.org/articles/2012/07/09/adding-aac-js</guid>
+      <description>&lt;p&gt;&lt;em&gt;Note: this post is archived from the now closed ofmlabs.org.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Today, we are releasing &lt;a href=&quot;https://github.com/audiocogs/aac.js&quot;&gt;AAC.js&lt;/a&gt;, our newest JavaScript audio codec written on top of &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;Aurora.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Advanced Audio Coding (AAC) is a standardized, high quality lossy audio codec, designed as the successor to the MP3 format. AAC is now one of the most widely deployed audio codecs, and such names as the iTunes Store distribute music in the AAC format.&lt;/p&gt;
+
+&lt;p&gt;AAC can be played in a limited number of browsers using the standard HTML5 &amp;lt;audio&amp;gt; element, but some browsers choose not to support the format for various reasons. AAC.js enables playback and other tasks that might need decoding in all browsers, using JavaScript.&lt;/p&gt;
+
+&lt;p&gt;Currently, AAC.js supports the Low Complexity profile, which is the most common profile in use today. Support for the Main, High Efficiency (Spectral Band Replication) and High Efficiency v2 (Spectral Band Replication + Parametric Stereo) profiles is planned. Other profiles, such as the low delay, and error resilient profiles are not supported, but we’d love pull requests if you feel motivated to implement them!&lt;/p&gt;
+
+&lt;p&gt;Since releasing &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC.js&lt;/a&gt; and &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;Aurora.js&lt;/a&gt; a few weeks ago, we’ve seen lots of interest from the community in writing more codecs and using Aurora in other ways. We added a &lt;a href=&quot;https://github.com/audiocogs/aurora.js/wiki/Known-Uses&quot;&gt;Known Uses&lt;/a&gt; page to the Aurora.js wiki to track uses of Aurora and the codecs people have written for it. If you wrote something using Aurora, and want us and the world to know about it, be sure to add it to that page!&lt;/p&gt;
+
+&lt;p&gt;AAC.js is just another reason why building audio applications in the browser is continuing to get easier. Armed with a suite of JavaScript audio codecs, your audio editors, DJ apps, Digital Audio Workstations and more can now be built in the browser more easily, and with support for more codecs, the user experience will be even better. AAC is a common format for users to have their music in, and we hope AAC.js will improve web audio applications.&lt;/p&gt;
+
+&lt;p&gt;Be sure to &lt;a href=&quot;http://audiocogs.org/codecs/aac/&quot;&gt;check out the demo&lt;/a&gt;, to which we’ve added the ability to play music off of your own hard drive, and also the code for AAC.js on &lt;a href=&quot;https://github.com/audiocogs/aac.js&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Introducing FLAC.js: A Pure JavaScript FLAC Decoder</title>
+      <link>http://ofmlabs.org/articles/2012/06/15/flac-and-aurora/</link>
+      <pubDate>Fri, 15 Jun 2012 00:00:00 -0700</pubDate>
+      <author>Jens Nockert (@jensnockert) and Devon Govett (@devongovett)</author>
+      <guid>http://ofmlabs.org/articles/2012/06/15/flac-and-aurora</guid>
+      <description>&lt;p&gt;&lt;em&gt;Note: this post is archived from the now closed ofmlabs.org.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Today Official.fm Labs is relesing our JavaScript &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC decoder&lt;/a&gt;. FLAC is the ”&lt;a href=&quot;http://flac.sourceforge.net/&quot;&gt;Free Lossless Audio Codec&lt;/a&gt;” which is probably the most common lossless audio codec around.&lt;/p&gt;
+
+&lt;p&gt;We have been waiting for a flashy demo to use it in for a long while, but we decided that you have waited long enough and wired it up with a song into a &lt;a href=&quot;http://audiocogs.org/codecs/flac/&quot;&gt;streaming audio player&lt;/a&gt;. Thanks to &lt;a href=&quot;http://www.myspace.com/fonksquish&quot;&gt;fONKSQUISh&lt;/a&gt; for allowing us to use their songs. &lt;strong&gt;Update&lt;/strong&gt;: if you use the &lt;a href=&quot;http://audiocogs.org/codecs/flac&quot;&gt;online demo&lt;/a&gt; chose a FLAC file from your hard drive for playback.&lt;/p&gt;
+
+&lt;h2 id=&quot;what_is_interesting_about_a_javascript_flac_decoder&quot;&gt;What is interesting about a JavaScript FLAC decoder?&lt;/h2&gt;
+
+&lt;p&gt;The main thing is that it runs on a lot of platforms and decodes FLAC encoded audio. The &lt;strong&gt;decoder&lt;/strong&gt; by itself &lt;em&gt;should&lt;/em&gt; run on any platform that supports typed arrays, but we have only tested it on platforms that support an Audio API, like the Mozilla Audio Data API, and Google’s Web Audio API. That means that it should work in Firefox, Chrome, and Webkit with Web Audio enabled.&lt;/p&gt;
+
+&lt;p&gt;We hoped that we could say that it runs on the iOS 6 beta, but we’re having problems getting the Web Audio API to work reliably. However the decoder itself does appear to work. Hopefully by the time iOS 6 ships this fall, the Web Audio API will be more reliable and our codecs will begin to work on mobile devices.&lt;/p&gt;
+
+&lt;p&gt;Even without a real audio API, you could use it together with an HTML5 Audio tag, but then you would lose the realtime aspect since you cannot stream data into an Audio tag from JavaScript. You would have to decode the entire file first, and then play it back, which is slow and a bad experience. We’re crossing our fingers that more browsers will begin to support the Web Audio API (which is on track to standardization now) - that’s you, Opera and Internet Explorer!&lt;/p&gt;
+
+&lt;p&gt;We have already shown with &lt;a href=&quot;https://github.com/audiocogs/jsmad&quot;&gt;JSMad&lt;/a&gt; and &lt;a href=&quot;https://github.com/audiocogs/alac.js&quot;&gt;ALAC.js&lt;/a&gt; that decoding audio in JavaScript is possible and actually quite performant. We think that this is a good way to add support for just about any audio codec possible to browsers and gain cross browser support. The HTML5 Audio tag is great, but codec support issues are very real and encoding multiple formats is unacceptable. We know that browsers will never agree to support every codec possible, but with a baseline of the Web Audio API supported, we can support whatever codecs we please via a JavaScript decoder.&lt;/p&gt;
+
+&lt;p&gt;Additionally, JavaScript audio decoding opens up a number of doors for previously impossible web applications, such as DJ apps, Garageband-esque apps, audio editors and more. Let us know what you build with our decoders! We’re excited to see the doors they open.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC decoder&lt;/a&gt; is released under the LGPL license (following the original license from FFmpeg), which means that you can use it freely; however, if you modify the FLAC decoder itself, then you need to provide the source to your users.&lt;/p&gt;
+
+&lt;h2 id=&quot;aurorajs&quot;&gt;Aurora.js&lt;/h2&gt;
+
+&lt;p&gt;We’ve been working on a nice little framework called &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;Aurora.js&lt;/a&gt; that we have been using to write our decoders so far. Aurora handles common tasks for you such as dealing with binary data, and the decoding pipeline from source to demuxer to decoder, and finally to the audio hardware itself by abstracting browser audio APIs. Aurora is designed to be easily extendible with more codecs, and that is exactly what we have been doing. JSMad was written before Aurora existed, and since then, we’ve converted it to use Aurora in the form of &lt;a href=&quot;https://github.com/devongovett/mp3.js&quot;&gt;MP3.js&lt;/a&gt;. Additionally, we have &lt;a href=&quot;https://github.com/audiocogs/alac.js&quot;&gt;ALAC.js&lt;/a&gt; and now &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC.js&lt;/a&gt;. We have at least one more in the pipeline to release shortly!&lt;/p&gt;
+
+&lt;p&gt;The result of all of this, is that the Aurora framework makes it very nice to write demuxers and decoders for various container formats and codecs respectively. It also makes it easy to extract various information about the format, duration, and metadata from audio files, and includes a high level player API that, in our opinion, is easier to work with than the HTML5 Audio tag.&lt;/p&gt;
+
+&lt;p&gt;You could use it for compressing samples for your game or synth, or building an awesome streaming music service. If you’re interested in extending Aurora with your own demuxers and decoders (and we would love if you did), you should check out the &lt;a href=&quot;https://github.com/audiocogs/aurora.js/wiki&quot;&gt;documentation&lt;/a&gt; for the framework, and definitely read the &lt;a href=&quot;https://github.com/audiocogs/aurora.js/&quot;&gt;source code&lt;/a&gt;! It is written in &lt;a href=&quot;http://coffee-script.org/&quot;&gt;CoffeeScript&lt;/a&gt; but we’ve worked to make it easy to use in regular JavaScript as well, and we have written demuxers and decoders in both languages. We’re already working on an AAC decoder, and we’d love to see an Ogg Vorbis decoder or anything else the community comes up with!&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;The Web Audio API opens up many doors to us to build amazing audio applications in the browser. Many of those applications will need to use compressed audio data, and we’ve been implementing the codecs to make that happen. Be sure to check out the &lt;a href=&quot;http://audiocogs.org/codecs/flac/&quot;&gt;demo&lt;/a&gt; of &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC.js&lt;/a&gt; and write your own decoders using &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;Aurora.js&lt;/a&gt;. We’re excited to see the amazing apps you build!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Problems with a 'pure Javascript' implementation of H.264</title>
+      <link>http://ofmlabs.org/articles/2012/05/09/broadway-and-h264/</link>
+      <pubDate>Wed, 09 May 2012 00:00:00 -0700</pubDate>
+      <author>Jens Nockert (@jensnockert)</author>
+      <guid>http://ofmlabs.org/articles/2012/05/09/broadway-and-h264</guid>
+      <description>&lt;p&gt;This was &lt;a href=&quot;http://blog.aventine.se/post/22679577526/broadway-and-h264&quot;&gt;originally posted&lt;/a&gt; on &lt;a href=&quot;http://aventine.se&quot;&gt;aventine.se&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I have written a lot of audio decoders in Javascript, and helped write a few more. I have never tackled video for a few reasons, and I’ll try to sum up why there will probably never be one implemented in ‘pure’ Javascript, and the methods with which I think it will be implemented instead.&lt;/p&gt;
+
+&lt;p&gt;Even the most high-end Audio codecs are also designed to work on really low-end DSP devices. ALAC (Apple Lossless Audio Codec) for example, decodes stereo fine in software on one of the 90 MHz ARM 7TDMI cores in the original iPod. AAC requires a bit more, but it is still within the reach of software on a relatively slow processor, like a Pentium or G3. A modern ARM processor can decode MP3 at a clock-speed of mere 10MHz, and with a bit more, AAC, which essentially is the most demanding codec that you’ll meet on the web.&lt;/p&gt;
+
+&lt;p&gt;Video codecs on the other hand are an entirely different story. The 2.4GHz Core 2 Duo in my laptop (a Macbook Pro) has serious problems decoding high-end (1080p Hi10P for example) H.264 in with FFmpeg. My desktop, a reasonably modern Xeon quad-core, handles these videos fine using FFmpeg, but with significant load. Note that this is with an implementation that is hand-optimized with assembly. To improve the situation, we cannot depend on hardware support either, because it is often out of date. No graphics card in my collection support this profile in hardware yet for example.&lt;/p&gt;
+
+&lt;p&gt;On top of these problems, there are some serious limitations in Javascript/ECMAScript that makes it a bad platform for video decoding. And while it is a very cool demo of emscripten, these are some of the reasons why I don’t think that Broadway.js will ever be able to decode H.264 in any sort of sane capacity using merely emscripten and some minor optimizations done by hand without a radically different Javascript engine to support it.&lt;/p&gt;
+
+&lt;h2 id=&quot;floatingpoint&quot;&gt;Floating-point&lt;/h2&gt;
+
+&lt;p&gt;Essentially all operations in Javascript operate on floating-point numbers, and this is not likely to change in the future. For audio codecs, this is not really a problem since they tend to be designed in a way that you can implement them as both fixed-point and floating-point.&lt;/p&gt;
+
+&lt;p&gt;Video codecs on the other hand tend to rely a lot on fixed-point for optimization, H.264 is even optimized to avoid needing floating-point as much as possible. Even the discrete cosine transform and motion compensation in H.264 is modified to operate on fixed-point numbers instead of floating-point.&lt;/p&gt;
+
+&lt;p&gt;The reason for this is that modern processors can often process fixed-point operations much faster, especially the 8 and 16 bit operations that are the most common. These short integer instructions often have at least 4 times faster thoroughput than double precision floating-point. Certain complex instructions like division make the difference irrelevant, and in many cases require fallback to floating-point, but these operations are extremely uncommon in H.264.&lt;/p&gt;
+
+&lt;h2 id=&quot;simd&quot;&gt;SIMD&lt;/h2&gt;
+
+&lt;p&gt;This is before the SIMD penalty is added for Javascript, because current Javascript engines utilize only scalar operations, a significant part of the execution hardware (1/2 to 1/4) spends most of the time idling.&lt;/p&gt;
+
+&lt;p&gt;Most decoders utilize these SIMD instructions, which gives them access to 8-16 times more throughput per core for simple operations. And on top of that, there are special instructions for optimizing MPEG codecs, giving a quite measurable speedup on top of that, which you are unlikely to be able to utilize without hand-optimized code.&lt;/p&gt;
+
+&lt;h2 id=&quot;threads&quot;&gt;Threads&lt;/h2&gt;
+
+&lt;p&gt;To provide the final blow against current Javascript, there is very little possibility for shared memory multicore programming in a browser. Workers are not good enough to do this, I haven’t actually measured this as I do not plan to implement a video decoder with workers, but I think that the cost of communication and latency is currently too high for it to make sense.&lt;/p&gt;
+
+&lt;p&gt;Only using a single core on a processor that has 2-8 is another problem that would keep a Javascript implementation from ever competing with a native implementation.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;There are two obvious solutions to all of these problems that are being prototyped on the web right now, WebCL and Rivertrail. Both of these are designed to solve the threading problem mainly, which is likely not the biggest issue, but it is still significant.&lt;/p&gt;
+
+&lt;p&gt;Rivertrail could solve most of these problems since it is currently based on Intel’s OpenCL runtime, which has good optimizers. It isn’t designed for this very specialized task, and while it does allow you to reduce precision, it doesn’t allow direct access to integer or media instructions, but it is a much better option than pure Javascript and with the addition of an integer API to Javascript, this could easily turn into the preferred method.&lt;/p&gt;
+
+&lt;p&gt;WebCL (OpenCL for the web) on the other hand, already solves most or all of these problems since it is essentially a massively parallel C with SIMD and device-specific extensions. It even allows for the GPU to pick up most of the burden, which is in many cases preferable to running on the CPU due to the extra computational power available.&lt;/p&gt;
+
+&lt;p&gt;There are probably other solutions as well, but just hoping that single-threaded Javascript with double precision floating-point will ever be enough is naïve and counter-productive in my opinion. Especially on mobile devices, which have special concerns, WebCL is in a great position to solve these too in the future.&lt;/p&gt;
+
+&lt;p&gt;And while I would love to be proved wrong about this, I don’t think I will be for a long while, and at that point, there will be more advanced codecs and higher resolutions around to target.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Why HTML5 Media is not Enough</title>
+      <link>http://ofmlabs.org/articles/2011/11/30/dublin/</link>
+      <pubDate>Wed, 30 Nov 2011 00:00:00 -0800</pubDate>
+      <author>Amos Wenger (@nddrylliog)</author>
+      <guid>http://ofmlabs.org/articles/2011/11/30/dublin</guid>
+      <description>&lt;p&gt;&lt;em&gt;Note: this post is archived from the now closed ofmlabs.org.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;once_upon_a_time_in_dublin&quot;&gt;Once upon a time in Dublin&lt;/h2&gt;
+
+&lt;p&gt;I’m taking the time to write these few lines on the plane back from Dublin, absolutely pumped by the week-end we just lived together.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ofmlabs.org&quot;&gt;ofmlabs&lt;/a&gt; has been having regular meetings with its core members and invited individuals since day one. Since we live in Switzerland, Sweden, Germany, Finland, and the USA, we like to take the time to see each other in person and have productive 48h hackathons.&lt;/p&gt;
+
+&lt;p&gt;This week-end was different: for the first time, a start-up generously offered office space to the six europeans of us and our guests. Eamon Leonard, co-founder of &lt;a href=&quot;http://orchestra.io&quot;&gt;orchestra.io&lt;/a&gt;, expressed his belief in our work and the open web, and was happy to contribute by &lt;a href=&quot;http://www.flickr.com/photos/70976014@N04/sets/72157628194160521/&quot;&gt;hosting us&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://orchestra.io&quot;&gt;orchestra.io&lt;/a&gt; is a scalable PHP hosting platform, recently acquired by &lt;a href=&quot;http://engineyard.com&quot;&gt;Engine Yard&lt;/a&gt;. It might seem like we are into very different businesses here, yet we all have a common goal here: to help the web mature into a strong and usable platform.&lt;/p&gt;
+
+&lt;p&gt;While great strides of progress have been made, we believe that in the area of audio and video, there is definitely a lot of room for improvement. As I tried to explain in my &lt;a href=&quot;http://speakerrate.com/talks/8561-jsmad-what-why-how&quot;&gt;jsconf.eu talk&lt;/a&gt;, the HTML5 audio tag still has a long way to go to even reach feature parity with proprietary technology such as Adobe Flash.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://twitter.com/maboa&quot;&gt;Mark Boas&lt;/a&gt;, of &lt;a href=&quot;http://happyworm.com&quot;&gt;Happyworm&lt;/a&gt;, whom we were happy to welcome in our coding party, can tell you about the amount of work he and his associate have put into &lt;a href=&quot;http://jplayer.org&quot;&gt;jPlayer&lt;/a&gt; merely to work around implementation bugs in the audio and video tags in modern browsers.&lt;/p&gt;
+
+&lt;p&gt;Even when just considering the leading edge duo of browsers, Chrome and Firefox, building consistent solutions on the web involving multimedia without Flash is still a challenge today. As for other browsers, the web community at large is looking forward to the IE team continuing its efforts reaching out to developers to better understand their needs. The &lt;a href=&quot;http://opera.com&quot;&gt;Opera&lt;/a&gt; team can be praised for committing very closely to the specifications, even when other browsers clearly went their own way.&lt;/p&gt;
+
+&lt;h2 id=&quot;flash_vs_the_world&quot;&gt;Flash vs the world&lt;/h2&gt;
+
+&lt;p&gt;Just today I learned about the &lt;a href=&quot;&quot;&gt;Occupy Flash&lt;/a&gt; movement. While my heart yearns for the quick death of Flash, it still holds the edge in multimedia on the web, and for good reasons. All the major streaming platforms still use Flash to stream their content. At the time of this writing, Flash is the only answer for problems like stream encryption, live broadcasting, etc. &lt;a href=&quot;http://youtube.com/&quot;&gt;YouTube&lt;/a&gt; has just recently started to take advantage of new Adobe Flash features such as seamless transition between quality settings.&lt;/p&gt;
+
+&lt;p&gt;Building the web is a long and tedious task. Organizations like the &lt;a href=&quot;http://w3.org&quot;&gt;W3C&lt;/a&gt; and the &lt;a href=&quot;http://www.whatwg.org&quot;&gt;WHAT-WG&lt;/a&gt; assemble dozens of big companies, all with their own corporate interests and often vigorous point of views on the questions being discussed. Good intentions from individual developers are not enough. A recent W3C discussion thread tried to raise awareness about the disconnect between standards organizations and web developers all around.&lt;/p&gt;
+
+&lt;p&gt;Trying to free the web of proprietary plugins is a noble goal to which we are committed. But it would be dishonest to strip people of the interactivity they have gotten used to, if we have no acceptable solution to offer them in exchange.&lt;/p&gt;
+
+&lt;p&gt;Technology such as Flash can evolve very quickly. With the recent announcement of Flash being discontinued on mobile devices (as a plugin, but still present in Air applications), I don’t think anybody saw the seamless quality transition feature coming. I certainly didn’t. Yet, it is so very easy to come up with a new cool feature when you are on your own, not having to reach consensus with a big group of companies having sometimes misaligned interests.&lt;/p&gt;
+
+&lt;p&gt;How long until such a feature hits HTML5 audio and video? From where we are standing, it feels like forever. The W3C Audio Working group is experiencing difficulties. Scarce meetings (if any), decisions being made internally by companies disregarding the opinions of the working group, unwillingness to let individual developers express themselves&lt;/p&gt;
+
+&lt;p&gt;In the end, if no big company is interested in the same feature as you, individual developer, what can you do? For the time being, not much.&lt;/p&gt;
+
+&lt;h2 id=&quot;what_standards_are_made_of&quot;&gt;What standards are made of&lt;/h2&gt;
+
+&lt;p&gt;This is where the cracks begin to show in the way web standards and browsers are being developed. It is being presented as a democratic process where anyone can get involved, but the reality is big browser vendors negotiating interfaces so that the web doesn’t explode from the fragmentation.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, it is not only about politics. From a software engineering perspective, the current modularity of multimedia support in browsers leaves a lot to be desired. As often, it seems that only the minimal use case has been implemented: throwing a raw piece of audio/video in your page. The default player controls are often everything but polished.&lt;/p&gt;
+
+&lt;p&gt;However, there is so much more to do with multimedia content than just a rectangle with a play button! This is is something people such as the &lt;a href=&quot;http://popcornjs.org&quot;&gt;popcorn.js&lt;/a&gt; team and web demoscene figure &lt;a href=&quot;http://mrdoob.com&quot;&gt;mrdoob&lt;/a&gt; keep showing in their work. The goal of all these additions to web browsers - seen not long ago as way to navigate text on steroids - is to be able to create rich, interactive multimedia compositions that will be able to reach an incredibly wide audience, now that the hardware and network infrastructures are available.&lt;/p&gt;
+
+&lt;p&gt;When trying to make an apple pie, you don’t go and buy a crumble, take the cooked apples out and use them in your new meal. You go and buy fresh apples at a grocery store, then cut them, arrange them to the pattern that you want, and cook them. Sure, they both have apples in them, but they are two very different food items, and it would be foolish to try and turn one into the other.&lt;/p&gt;
+
+&lt;p&gt;That is exactly the problem with HTML5 audio and video elements. They are very tasty pieces of software, but they are not well adapted for every use case out there. Since they depend on the DOM, doing real-time audio processing with them is impossible due to delays, memory usage, etc. On certain platforms (I’m thinking mobile here), it’s simply impossible to play several audio elements at once. It might be Apple trying to save native apps or just trying to preserve the overall performance of its devices, but it’s a major show-stopper for HTML5 games.&lt;/p&gt;
+
+&lt;h2 id=&quot;lowlevel_multimedia_apis_the_land_of_the_free&quot;&gt;Low-level multimedia APIs: the land of the free&lt;/h2&gt;
+
+&lt;p&gt;Once you get low-level access, i.e. you can directly write audio samples into the audio devices available, suddenly a world of possibilities open up. You can do multi-channel mixing yourself, for games or music sequencers. You can generate sound programmatically, like in &lt;a href=&quot;https://github.com/jussi-kalliokoski/audiolib.js/&quot;&gt;audiolib.js&lt;/a&gt;. You can start playing sound samples exactly when you want, you can make a gapless music player if you want. You can mix generated sound with existing recording of instruments and noises. You can do &lt;em&gt;anything&lt;/em&gt; with fresh apples.&lt;/p&gt;
+
+&lt;p&gt;And guess what, we can already do that. Along with the HTML5 audio and video tag I have mentioned above, Chrome integrates the &lt;a href=&quot;http://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html&quot;&gt;Web Audio API&lt;/a&gt;, and Firefox integrates the &lt;a href=&quot;https://wiki.mozilla.org/Audio_Data_API&quot;&gt;Audio Data API&lt;/a&gt;. Using those APIs, you can write any audio data you want to your soundcard, just like we talked above. What are we complaining about, then? For one, there are two different APIs.&lt;/p&gt;
+
+&lt;p&gt;The W3C Audio Working Group discussions haven’t quite led to consensus yet. Both parties (Google and Mozilla) have strong beliefs about how web audio should be done. The Google argument is generally that doing audio processing in JavaScript is silly when it’s so easy to provide readymade elements for common operations (such as FFT, Low/High-pass filters etc.).&lt;/p&gt;
+
+&lt;p&gt;The Mozilla argument however, is that coming up with a list of components (i.e. nodes, in Google’s API) that will stay relevant to audio for the years to come and fit every possible usecase is pretty hard. They argue that JavaScript is fast enough, and that power should be put in the hands of the users (that is, the web developers) so that they can develop their own components, and share them, allowing the web to even supersede the proprietary model (eg. Adobe) in velocity.&lt;/p&gt;
+
+&lt;p&gt;And this is exactly our position. We have shown once, back in June, that JavaScript was fast enough to decode mp3 in realtime, &lt;a href=&quot;http://jsmad.org/&quot;&gt;with jsmad&lt;/a&gt;, and play it back in the browser. To make it work in both Chrome and Firefox, we had to use &lt;a href=&quot;https://github.com/jussi-kalliokoski/sink.js/&quot;&gt;sink.js&lt;/a&gt;, to abstract the differences between the audio APIs.&lt;/p&gt;
+
+&lt;h2 id=&quot;where_do_we_go_from_here&quot;&gt;Where do we go from here?&lt;/h2&gt;
+
+&lt;p&gt;We are about to release more exciting open source software to the world soon. But after this weekend of hacking some more high-performance JavaScript code, we can only repeat our plea for a unified low-level Audio API, allowing simple write access to audio devices (capture would be great, but has more security implications). When it’s standardized, no doubt Opera will implement it, and IE will eventually follow when it picks up steam.&lt;/p&gt;
+
+&lt;p&gt;Until next week, take a look at &lt;a href=&quot;http://mbebenita.github.com/Broadway/broadway.html&quot;&gt;Broadway.js&lt;/a&gt;, an H.264 decoder in JavaScript, and &lt;a href=&quot;http://bemasc.net/wordpress/2011/11/30/route9-js/&quot;&gt;Route9.js&lt;/a&gt;, a WebM/VP8 decoder in JavaScript. It’s incredible, but in the current situation, it’s becoming easier to implement codecs in JS than try to lobby vendors and figure out royalties. At least this makes for great hacks!&lt;/p&gt;
+
+&lt;p&gt;You can also read &lt;a href=&quot;http://happyworm.com/blog/2011/11/15/html5-audio-apis-how-low-can-we-go/&quot;&gt;Mark Boas’s article about low-level audio APIs&lt;/a&gt;, published earlier this year, which covers the same substance with a different prose.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Genesis</title>
+      <link>http://ofmlabs.org/articles/2011/08/02/genesis/</link>
+      <pubDate>Tue, 02 Aug 2011 00:00:00 -0700</pubDate>
+      <author>Amos Wenger (@nddrylliog)</author>
+      <guid>http://ofmlabs.org/articles/2011/08/02/genesis</guid>
+      <description>&lt;p&gt;&lt;em&gt;Note: this post is archived from the now closed ofmlabs.org.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Music is a part of our daily lives. The Web has forever changed the way we interact. Audio in the browser has been a reality for quite some time, through &lt;a href=&quot;http://www.adobe.com/products/flashplayer/&quot;&gt;proprietary plug-ins&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;But things are changing. &lt;a href=&quot;https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html&quot;&gt;New&lt;/a&gt;, &lt;a href=&quot;https://wiki.mozilla.org/Audio_Data_API&quot;&gt;powerful&lt;/a&gt; APIs are being drafted. People are coming together to build better technology for everyone. On &lt;a href=&quot;http://github.com/&quot;&gt;GitHub&lt;/a&gt; alone, more than a million are collaborating.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://creativejs.com/&quot;&gt;Everyday&lt;/a&gt;, hackers come up with &lt;a href=&quot;http://jsmad.org/&quot;&gt;demos&lt;/a&gt; to show just how &lt;a href=&quot;https://github.com/devongovett/pdfkit&quot;&gt;powerful&lt;/a&gt; web browsers have become, using &lt;a href=&quot;http://paperjs.org/&quot;&gt;Canvas&lt;/a&gt;, &lt;a href=&quot;http://raphaeljs.com/&quot;&gt;SVG&lt;/a&gt;, &lt;a href=&quot;https://github.com/mrdoob/three.js/&quot;&gt;WebGL&lt;/a&gt;, &lt;a href=&quot;http://www.w3.org/TR/FileAPI/&quot;&gt;File&lt;/a&gt;, &lt;a href=&quot;http://www.html5rocks.com/en/mobile/touch.html&quot;&gt;Touch&lt;/a&gt;, &lt;a href=&quot;http://diveintohtml5.org/storage.html&quot;&gt;Local Storage&lt;/a&gt;, &lt;a href=&quot;http://dev.w3.org/geo/api/spec-source.html&quot;&gt;Geo-location&lt;/a&gt;, &lt;a href=&quot;http://www.jplayer.org/&quot;&gt;Video&lt;/a&gt;, &lt;a href=&quot;https://github.com/jussi-kalliokoski/audiolib.js&quot;&gt;Audio&lt;/a&gt;, and even &lt;a href=&quot;https://bugzilla.mozilla.org/show_bug.cgi?id=604039&quot;&gt;Joystick&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Pushing the web &lt;a href=&quot;https://webfwd.org/&quot;&gt;forward&lt;/a&gt; is not an easy task. Some W3C specifications have been on the battleground for &lt;a href=&quot;http://www.w3.org/Graphics/SVG/&quot;&gt;years&lt;/a&gt; before reaching an agreement. Some browsers lag behind in implementation of proposals.&lt;/p&gt;
+
+&lt;p&gt;At ofmlabs, our mission is to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Build open-source JavaScript libraries to abstract over browser differences&lt;/li&gt;
+
+&lt;li&gt;Collaborate with other projects to showcase the power of the web.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://official.fm/&quot;&gt;Official.fm&lt;/a&gt; invested money so that a team of &lt;a href=&quot;https://twitter.com/audiocogs/lists/team&quot;&gt;8 persons&lt;/a&gt; around the world can spend most of their time working on &lt;a href=&quot;https://github.com/audiocogs/projects&quot;&gt;open-source projects&lt;/a&gt; to help the web grow up.&lt;/p&gt;
+
+&lt;p&gt;We hang out &lt;abbr title=&#39;#ofmlabs on Freenode&#39;&gt;on IRC&lt;/abbr&gt; and collaborate with fellow developers &lt;a href=&quot;https://github.com/audiocogs&quot;&gt;on GitHub&lt;/a&gt;. We’re interested in meeting JS hackers around the world, so drop by and chat a little, you’re always welcome on our corner of the internet!&lt;/p&gt;
+
+&lt;p&gt;Since we just launched, things are looking a little bare here, but we’ll regularly post status updates on our work, with assorted demos. Follow us &lt;a href=&quot;http://twitter.com/audiocogs&quot;&gt;on Twitter&lt;/a&gt; if you want to have the inside scoop!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;EDIT (2013-03-18):&lt;/strong&gt; we no longer hang out on the #ofmlabs IRC channel. You can find us on #audiocogs on Freenode.&lt;/p&gt;</description>
+    </item>
+    
+
+  </channel>
+</rss>

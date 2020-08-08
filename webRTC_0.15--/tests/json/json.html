@@ -1,0 +1,139 @@
+<script>
+function vache()
+{
+	return 'meuh';
+}
+
+var a = JSON.stringify ({
+	from: function(){return 'toto';},
+	to:	vache(),
+	msg: ['egout', 'afanato', 'lolo', 'null']
+})
+
+//alert(a);
+
+console.log(a);
+var b = JSON.parse(a);
+
+console.log(b.msg.length);
+console.log(b.msg[2])
+
+console.log((Math.random()*0xFFFFFF<<0).toString(16));
+
+for (var i=0; i<3; i++) console.log('meuh');
+console.log(b.to);
+
+var z = new Array();
+z[0]=45;
+z[1]=44;
+z[2]=22;
+console.log(z[1]);
+
+z.push(3);
+console.log(z[3]);
+console.log('taille:'+z.length)
+z.splice(1,1);					// At position 1, remove 1 item. (implicite; liste chainées avec pointeurs.
+console.log('taille:'+z.length)
+console.log(z[3]);
+console.log(z[1]);
+
+var obj = function(id,name) {
+	this.id = id;
+	this.name = name;
+	this.object= function() { return this.name; }
+}
+var A = new Array();
+
+A.push(new obj(44,'banane'));
+console.log('id='+A[0].id+'.name='+A[0].name+' taille='+A.length);
+A.push(new obj(22,'poire'));
+console.log('id='+A[1].id+'.name='+A[1].name+' taille='+A.length);
+A.push(new obj(11,'cerise'));
+console.log('id='+A[2].id+'.name='+A[2].name+' taille='+A.length);
+
+A.splice(1,1);
+console.log('AFTER SPICE pour ID1 : id='+A[1].id+'.name='+A[1].name+' taille='+A.length);
+
+//alert(A.join());
+
+//console.log(A.join(name));
+
+var B = new Array ();
+B.push('cerise');
+B.push('poire');
+B.push('pomme');
+console.log(B.length);
+console.log("\""+B.join("\",\"")+"\"");
+
+var a = JSON.stringify ({
+	from: [ B.join(",") ],
+	to:	vache(),
+	msg: ['egout', 'afanato', 'lolo', 'null']
+})
+//{"from":["cerise,poire,pomme"],"to":"meuh","msg":["egout","afanato","lolo","null"]}
+
+//alert(a);
+var b=JSON.parse(a);
+console.log(b.from.length);
+
+var c = "{\"from\":[\"cerise\",\"poire\",\"fraise\"]}";
+//var c = "{'from':['cerise','poire','fraise']}";
+
+var c = "{\"from\":[\""+B.join('\",\"')+"\"]}";			// Création manuelle de l'obj JSON avec  array.join()
+alert(c);
+
+
+var d=JSON.parse(c);
+console.log('taille:'+d.from.length);
+console.log(d.from[2]);
+
+/*
+var b = JSON.parse(a);
+console.log(b.from.length);
+
+var C = new Array();
+C[0] = new Array("banane","choux");
+C[1] = new Array();
+C[2] = new Array("toto","lolo");
+
+console.log(C[0][0]+' '+C[0][1]);
+console.log('taille globale:'+C.length);
+C.push(new Array("carote","cuites"));
+console.log('taille globale:'+C.length);
+console.log(C[3][0]+' '+C[3][1]);
+console.log(C[2][0]+' '+C[2][1]);
+
+C.splice(1,1);
+
+console.log(C[2][0]+' '+C[2][1]);
+
+console.log(C.join(","));
+*/
+/*
+function vache() 
+{
+	return 'meuh\"'+',\"vache';
+}
+console.log(vache());
+
+var H = JSON.stringify ({
+	from: [ vache() ],
+	to:	vache(),
+	msg: ['egout', 'afanato', 'lolo', 'null']
+})
+//alert(H);
+
+var obj ={
+	toto: 'toto',
+	toJSON :function () {
+		return C.join('\',\'');
+		}
+	}
+var D=JSON.stringify({gre: obj}); // '"truc"'
+//alert(D);
+var T = JSON.parse(D);
+console.log(T.gre.length);
+*/
+
+
+</script>

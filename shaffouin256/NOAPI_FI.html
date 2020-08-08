@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>un gros lolo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="file" id="files" name="files[]" multiple />
+
+<div id='texte'>	</div>
+
+<script type="text/javascript">
+/* test API crypto : window.crypto.subtle && window.crypto.subtle.digest -> Firefox34+ */
+var texte = document.getElementById('texte');
+
+var is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
+	
+if (is_crypto) 	console.log('is_crypto vaut TRUE: CONTINUE...');
+else 		  	console.log('is_crypto vaut FALSE: BUG !');
+    
+function handle_file_select(event) {				
+	event.stopPropagation();
+	event.preventDefault();
+
+	var files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+	var file = files[0];
+
+	texte.innerHTML+='GENERATE IDENTITY FOR :'+file.name;
+	
+	// var worker = new Worker('calculator.worker.sha256.js');
+	// hash_total_file(file, worker);
+	
+	var worker = new Worker('sha256AloneWorker.js');
+	hash_segmential_file(file, worker);
+}
+	
+/* Fonction utilisée dans les deux cas */
+function hash_total_file(file, worker) {					
+	var reader = new FileReader();
+	reader.onload = function (event) {
+		worker.postMessage({
+			'message' : event.target.result,
+			'block' : block
+		});
+	};	
+	var handle_hash_block = function (event) {
+		if(block.end != file.size) {
+			block.start += buffer_size;
+			block.end += buffer_size;
+			if(block.end > file.size) 	block.end = file.size;
+				
+			reader.readAsArrayBuffer(file.slice(block.start, block.end));
+		}
+		else console.log(event.data.result);
+	};
+	worker.addEventListener('message', handle_hash_block);
+	
+	var buffer_size = 64 * 16 * 1024;
+	
+	var block = {
+		'file_size' : file.size,
+		'start' : 0,
+		'end' : (buffer_size > file.size ? file.size : buffer_size)
+	};
+	reader.readAsArrayBuffer(file.slice(block.start, block.end));
+}
+
+function hash_segmential_file(file, worker) {
+
+	var reader = new FileReader();
+	reader.onload = function (event) {
+		worker.postMessage({
+			'message' : event.target.result,
+			'block' : block
+		});
+	};
+		
+	var handle_hash_block = function (event) {
+		texte.innerHTML+='<br>'+event.data.result;
+		block.currentSegment++;
+		if (block.currentSegment < block.requireSegment) {
+
+			var begin = block.currentSegment*buffer_size;
+			var end = begin + buffer_size;
+			if (end > file.size)	{
+				block.blockSize = file.size - begin;
+				end = file.size;
+			}
+			reader.readAsArrayBuffer(file.slice(begin, end));
+		}
+		else console.log('End of sha256.');
+	};
+	worker.addEventListener('message', handle_hash_block);
+	
+	var buffer_size = 1024 * 1024;
+	var block = {
+		'file_size' : file.size,
+		'requireSegment' : (Math.ceil(file.size/buffer_size)),
+		'currentSegment' : 0,
+		'blockSize' : buffer_size
+	};
+	var end = (block.currentSegment+1)*buffer_size;
+	if (end > file.size)		block.blockSize = end = file.size;
+			
+	reader.readAsArrayBuffer(file.slice(0, end));
+}
+
+document.getElementById('files').addEventListener('change', handle_file_select, false);
+</script>
+</body>
+</html>

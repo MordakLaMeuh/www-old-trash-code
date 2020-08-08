@@ -1,0 +1,50 @@
+
+<!DOCTYPE HTML>
+<html lang="fr">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+   <title>Portail Libre VPN</title>
+      <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+</head>
+
+<body>
+
+<H3> TEST </H3>
+
+<?php
+
+//exec("bash test");
+
+printf("php okay");
+
+//$output = shell_exec('ls -lart');
+//echo "<pre>$output</pre>";
+//$output = shell_exec('sudo iptables -L -v');
+//echo "<pre>$output</pre>";
+
+$output = shell_exec('sudo ifconfig');
+echo "<pre>$output</pre>";
+$name="z9";
+
+exec("echo $name > pipe_in");
+exec("cat pipe_out > response_from_server");
+
+$file = fopen('response_from_server', 'r');
+ 
+$out = fgets($file);
+ 
+fclose($file);
+echo $out;
+
+//include 'z6.zip';
+
+//shell_exec('cat pipe > test')
+?>
+
+<a href=<?php echo $name; ?>.zip><?php echo $name; ?>, vous devez cliquer ici pour recevoir votre compte VPN !</a>
+</body>

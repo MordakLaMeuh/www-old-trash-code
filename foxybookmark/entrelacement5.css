@@ -1,0 +1,120 @@
+* { margin: 0px; padding: 0px; }
+body { background-color: black; overflow:hidden; font-size: 1.4vh; font-family: Cursive;}
+H3 { text-decoration: underline; text-align: center; font-family: monospace; font-size: 3vh; color: green; margin-top: 1vh;}
+
+#header		{ width: 100vw; height: 15vh; background-color: black; color:white;}
+#footer		{ width: 100vw; height: 15vh; top: 85vh; background-color: black; color:white; margin-left: 1.5vw;}
+
+/*** Définition de la div URL ***/
+#urlAreaDom {
+	width:80vw;
+	height:70vh;
+	position:relative; /* Un élément en relative compte pour un 'bloc dur', c'est à dire qu'il pousse les autres éléments tout comme un 'static' et contrairement     */
+	left:13vw;	   /* à un 'absolute'. Il peut servir de repère à des éléments en absolute contenu dans lui. On peut aussi placer un 'relatif' à un autre endroit */
+			   /* que celui ou il aurait du normalement être { mais l'espace 'dur' occupé sera toujours celui de l'endroit de 'base' }			  */
+}
+.boxLine {
+	width:inherit;
+	position:static;
+	transition-duration: 0.5s;
+	z-index:10;
+}
+.areaLine {
+	width:inherit;
+	position:absolute;
+	z-index:20;
+}
+.red 		{ background-color: red; 	}
+.orange  	{ background-color: orange;  	}
+.yellow  	{ background-color: yellow;  	}
+.green     	{ background-color: #228B22; 	}
+.blue 	     	{ background-color: #1E90FF; 	}
+.darkMagenta 	{ background-color: #8B008B; 	} 
+.blueViolet  	{ background-color: #8A2BE2; 	}
+
+.leftBox	{ background-color:white; width:15vw; height:inherit; float: left; opacity: 0.3;}
+.rightBox	{ width:inherit; height:inherit; text-align: center; font-family: monospace; font-size: 0.9em;}
+
+/*** Définitions CSS pour la scrollBar maison ***/
+.hideOverflow 	{ overflow:hidden;}
+.contextScrollbar {
+	position:absolute;
+	background-color: black;
+	border-radius: 1vw;
+	margin-right: 1vw;
+	border:solid green 2px;
+	z-index: 999;
+	/*float: right;*/
+}
+.contextMiddle {
+	position:inherit;
+	background-color: red;
+	border-radius: inherit;
+	opacity: 1;
+	cursor:pointer;
+}
+.contextScrollbarMainDiv, 		.contextScrollbar		{ opacity:0.88;	} 
+.contextScrollbarMainDiv:hover,		.contextScrollbar:hover		{ opacity:1;	}
+
+/*** Texte Area ***/
+#mainTexte   {
+	overflow:hidden;
+	position:relative;
+	left: 15vw;
+	width: 80vw;
+}
+
+/*** Images ***/
+#macaron     {
+	position: absolute;
+	top: 1.5vh;
+	left: 1.5vw;
+	width:    9vw;
+	/*z-index: 50;*/
+	border-radius: 1vw;
+}
+#rabbit	    {
+	position: absolute;
+	top: 1.5vh;
+	right: 0px;
+	width: 12vw;
+	
+	z-index: 1000;
+}
+
+img   { width: inherit; }
+
+/*** no script ***/
+.noscript    {
+	color: white;
+	font-family: monospace;
+	font-size: 2.2vh;
+	display: inline-block;	/* Trop bien ! Permet de rendre une simple balise d'une ligne en véritable bloc, idéal pour mettre un bord ! */
+	border: solid 2px red;
+	margin-top: 10vh;
+	padding: 1vh;
+	border-radius: 1vh;
+}
+
+/*** Toolbar ***/
+#toolbar	{
+	position:absolute;
+	opacity: 0;
+	top:0px;
+	right:-7.8vw;
+	width:8.2vw;
+	z-index:999; 
+	transition-duration: 1s;
+}
+#toolbar:hover {
+	opacity: 1;
+	transition-duration: 1s;
+	-ms-transform: translate(-7.8vw,0px);	 /* IE 9 */
+   	-webkit-transform: translate(-7.8vw,0px);  /* Safari */
+	transform: translate(-7.8vw,0px);
+} 
+.menuItem	{
+	border: solid white 0.1vw;
+	width:8vw;	
+}
+  

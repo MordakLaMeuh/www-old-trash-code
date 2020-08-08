@@ -1,0 +1,97 @@
+#!/bin/bash
+
+php="/var/www"
+zip_bank="/var/www/.bank"
+client_vpn="/root/vpn/client"
+
+i=0
+while [ $i -eq 0 ]
+do
+    echo "Debut de nouvelle ecoute"
+    nc -l -v -p 800 > client.id
+    client=`cat client.id | sed -e '2d'`
+    id=`cat client.id | sed -e '1d'`
+    directory=$client\_$id
+    echo -e "Nouveau compte à créer : $client"
+    echo -e "ID special du client : $id"
+    echo -e "Dossier : $directory"
+    
+    if [ 0$client = 0 ]
+    then
+	echo "Mauvais client ! Reception erronée !"
+    else
+        # Se place dans le dossier des keys
+	cd /root/vpn/config/keys/
+
+	# Vérifie que le client n'est pas déjà enregistré
+	# Condition : SI client n'existe pas
+	# Done => Fais lui un fichier client.key
+
+	if [ ! -e $client.key ]
+	then
+        # Se place dans le dossier commandes
+	    cd /root/vpn/config
+	    echo "Création d'une clef client"
+	    . vars
+	    ./pkitool $client
+	    echo "Clef client générée !"
+	else
+	    echo "Fichier client déjà présent"
+	fi
+
+# Retour dans le dossier des clés
+# Test si le zip existe
+	cd $client_vpn/$client
+	zip=$client.zip
+
+	if [ ! -e $zip ]
+	then
+
+	    echo "Fabrication du zip"
+	    mkdir $client_vpn/$client # crée dossier client
+	    cd /root/vpn/
+	    cp ca.crt ta.key $client_vpn/$client/
+	    cd /root/vpn/config/keys/
+    
+	    cp $client.crt $client_vpn/$client/$client.crt
+	    cp $client.key $client_vpn/$client/$client.key
+
+	    cd /root/vpn/
+	    addr=$(cat IP) # Va chercher l'addresse du serveur - fichier IP
+	    echo -e "client\ndev tap\nproto tcp-client\nremote $addr 110\nresolv-retry infinite\ncipher AES-256-CBC\n" > client1.ovpn
+	    echo -e "ca ca.crt\ncert $client.crt\nkey $client.key\ntls-auth ta.key 1\n" > client2.ovpn
+	    echo -e "nobind\npersist-key\npersist-tun\ncomp-lzo\nverb 3\n\nremote-cert-tls server" > client3.ovpn
+	    cat client1.ovpn client2.ovpn client3.ovpn > client.ovpn
+
+	    cp client.ovpn $client_vpn/$client/client.ovpn
+	    cd $client_vpn/$client/
+	    cp client.ovpn client.conf # Compatibilité Windows : .conf <=> .ovpn
+
+	    zip $client.zip * # Fabrique le fichier .zip
+	    mkdir  $zip_bank/$directory
+	    cp $client.zip $zip_bank/$directory/librevpn.zip
+	    chown www-data:www-data $zip_bank/$directory $zip_bank/$directory/librevpn.zip
+
+
+#echo -e "Ci-joint, vos fichiers de configurations VPN, prenez-en soin !" | mutt -s "VPN gratos - L'essayer c'est l'adopter." -a $client.zip -- $clientmail
+#echo -e "Fichier envoyé !"
+
+	else
+            # Peut renvoyer client déjà pris, qui sait !
+	    echo -e "Fichier zip déjà présent et/ou envoyé"
+	    if [ ! -e $zip_bank/$directory/librevpn.zip ]
+            then
+		echo -e "Fichier absent de la zip_bank, demande de creation"
+
+                mkdir  $zip_bank/$directory
+	    	cp $client.zip $zip_bank/$directory/librevpn.zip
+	    	chown www-data:www-data $zip_bank/$directory $zip_bank/$directory/librevpn.zip
+       
+	    else
+	    	echo -e "Fichier déjà présent dans la zip_bank"
+	    fi
+	fi
+    fi
+done
+echo "Processus terminé"
+exit 0

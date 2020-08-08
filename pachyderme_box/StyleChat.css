@@ -1,0 +1,271 @@
+body
+{
+    background:#F7FE2E;
+    padding: 0;
+    margin: 0;
+}
+
+#charlie
+{
+    position:absolute; 
+    z-index:999;
+   /* left:5%; */
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-track-piece
+{
+	background: transparent none;
+	border: solid 4px transparent;
+	border-right-width: 8px;
+	margin: 4px;
+	-webkit-box-shadow: inset 1px 1px 0 0 rgb(137,131,117), inset -1px -1px 0 0 rgb(224,220,210);
+}
+
+::-webkit-scrollbar-track-piece:horizontal
+{			/* Fond pour la barre du bas */
+	border-right-width: 4px;
+	border-bottom-width: 8px;
+}
+
+*:focus             /* Désactive tout effet d'entourage des champs de formulaire quand le focus est dessus. */
+{
+    outline: none;
+}
+
+#contener_header            /* Le conteiner contiens la balise <H1> et l'image #play_pause_button, le signifier RELATIVE permettra aux contenant de tenir dedans ! */
+{
+    width:100%;
+    border: none;
+    position: relative;
+}
+
+H1
+{
+    margin: 0;
+    padding-top: 5px;
+    width:100%;
+    height:80px;
+    color: green;
+    font-family: courier new, verdana, sans-serif;
+    font-style: italic;
+    background:#01DF01;
+}
+
+H1,H5
+{
+    text-align: center;
+}
+
+#play_pause_button
+{
+    position: absolute;   /* Le bouton est en position ABSOLUTE à l'intèrieur de son conteiner. */
+    top: 0px;
+    right: 0px;
+    border: none;
+   /* height: 85px;*/
+}
+
+#contener_medium
+{
+    width:100%;
+    border: none;
+    position: relative;
+}
+
+#identified_status
+{
+    font-style: italic;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#identification_area
+{
+    margin-left: 10px;
+    text-align: center;
+}
+
+#login
+{
+    width: 400px;
+    height: 30px;
+    background:#BEF781;
+    font-family: garamond, verdana, sans-serif;
+    font-size: 20px;
+    color:#01DF01;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+#identification_button
+{
+    display: none;
+}
+
+#chatbox
+{
+    width:90%;
+    height:300px;       /* Valeur par défault */
+    background:#BEF781;
+    background-image: url("./images/chatbox_pachyderme.png");
+    background-repeat: repeat;
+    background-position: center top;
+    vertical-align: bottom;
+    overflow:auto;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-top: 10px;
+    margin-left: 5%;
+    padding: 5px;
+    font-family: garamond, verdana, sans-serif;
+    color:#8A2908;
+    font-weight: bold;
+    display:none;
+
+    word-wrap:break-word;   /* Coupe les phrases trop longue en retournant à la ligne. */
+    white-space: pre-wrap;  /* Conserve les espaces dans l'affichage final et les sauts de lignes. */
+}
+
+#line_box
+{
+    width:90%;
+    height:30px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5%;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #2EFE2E;
+    font-size: 14px;
+    color:#AA2908;
+    font-weight: bold;
+}
+
+#bouton_send_line
+{
+    display: none;
+}
+
+#contener_footer
+{
+    position: relative;
+}
+
+#msg_send_id
+{
+    width:90%;
+    height:100px;       /* Valeur par défault */
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 5%;
+    background: #FF0000;
+    padding: 5px;
+    font-size: 14px;
+    color:white;
+    position: relative;
+}
+
+#bouton_send_area
+{
+  right: 0px;
+  position: absolute;
+  top: 85px;           /* Valeur par défault */
+}
+
+#horloge
+{
+    padding:0px;
+    border: 0;
+    margin-left: 5%;
+}
+
+#horloge:hover,#play_pause_button:hover,#bouton_send_area:hover
+{
+    cursor: url('./images/php_curseur.png'), pointer;
+}
+
+#time_img
+{
+    border: 0;
+}
+
+#user_list
+{
+    font-style: italic;
+    color: red;
+    left: 16%;
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    bottom: 10px;
+}
+
+#history_button
+{
+    margin-left: 5%;
+}
+
+.strong_green
+{
+    color:green;
+    font-style: normal;
+    font-weight: bold;
+}
+
+
+.green_txt
+{
+    font-style: italic;
+    font-weight: normal;
+    color:green;
+}
+
+.blue_txt
+{
+    font-style: italic;
+    font-weight: bold;
+    color:#088A08;
+}
+
+.red_txt
+{
+    font-weight: bold;
+    font-style: italic;
+    color:red;
+}
+
+.light_black
+{
+    font-style: normal;
+    font-weight: normal;
+    color:black;
+    font-size: 12px;
+}
+
+.purple_txt
+{
+    font-weight: normal;
+    font-style: italic;
+    color:purple;
+}

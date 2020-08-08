@@ -1,0 +1,278 @@
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost [127.0.0.1] 48717
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier absent de la zip_bank, demande de creation
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost [127.0.0.1] 48822
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost [127.0.0.1] 49087
+Nouveau compte à créer : afanato
+ID special du client : 2cd1b8a70b214062
+Dossier : afanato_2cd1b8a70b214062
+Création d'une clef client
+NOTE: If you run ./clean-all, I will be doing a rm -rf on /root/vpn/config/keys
+Generating a 1024 bit RSA private key
+.....................................................................++++++
+.......++++++
+writing new private key to 'afanato.key'
+-----
+Using configuration from /root/vpn/config/openssl-1.0.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+countryName           :PRINTABLE:'FR'
+stateOrProvinceName   :PRINTABLE:'FR'
+localityName          :PRINTABLE:'Paris'
+organizationName      :PRINTABLE:'Rltech'
+commonName            :PRINTABLE:'afanato'
+emailAddress          :IA5STRING:'Solaris'
+Certificate is to be certified until Oct 31 15:36:06 2024 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Clef client générée !
+./php_client: line 44: cd: /root/vpn/client/afanato: No such file or directory
+Fabrication du zip
+  adding: afanato.crt (deflated 47%)
+  adding: afanato.key (deflated 22%)
+  adding: ca.crt (deflated 32%)
+  adding: client.conf (deflated 28%)
+  adding: client.ovpn (deflated 28%)
+  adding: ta.key (deflated 40%)
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 48045
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40319
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 49419
+Nouveau compte à créer : testG
+ID special du client : 5bd80c3c334c9df8
+Dossier : testG_5bd80c3c334c9df8
+Création d'une clef client
+NOTE: If you run ./clean-all, I will be doing a rm -rf on /root/vpn/config/keys
+Generating a 1024 bit RSA private key
+............................................++++++
+............................................................................................++++++
+writing new private key to 'testG.key'
+-----
+Using configuration from /root/vpn/config/openssl-1.0.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+countryName           :PRINTABLE:'FR'
+stateOrProvinceName   :PRINTABLE:'FR'
+localityName          :PRINTABLE:'Paris'
+organizationName      :PRINTABLE:'Rltech'
+commonName            :PRINTABLE:'testG'
+emailAddress          :IA5STRING:'Solaris'
+Certificate is to be certified until Nov 12 21:28:21 2024 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Clef client générée !
+./php_client: line 44: cd: /root/vpn/client/testG: No such file or directory
+Fabrication du zip
+  adding: ca.crt (deflated 32%)
+  adding: client.conf (deflated 28%)
+  adding: client.ovpn (deflated 28%)
+  adding: ta.key (deflated 40%)
+  adding: testG.crt (deflated 48%)
+  adding: testG.key (deflated 22%)
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 51682
+Nouveau compte à créer : draco
+ID special du client : 79a65bb2648f7e82
+Dossier : draco_79a65bb2648f7e82
+Création d'une clef client
+NOTE: If you run ./clean-all, I will be doing a rm -rf on /root/vpn/config/keys
+Generating a 1024 bit RSA private key
+....++++++
+...++++++
+writing new private key to 'draco.key'
+-----
+Using configuration from /root/vpn/config/openssl-1.0.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+countryName           :PRINTABLE:'FR'
+stateOrProvinceName   :PRINTABLE:'FR'
+localityName          :PRINTABLE:'Paris'
+organizationName      :PRINTABLE:'Rltech'
+commonName            :PRINTABLE:'draco'
+emailAddress          :IA5STRING:'Solaris'
+Certificate is to be certified until Nov 12 21:38:23 2024 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Clef client générée !
+./php_client: line 44: cd: /root/vpn/client/draco: No such file or directory
+Fabrication du zip
+  adding: ca.crt (deflated 32%)
+  adding: client.conf (deflated 28%)
+  adding: client.ovpn (deflated 28%)
+  adding: draco.crt (deflated 48%)
+  adding: draco.key (deflated 22%)
+  adding: ta.key (deflated 40%)
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 43968
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 35108
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 45921
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 36627
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 37320
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 38422
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40436
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40438
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40440
+Nouveau compte à créer : bouboule
+ID special du client : e60844200d50e145
+Dossier : bouboule_e60844200d50e145
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40751
+Nouveau compte à créer : mathieu
+ID special du client : c77f371a98d24abd
+Dossier : mathieu_c77f371a98d24abd
+Création d'une clef client
+NOTE: If you run ./clean-all, I will be doing a rm -rf on /root/vpn/config/keys
+Generating a 1024 bit RSA private key
+...............................................++++++
+..++++++
+writing new private key to 'mathieu.key'
+-----
+Using configuration from /root/vpn/config/openssl-1.0.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+countryName           :PRINTABLE:'FR'
+stateOrProvinceName   :PRINTABLE:'FR'
+localityName          :PRINTABLE:'Paris'
+organizationName      :PRINTABLE:'Rltech'
+commonName            :PRINTABLE:'mathieu'
+emailAddress          :IA5STRING:'Solaris'
+Certificate is to be certified until Dec 15 16:13:38 2024 GMT (3650 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Clef client générée !
+./php_client: line 44: cd: /root/vpn/client/mathieu: No such file or directory
+Fabrication du zip
+  adding: ca.crt (deflated 32%)
+  adding: client.conf (deflated 28%)
+  adding: client.ovpn (deflated 28%)
+  adding: mathieu.crt (deflated 47%)
+  adding: mathieu.key (deflated 22%)
+  adding: ta.key (deflated 40%)
+Debut de nouvelle ecoute
+listening on [any] 800 ...
+connect to [127.0.0.1] from localhost.localdomain [127.0.0.1] 40752
+Nouveau compte à créer : mathieu
+ID special du client : c77f371a98d24abd
+Dossier : mathieu_c77f371a98d24abd
+Fichier client déjà présent
+Fichier zip déjà présent et/ou envoyé
+Fichier déjà présent dans la zip_bank
+Debut de nouvelle ecoute
+listening on [any] 800 ...

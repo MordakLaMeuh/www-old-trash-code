@@ -1,0 +1,221 @@
+*	{ 	padding: 0px; margin: 0px;}
+body 	{	background-color: #002200; 
+		color: #00cc00;	}
+		
+/* DEFINITIONS OF SCROLLBAR */
+.scrollbar {
+	float: right;
+	padding-left: 1vw;
+	background-color: transparent;
+	opacity: 0.3;
+}
+.cursorArrow {position:absolute; cursor:pointer; opacity: 0.6;}
+
+.middle {
+	background-color: green;
+	cursor:pointer;
+	position:absolute;
+	right:0;
+}
+
+.contextScrollbar {
+	float: right;
+	background-color: #00CC00;
+	border-radius: 1vw;
+	opacity: 0.6;
+	margin-right: 1vw;
+}
+
+.contextMiddle {
+	/*background-color: yellow;*/		/* -> Color définited in JS part */
+	cursor:pointer;
+	position:absolute;
+	right:0;
+	border-radius: 1vw;
+	opacity: 1;
+}
+
+/* HOVER EFFECTS */
+.normalScrollbarMainDiv, 	.contextScrollbarMainDiv, 		.contextScrollbar 	,#sendBox		{ opacity:0.88; } 
+.normalScrollbarMainDiv:hover,.contextScrollbarMainDiv:hover,	.contextScrollbar:hover	,#sendBox:hover	{ opacity:1;   } 
+
+/* MAIN CSS DESCRIPTION */
+#header	{ height: 3vh; background-color: #00cc00; color: green;}
+	.imgBoutons		 { margin-left: 1vh; width: 2.5vh;   height: 2.5vh; float:left; }
+	.imgBoutons:active { width: 3vh;   height: 3vh; }
+	.imgBoutons:hover  { cursor:pointer; }
+H1 { position: absolute;
+	left:25vw;
+	font-family: Verdana, sans-serif;
+	font-size: 3vh; }
+	
+/* Anciennement consoleTab */
+#consoleTab  { 	height: 17vh; 
+			background-color: #003300; 
+			padding-left:1vw; 	
+			text-align: justify; 
+			font-family: garamond, sans-serif;}
+#connectTab { width: 20vw; height: 17vh; background-color: black; float:right;}
+
+#fileTab	{ height: 50vh; background-color: #003300;}	
+	#fileTitle  { width: 60vw; height: 3vh; background-color: #00cc00; color: green;}
+	.file-upload {
+		width: 20vw;
+		background-color: #00cc00;
+		float:right;
+		cursor: pointer;
+		height: 3vh;
+		color: white;
+		font-family: Helvetica, sans-serif;
+		font-weight: bold;
+		font-size: 2.5vh;
+		text-align: center;
+	}
+	input[type="file"] {
+		display: none;
+	}
+	#files     { height: 47vh; 				/* anciennement files && height 44 BUG !*/ 
+		padding-left:3vw; 
+		font-size: 2.5vh;
+		font-family: garamond, sans-serif;
+		position:relative;
+		/*bottom:1.5vh;
+		top:1.5vh;*/
+	}
+#statusTab	{ width: 20vw; height: 53vh; background-color: #00cc00; float:right;}
+	
+#chatTitle  { height: 3vh; background-color: #00cc00; color: green; }
+#chatTab	{ height: 22vh; 		/* Anciennement chatTab */
+	background:#BEF781;
+	background-image:url("../medias/images/chatbox_pachyderme.png");
+	background-repeat: repeat;
+	background-position: center top;
+	background-size: 120vh 20vh;
+	font-family: garamond, verdana, sans-serif;
+	color:#8A2908;
+	font-weight: bold;
+	vertical-align: bottom;
+	padding-left: 1vw;
+	opacity: 0.85;
+	word-wrap:break-word;}
+	
+.commentChatbox	{color:white;}
+.userSpeakChatbox {color:black;}
+
+#postTab	{ height: 5vh; background-color: #001100; 
+	color: #ffffff; }
+	#sendBox
+	{
+		position: relative;
+		top: 0.5vh;
+		width:89vw;
+		margin-left: 1vw;
+		height:3vh;
+		padding-left: 0.5vw;
+		padding-right: 0.5vw;
+		background: #00cc00;
+		font-size: 2.5vh;
+		color:#ffffff;
+		border-radius: 1vw;
+		outline: none;
+	}
+#bouton_send_chat { display:none; }
+
+.hideOverflow { overflow:hidden;}
+
+#toolbar	{
+	position:absolute;
+	opacity: 0;
+	right:0.0vw;			/* 2 fois border 4px */
+	z-index:999;  
+	width:1vw;
+	transition-duration: 1s;
+}
+#toolbar:hover {
+	visibility:visible;
+	opacity: 1;
+	transition-duration: 1s;
+	-ms-transform: translate(-7.8vw,0px);	 /* IE 9 */
+   	-webkit-transform: translate(-7.8vw,0px);  /* Safari */
+	transform: translate(-7.8vw,0px);
+} 
+.menuItem	{
+	border-width: 4px;
+	border-style: solid;
+	width:8vw;}
+  
+H2 { position: relative;
+	left:5vw;
+	font-family: Arial, sans-serif;
+	font-size: 2.5vh; }
+video { position: relative;
+	height: 17vh;
+	width: 20vw; }
+
+.elePHPant { height: 4vh; float:right; padding-right:1.5vw;}
+.FN	     { height: 51.5vh; width: 20vw; }
+
+.imgFile   { float: right; width: 2vw; height: 2vh; padding-right: 1vw; padding-left: 1vw; cursor: pointer;}
+
+.downloadButton { float: right; 
+			cursor: pointer; 
+			padding-right: 1vw; 
+			padding-left: 1vw; 
+			color:red; 
+			font-family: helvetica, sans-serif;
+			font-size:2vh;}
+.downloadButton:hover { color:#FFA500;} 
+/*.downloadButton:hover + p { color:blue;}*/
+
+.sharingButton  { float: right;
+			cursor: pointer;
+			padding-right: 1vw; 
+			padding-left: 1vw; 	
+			color: #00CC22;
+			font-family: helvetica, sans-serif;
+			font-size:2vh;
+			text-decoration:none;
+}
+
+.sharingButton:hover { color:red;} 
+/*.sharingButton:hover + p { color: blue; }*/
+
+.sharingButton:hover + p { color: blue; }
+
+.deleteFile	{ 
+	color: red; 
+	float: right;
+	padding-right: 1vw; 
+	padding-left: 1vw; 
+	font-size:2vh;
+	cursor: pointer;
+}
+.deleteFile:hover { color: blue; }
+
+.elePHPant:hover { cursor:pointer; }
+
+.generatingHash {	
+	animation: 1s linear 0s infinite none alternate JauneRougeDoux;
+	webkitAnimation: 1s linear 0s infinite none alternate JauneRougeDoux;
+	mozAnimation:  1s linear 0s infinite none alternate JauneRougeDoux;
+}
+
+@keyframes JauneRougeDoux{ 
+    from{color:yellow;}  
+    to{color:red;}  
+}  
+@-webkit-keyframes JauneRougeDoux{ 
+    from{color:yellow;}  
+    to{color:red;}  
+} 
+@-moz-keyframes JauneRougeDoux{ 
+    from{color:yellow;}  
+    to{color:red;}  
+} 
+
+.consoleImportantInformation  { color: #FFA500; font-weight: bold; }
+.criticalWarning			{ color: red; font-style: italic;}
+
+.instance				{ color: white; font-weight: normal; font-style: italic;}
+
+#webcam 		     	      { height: 51.5vh; width: 20vw; }

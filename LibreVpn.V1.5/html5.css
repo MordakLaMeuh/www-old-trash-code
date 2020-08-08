@@ -1,0 +1,225 @@
+/*******************************************************/
+/*  Feuille de style pour pages de test html5 et css3  */
+/*  Quelques Ã©lÃ©ments en css3  :                       */
+/*    Â¤ Fonds dÃ©gradÃ©s                                 */
+/*    Â¤ Ombre portÃ©e pour les cadres                   */
+/*    Â¤ Ombre portÃ©e pour le texte                     */
+/*    Â¤ Coins arrondis des cadres                      */
+/*******************************************************/
+
+body {
+	margin: 0;
+	padding: 20px;
+	font-family: verdana, tahoma, tempus, arial;
+/* DÃ©gradÃ© de gauche Ã  droite du fond de page (uniquement Webkit et Firefox 3.6) */
+	background: -moz-linear-gradient(left, #6E6E6E, #FFF);
+	background-image: -webkit-gradient(linear, left top, right top,
+                   	 	  color-stop(0.00, #6E6E6E),   
+                  		  color-stop(1.00, #FFF));
+	background: linear-gradient(left, #6E6E6E, #FFF);
+/* Prise en charge du dÃ©gradÃ© par IE 6 - 8 */
+	-pie-background: linear-gradient(left, #6E6E6E, #FFF);
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+#content {
+	width: 750px;
+	margin: 10px auto;
+	border: #000 1px solid;
+	background: #FFF url(images/html5-logo-w3c.png) no-repeat 40px 35px;
+	padding: 5px 5px 5px 15px;
+/* Ombre du cadre de contenu */
+	box-shadow: -3px -3px 5px #01004F;
+	-o-box-shadow: -3px -3px 5px #01004F;
+	-icab-box-shadow: -3px -3px 5px #01004F;
+	-khtml-box-shadow: -3px -3px 5px #01004F;
+	-moz-box-shadow: -3px -3px 5px #01004F;
+	-webkit-box-shadow: -3px -3px 5px #01004F;
+/* Coins arrondis du cadre de contenu */
+	border-radius: 10px;
+	-o-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+/* Prise en charge des coins arrondis et de l'ombre par IE 6 - 8 */
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+nav#menu {
+	float: left;
+	font-size: 0.7em;
+	margin: 0;
+	padding: 2px 4px;
+	border: #01004F 1px solid;
+	background: #FFF;
+/* Ombre du cadre */
+	box-shadow: 0 0 4px #01004F;
+	-o-box-shadow: 0 0 4px #01004F;
+	-icab-box-shadow: 0 0 4px #01004F;
+	-khtml-box-shadow: 0 0 4px #01004F;
+	-moz-box-shadow: 0 0 4px #01004F;
+	-webkit-box-shadow: 0 0 4px #01004F;
+/* Coins arrondis du cadre du menu */
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-icab-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+/* Prise en charge des coins arrondis par IE 6 - 8 */
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+h1 {
+	font-size: 2em;
+/* Ombre du texte du titre */
+	text-shadow: 10px 10px 5px #9F9F9F;
+	float: right;
+	text-align: right;
+	background: #01004F;
+	color: #FFF;
+	margin: 5px;
+	padding: 5px 15px 15px 15px;
+	border: #000 1px solid;
+/* Coins arrondis */
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-icab-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+/* Prise en charge des coins arrondis par IE 6 - 8 */
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+h2 {
+	clear: right;
+	font-size: 1.2em;
+	color: #01004F;
+	margin: 10px 10px 5px 0;
+	padding: 0;
+}
+
+p {
+	Margin: 5px 10px;
+	padding: 0;
+}
+
+dl {
+	margin: 10px;
+	padding: 0;
+	width: 350px;
+	float: left;
+	opacity: 0.7;
+}
+
+dl.action {
+	clear: left;
+}
+
+dt {
+	margin: 15px 5px 5px 5px;
+	padding: 0;
+	font-weight: bold;
+	color: #DF570D;
+}
+
+dd {
+	margin: 0;
+	padding: 5px;
+	border: #3F3F3F 1px solid;
+/* Coins arrondis */
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-icab-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	background: #CFCFCF;
+/* Prise en charge des coins arrondis par IE 6 - 8 */
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+.action dd {
+	text-align: center;
+}
+
+pre {
+	position: relative;
+	margin: 10px;
+	padding: 8px;
+	opacity: 0.7;
+/* Coins arrondis */
+	border-radius: 5px;
+	-o-border-radius: 5px;
+	-icab-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: #9F9F9F dashed 2px;
+	background: #EFEFEF;
+/* Prise en charge des coins arrondis par IE 6 - 8 */
+	behavior: url(http://jojaba.free.fr/xmedia/theme/airjojaba/PIE.htc);
+}
+
+.code pre {
+	margin: 0;
+	padding: 0;
+	width: 335px;
+	overflow: auto;
+}
+
+.warning {
+	color: red;
+}
+
+footer p {
+	clear: left;
+	text-align: center;
+	font-size: 0.8em;
+	margin: 10px;
+	padding: 10px 0 0 0;
+	padding: 0;
+	color: #9F9F9F;
+}
+
+a {
+	color: #006F0F;
+	text-decoration: none;
+	border-bottom: #006F0F 1px dotted;
+}
+
+a:hover {
+	color: #DF570D;
+	border-color: #DF570D;
+}
+
+a img {
+	border: none;
+}
+
+dd.comment, p.comment {
+	text-align: right;
+	background: none;
+	border: none;
+}
+
+dd.comment a, p.comment a {
+	font-size: 0.8em;
+	color: #9F9F9F;
+/* Ombre du texte du lien */
+	text-shadow: 0 0 10px #000;
+	border: none;
+}
+
+dd.comment a:hover, p.comment a:hover {
+	color: #EFEFEF;
+/* Ombre en cas de survol du texte du lien */
+	text-shadow: 0 0 5px #000;
+}

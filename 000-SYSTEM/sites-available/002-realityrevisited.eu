@@ -1,0 +1,6 @@
+<VirtualHost *:80>
+    DocumentRoot /var/www/realityrevisited/
+    ServerName www.realityrevisited.eu
+    ServerAlias realityrevisited.eu
+</VirtualHost>
+

@@ -1,0 +1,85 @@
+<html>
+<body>
+
+</body>
+</html>
+
+
+<script>
+
+var peerInstance = (function(){
+	// statics variables...
+	
+	function peerConstuctor(init) {
+	
+		var All_Candidates_Receved_for_send_offer = new Event('make_offer');
+		
+		var z;
+		
+		this.a = init;
+		this.b = 0;
+		
+		this.add = function(x) {
+			this.b = this.a * x; 
+		}
+		
+		this.armEvent = function() {
+		z=addEventListener('make_offer', function (){
+			console.log('meuh');
+									})
+						   }
+		this.launchEvent = function() {
+			dispatchEvent(All_Candidates_Receved_for_send_offer); 
+			z=null;
+			}
+									
+						
+	}
+	return peerConstuctor;
+})();
+
+instance=new peerInstance(4);
+console.log(instance.a);
+instance.add(3);
+instance.armEvent();
+
+instance.launchEvent();
+
+{
+	instance=new peerInstance(9);
+	console.log(instance.a);
+	
+	setTimeout(function(){instance.launchEvent();},1000);
+}
+
+console.log(instance.a);
+
+console.log(instance.b);
+
+// Create the event.
+var event = document.createEvent('Event');
+
+event.initEvent('build', true, true);
+
+var listener = function (event) {
+  console.log('baba');
+  removeEventListener('build', listener, false);
+};
+
+addEventListener('build', listener);
+
+dispatchEvent(event);
+
+//removeEventListener('build', listener, false);
+
+listener = function (event) {
+  console.log('bobo');
+  removeEventListener('build', listener, false);
+};
+
+addEventListener('build', listener);
+
+dispatchEvent(event);
+
+dispatchEvent(event);
+</script>

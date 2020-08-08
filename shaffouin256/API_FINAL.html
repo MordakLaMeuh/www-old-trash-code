@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>un gros lolo</title>
+</head>
+<body>
+
+<input type="file" id="files" name="files[]" multiple />
+
+<div id='texte'>	</div>
+
+<script type="text/javascript">
+var texte = document.getElementById('texte');
+
+var is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
+	
+if (is_crypto) 	console.log('is_crypto vaut TRUE: CONTINUE...');
+else 		  	console.log('is_crypto vaut FALSE: BUG !');
+
+/* Fonction de hash total sur fichier : ATTENTION limitation taille du blob MAX ! */
+function handle_total_file_select(event) {				
+	event.stopPropagation();
+	event.preventDefault();
+
+	var files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+		
+	var reader = new FileReader();
+	reader.onload = function(event) {
+		window.crypto.subtle.digest({name: "SHA-256"}, event.target.result)
+		.then(function(hash) {
+			var hexString = '', hashResult = new Uint8Array(hash);
+
+			for (var i = 0; i < hashResult.length; i++) {
+				hexString += ("00" + hashResult[i].toString(16)).slice(-2);
+			}
+			console.log(hexString);
+		})
+		.catch(function(error) {
+			console.error(error);
+		});
+	}
+	reader.readAsArrayBuffer(files[0]);
+}
+
+/* Fonction de hash sur parties de 512ko sur fichier : ATTENTION limitation taille du blob MAX ! */
+function handle_identity_file_select(event) {				
+	event.stopPropagation();
+	event.preventDefault();
+
+	var files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+	var file = files[0];
+		
+	var reader = new FileReader();
+	reader.onload = function(event) {
+		window.crypto.subtle.digest({name: "SHA-256"}, event.target.result)
+		.then(function(hash) {
+			var hexString = '', hashResult = new Uint8Array(hash);
+
+			for (var i = 0; i < hashResult.length; i++) {
+				hexString += ("00" + hashResult[i].toString(16)).slice(-2);
+			}
+			texte.innerHTML+='<br>'+hexString;
+		})
+		.catch(function(error) {
+			console.error(error);
+		});
+		currentSegment++;
+		if ( currentSegment < segmentNeeded) {
+			begin+=segmentSize; 
+			end+=segmentSize;
+			reader.readAsArrayBuffer(file.slice(begin,end));
+		}
+		else	return false;
+	}
+	texte.innerHTML='GENERATE IDENTITY CARD of '+file.name+' SIZE:'+file.size;
+	var segmentSize = 1024*1024;
+	var segmentNeeded = Math.ceil(file.size/segmentSize);
+	var currentSegment = 0;
+	texte.innerHTML+=' '+segmentNeeded+' segments finded.';
+	var begin 	= 0;
+	var end 	= segmentSize;
+	
+	reader.readAsArrayBuffer(file.slice(begin,end));
+}
+
+//document.getElementById('files').addEventListener('change', handle_total_file_select, false);
+document.getElementById('files').addEventListener('change', handle_identity_file_select, false);
+
+/* TEST avec une chaine de caractère transformée en Array Buffer */
+window.crypto.subtle.digest({name: "SHA-256"}, new TextEncoder("utf-8").encode("les carotes sont cuites."))
+.then(function(hash) {
+	var hexString = '', hashResult = new Uint8Array(hash);
+
+	for (var i = 0; i < hashResult.length; i++) {
+		hexString += ("00" + hashResult[i].toString(16)).slice(-2);
+	}
+	console.log(hexString);
+	})
+	.catch(function(error) {
+		console.error(error);
+	});
+</script>
+</body>
+</html>

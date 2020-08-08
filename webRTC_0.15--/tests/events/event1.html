@@ -1,0 +1,11 @@
+<body>
+</body>
+
+<script>
+var Xevent = new Event('build');
+
+addEventListener('build', function (e) {alert('meuh');}, false);
+
+// Dispatch the event.
+dispatchEvent(Xevent);
+</script>

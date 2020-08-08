@@ -1,0 +1,36 @@
+<VirtualHost *:80>
+	DocumentRoot /usr/share/squirrelmail/
+        ServerName www.naomail.eu
+        ServerAlias naomail.eu
+        Redirect / https://www.naomail.eu/
+</VirtualHost>
+
+<VirtualHost *:443>
+ServerName https://www.naomail.eu
+ServerAlias https://naomail.eu
+DocumentRoot /usr/share/squirrelmail/
+
+#Les directives pour les certificats
+
+SSLEngine On
+SSLCertificateFile    /etc/certif/naomail/naomail.crt
+SSLCertificateKeyFile /etc/certif/naomail/naomail.key
+
+#Les directives qui suivent ne sont pas obligatoires mais
+#aident au débugage
+#On isole les erreurs relatives à http
+#Attention : il faut créer le fichier "error_ssl.log"
+
+ErrorLog /var/log/apache2/error_ssl.log
+LogLevel warn
+</VirtualHost>
+
+
+
+
+# <VirtualHost *:80>
+#    DocumentRoot /usr/share/squirrelmail/
+#    ServerName www.naomail.eu
+#    ServerAlias naomail.eu
+# </VirtualHost>
+

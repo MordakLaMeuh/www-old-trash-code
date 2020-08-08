@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+	
+	<title>WebRTC P2P Sharing File 0.18</title>
+	
+	<link rel='stylesheet' href='dom/dom.css' type='text/css' media='all' /> 
+	<link rel="shortcut icon" href="medias/images/ours.png">
+	
+	<script src="dom/dom.js"></script> 
+	<script src="file/file.js"></script> 
+	<script src="core/rtc.js"></script> 
+</head>
+<body class='hideOverflow' onload='begin()'>
+
+<div id='toolbar'>
+  <!-- ------------------------------------------------------- -->
+  <img class='menuItem' src="medias/images/Elephant-icon.png" alt="..."/>
+  <img class='menuItem' src="medias/images/Dolphin-icon.png" alt="..."/>
+  <img class='menuItem' src="medias/images/Panda-icon.png" alt="..."/>
+  <img class='menuItem' src="medias/images/Hippopotamus-icon.png" alt="..;"/>
+</div>
+
+<div id='header'>
+	<img onclick="RTCstart();" src='medias/images/bouton_on.gif' alt='on' class='imgBoutons'/>
+	<img onclick="RTCstop();"  src='medias/images/bouton_off.gif' alt='off' class='imgBoutons'/>
+	<H1>WebRTC P2P Sharing File 0.18</H1>
+</div>
+<div id='connectTab' class='hideOverflow'> 
+	<video id='video' autoplay='true'>
+		<!-- <source src='medias/video/La_bataille_de_Farador.webm' type='video/webm' />  -->
+			<source src='' type='video/webm' />	
+      </video>
+</div>
+
+<div id='consoleTab' class='hideOverflow'>
+	<NOSCRIPT>
+		Sorry ! But I need Java Script to do my job :(
+	</NOSCRIPT>
+</div>
+
+
+<div id='statusTab' class='hideOverflow'> 
+	<img src='medias/images/frontNational.jpg' alt='FN' class='FN' /> 
+	<!-- <video id="webcam" autoplay></video> -->
+</div>
+
+<div id='fileTab'> 
+	<label for="file-upload" class="file-upload">
+			Select file
+	</label>
+	<input id="file-upload" type="file"/>
+	<div id='fileTitle'  class='hideOverflow'> 
+	<H2>Liste des fichiers</H2> 
+	</div>
+	<div id='files' class='hideOverflow'>
+<!--		<bouton onclick='DOM.selectFile()'><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem-ipsum-dolor-sit-met,-consectetur-adipiscing-elit,-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua.-Ut-enim-ad</p>
+		<bouton onclick='DOM.selectFile()'><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem ipsum dolor sit met, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>		
+		<bouton onclick='DOM.selectFile()'><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem-ipsum-dolor-sit-met,-consectetur-adipiscing-elit,-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua.-Ut-enim-ad</p>
+		<bouton onclick='DOM.selectFile()'><img class='imgFile' src='images/bouton_on.gif' alt='' /></bouton><p>Lorem ipsum dolor sit met, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
+-->
+	</div>
+</div>
+
+
+<div id='chatTitle'><H2><b>Micro-chatbox P2P des pachydermes</b></H2></div>
+
+<div id='chatTab' class='hideOverflow'>
+
+</div>
+<div id='postTab' class='hideOverflow'> 
+	<img class='elePHPant' src='medias/images/elephant.png' alt='elephant' onclick='_DOM_.sendMsg()'/> 
+	<form name='postChatbox' method='POST' action='javascript:_DOM_.sendMsg()'>
+		<input name='line_send' id='sendBox' spellcheck='false' autocomplete='off' type='text'>
+            <input type='button' id='bouton_send_chat' value='OK' onclick='_DOM_.sendMsg()'>
+      </form>
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+/*
+var mediaOptions = {
+    video: true,
+    audio: true
+};
+
+navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+
+var errorHandler = function (err) {
+    console.error(err);
+};
+
+var video = document.getElementById("webcam");
+navigator.getUserMedia(mediaOptions, function (stream) {
+    video.src = URL.createObjectURL(stream);
+}, errorHandler);
+*/
+
+/*
+Attache div vidéo au flux.
+pc.addStream(stream);
+
+execute remote:
+<video id="otherPeer" autoplay></video>
+ 
+var otherPeer = document.getElementById("otherPeer");
+pc.onaddstream = function (e) {
+    otherPeer.src = URL.createObjectURL(e.stream);
+};
+*/
+
+var _DOM_;
+var _RTC_CORE_;
+var _FILE_SYSTEM_;
+
+var RTCstart;
+var RTCstop;
+
+var begin = function() {
+	_DOM_			= new mainDOM();
+	_FILE_	 	= new mainFILE();
+	_RTC_CORE_ 		= new webRTC();
+	
+	RTCstart = function() { 
+		console.log('Connection to server.');
+		_RTC_CORE_.addServer();
+	}
+	RTCstop = function()  { console.log('disable RTC');}
+}
+</script>
+

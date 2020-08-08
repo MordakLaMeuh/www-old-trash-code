@@ -1,0 +1,62 @@
+*	
+{ 	
+	padding: 0px; margin: 0px;
+}
+body 	
+{	
+	background-color: #002200; 
+	color: #00cc00;	
+}
+H1 { text-align: center; }
+p {
+	cursor: pointer;
+}
+form {
+	margin: 5px;
+	float: right;
+}
+
+textarea
+{
+	resize:none;
+	overflow:hidden;
+	height:10vh;
+	border:solid 0.3vw steelblue; 
+	border-radius: 4px;
+	text-transform:uppercase; 
+	font-weight:bold; 
+	color:#4682b4;
+	background-color: #87CEEB;
+	text-align: justify;
+}
+textarea:focus
+{
+	border:solid 0.3vw  orange; 
+}
+#urlArea
+{
+	width:25vw;
+}
+#commentArea
+{
+	width:70vw;
+}
+
+#urlButton
+{
+	width:20vw;
+	border-radius: 3vw;
+	margin: 10px;
+	font-weight:bold;
+}
+
+button
+{
+	color:red;
+}
+.headButton
+{
+	margin: 10px;
+	background-color: #9ACD32;
+	font-weight:bold;
+}

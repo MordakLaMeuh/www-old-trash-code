@@ -1,0 +1,51 @@
+<script>
+function meuh(value) {
+
+	//console.log(document.getElementById(value.id).innerHTML);
+	console.log(value);
+	
+}
+var F = new Array();
+F[0]='lolo';
+F[1]='vieux';
+F[2]='gre';
+</script>
+
+<div class='line'><div class="myButton red" onclick="javascript:meuh(F[0])">SEND()</div><div class='padd'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div></div>
+<div class='line'><div class="myButton green" onclick="javascript:meuh(F[1])">SEND()</div>
+<div class="myButton red" onclick="javascript:meuh(F[2])">SEND()</div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+
+<style>
+.myButton {
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	width: 100px;
+	vertical-align:top;
+}
+.green:hover {
+	background-color:#5cbf2a;
+}
+.red:hover {
+	background-color:#00CC00;
+}
+.myButton:active {
+	/*position:relative;
+	top:1px;*/
+}
+.red {background-color:#EF0000;}
+.green {background-color:#44c767;}
+
+.line { width:700px; overflow:hidden;}
+.padd { width:300px; vertical-align:top;}
+</style>
+      

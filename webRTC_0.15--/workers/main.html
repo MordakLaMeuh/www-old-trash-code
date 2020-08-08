@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello Web Workers</title>
+</head>
+<body>
+</body>
+<script>
+//Création d'une zone d'affichage
+console.log('meuhscript');
+var elem = document.createElement("output");
+elem.value = "Log :";
+document.body.appendChild(elem);
+
+if(window.SharedWorker){
+console.log('le navigateur supporte les shared-workers');
+  var w = new SharedWorker("worker.js");
+  w.port.onmessage = function(e){
+    elem.innerHTML += "<br />" + e.data;
+  };
+  w.port.postMessage("Bonjour");
+
+}else{
+console.log('le navigateur NE supporte PAS les shared-workers');
+  elem.textContent="Votre navigateur ne "+
+    "supporte pas les shared-workers ☹";
+}
+</script>
+</html>

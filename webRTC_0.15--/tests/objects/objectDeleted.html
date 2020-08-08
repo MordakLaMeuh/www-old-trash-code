@@ -1,0 +1,36 @@
+<script>
+var SUPPR = function(OBJ) {
+	for (i=0; i<A.length; i++) 
+	{
+		if (OBJ == A[i]) {
+			console.log('Suppression de l\'objet:'+i);
+			A[i] = null;
+			A.splice(i,1);
+		}
+	}
+
+}
+
+var obj = function(g) {
+	var x=43;
+	this.y=g;
+	this.deleted = function() {
+		SUPPR(this);
+	}
+}
+var A = new Array();
+A[0]= new obj(1);
+A[1]= new obj(2);
+A[2]= new obj(3);
+A[3]= new obj(4);
+console.log('taille:'+A.length);
+
+A[3].deleted();
+
+console.log('value:'+A[0]);
+console.log('value:'+A[1]);
+console.log('value:'+A[2]);
+console.log('value:'+A[3]);
+
+console.log('taille:'+A.length);
+</script>

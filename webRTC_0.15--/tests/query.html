@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Specific navigator description in Java Script</title>
+   
+<!--    <script src="ext-js/jquery.js"></script>  
+	<script src="ext-js/jquery.browser.min.js"></script> 	-->	  	
+  </head>
+  
+  <script>
+  var is_chrome = (navigator.userAgent.indexOf("Chrome") > 0)?true:undefined;
+  
+  var chromeRegex = new RegExp(/Chrome\/(\d+)/);
+  var firefoxRegex = new RegExp(/Firefox\/(\d+)/);
+  
+  if (is_chrome == true)  var browser_ver = chromeRegex.exec(navigator.userAgent)[1]; 
+  else			  var browser_ver = firefoxRegex.exec(navigator.userAgent)[1]; 
+  
+  var browser_name = (is_chrome == true)?'chrome':'firefox';
+  
+  document.write("JS is_chrome="+is_chrome+
+		"<br>JS version="+browser_ver+
+		"<br>JS browser name="+browser_name+
+		"<br>appCodeName="+navigator.appCodeName+
+		"<br>userAgent="+navigator.userAgent+
+		"<br>platform="+navigator.platform+
+		"<br>appVersion="+navigator.appVersion+
+		"<br>AppName="+navigator.appName);
+		/*
+		"<br>JQuery version="+$.browser.versionNumber+
+		"<br>JQuery browser name="+$.browser.name+
+		"<br>JQuery is_chrome="+$.browser.chrome+
+		*/		
+  </script>
+</html>

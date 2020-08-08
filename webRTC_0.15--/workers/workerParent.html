@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello Web Workers</title>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script type="text/javascript">
+        // On instantie le Worker
+        
+        console.log('démarage');
+        var monWorker = new Worker('helloworkers.js');
+        var monWorker2 = new Worker('helloworkers.js');
+        // On se prépare à traiter le message de retour qui sera
+        // renvoyé par le worker
+        monWorker.addEventListener("message", function (event) {
+            document.getElementById("output").textContent += event.data;
+            console.log('data:'+event.data);
+        }, false);
+        
+        monWorker2.addEventListener("message", function (event) {
+            document.getElementById("output").textContent += event.data;
+            console.log('data:'+event.data);
+        }, false);
+
+        // On démarre le worker en lui envoyant un 1er message
+        monWorker.postMessage("David");
+        monWorker2.postMessage("Mika");
+
+        // On stoppe le worker via la commande terminate()
+        //setTimeout(function(){monWorker.terminate();},1000);
+    </script>
+</body>
+</html>

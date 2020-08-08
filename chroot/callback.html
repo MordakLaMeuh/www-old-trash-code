@@ -1,0 +1,31 @@
+<script>
+var p=new Promise(
+	function myPromiseLogic(success,error,progress) 
+	{
+		success(1);
+	})
+	.then(function(value)
+	{
+		return value+1;
+	})
+	.then(function(value) {
+		console.log(value);
+	});
+	
+var p=new Promise(function myPromiseLogic(success,error,progress) { success(1);})
+.then(function(value){
+	return new Promise(function myPromiseLogic(success,error,progress) {
+		success(value+1);
+	});
+}).then(function(value) {
+	console.log(value);
+});
+var greetingPromise = sayHello();
+greetingPromise
+    .then(addExclamation)
+    .then(function (greeting) {
+        console.log(greeting);    // 'hello world!!!!’
+    }, function(error) {
+        console.error('uh oh: ', error);   // 'uh oh: something bad happened’
+    });
+</script>
