@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mini Chat-Box</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="une simple chatbox">
+	<meta name="author" content="mordak">	
+	<link rel="shortcut icon" href="ours.png">
+	<style type="text/css"> 
+		*	{ 	
+			padding: 0px; 
+			margin: 0px;  
+		}	
+		body 	{	
+			display: block;
+			background:#BEF781;
+			background-image: url("matrix.jpg");
+			background-repeat: repeat;
+			background-position: center top;
+			color: #00cc00;
+			font-family: monospace;
+    			height:100vh;
+    			width: 100vw;
+    			position: fixed;
+		}	
+	</style>
+	<link rel='stylesheet' href='modulableWindow6.css' type='text/css' media='all'> 
+</head>
+
+<body>
+
+<svg height='100%' id='MW_SVG_CLOSE'class='MW_Svg_Icon MW_Svg_Icon_Right MW_Svg_Hidden' viewBox="0 0 200 200"  xml:lang="fr">		<!-- CLOSE ICON -->
+	<line x1="30" y1="30" x2="170" y2="170" style="stroke-width:20px;" />
+	<line x1="30" y1="170" x2="170" y2="30" style="stroke-width:20px;" />
+</svg>
+<svg height='100%' id='MW_SVG_MAXIMIZE' class='MW_Svg_Icon MW_Svg_Icon_Right MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">				<!-- MAXIMIZE ICON -->
+	<rect x="30px" y="40px" width="140" height="120" style="stroke-width:20px; fill:none;" />
+</svg>
+<svg height='100%' id='MW_SVG_MAXIMIZE_INVERSE' class='MW_Svg_Icon MW_Svg_Icon_Right MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">	<!-- MAXIMIZE INVERSE ICON -->
+	<rect x="25px" y="25px" width="140" height="125" style="stroke-width:20px; fill:none;"/>
+	<rect x="50px" y="50px" width="140" height="125" style="stroke-width:20px; fill:none;"/>
+</svg>
+<svg height='100%' id='MW_SVG_MINIMIZE' class='MW_Svg_Icon MW_Svg_Icon_Right MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">	<!-- MINIMIZE ICON -->
+	<line x1="30" y1="160" x2="170" y2="160" style="stroke-width:30px;" />
+</svg>
+<svg height='100%' id='MW_SVG_OPACITY' class='MW_Svg_Icon MW_Svg_Icon_Left MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">		<!-- OPACITY ICON -->
+	<circle cx="70" cy="100" r="60" 	style="stroke-width:20px; fill:none;"/>
+	<circle cx="130" cy="100" r="60" 	style="stroke-width:20px; fill:none;"/>
+</svg>
+<svg height='100%' id='MW_SVG_HEADERLESS' class='MW_Svg_Icon MW_Svg_Icon_Left MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">	<!-- HEADERLESS ICON -->
+  	<polygon points="100,20 40,180 180,78 20,78 160,180" style="fill:none; stroke-width:10px; fill-rule:nonzero;" />
+</svg>
+<svg height='100%' id='MW_SVG_PROPORTIONS' class='MW_Svg_Icon MW_Svg_Icon_Left MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">	<!-- PROPORTIONS ICON -->
+  	<line x1="30" y1="160" x2="170" y2="160" 	style="stroke-width:20px; stroke-linecap:round;" />
+  	<polygon points="170,160 130,130 130,190" style="fill:black; stroke-width:10px; fill-rule:nonzero;" />
+  	<line x1="30" y1="140" x2="30" y2="20" 	style="stroke-width:20px; stroke-linecap:round;" />
+  	<polygon points="30,20 0,50 60,50" 		style="fill:black; stroke-width:10px; fill-rule:nonzero;" />
+</svg>
+<svg height='100%' id='MW_SVG_BACKROOM' class='MW_Svg_Icon MW_Svg_Icon_Left MW_Svg_Hidden' viewBox="0 0 200 200" xml:lang="fr">	<!-- BACKROOM ICON -->
+	<circle cx="100" cy="100" r="20" 	style="stroke-width:10px; fill:none;"/>
+	<circle cx="100" cy="100" r="50" 	style="stroke-width:10px; fill:none;"/>
+	<circle cx="100" cy="100" r="80" 	style="stroke-width:10px; fill:none;"/>
+</svg>
+<svg height='100%' id='MW_SVG_VIDEO_PLAY' class='MW_Svg_Hidden video_Controls_Icons' viewBox="0 0 200 200" xml:lang="fr">	<!-- VID PLAY ICON -->
+  	<polygon points="20,20 20,180 180,100" style="stroke-width:10px;"/>
+</svg>
+<svg height='100%' id='MW_SVG_VIDEO_PAUSE' class='MW_Svg_Hidden video_Controls_Icons' viewBox="0 0 200 200" xml:lang="fr">	<!-- VID PAUSE ICON -->
+	<line x1="66" y1="20" x2="66" y2="180" style="stroke-width:30px;"/>
+	<line x1="133" y1="20" x2="133" y2="180" style="stroke-width:30px;"/>
+</svg>
+<svg height='100%' id='MW_SVG_VIDEO_SOUND' class='MW_Svg_Hidden video_Controls_Icons' viewBox="0 0 512 512" xml:lang="fr">
+	<path d="M160,96v304.625C142.984,390.406,120.703,384,96,384c-53.016,0-96,28.656-96,64s42.984,64,96,64s96-28.656,96-64V256l288-96 v144.625C463,294.406,440.688,288,416,288c-53,0-96,28.656-96,64s43,64,96,64s96-28.656,96-64V0L160,96z M96,480
+		c-39.063,0-64-18.938-64-32s24.938-32,64-32s64,18.938,64,32S135.063,480,96,480z M192,224v-72.719l288-78.563V128L192,224z
+		M416,384c-39.063,0-64-18.938-64-32s24.938-32,64-32s64,18.938,64,32S455.063,384,416,384z"/>
+</svg>
+	<div id="chat" class='MW'>
+		
+		<div class='MWHeaderMask'> 
+			<div class='MWHeader MW_Visible_Header'>
+		<!--		<div class='MWSymbolItem MWItemLeft MWOpacity'>		</div>
+				<div class='MWSymbolItem MWItemLeft MWHideHeader'>	</div>
+				<div class='MWSymbolItem MWItemRight MWClose'>		</div>
+				<div class='MWSymbolItem MWItemRight MWMinimize'>	</div>
+				<div class='MWSymbolItem MWItemRight MWResize'>		</div>		-->
+				<div class='MWTitle'> 						</div>
+			</div>
+		</div>
+		
+		<div class='MWConteiner'>
+			<div class='MWLeft MWSideDiv'> 			
+				<div class='MWMouseSideDiv'>				</div>
+			</div>
+			<div class='MWRight MWSideDiv'> 			
+				<div class='MWMouseSideDiv'>				</div>
+			</div>
+			<div class='MWBody'>							
+				<!-- RAW STUFF -->
+									<header>
+										<H1>CHATBOX DU FUTUR</h1>
+									</header>
+						
+									<div id="chatTab">	
+										 <noscript><H1>Javascipt doit être activé pour que la chatBox puisse fonctionner !</H1></noscript> 
+									</div>
+									
+									<footer>
+										<form method='POST' action='javascript:postMsg()'>
+											IDENTIFIEZ-VOUS: <input spellcheck='false' autocomplete='off' type='text' autofocus>
+										</form>
+									</footer>
+			</div>
+		</div>
+		<div class='MWFooter'>
+			<div class='MWBottom'> 						</div>
+			<div class='MWMouseBottomDiv'> 				</div>
+			<div class='MWLeftBottom MWMouseSideBottomDiv'> 	</div>
+			<div class='MWRightBottom MWMouseSideBottomDiv'> 	</div>
+		</div>
+	</div>
+						
+
+<script type="text/javascript" src="modulableWindow6.js"></script> 
+
+<script type="text/javascript">
+//window.ondragstart = function()  	 { return false; } 		// IMPORTANT - FIX BUG
+//document.onmousedown = function()  { return false; } 		// IMPORTANT - FIX BUG / DISABLE AUTOMATIC SELECT OF ELEMENT
+	
+var win0 = new MW('guignol','th. du complot',70,30,30,70,'#e74c3c','black',{'type':'video','url':'complot.mp4','ratio':true,'opacity':true});
+											
+var win1 = new MW('macaron','Macaron',37,28,40,45,'#f1c40f','#ecf0f1',{'type':'image','url':'macaron','ratio':true});
+
+var win2 = new MW('farador','Farador',0,0,90,60,'#2980b9','black',{'type':'video','url':'farador.mp4','ratio':true});
+
+var win3 = new MW('rawtxt','Raw Text',58,4,40,25,'#9b59b6','#220022',{'type':'rawTxt'});
+											// BackTicks ` [...] ` est un template littéral afin d'écrire sur plusieurs lignes:
+win3.utilize().innerHTML+=`				
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam. 
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur. 
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur.
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur.
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+`;
+
+var win4 = new MW('IframeTest','IframeTest (experimental)',50,56,30,40,'#c0392b','#2E1043',{'type':'iframe','url':'http://www.duckduckgo.com','noheader':true});						
+
+var win5 = new MW('iframe2','IframeTest2 (experimental)',5,35,40,40,'#c0392b','#002200',{'type':'iframe','url':'http://localhost/foxybookmark/entrelacement5.html'});
+
+var win6 = new MW('chat','chatbox du futur',2,42,35,50,'#00CC00','#002200',{'type':'customContent','fullscreen':true});
+
+var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+				
+var socket  = new WebSocket('ws://192.168.43.128:8080');
+var chatTab = document.getElementById("chatTab");
+chatTab.innerHTML = "";
+
+chatTab.addEventListener(mousewheelevt, function(e) {
+	var e = window.event || e; // old IE support
+	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+	chatTab.scrollTop -= delta*20;
+}, false);
+
+var formInput = document.getElementsByTagName("input")[0];
+		
+socket.onerror = function() { chatTab.innerHTML+="Aucune réponse du serveur...";  }
+
+socket.onmessage = function(str){
+	chatTab.innerHTML+=str.data;
+	chatTab.scrollTop+=10000;
+};
+
+var identified = false;
+
+var postMsg = function()
+{
+	socket.send(formInput.value);
+	
+	if (identified == false) {
+		var identify = document.getElementsByTagName("form")[0];
+		identify.removeChild(identify.firstChild);
+		formInput.setAttribute("style","width:99.5vw");
+		identified = true; 
+	}
+	formInput.value = null;
+}
+
+console.log('value:'+document.styleSheets[0].cssRules[0]);
+</script>
+</body>
+</html>

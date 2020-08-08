@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mini Chat-Box</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="une simple chatbox">
+	<meta name="author" content="mordak">	
+	<link rel="shortcut icon" href="ours.png">
+	<style type="text/css"> 
+		*	{ 	
+			padding: 0px; 
+			margin: 0px;  
+		}	
+		body 	{	
+			display: block;
+			background:#BEF781;
+			background-image: url("matrix.jpg");
+			background-repeat: repeat;
+			background-position: center top;
+			color: #00cc00;
+			font-family: monospace;
+    			height:100vh;
+    			width: 100vw;
+    			position: fixed;
+		}	
+	</style>
+</head>
+
+<body>
+<input type="file" id="select_file" name="select_file"/>
+</body>
+<script type="text/javascript">
+	var img = document.createElement('img');
+	img.src = 'macaron.jpg';
+	img.onload = function() {
+			document.body.appendChild(img);
+			img.onclick = function() {
+			
+				var file = img.files;
+			
+			/*
+				// atob to base64_decode the data-URI
+				var image_data = atob(img.src.split(',')[1]);
+				// Use typed arrays to convert the binary data to a Blob
+				var arraybuffer = new ArrayBuffer(image_data.length);
+				var view = new Uint8Array(arraybuffer);
+				for (var i=0; i<image_data.length; i++) {
+				  view[i] = image_data.charCodeAt(i) & 0xff;
+				}
+				try {
+				  // This is the recommended method:
+				  var blob = new Blob([arraybuffer], {type: 'application/octet-stream'});
+				} catch (e) {
+				  // The BlobBuilder API has been deprecated in favour of Blob, but older
+				  // browsers don't know about the Blob constructor
+				  // IE10 also supports BlobBuilder, but since the `Blob` constructor
+				  //  also works, there's no need to add `MSBlobBuilder`.
+				  var bb = new (window.WebKitBlobBuilder || window.MozBlobBuilder);
+				  bb.append(arraybuffer);
+				  var blob = bb.getBlob('application/octet-stream'); // <-- Here's the Blob
+				}
+				
+				// Use the URL object to create a temporary URL
+				var url = (window.webkitURL || window.URL).createObjectURL(blob);
+				location.href = url; // <-- Download!
+				
+				*/
+
+//document.getElementById('select_file').onchange = function() {
+
+	//console.log(this.files[0]);
+
+	//var file = this.files[0];
+	
+	//var file = img.files[0];
+	var reader = new window.FileReader();
+
+	console.log('Name:'+ file.name+' size:'+file.size+' type:'+file.type+' last modified:'+file.lastModifiedDate);
+	/*instance.send(JSON.stringify	({
+		rtcDataType: 'META',
+		fileName    : file.name,
+		fileSize	: file.size,
+		fileType	: file.type
+						})); */
+
+	reader.onload = function(segment) {
+		console.log('Taille du segment émis:'+segment.target.result.byteLength);
+		//instance.send(segment.target.result);
+			
+		offset+=chunkSize;
+		slice = file.slice(offset, offset + chunkSize);
+				
+		if (offset < file.size) {
+			reader.readAsArrayBuffer(slice);
+			/*
+			if (dataChannel.bufferedAmount <= 16000000) {
+				console.log('buffer='+dataChannel.bufferedAmount);
+				reader.readAsArrayBuffer(slice);
+			}
+			else 
+			{
+				function timeout() {
+					console.log('buffer='+dataChannel.bufferedAmount);
+					if (dataChannel.bufferedAmount <= 1000000) 	reader.readAsArrayBuffer(slice);
+					else 	setTimeout(function(){timeout()},50);
+				}
+				console.log('*** risk of buffer overflow ***');
+				timeout(); 
+				setTimeout(function(){reader.readAsArrayBuffer(slice)},80);
+			}*/					
+		}
+	}
+
+	var offset = 0;
+	var chunkSize = 64000;
+	//if (is_chrome) var chunkSize = 64000;
+	//else 		   var chunkSize = 16000;
+
+	var slice = file.slice(offset, offset + chunkSize);
+	reader.readAsArrayBuffer(slice);
+//}	
+			};
+	}
+	
+	function getDataUri(url, callback) {
+    var image = new Image();
+
+    image.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+        canvas.getContext('2d').drawImage(this, 0, 0);
+
+        // Get raw image data
+        callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+
+        // ... or get as Data URI
+        callback(canvas.toDataURL('image/png'));
+    };
+
+    image.src = url;
+}
+
+// Usage
+getDataUri('macaron.jpg', function(dataUri) {
+    // Do whatever you'd like with the Data URI!
+});
+</script>
+</html>

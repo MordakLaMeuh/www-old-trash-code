@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1;">
+	<meta name="description" content="Helios system WebRTC">
+	<meta name="author" content="momo">
+</head>
+<body>
+<div id='txt'>
+</div>
+</body>
+<script>
+console.log = function(str) {document.getElementById('txt').innerHTML+=str+'<br>';}
+console.log('************************************************************************************');
+console.log('Héritage entre classe basique grace a la méthode call(this.[arg...]):Big mémory use');
+console.log('************************************************************************************');
+var ClasseA = function(a,b) {
+	this.attrA = a;
+	this.attrB = b;
+
+	this.somme = function() {
+		return (this.attrA + this.attrB);
+	}
+
+	this.diff = function() {
+		return (this.attrA - this.attrB);
+	}
+}
+
+var ClassZ = function(z) {
+	this.attrZ = z;			// attrZ fera partie intrégrante de la classe fille avec un this. comme d'hab.
+	var Zprivate = z;			// Zprivate déclarée avec var est vraiment privée de chez privée, L'est innacessible depuis enfant.
+	this.bark = function() {
+		console.log(this.attrZ+' fois wouuuf ! privée='+Zprivate);
+	}
+	this.remonteZprivate = function() {
+		return Zprivate;
+	}
+}
+
+var ClasseB = function(a,b) {
+	ClasseA.call(this,a,b); /* Appel du constructeur de la ClasseA */
+
+	this.diff = function() { /* Nous redéfinissons diff */
+		return 0;
+	}
+
+	this.multiplie = function() { /* Nous ajoutons une méthode */
+		return (this.attrA * this.attrB);
+	}
+    
+	this.addZ = function(z) {
+		ClassZ.call(this,z);
+	}
+}
+
+var X = new ClasseB(3,4);
+console.log('a='+X.attrA+' b='+X.attrB);
+var Y = new ClasseB(6,7);
+console.log('a='+X.attrA+' b='+X.attrB);
+console.log('a='+Y.attrA+' b='+Y.attrB);
+console.log('a='+X.attrA+' b='+X.attrB);
+console.log('Création des sommes. function obj. mother');
+console.log(X.somme());
+console.log(Y.somme());
+console.log('Vérification de l absence actuelle de AttrZ');
+console.log(X.attrZ);
+console.log(Y.attrZ);
+console.log('Ajout dynamique d\'une nouvelle maman classZ pour X et Y');
+X.addZ(13);
+Y.addZ(21);
+console.log('vérification des sommes');
+console.log(X.somme());
+console.log(Y.somme());
+console.log('Tentative d\'accès au nouvel attribut attrZ');
+console.log(X.attrZ);
+console.log(Y.attrZ);
+console.log('Faisons aboyer ces fonctions !');
+X.bark();
+Y.bark();
+console.log('remontons enfin une variable privée de chez privée !');
+console.log(X.remonteZprivate());
+console.log(Y.remonteZprivate());
+
+console.log('*******************************************************************************');
+console.log('UTILISATION DES PROTOTYPES POUR EVITER LE GASPILAGE MEMOIRE');
+console.log('*******************************************************************************');
+/* constructeur de ClasseA */
+var ClasseA = function (a,b,c) {
+    /* attributs */
+    this.attrA = a;
+    this.attrB = b;
+    var c = c;
+    this.getC = function() { return c; }
+    
+    this.makeDiff = function() {
+	   return (this.diff());
+    }
+}
+
+/* methodes de ClasseA */
+ClasseA.prototype.somme = function() {
+        return (this.attrA + this.attrB);
+}
+
+var diff = function() { return (this.attrA - this.attrB); }
+ClasseA.prototype.diff = diff;
+
+var mul = function() { return (this.attrA * this.attrB); }
+
+var TimeDown = function (d) { var d=d; var SUPER=this; setTimeout(function(){console.log('private:'+d+' public:'+SUPER.mul());},3000);}
+ClasseA.prototype.TimeDown = TimeDown;
+
+ClasseA.prototype.queryC = function() {
+	return c;
+}
+
+var X = new ClasseA(3,4,1045);
+var Y = new ClasseA(7,5,7893);
+console.log('test tout bête du fonctionnement de la somme:');
+console.log(X.somme());
+console.log(Y.somme());
+console.log('test de la diff: déclarée par fonction interposée');
+console.log(X.diff());
+console.log(Y.diff());
+console.log('Test de la multiplication avant initialisation');
+console.log(X.mul?X.mul():'mul is undefined for X');
+console.log(Y.mul?Y.mul():'mul is undefined for Y');
+console.log('Ajout du prototype de mul');
+ClasseA.prototype.mul = mul;
+console.log('nouveaux tests: Dorénavant toute la classe A possede la fonction mul');
+console.log(X.mul?'mul result:'+X.mul():'mul is undefined for X');
+console.log(Y.mul?'mul result:'+Y.mul():'mul is undefined for Y');
+
+console.log(X.makeDiff());
+console.log(Y.makeDiff());
+
+console.log('initialisation de 2 compteurs possedants variables privée + appel à public');
+X.TimeDown(12);
+Y.TimeDown(21);
+console.log('Tentative de récupération d\'une variable privée de la maman, méthode MOTHER:');
+console.log(X.getC());
+console.log(Y.getC());
+console.log('Tentative de récupération d\'une variable privée de la maman, méthode PROTOTYPE:');
+console.log(X.queryC());
+console.log(Y.queryC());
+</script>
+</html>

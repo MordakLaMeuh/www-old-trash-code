@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Little Fox-Box</title>
+	<meta charset="UTF-8"/>
+</head>
+
+<body>
+<script type="text/javascript" src="rtc.js"></script> 
+
+<script type="text/javascript">
+'use strict';
+
+var chatTab = document.body;
+chatTab.innerHTML = "HELLO<br/>";
+	
+
+	
+var display = function(msg) {
+		chatTab.innerHTML+=msg+"<br/>";
+}
+console.log = function(str) { display(str); } 
+
+var user = "MORDAK";
+var user_To_Share = "EWAN";
+	
+var NodeServer = function(ip,port_Order) {
+	var serverType = { 						// 1-L'utilisation de l'API crypto passe forcément pas une page HTTPS sur la dernière version de chrome
+		ssl	: false,						// 2-Aucune regression de sécurité n'est possible, si la page source est HTTPS le serveur node doit etre SSL aussi. 
+		ws	: 'ws://'+ip+':'+(port_Order+80)+'/',
+		wss	: 'wss://'+ip+':'+(port_Order+443)+'/'	
+	};
+	var addr=(serverType.ssl || location.protocol == 'https:')?serverType.wss:serverType.ws;
+	
+	var socket = null;
+	
+	this.send_RTC = function(type,to,from,data) {
+		socket.send(JSON.stringify	({					
+			type	: type,
+			to    : to,
+			from 	: from,
+			data  : data
+						}))	
+	}	
+
+	socket = new WebSocket(addr);
+	socket.onopen	= function() {
+		display("Connexion au serveur réussie.<br/>");
+		socket.send(JSON.stringify	({					
+			type	: "CHAT",
+			data  : "MORDAK"
+							}))
+	};
+	socket.onmessage  = function(str) {
+		display(str.data);
+		var obj = JSON.parse(str.data);
+		switch (obj.type) {
+			case 'OFFER':
+				console.log('offer received'+JSON.stringify(obj.data));
+				RTC.initializePeerInstance(obj.from,obj.to,obj.data);
+				break;
+			case 'ANSWER':
+				console.log('answer reveived'+JSON.stringify(obj.data));
+				RTC.launchSeeding(obj.from,obj.data);
+				break;
+			default:
+				console.log('other datas...');
+				display(RTC.initializeNewInstance(user,user_To_Share,false));
+				break;	
+		}
+	};
+	socket.onerror 	= function() {
+	 	 display("Aucune réponse du serveur. Vous ne pouvez rien y faire !\n"); 	
+	};
+}
+
+var server = new NodeServer('192.168.0.100',9000);
+var RTC = new Web_RTC();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

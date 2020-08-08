@@ -1,0 +1,300 @@
+
+/* MODULABLE WINDOW CSS FILE */
+/* ------------------------- */
+
+
+/* MAIN WINDOW DEFINITION */
+
+.MW {
+	position: absolute;
+	font-weight: bold;
+	font-size: 2vh;
+	opacity: 0;						/* Au commencement, les fenetres ne sont pas affichées, elles le seront une fois leurs proportions dessinées par JS. */
+}
+
+/* WINDOW MAIN GROUPS ELEMENTS */
+
+.MWHeaderMask {
+	width: 100%;
+	transition-property: inherit;			/* Pour le passage au mode headerless, HeaderMask est progressivement diminué jusqu à 0. La transition-property HEIGHT est donné en arg au parent. */
+	transition-duration: inherit;
+}
+.MWHeader {
+	width: 100%;
+	position: absolute;
+	border-top-left-radius: 10px;			
+}
+.MWHeader svg:hover {
+	stroke: red;
+}
+.MW_Visible_Header {
+	stroke: black;
+	color: black;
+}
+.MW_Hidden_Header {
+	opacity: 0.2;
+	stroke: white;
+	color: white;
+	transition-duration: 0.3s;
+	transition-property: opacity;
+	background-color: blue;
+}
+.MW_Hidden_Header:hover { 
+	opacity: 1;
+}
+
+				
+.MWConteiner {
+	width: 100%;
+	transition-property: inherit;
+	transition-duration: inherit;
+}
+.MWFooter {
+	width: 100%;
+	transition-duration: 0.1s;
+	transition-property: height; 
+}
+
+/* WINDOW HEADER ELEMENTS */
+
+.MWTitle {
+	text-align: center;
+	height: 100%;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:2'>\
+			<line x1='10' y1='0' x2='10' y2='20' style='stroke-width:2'/>\
+			<line x1='0' y1='10' x2='20' y2='10' style='stroke-width:2'/>\
+			<path d='M10 0 L7 3 L13 3 Z'/>\
+			<path d='M10 20 L7 17 L13 17 Z'/>\
+			<path d='M0 10 L3 7 L3 13 Z'/>\
+			<path d='M20 10 L17 7 L17 13 Z'/>\
+		</svg>") 10 10,move;
+}
+
+span {
+	font-style: italic;
+	font-size: 2.5vh;
+}
+
+/* WINDOW CONTEINER ELEMENTS */
+
+.MWBody {
+	height: 100%;
+	overflow:hidden;	
+}
+			
+.MWSideDiv {
+	height: 100%;
+	transition-duration: 0.1s;
+	transition-property: width; 
+}
+.MWLeft 	{
+	float:left;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:3'>\
+			<line x1='0' y1='0' x2='0' y2='20' style='stroke-width:4'/>\
+			<line x1='5' y1='10' x2='20' y2='10'/>\
+			<line x1='5' y1='10' x2='10' y2='5'/>\
+			<line x1='5' y1='10' x2='10' y2='15'/>\
+		</svg>") 10 10,ew-resize;
+}	
+.MWRight 	{
+	float:right;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:3'>\
+			<line x1='20' y1='0' x2='20' y2='20' style='stroke-width:4'/>\
+			<line x1='0' y1='10' x2='15' y2='10'/>\
+			<line x1='15' y1='10' x2='10' y2='5'/>\
+			<line x1='15' y1='10' x2='10' y2='15'/>\
+		</svg>") 10 10,ew-resize;
+}
+.MWMouseSideDiv {
+	opacity: 0;
+	background-color: white;
+	position: relative;
+	height: 100%;
+}
+
+/* WINDOW FOOTER ELEMENTS */
+
+.MWMouseBottomDiv {
+	opacity: 0;
+	background-color: white;
+	position: relative;
+	width: 100%;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:3'>\
+			<line x1='10' y1='0' x2='10' y2='15'/>\
+			<line x1='10' y1='15' x2='5' y2='10'/>\
+			<line x1='10' y1='15' x2='15' y2='10'/>\
+			<line x1='0' y1='20' x2='20' y2='20' style='stroke-width:4'/>\
+		</svg>") 10 10,ns-resize;
+}
+.MWMouseSideBottomDiv {
+	opacity: 0.3;
+	background-color: red;
+	position: relative;
+}
+.MWLeftBottom {
+	float: left;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:3'>\
+			<line x1='20' y1='0' x2='5' y2='15'/>\
+			<line x1='5' y1='15' x2='15' y2='15'/>\
+			<line x1='5' y1='15' x2='5' y2='5'/>\
+			<path d='M0 0 L0 20 L20 20' style='stroke-width:4'/>\
+		</svg>") 10 10,nesw-resize;
+}
+.MWRightBottom {
+	float: right;
+	cursor:  url("data:image/svg+xml;charset=utf-8,\
+		<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'  width='20' height='20' viewBox='0 0 20 20' style='fill:none;stroke:green;stroke-width:3'>\
+			<line x1='0' y1='0' x2='15' y2='15'/>\
+			<line x1='15' y1='15' x2='15' y2='5'/>\
+			<line x1='15' y1='15' x2='5' y2='15'/>\
+			<path d='M0 20 L20 20 L20 0' style='stroke-width:4'/>\
+		</svg>") 10 10,nwse-resize;
+}
+.MWBottom {
+	width: 100%;
+	height: inherit;
+	
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+/* IMAGES WINDOW CLASSES */
+
+.MWImgFull {
+	width: 100%;
+	height: inherit;
+}
+.MWImgProportionned {
+	position: relative;	
+}
+
+/* VIDEO WINDOW CLASSES */
+
+.MWVid {
+	position: relative;
+	transform-origin: 0% 0%;
+}
+.video_Controls {
+	width: 100%;
+	height: 10%;
+	position: relative;
+	bottom: 10%;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+}
+.video_Controls:hover {
+	opacity: 0.7;
+	transition: opacity 0.3s ease-in-out;
+}
+.video_Controls_Selected {
+	opacity: 0.7;
+}
+.video_Controls_Timeline {
+	position: relative;
+	width: 90%;
+	left: 5%;
+	height: 16%;
+	border-radius: 10px;
+	border: solid white 2px;
+}
+.video_Current_TimeLine {
+	background-color: white;
+	width: 60%;
+	height: 100%;
+}
+
+.video_Controls_Conteiner {
+	top: 10%;
+	position: relative;
+	width: 90%;
+	left: 5%;
+	height: 50%;
+}
+.video_Controls_Icons {
+	height: 100%;
+	stroke: white;
+	fill: white;
+}
+.video_Controls_Icons_Active {
+	stroke: red;
+	fill: red;
+}
+.video_Time_Info {
+	display: inline-block;
+	vertical-align: top;
+	color: white;
+	margin-left: 5%;
+	/*float: right;*/						/* Bug incompréhensible à mon niveau :s -> Un float right ici modifie la position de la zone souris bottom-right contenu dans la classe footer. */
+}
+
+/* IFRAME CLASSES */
+
+.MW_Iframe {
+	width: 100%;
+	height: 100%;
+}
+.MW_Iframe_Mouse_Box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	bottom: 100%;
+	background-color: blue;
+}
+
+/* SVG DEFAULT CLASS */
+
+.MW_Svg_Hidden { display: none; }
+.MW_Svg_Icon_Right { float: right; }
+.MW_Svg_Icon_Left  { float: left;  }
+
+/* RESERVED CUSTOM WINDOW */
+
+.MW .MWConteiner .MWBody {
+	color: green;
+}
+.MW .MWConteiner .MWBody header {
+	height: 8%;
+	text-align: center;
+}
+.MW .MWConteiner .MWBody H1{
+	position: relative;
+	top: 15%;
+	color: green;
+	font-size:1em;
+}
+.MW .MWConteiner .MWBody #chatTab{
+	font-size:0.5em;
+	color: green;
+	height: 80%; 		
+	font-weight: bold;
+	padding-left: 1%;
+	background-color: #003300;
+	overflow: hidden;
+	word-wrap:break-word;
+	white-space:pre-wrap;	
+}
+.MW .MWConteiner .MWBody footer{
+	height: 12%;
+	font-size:0.8em;
+}
+.MW .MWConteiner .MWBody footer form{
+	height: 40%;
+	position: relative;
+	top: 30%;
+}
+.MW .MWConteiner .MWBody footer form input[type="text"] { 
+	height: 100%;
+	background-color: #003300;
+	color: #00cc00;
+	outline: none;
+	border: none;
+	padding-left: 0.5%;
+	width: 40%;
+	font-size: 0.8em;
+}	

@@ -8,8 +8,20 @@
 	
 	<title>Helios System-WebRTC P2P Sharing File Interface</title>
 	<link rel="shortcut icon" href="images/ours.png">
+	<style>
+		#image {
+			width: 400px;
+			height: 400px;
+			background-color: blue;
+		}
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
 </head>
 <body>
+<div id='image'> </div>
 <div id='info'> </div>
 
 <form name='register' method='POST' action="javascript:instance.send(JSON.stringify({
@@ -35,6 +47,11 @@
 <div id='chat'></div>
 </body>
 <script>  
+
+var img = document.createElement('img');
+//img.src = 'macaron.jpg';
+//document.getElementById('image').appendChild(img);
+
 var is_chrome = (navigator.userAgent.indexOf("Chrome") > 0)?true:false;
   
 var chromeRegex = new RegExp(/Chrome\/(\d+)/);
@@ -82,7 +99,7 @@ else
 
 var servers = {iceServers: [{url: "stun:stun.l.google.com:19302"}]};			// Serveur STUN de google.
 
-var socket       = new WebSocket('ws://naomail.eu:8000/');
+var socket       = new WebSocket('ws://localhost:8000/');
 
 var errorHandler = function (err){console.error(err);}					// Fonction en charge de l'affichage des erreures rencontrée.?=
 
@@ -264,6 +281,9 @@ var peerInstance = (function(){
 					fileDOM[file.id].href=URL.createObjectURL(received);
 					fileDOM[file.id].download = file.name;
 					fileDOM[file.id].style.display = 'block';
+					
+					img.src = fileDOM[file.id].href;						// TODO AJOUT
+					document.getElementById('image').appendChild(img);
 										}}							
 			else						{
 				var data = JSON.parse(jsonpaquet.data);
@@ -288,7 +308,7 @@ var peerInstance = (function(){
 		}
 		
 		document.getElementById('select_file').onchange = function() {
-
+			console.log(this.files[0]);
 			
 			var file = this.files[0];
 			var reader = new window.FileReader();
@@ -302,7 +322,29 @@ var peerInstance = (function(){
 								}));
 	
 			reader.onload = function(segment) {
+			
+			
+					//img.src = segment;						// TODO AJOUT
+					//document.getElementById('image').appendChild(img);
+					//return;
+			
+			
+			
 				console.log('Taille du segment émis:'+segment.target.result.byteLength);
+				
+				//var received = new window.Blob(segment.target.result);
+				
+				//var fileDOM = new Array();
+				//fileDOM[0].href=URL.createObjectURL(segment);
+				
+				
+				
+				img.src = URL.createObjectURL(segment.target.result);
+				document.getElementById('image').appendChild(img);
+				
+						
+				return;
+				
 				instance.send(segment.target.result);
 					
 				offset+=chunkSize;
@@ -331,8 +373,9 @@ var peerInstance = (function(){
 			if (is_chrome) var chunkSize = 64000;
 			else 		   var chunkSize = 16000;
       
-			var slice = file.slice(offset, offset + chunkSize);
-			reader.readAsArrayBuffer(slice);
+			//var slice = file.slice(offset, offset + chunkSize);
+			//reader.readAsArrayBuffer(slice);
+			reader.readAsArrayBuffer(file);
 		}		
 	}
 	return peerConstuctor;

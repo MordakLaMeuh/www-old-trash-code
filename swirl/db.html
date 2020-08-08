@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Little Fox-Box</title>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="chatbox html 1.0">
+	<meta name="author" content="mordak">
+</head>
+
+<body>
+
+<script type="text/javascript">
+'use strict';
+
+// http://www.html5rocks.com/en/tutorials/file/filesystem/#toc-introduction 		FILESYSYSTEM API
+// https://hacks.mozilla.org/2012/07/why-no-filesystem-api-in-firefox/			Firefox et FileSystem API
+// https://wiki.mozilla.org/WebAPI/DeviceStorageAPI						Device Storage API
+
+// http://stackoverflow.com/questions/19899567/storing-retreiving-html-5-file-object-for-resuming-a-broken-file-upload		IndexDB
+// https://developer.mozilla.org/fr/docs/IndexedDB													IndexDB
+// https://developer.mozilla.org/fr/docs/IndexedDB/Using_IndexedDB										IndexDB
+
+window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
+
+if (!window.indexedDB) {
+    window.alert("Votre navigateur ne supporte pas une version stable d'IndexedDB. Quelques fonctionnalités ne seront pas disponibles.")
+}
+
+
+var db;
+
+var request = window.indexedDB.open("MyTestDatabase", 4);
+
+request.onerror = function(event) {
+	alert("Pourquoi ne permettez-vous pas à ma web app d'utiliser IndexedDB?!");
+};
+request.onsuccess = function(event) {
+	db = request.result;
+	db.onerror = function(event) {
+		alert("Database error: " + event.target.errorCode);
+	};
+};
+</script>
+</body>
+</html>

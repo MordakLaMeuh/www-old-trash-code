@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mini Chat-Box</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="une simple chatbox">
+	<style type="text/css"> 
+		*	{ 	
+			padding: 0px; 
+			margin: 0px;  
+		}	
+		body 	{	
+			background-color: black; 
+			color: #00cc00;
+			font-family: monospace;
+			overflow:hidden;
+			width: 100vw;
+			height: 100vh;
+		}
+		#banane {
+			background-color: red;
+		}
+		#fraise {
+			background-color: blue;
+		}
+		.fruits {
+			float:left;
+			width: 40%;
+			height: 20%;
+		}	
+		#gros { background-color: green; }
+
+</style>
+
+</head>
+<body>
+<div id='banane' class='fruits'></div>
+<div id='fraise' class='fruits'></div>
+
+<div id='gros' class='fruits'></div>
+<script type="text/javascript">
+var Create = function(id,number) {
+	this.id = document.getElementById(id);
+	this.active(number);
+	this.assign = function() {
+		this.gros = document.getElementById('gros');
+	}
+	this.assign();
+	//this.born();
+	this.gros.style.backgroundColor = 'yellow';
+	
+}
+Create.prototype.active = function(i) {
+	var j = i;
+	this.id.onmousedown = function() {
+		console.log('number='+j);
+	}
+}
+Create.prototype.born = function() {
+	this.gros = document.getElementById('gros');
+}
+var A = new Create('banane',7);
+var B = new Create('fraise',13);
+</script>
+</body>
+</html>

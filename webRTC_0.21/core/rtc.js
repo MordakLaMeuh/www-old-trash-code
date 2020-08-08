@@ -13,8 +13,8 @@ var webRTC = function() {
 		/* WARNING: 1-L'utilisation de l'API crypto passe forcément pas une page HTTPS sur la dernière version de chrome
 		 * 		2-Aucune regression de sécurité n'est possible, si la page source est HTTPS le serveur node doit etre SSL aussi. */
 		var serverType = { 
-			ssl	: true,
-			ws	: 'ws://grosdada.eu:8080/',
+			ssl	: false,
+			ws	: 'ws:localhost:8080',
 			wss	: 'wss://grosdada.eu:8443/'	
 		};
 		var IP=(serverType.ssl || location.protocol == 'https:')?serverType.wss:serverType.ws;

@@ -92,10 +92,10 @@ var begin = function() {
 	_RTC_CORE_ 		= new webRTC();
 	_P2P_ 		= new P2P_Channel();
 	
-	//RTCstart = function() { 
+	RTCstart = function() { 
 		console.log('Connection to server.');
 		_RTC_CORE_.addServer();
-	//}
+	}
 	RTCstop = function()  { console.log('disable RTC');}
 }
 </script>

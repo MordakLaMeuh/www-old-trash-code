@@ -16,7 +16,7 @@ b
 
     <div style="background-color:#000;">
         <table CELLPADDING="10" CELLSPACING="10" style="width: 90%; margin-left:auto; margin-right:auto;">
-            <caption><img width="98%" src="https://grosdada.eu/R.menu.R.jpg"/></caption>
+            <caption><img width="98%" src="./R.menu.R.jpg"/></caption>
             <thead>
                 <tr style="background-color:#2F3534; color:white; font-family:arial;">
                     <th style="width:33%">COMMUNICATION VISUELLE</th>
@@ -49,7 +49,7 @@ b
                     Habeo vitae urbanitas cum cu. </td>
                 </tr>
                 <tr>
-                    <td valign="bottom" style="vertical-allign:bottom;"><img width="100%" src="https://grosdada.eu/Novelum-2013.jpg"/></td>
+                    <td valign="bottom" style="vertical-allign:bottom;"><img width="100%" src="./Novelum-2013.jpg"/></td>
                 </tr>
                 <tr align="center">
                     <td STYLE="font-family: Helvetica; font-size: 24px; color: #B00000; font-weight: bold;">laurent.ilhe@gmail.com </td>

@@ -1,0 +1,724 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mini Chat-Box</title>	
+	<style type="text/css"> 
+		*	{ 	
+			padding: 0px; 
+			margin: 0px;
+		}
+		
+		body 	{	
+			background-color: black; 
+			color: #00cc00;
+			font-family: monospace;
+			overflow:hidden;
+		}	
+		
+		header	{
+			height: 8%;
+			text-align: center;
+		}
+		
+		footer	{
+			height: 12%;
+		}
+		form	{
+			height: 40%;
+			position: relative;
+			top: 30%;
+		}
+		input[type="text"] { 
+			height: 100%;
+			background-color: #005500;
+			color: #00cc00;
+			outline: none;
+			border: none;
+			padding-left: 0.5%;
+			width: 40%;
+		}
+		
+		#chatTab	{ 
+			height: 80%; 		
+			font-weight: bold;
+			padding-left: 1%;
+			background-color: #005500;
+			overflow: hidden;
+			word-wrap:break-word;
+			white-space:pre-wrap;	
+		}
+		
+		
+		.modulableWindow {
+			position: absolute;
+			font-weight: bold;
+			font-size: 2vh;
+			display: none;
+		}
+		.modulableWindowHeader {
+			width: 100%;
+		}
+		.modulableWindowSymbolItem {
+			float: right;
+			cursor: pointer;
+			height: 100%;
+		}
+		.modulableWindowClose:before 		{ content: "\2717"; }
+		.modulableWindowMinimize:before 	{ content: "\1216"; }
+		.modulableWindowResize:before 	{ content: "\1516"; }
+		.modulableWindowTitle {
+			border-top-left-radius: 10px;
+			text-align: center;
+			cursor: move;
+			height: 100%;
+			background-color: blue;
+		}			
+		.modulableWindowConteiner {
+			width: 100%;
+			transition-property: inherit;
+			transition-duration: inherit;
+		}
+		.modulableWindowBody {
+			height: 100%;
+			overflow:hidden;	
+		}	
+		.modulableWindowSideDiv {
+			height: 100%;
+			transition-duration: 0.1s;
+			transition-property: width; 
+		}
+		.modulableWindowLeft 	{
+			float:left;
+			cursor: ew-resize;
+		}	
+		.modulableWindowRight 	{
+			float:right;
+			cursor: ew-resize;
+		}
+		.modulableWindowFooter {
+			width: 100%;
+			transition-duration: 0.1s;
+			transition-property: height; 
+		}
+		.modulableWindowSideBottomDiv {
+			opacity: 0;
+			height: inherit;
+		}
+		.modulableWindowLeftBottom {
+			float: left;
+			cursor: nesw-resize;
+		}
+		.modulableWindowRightBottom {
+			float: right;
+			cursor: nwse-resize;
+		}
+		.modulableWindowBottom {
+			width: 100%;
+			height: inherit;
+			cursor: ns-resize;
+		}
+		
+		.modulableWindowImg {
+			width: 100%;
+			height: inherit;
+		}
+		.modulableWindowVid {
+			width: 100%;
+			transform-origin: 0% 0%;
+		}
+		.modulableWindowIframe {
+			width: 100%;
+			height: 100%;
+		}
+		span {
+			font-style: italic;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="chat" class='modulableWindow'>
+		<div class='modulableWindowHeader'>
+			<div class='modulableWindowSymbolItem modulableWindowClose'>	</div>
+			<div class='modulableWindowSymbolItem modulableWindowMinimize'>	</div>
+			<div class='modulableWindowSymbolItem modulableWindowResize'>	</div>
+			<div class='modulableWindowTitle'> 						</div>
+		</div>
+		
+		<div class='modulableWindowConteiner'>
+			<div class='modulableWindowLeft modulableWindowSideDiv'> 			</div>
+			<div class='modulableWindowRight modulableWindowSideDiv'> 			</div>
+			<div class='modulableWindowBody'>							
+				<!-- RAW STUFF -->
+				<header>
+					CHATBOX DU FUTUR
+				</header>
+	
+				<div id="chatTab">	
+					 <noscript><H1>Javascipt doit être activé pour que la chatBox puisse fonctionner !</H1></noscript> 
+				</div>
+				
+				<footer>
+					<form method='POST' action='javascript:postMsg()'>
+						IDENTIFIEZ-VOUS: <input spellcheck='false' autocomplete='off' type='text' autofocus>
+					</form>
+				</footer>
+	
+			</div>
+		</div>
+		<div class='modulableWindowFooter'>
+			<div class='modulableWindowLeftBottom modulableWindowSideBottomDiv '> 	</div>
+			<div class='modulableWindowRightBottom modulableWindowSideBottomDiv '> 	</div>
+			<div class='modulableWindowBottom'> 						</div>
+		</div>
+	</div>
+						
+
+	
+	<script type="text/javascript">
+		//window.ondragstart = function()  	 { return false; } 		// IMPORTANT - FIX BUG
+		//document.onmousedown = function()  { return false; } 		// IMPORTANT - FIX BUG / DISABLE AUTOMATIC SELECT OF ELEMENT
+		
+		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+		
+		var ModulableWindow = function(id,titleWindow,positionX,positionY,sizeX,sizeY,color,background,borderSize,opacity,zIndex) {
+			this.titleWindow  = titleWindow;
+			this.positionX	= positionX;
+			this.positionY	= positionY;
+			this.sizeX 		= sizeX;
+			this.sizeY 		= sizeY;
+			this.color		= color;				// internal function ?
+			this.background	= background;			// internal function ?
+			this.borderSize	= borderSize;
+			this.opacity 	= opacity;				// internal function ?
+			this.zIndex		= zIndex;
+
+			this.titleTxtColor = 'black';				// Predefined
+			this.headerHeight  = 2.5;				// Predefined
+														
+			this.main = document.getElementById(id);
+			if (this.main) 		this.assign(id);
+			else				this.create(id); 		
+			
+			this.changeColor		= function() {}
+			this.changeBackground	= function() {}
+			this.changeOpacity	= function() {}
+			
+			this.diffX = this.diffY = this.temp = null;
+			var obj = this;
+					
+			this.topSpace.onmousedown = function(e) {
+				obj.moveBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.moveCurrent(e);
+				}
+				mouseUpFunction = function() {
+					obj.moveEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.bottomDiv.onmousedown = function(e) {
+				obj.bottomResizeBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.bottomResizeCurrent(e);
+					if (obj.video) obj.resizeVideo();
+				}
+				mouseUpFunction = function() {
+					obj.bottomResizeEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.leftDiv.onmousedown = function(e) {
+				obj.leftResizeBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.leftResizeCurrent(e);
+					if (obj.video) obj.resizeVideo();
+				}
+				mouseUpFunction = function() {
+					obj.leftResizeEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.rightDiv.onmousedown = function(e) {
+				obj.rightResizeBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.rightResizeCurrent(e);
+					if (obj.video) obj.resizeVideo();
+				}
+				mouseUpFunction = function() {
+					obj.rightResizeEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.bottomLeftDiv.onmousedown = function(e) {
+				obj.bottomResizeBegin(e);
+				obj.leftResizeBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.bottomResizeCurrent(e);
+					obj.leftResizeCurrent(e);
+					if (obj.video) obj.resizeVideo();
+				}
+				mouseUpFunction = function() {
+					obj.bottomResizeEnd();
+					obj.leftResizeEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.bottomRightDiv.onmousedown = function(e) {
+				obj.bottomResizeBegin(e);
+				obj.rightResizeBegin(e);
+				mouseMoveFunction = function(e) {
+					obj.bottomResizeCurrent(e);
+					obj.rightResizeCurrent(e);
+					if (obj.video) obj.resizeVideo();
+				}
+				mouseUpFunction = function() {
+					obj.bottomResizeEnd();
+					obj.rightResizeEnd();		
+					mouseMoveFunction = mouseUpFunction = function() {}
+				}
+				return false;
+			}
+			this.close.onmousedown = function() {
+				console.log('ModulableWindow: Close'); 
+				obj.main.style.transitionProperty = 'opacity';
+				obj.main.style.transitionDuration = '0.4s';
+				obj.main.style.opacity='0'; 
+				if (obj.video) obj.video.pause();
+			}
+			
+// BUG -> Il est imperatif de régler les conflits entre MINIMIZE ET MAXIMIZE:
+			var minimizeState = false;
+			var lastTopMin, lastLeftMin, lastHeightMin, lastWidthMin = null;
+			this.minimize.onmousedown = function() {
+				console.log('ModulableWindow: Minimize');
+				obj.main.style.transitionProperty = 'all';
+				obj.main.style.transitionDuration = '0.1s';
+				if (!minimizeState) { 
+					if (!maximizeState) {
+						lastTopMin = obj.main.offsetTop/window.innerHeight*100;
+						lastLeftMin = obj.main.offsetLeft/window.innerWidth*100;
+						lastHeightMin = obj.main.offsetHeight/window.innerHeight*100;
+						lastWidthMin = obj.main.offsetWidth/window.innerWidth*100;
+						obj.main.style.height = (obj.headerHeight + obj.borderSize)+'vh';
+						obj.conteiner.style.height = '0px';						
+						// Routines de redimentionnement minimal de la taille horizontale de la fenetre:
+						var minimalWidth = ((obj.title.offsetWidth+obj.close.offsetWidth+obj.minimize.offsetWidth+obj.maximize.offsetWidth)/window.innerWidth*100)+2;
+						obj.main.style.width = minimalWidth +'vw';  
+						obj.main.style.left = (lastLeftMin + lastWidthMin - minimalWidth)+'vw'; 
+					}
+					else {
+						obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = obj.borderSize+'vh';
+						obj.conteiner.style.height = (100 - obj.headerHeight - obj.borderSize)+'vh';
+						maximizeState = false;
+					}
+				}
+				else {
+					obj.main.style.height = lastHeightMin+'vh';
+					obj.main.style.width = lastWidthMin+'vw';
+					obj.main.style.top = lastTopMin+'vh'; 
+					obj.main.style.left = lastLeftMin+'vw';
+					obj.conteiner.style.height = (lastHeightMin - obj.headerHeight  - obj.borderSize)+'vh';	
+				}
+				minimizeState = !minimizeState;
+			}
+			
+			var maximizeState = false;
+			var lastTopMax, lastLeftMax, lastHeightMax, lastWidthMax = null;
+			var switchToFullscreen = function() {
+				obj.main.style.height = '100vh';
+				obj.main.style.width = '100vw';
+				obj.main.style.top = obj.main.style.left ='0px';
+				
+				obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = '0px';
+				obj.conteiner.style.height = (100 - obj.headerHeight)+'vh';
+			}
+			var quitFullscreen = function () {
+				obj.main.style.height = lastHeightMax+'vh';
+				obj.main.style.width = lastWidthMax+'vw';
+				obj.main.style.top = lastTopMax+'vh'; 
+				obj.main.style.left = lastLeftMax+'vw';
+				
+				obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = obj.borderSize+'vh';
+				obj.conteiner.style.height = (lastHeightMax - obj.headerHeight - obj.borderSize)+'vh';
+			}
+			this.maximize.onmousedown = function() {
+				if (obj.video) obj.video.style.display='none';
+				console.log('ModulableWindow: Maximize');
+				obj.main.style.transitionProperty = 'all';
+				obj.main.style.transitionDuration = '0.1s';
+				
+				if (!maximizeState) {
+					if (!minimizeState) {
+						lastTopMax = obj.main.offsetTop/window.innerHeight*100;
+						lastLeftMax = obj.main.offsetLeft/window.innerWidth*100;
+						lastHeightMax = obj.main.offsetHeight/window.innerHeight*100;
+						lastWidthMax = obj.main.offsetWidth/window.innerWidth*100;
+					}
+					else {
+						lastTopMax = lastTopMin;
+						lastLeftMax = lastLeftMin;
+						lastHeightMax = lastHeightMin;
+						lastWidthMax = lastWidthMin;
+						minimizeState = false;
+					}
+					switchToFullscreen();
+				}
+				else  quitFullscreen();
+				
+				maximizeState = !maximizeState;
+			}
+			
+			var endOfTransition = function(e) {						// Upgrade possible. EndOfTransition peut etre lancé 5 fois de suites puisqu'il y a plusieurs types de transitions. A améliorer !!!
+				console.log("ModulableWindow: temporal disable transition -> "+e.propertyName);
+				obj.main.style.transitionProperty = 'none';
+				if (e.propertyName == 'opacity') obj.main.style.display = 'none';
+				if (obj.video) { 
+					obj.resizeVideo();
+					if (obj.video) obj.video.style.display='block';
+				}	
+			}
+			obj.main.addEventListener("transitionend",endOfTransition,false);
+					
+			this.resizeVideo = function() {							// Aucune méthode n'est produite pour un resize manuel de le la fenetre globale internet !
+				var actualVideoHeight = obj.video.videoHeight*(obj.body.offsetWidth/obj.video.videoWidth);
+				var scaleY = obj.body.offsetHeight/actualVideoHeight;
+				
+			 	console.log("ModulableWindow: Resize Video: Real vid proportions -> Width="+obj.video.videoWidth+" Height="+obj.video.videoHeight+". Actual video height (relative to window width):"+actualVideoHeight+" -> scaleY:"+scaleY);
+				obj.video.style.transform="scaleY("+scaleY+")";	
+			}
+			
+			this.special = function() {
+				// Conversion liste des arguments en véritable objet Array, ici, c'est pour pouvoir appliquer un listage des arguments via join(). `args = Array.prototype.slice.call(arguments);`
+				console.log("ModulableWindow: special methode called -> args:"+Array.prototype.slice.call(arguments).join());
+				for (var i=0; i<arguments.length; i++) {
+					switch (arguments[i]) {
+						case 'fullScreen':
+							console.log('ModulableWindow: special methode called -> Apply FullScreen');
+							maximizeState = true;
+							lastTopMax = this.positionY;
+							lastLeftMax = this.positionX;
+							lastHeightMax = this.sizeY;
+							lastWidthMax = this.sizeX;
+							switchToFullscreen();
+							break;
+						default:
+							console.log('ModulableWindow: special methode called -> Default');
+							break;
+					}
+				}
+			}
+			
+			this.activeScrolling = function() {
+				this.body.addEventListener(mousewheelevt, function(e) {
+					var e = window.event || e; // old IE support
+					var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+					obj.body.scrollTop -= delta*20;
+				}, false);
+			}
+		}
+// ModulableWindow -> Prototypes de base:
+		ModulableWindow.prototype.display = function(i) { 
+			this.main.style.display = (i == 1)?'block':'none'; 
+			this.main.style.zIndex = this.zIndex;
+		}
+		ModulableWindow.prototype.utilize = function() {				// (EN)utilize <--> (FR)exploiter	cf. To utilize a woman
+			return this.body;
+		}			
+			
+// ModulableWindow -> Prototypes de création primordiale des fenêtres:
+		ModulableWindow.prototype.assign = function() {
+			console.log('ModulableWindow: Assign existed window');
+
+			this.header = this.main.getElementsByClassName("modulableWindowHeader")[0];					
+				this.close = this.header.getElementsByClassName("modulableWindowClose")[0];
+				this.minimize = this.header.getElementsByClassName("modulableWindowMinimize")[0];
+				this.maximize = this.header.getElementsByClassName("modulableWindowResize")[0];
+				this.topSpace = this.header.getElementsByClassName('modulableWindowTitle')[0];
+			
+			this.conteiner = this.main.getElementsByClassName("modulableWindowConteiner")[0];
+				this.leftDiv = this.conteiner.getElementsByClassName("modulableWindowLeft")[0];
+				this.rightDiv = this.conteiner.getElementsByClassName("modulableWindowRight")[0];
+				this.body = this.conteiner.getElementsByClassName("modulableWindowBody")[0];
+
+			this.footer = this.main.getElementsByClassName("modulableWindowFooter")[0];
+				this.bottomDiv = this.footer.getElementsByClassName("modulableWindowBottom")[0];
+				this.bottomLeftDiv = this.footer.getElementsByClassName("modulableWindowLeftBottom")[0];
+				this.bottomRightDiv = this.footer.getElementsByClassName("modulableWindowRightBottom")[0];
+		
+			this.setProperty();
+		}
+		ModulableWindow.prototype.create = function(id) {
+			console.log('ModulableWindow: Create new window');
+			
+			this.main = document.createElement('div');
+			this.main.id = id;
+			this.main.className = 'modulableWindow';
+			document.getElementsByTagName('body')[0].appendChild(this.main);
+			
+			this.header = document.createElement('div');
+			this.header.className = 'modulableWindowHeader';
+			this.main.appendChild(this.header);
+				this.close = document.createElement('div');
+				this.minimize = document.createElement('div');
+				this.maximize = document.createElement('div');
+				this.topSpace = document.createElement('div');
+				this.close.className = 'modulableWindowSymbolItem modulableWindowClose';
+				this.minimize.className = 'modulableWindowSymbolItem modulableWindowMinimize';
+				this.maximize.className = 'modulableWindowSymbolItem modulableWindowResize';
+				this.topSpace.className = 'modulableWindowTitle';
+				this.header.appendChild(this.close);
+				this.header.appendChild(this.minimize);
+				this.header.appendChild(this.maximize);
+				this.header.appendChild(this.topSpace);
+			
+			this.conteiner = document.createElement('div');
+			this.conteiner.className = 'modulableWindowConteiner';
+			this.main.appendChild(this.conteiner);
+				this.leftDiv = document.createElement('div');
+				this.rightDiv = document.createElement('div');
+				this.body = document.createElement('div');
+				this.leftDiv.className = 'modulableWindowLeft modulableWindowSideDiv';
+				this.rightDiv.className = 'modulableWindowRight modulableWindowSideDiv';
+				this.body.className = 'modulableWindowBody';
+				this.conteiner.appendChild(this.leftDiv);
+				this.conteiner.appendChild(this.rightDiv);
+				this.conteiner.appendChild(this.body);
+			
+			this.footer = document.createElement('div');
+			this.footer.className = 'modulableWindowFooter';
+			this.main.appendChild(this.footer);
+				this.bottomLeftDiv = document.createElement('div');
+				this.bottomRightDiv = document.createElement('div');
+				this.bottomDiv = document.createElement('div');
+				this.bottomLeftDiv.className='modulableWindowLeftBottom modulableWindowSideBottomDiv';
+				this.bottomRightDiv.className='modulableWindowRightBottom modulableWindowSideBottomDiv';
+				this.bottomDiv.className='modulableWindowBottom';
+				this.footer.appendChild(this.bottomLeftDiv);
+				this.footer.appendChild(this.bottomRightDiv);
+				this.footer.appendChild(this.bottomDiv);
+			
+			this.setProperty();;
+		}
+		ModulableWindow.prototype.setProperty = function()
+		{
+			this.main.style.left = this.positionX+'vw';		
+			this.main.style.top = this.positionY+'vh';		
+			this.main.style.width = this.sizeX+'vw';
+			this.main.style.height = this.sizeY+'vh';
+
+			this.header.style.height = this.headerHeight+'vh';	
+			this.title = document.createElement('span');
+			this.topSpace.appendChild(this.title);
+			var txtNode = document.createTextNode(this.titleWindow);
+			
+			this.title.appendChild(txtNode);					
+			this.header.style.color = this.close.style.color = this.minimize.style.color = this.maximize.style.color = this.titleTxtColor;
+			
+			this.conteiner.style.height = (this.sizeY - this.headerHeight - this.borderSize)+'vh';
+			this.body.style.backgroundColor = this.background;
+			this.body.style.opacity	= this.opacity;
+			
+			this.topSpace.style.backgroundColor = this.bottomDiv.style.backgroundColor = this.leftDiv.style.backgroundColor = this.rightDiv.style.backgroundColor = this.color;
+			this.footer.style.height = this.bottomLeftDiv.style.width = this.bottomRightDiv.style.width = this.leftDiv.style.width = this.rightDiv.style.width = this.borderSize+'vh';
+		}
+// ModulableWindow -> Ensemble de prototypes permettant le redimentionnement et le repositionnement des fenetres selon l'utilisation faite de la souris:		
+		ModulableWindow.prototype.moveBegin = function(e) {
+			console.log('ModulableWindow: start moving');
+			this.diffX = e.pageX - this.main.offsetLeft;
+			this.diffY = e.pageY - this.main.offsetTop;
+		}
+		ModulableWindow.prototype.moveCurrent = function(e) {
+			var newTop 	= -this.diffY + e.pageY;
+			var newLeft = -this.diffX + e.pageX;
+			if (newTop < 0) newTop   = 0;
+			if (newLeft < 0) newLeft = 0;
+			if (newTop > (window.innerHeight - this.main.offsetHeight)) newTop = (window.innerHeight - this.main.offsetHeight);
+			if (newLeft > (window.innerWidth  - this.main.offsetWidth))  newLeft = (window.innerWidth - this.main.offsetWidth); 
+			this.main.style.top = newTop+"px";
+			this.main.style.left = newLeft+"px";
+		}
+		ModulableWindow.prototype.moveEnd = function() {
+			console.log("ModulableWindow: stop moving");
+		      this.main.style.top = (this.main.offsetTop/window.innerHeight*100)+"vh";	// Conversion finale en VH et VW, BUG conversion overflow barre de scroll actives dans certaines résolutions
+		      this.main.style.left = (this.main.offsetLeft/window.innerWidth*100)+"vw";
+		}
+
+		ModulableWindow.prototype.bottomResizeBegin = function(e) {
+			console.log("ModulableWindow: start resizing bottom Tab");
+			this.diffY = e.pageY - this.main.offsetHeight;
+		}
+		ModulableWindow.prototype.bottomResizeCurrent = function(e) {
+			var newHeight = -this.diffY + e.pageY;
+			if (newHeight < (this.header.offsetHeight + 100)) 	newHeight = this.header.offsetHeight + 100;
+			if ((newHeight + this.main.offsetTop) > window.innerHeight) newHeight = window.innerHeight - this.main.offsetTop;
+			this.main.style.height = newHeight+"px";
+			this.conteiner.style.height = (newHeight-this.header.offsetHeight-this.footer.offsetHeight)+"px";
+		}
+		ModulableWindow.prototype.bottomResizeEnd = function() {
+			console.log("ModulableWindow: stop resizing bottom");
+			this.main.style.height 		= (this.main.offsetHeight/window.innerHeight*100)+"vh";
+			this.conteiner.style.height 	= (this.conteiner.offsetHeight/window.innerHeight*100)+"vh";
+		} 
+		
+		ModulableWindow.prototype.leftResizeBegin = function(e) {
+			console.log("ModulableWindow: start resizing left Tab");
+			this.diffX = e.pageX - this.main.offsetLeft;
+			this.temp = this.main.offsetLeft + this.main.offsetWidth;
+		}
+		ModulableWindow.prototype.leftResizeCurrent = function(e) {
+			var newLeft = -this.diffX + e.pageX;
+			if (newLeft < 0) 				newLeft = 0;
+			if (newLeft > (this.temp - 100)) 	newLeft = this.temp - 100; 
+			this.main.style.left = newLeft+"px";
+			this.main.style.width = (this.temp-this.main.offsetLeft)+"px";	
+		}
+		ModulableWindow.prototype.leftResizeEnd = function() {
+			console.log("ModulableWindow: stop resizing left tab");
+			this.main.style.left	= (this.main.offsetLeft/window.innerWidth*100)+"vw";
+			this.main.style.width	= (this.main.offsetWidth/window.innerWidth*100)+"vw";	
+		} 
+		
+		ModulableWindow.prototype.rightResizeBegin = function(e) {
+			console.log("ModulableWindow: start resizing right Tab");
+			this.diffX = e.pageX - (this.main.offsetLeft + this.main.offsetWidth);
+			this.temp = this.main.offsetLeft;
+		}
+		ModulableWindow.prototype.rightResizeCurrent = function(e) {
+			var newRight = -this.diffX + e.pageX;
+			if (newRight > window.innerWidth) 	newRight = window.innerWidth;
+			if (newRight < (this.temp + 100))	newRight = this.temp + 100;
+			this.main.style.width = (newRight - this.temp)+"px";
+		}
+		ModulableWindow.prototype.rightResizeEnd = function() {
+			console.log("ModulableWindow: stop resizing right tab");
+			this.main.style.width	= (this.main.offsetWidth/window.innerWidth*100)+"vw";
+		}
+// ModulableWindow -> CUSTOM CONTENT:
+		ModulableWindow.prototype.singleImage = function(url) {
+			this.img = document.createElement('img');
+			this.img.className = 'modulableWindowImg';
+			this.img.src = url;
+			this.body.appendChild(this.img);
+		}
+		ModulableWindow.prototype.iframe = function(url) {
+			this.iframe = document.createElement('iframe');
+			this.iframe.className = 'modulableWindowIframe';
+			this.iframe.src = url;
+			this.iframe.frameBorder = 0;
+			this.body.appendChild(this.iframe);
+		}
+		ModulableWindow.prototype.singleVideo = function(path) {
+			var obj = this;
+			this.video = document.createElement('video');
+			this.video.addEventListener('loadedmetadata', function() {
+				var actualVideoHeight = obj.video.videoHeight*(obj.body.offsetWidth/obj.video.videoWidth);
+				var scaleY = obj.body.offsetHeight/actualVideoHeight;
+				
+			 	console.log("ModulableWindow: Real vid proportions -> Width="+obj.video.videoWidth+" Height="+obj.video.videoHeight+". Actual video height (relative to window width):"+actualVideoHeight+" -> scaleY:"+scaleY);
+				obj.video.style.transform="scaleY("+scaleY+")";
+				obj.video.play();
+			});
+			this.video.src = path;
+			this.video.className = 'modulableWindowVid';
+			this.video.type = 'video/mp4';						// Est-ce que le type de la vidéo se définit vraiment ainsi en JS ?
+			this.body.appendChild(this.video);
+		}
+// General DOM -> Spécific fonctions (Dépendances de modulableWindow):	
+		var mouseMoveFunction = function() {}
+		document.onmousemove = function(e) {
+			mouseMoveFunction(e);
+			return false;
+		}
+		
+		var mouseUpFunction = function() {}
+		document.onmouseup = function(e) {
+			mouseUpFunction(e);
+			return false;
+		}
+		
+// MAIN SCRIPT:	
+		var win1 = new ModulableWindow('macaron','Macaron',27,6,40,65,'#00CC00','#002200',0.5,0.65,2);
+		win1.singleImage('macaron.jpg');
+		win1.display(1);
+		
+		var win2 = new ModulableWindow('farador','Farador',5,15,20,68,'#00CCCC','transparent',0.5,0.55,3);
+		win2.singleVideo('farador.mp4','keepProportions');
+		win2.display(1);
+		
+		var win3 = new ModulableWindow('rawtxt','Raw Text',58,4,40,50,'#CC00CC','#220022',0.5,0.70,1);
+		win3.activeScrolling();													// BackTicks ` [...] ` est un template littéral afin d'écrire sur plusieurs lignes:
+		win3.utilize().innerHTML=`				
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam. 
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur. 
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur.
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+Omitto iuris dictionem in libera civitate contra leges senatusque consulta; caedes relinquo; libidines praetereo, quarum acerbissimum extat indicium et ad insignem memoriam turpitudinis et paene ad iustum odium imperii nostri, quod constat nobilissimas virgines se in puteos abiecisse et morte voluntaria necessariam turpitudinem depulisse. Nec haec idcirco omitto, quod non gravissima sint, sed quia nunc sine teste dico.
+Ardeo, mihi credite, Patres conscripti (id quod vosmet de me existimatis et facitis ipsi) incredibili quodam amore patriae, qui me amor et subvenire olim impendentibus periculis maximis cum dimicatione capitis, et rursum, cum omnia tela undique esse intenta in patriam viderem, subire coegit atque excipere unum pro universis. Hic me meus in rem publicam animus pristinus ac perennis cum C. Caesare reducit, reconciliat, restituit in gratiam.
+Iam virtutem ex consuetudine vitae sermonisque nostri interpretemur nec eam, ut quidam docti, verborum magnificentia metiamur virosque bonos eos, qui habentur, numeremus, Paulos, Catones, Galos, Scipiones, Philos; his communis vita contenta est; eos autem omittamus, qui omnino nusquam reperiuntur.
+Et prima post Osdroenam quam, ut dictum est, ab hac descriptione discrevimus, Commagena, nunc Euphratensis, clementer adsurgit, Hierapoli, vetere Nino et Samosata civitatibus amplis inlustris.
+Excitavit hic ardor milites per municipia plurima, quae isdem conterminant, dispositos et castella, sed quisque serpentes latius pro viribus repellere moliens, nunc globis confertos, aliquotiens et dispersos multitudine superabatur ingenti, quae nata et educata inter editos recurvosque ambitus montium eos ut loca plana persultat et mollia, missilibus obvios eminus lacessens et ululatu truci perterrens.
+		`;
+		win3.display(1);
+		
+		var win4 = new ModulableWindow('IframeTest','IframeTest (experimental)',70,51,30,40,'#8EB27F','#2E1043',0.5,0.70,4);
+		win4.iframe('http://localhost/foxybookmark/entrelacement5.html');						//win4.iframe('http://www.w3schools.com');
+		win4.display(1);
+
+		var win5 = new ModulableWindow('chat','chatbox du futur',10,54,30,40,'#00CC00','#002200',0.5,0.90,5);
+		win5.display(1);	
+		//win4.special('fullScreen');
+		
+		
+		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+						
+		var socket  = new WebSocket('ws://127.0.0.1:8080');
+		var chatTab = document.getElementById("chatTab");
+		chatTab.innerHTML = "";
+		
+		chatTab.addEventListener(mousewheelevt, function(e) {
+			var e = window.event || e; // old IE support
+			var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+			chatTab.scrollTop -= delta*20;
+		}, false);
+		
+		var formInput = document.getElementsByTagName("input")[0];
+				
+		socket.onerror = function() { chatTab.innerHTML+="Aucune réponse du serveur...";  }
+		
+		socket.onmessage = function(str){
+			chatTab.innerHTML+=str.data;
+			chatTab.scrollTop+=10000;
+		};
+ 
+		var identified = false;
+		
+		var postMsg = function()
+		{
+			socket.send(formInput.value);
+			
+			if (identified == false) {
+				var identify = document.getElementsByTagName("form")[0];
+				identify.removeChild(identify.firstChild);
+				formInput.setAttribute("style","width:99.5vw");
+				identified = true; 
+			}
+			formInput.value = null;
+		}
+	</script>
+</body>
+</html>
