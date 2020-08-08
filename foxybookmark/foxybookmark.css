@@ -1,11 +1,11 @@
-*	
-{ 	
+*
+{
 	padding: 0px; margin: 0px;
 }
-body 	
-{	
-	background-color: #002200; 
-	color: #00cc00;	
+body
+{
+	background-color: #002200;
+	color: #00cc00;
 }
 H1 { text-align: center; }
 p {
@@ -21,17 +21,17 @@ textarea
 	resize:none;
 	overflow:hidden;
 	height:10vh;
-	border:solid 0.3vw steelblue; 
+	border:solid 0.3vw steelblue;
 	border-radius: 4px;
-	text-transform:uppercase; 
-	font-weight:bold; 
+	text-transform:uppercase;
+	font-weight:bold;
 	color:#4682b4;
 	background-color: #87CEEB;
 	text-align: justify;
 }
 textarea:focus
 {
-	border:solid 0.3vw  orange; 
+	border:solid 0.3vw  orange;
 }
 #urlArea
 {

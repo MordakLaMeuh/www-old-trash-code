@@ -22,7 +22,7 @@
 .MWHeader {
 	width: 100%;
 	position: absolute;
-	border-top-left-radius: 10px;			
+	border-top-left-radius: 10px;
 }
 .MWHeader svg:hover {
 	stroke: red;
@@ -39,11 +39,11 @@
 	transition-property: opacity;
 	background-color: blue;
 }
-.MW_Hidden_Header:hover { 
+.MW_Hidden_Header:hover {
 	opacity: 1;
 }
 
-				
+
 .MWConteiner {
 	width: 100%;
 	transition-property: inherit;
@@ -52,7 +52,7 @@
 .MWFooter {
 	width: 100%;
 	transition-duration: 0.1s;
-	transition-property: height; 
+	transition-property: height;
 }
 
 /* WINDOW HEADER ELEMENTS */
@@ -80,13 +80,13 @@ span {
 
 .MWBody {
 	height: 100%;
-	overflow:hidden;	
+	overflow:hidden;
 }
-			
+
 .MWSideDiv {
 	height: 100%;
 	transition-duration: 0.1s;
-	transition-property: width; 
+	transition-property: width;
 }
 .MWLeft 	{
 	float:left;
@@ -97,7 +97,7 @@ span {
 			<line x1='5' y1='10' x2='10' y2='5'/>\
 			<line x1='5' y1='10' x2='10' y2='15'/>\
 		</svg>") 10 10,ew-resize;
-}	
+}
 .MWRight 	{
 	float:right;
 	cursor:  url("data:image/svg+xml;charset=utf-8,\
@@ -158,7 +158,7 @@ span {
 .MWBottom {
 	width: 100%;
 	height: inherit;
-	
+
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
@@ -170,7 +170,7 @@ span {
 	height: inherit;
 }
 .MWImgProportionned {
-	position: relative;	
+	position: relative;
 }
 
 /* VIDEO WINDOW CLASSES */
@@ -271,16 +271,16 @@ span {
 .MW .MWConteiner .MWBody #chatTab{
 	font-size:0.5em;
 	color: green;
-	height: 80%; 
-	width: 100%;		
+	height: 80%;
+	width: 100%;
 	font-weight: bold;
 	padding-left: 1%;
 	background-color: #003300;
 	overflow: hidden;
-	/*overflow-y: auto;					
+	/*overflow-y: auto;
 	overflow-x: hidden;*/					/* smatphone feature */
 	word-wrap:break-word;
-	white-space:pre-wrap;	
+	white-space:pre-wrap;
 }
 .MW .MWConteiner .MWBody footer{
 	height: 12%;
@@ -291,11 +291,11 @@ span {
 	position: relative;
 	top: 30%;
 	padding-left: 1%;
-		
+
 	display: flex;
 	flex-direction:row;
 }
-.MW .MWConteiner .MWBody footer form input[type="text"] { 
+.MW .MWConteiner .MWBody footer form input[type="text"] {
 	height: 100%;
 	background-color: #003300;
 	color: #00cc00;
@@ -304,7 +304,7 @@ span {
 	padding-left: 0.5%;
 	width: 40%;
 	font-size: 0.8em;
-}	
+}
 .input-file-container {
 	position: relative;
 	top: 10%;

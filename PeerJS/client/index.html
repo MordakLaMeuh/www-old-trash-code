@@ -1,12 +1,12 @@
 <html>
   <head>
     <title>WebRTC Copy</title>
-	
+
     <meta name="viewport" content="width=device-width; initial-scale=1;">
     <meta name="description" content="Transfer files(of any size) and messages in the browser using WebRTC.">
     <meta name="author" content="erbbysam">
     <link rel="shortcut icon" href="images/favicon.ico">
-    
+
 	<!-- jquery -->
     <script src="ext-js/jquery.js"></script>
     <script src="ext-js/jquery.browser.min.js"></script>
@@ -19,22 +19,22 @@
 	<script src="ext-js/otr/eventemitter.js"></script>
 	<script src="ext-js/otr/otr.js"></script>
 	<!-- additional crypto-js -->
-	<script src="ext-js/crypto-js/core.js"></script> 
-	<script src="ext-js/crypto-js/rabbit.js"></script> 
+	<script src="ext-js/crypto-js/core.js"></script>
+	<script src="ext-js/crypto-js/rabbit.js"></script>
 	<!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet"> <!-- min. -->
-	
+
 	<!-- site CSS -->
     <link type="text/css" href="style.css" rel="stylesheet"></link>
 	<!--  site js  -->
 	<script src="js/crypto.js"></script>
     <script src="js/webrtc-data.io.js"></script>
   </head>
-  
+
   <!-- image credit - http://lostandtaken.com/blog/2012/10/14/7-white-grunge-textures.html -->
   <body style="background-image:url(https://i.imgur.com/37C3OI5.jpg);">
-  
-  
+
+
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
 	  <div class="container">
 		<div class="navbar-header">
@@ -55,7 +55,7 @@
 	  </div><!-- /.container -->
      </div><!-- /.navbar -->
 	<div id="alerts"></div>
-	
+
 	<div id="roomprompt" style="display:none">
 		<div class="panel panel-default username-panel">
 			<div class="panel-body">
@@ -76,7 +76,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="userprompt" style="display:none">
 		<div class="panel panel-default username-panel">
 			<div class="panel-body">
@@ -92,21 +92,21 @@
 				This website allows files of <i>any</i> size and messages to be <a href="white_paper.html" target="_blank">securely</a> transmitted directly between web browsers.<br />
 				If you did not create a new room, you were likely sent this link. <a href="/">Click here to create a new room.</a><br />
 				<br />
-				<span class="small">OTR details:<br /> 
+				<span class="small">OTR details:<br />
 				We offer OTR encryption on top of the WebRTC encryption your browser supports. If a pre-shared password is provided and you connect to others, their identity can be guaranteed.<br />
 				Your OTR settings must match the other users in the room.<br/ >
-				<a href="white_paper.html" target="_blank">Click here for more details.</a><br /> 
+				<a href="white_paper.html" target="_blank">Click here for more details.</a><br />
 				</span>
 				<br />
 				<span class='support'>Notice: only Chrome, Firefox & Opera are currently supported.</span>
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="chat_display" style="display:none;">
-		
+
 		<div class="row row-offcanvas row-offcanvas-left">
-		
+
 			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 			  <div class="sidebar-nav panel panel-default">
 				<div class="panel-heading"><span id="roomname"></span></div>
@@ -116,7 +116,7 @@
 				</div>
 			  </div><!--/.well -->
 			</div><!--/span-->
-		
+
 			<div class="col-xs-12 col-sm-9">
 				<div id="chatbox" class="panel panel-default">
 					<span class="visible-xs"><button type="button" class="btn btn-primary btn-xs btn_off" data-toggle="offcanvas">Toggle User List</button></span>
@@ -130,10 +130,10 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div><!--/row-->
 	</div>
-	
+
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		  <div class="modal-content">
@@ -174,10 +174,10 @@
 		  </div>
 		</div>
 	</div>
-	
+
 	<!-- Bootstrap core js -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-    
+
 	<!-- more site js -->
    	<script src="js/file-io.js"></script>
 	<script src="js/script.js"></script>

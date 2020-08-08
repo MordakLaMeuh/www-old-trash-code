@@ -35,7 +35,7 @@ var request_chunk_decrypt_rand = []; /* this is the decryption key we sent when 
 var hashed_message = [];
 
 /***************
-	OTR functions 
+	OTR functions
 	Steps 1,2,3,4 are labeled below
 ****************/
 
@@ -81,7 +81,7 @@ function otr_connect_buddy(id) {
 	this.buddy_crypto_streams[id].on('error', function (err) {
 		console.error("error occurred: " + err);
 	});
-	
+
 	this.buddy_crypto_streams[id].on('status', function (state) {
 	if (state === OTR.CONST.STATUS_AKE_SUCCESS) {
 		console.log('AKE SUCCESS');
@@ -97,7 +97,7 @@ function otr_connect_buddy(id) {
 	}
 
 	});
-	
+
 	this.buddy_crypto_streams[id].on('file', function (type, key, filename) {
 		if (type === 'send') {
 			buddy_crypto_send_symetric_keys[id] = key;
@@ -108,17 +108,17 @@ function otr_connect_buddy(id) {
 		} else {
 			console.error('unrecognized otr file type: '+type);
 		}
-		
+
 		/* these are equal, so lets compare them to verify */
 		if (buddy_crypto_recieve_symetric_keys[id] && buddy_crypto_send_symetric_keys[id]){
 			if (buddy_crypto_send_symetric_keys[id] != buddy_crypto_recieve_symetric_keys[id]) {
 				console.error("ERROR - non-matching crypto keys!");
 			} else {
 				/* if they are equal, then we can also want to verify identity using SMP */
-				
-				/* Step 3) Socialist Millionaire Protocol 
-				 * ONLY A SINGLE HOST CAN START THIS! 
-				 * We have no concept of host/initiator, so choose host with lowest ID to start 
+
+				/* Step 3) Socialist Millionaire Protocol
+				 * ONLY A SINGLE HOST CAN START THIS!
+				 * We have no concept of host/initiator, so choose host with lowest ID to start
 				 * Can't use localCompare becuase Firefox doesn't offically support it?...
                  * So we are going to compare the numbers in our ID strings
 				 * (ID's are psudo random number/lettter string, ie. 5bc7a87d-7b5b-5ab4-c187-0c9b2390cc7a)
@@ -134,7 +134,7 @@ function otr_connect_buddy(id) {
 			}
 		}
 	});
-	
+
 	this.buddy_crypto_streams[id].on('smp', function (type, data, act) {
 		switch (type) {
 			case 'question':
@@ -181,7 +181,7 @@ function otr_rcv_msg(id,msg) {
 }
 
 /***************
-	Crypto-JS functions 
+	Crypto-JS functions
 	note: we had to redefine CryptoJS's namespace to not conflict with OTR CryptoJS code. No other changes were made.
 			TODO - bring Rabbit's functionality into OTR's CryptoJS namespace
 decrpyt & encrypt: file chunks QUICKLY using CryptoJS's Rabbit stream cipher
@@ -199,24 +199,24 @@ function generate_second_half_RC4_random() {
 function file_decrypt(id, message) {
 	if (this.buddy_crypto_verified[id]) {
 		hash = CryptoJS.SHA256(message).toString(CryptoJS.enc.Base64); //console.log(hash);
-		
+
 		message = RabbitCryptoJS.Rabbit.decrypt(JSON.parse(message),buddy_crypto_recieve_symetric_keys[id] + request_chunk_decrypt_rand[id]).toString(CryptoJS.enc.Utf8);
 		process_binary(id, base64DecToArr(message).buffer, hash); /* send back a hash as well to send back to the original host with the next request */
 	}
 }
-	
+
 /* encrypt and send out a peice of a file */
 function file_encrypt_and_send(id, message, additional_key, chunk_num) {
 	/* MUST have completed OTR first */
 	if (this.buddy_crypto_verified[id]) {
 		message = _arrayBufferToBase64(message);
 		message = JSON.stringify(RabbitCryptoJS.Rabbit.encrypt(message, buddy_crypto_send_symetric_keys[id] + additional_key));
-		
+
 		if (chunk_num == 0) {
 			hashed_message[id] = [];
 		}
 		hashed_message[id][chunk_num] = CryptoJS.SHA256(message).toString(CryptoJS.enc.Base64); //console.log(hashed_message[id][chunk_num]);
-		
+
 		/* This is the one other place we can send directly! */
 		var channel = rtc.dataChannels[id];
 		if (rtc.connection_ok_to_send[id]) {

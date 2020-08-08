@@ -12,34 +12,34 @@ var moveObj = function(ID) {
 	element.addEventListener('mousedown',run_Move,false);
 }
 
-// BROUILLON approximatif 
+// BROUILLON approximatif
 var moveRabbit = function(ID) {
 	var element = ID;
-	
+
 	var origin_X, destination_X;
 	var origin_Y, destination_Y;
-	
+
 	var direction;
 	var ratio_X, diff_X;
 	var ratio_Y, diff_Y;
-	
+
 	var timeout = false;
 	var i=0;
-	
+
 	var rabbit_Destination = function(e) {
 		window.removeEventListener('mouseup',rabbit_Destination,false);
-		
+
 		direction=(e.pageX < origin_X)?1:(-1);
 		element.style.transform = 'scaleX('+direction+')';
-		
+
 		origin_X -= diff_X;
-		
-		destination_X = e.pageX-diff_X; 
-		destination_Y = e.pageY-diff_Y; 
-		
+
+		destination_X = e.pageX-diff_X;
+		destination_Y = e.pageY-diff_Y;
+
 		ratio_X = (destination_X - origin_X)/50;
 		ratio_Y = (destination_Y - origin_Y)/50;
-		
+
 		i=0;
 		console.log(ratio_X);
 		timeout = setInterval(function(){
@@ -47,14 +47,14 @@ var moveRabbit = function(ID) {
 				ratio_X = (ratio_X * -1);
 				direction = (direction * -1);
 				element.style.transform = 'scaleX('+direction+')';
-				
+
 				origin_X = element.offsetLeft;
 				origin_Y = element.offsetTop;
 				i = 0;
 			}
 			if (((element.offsetTop+ratio_Y) < 0) || (element.offsetTop+element.offsetHeight+ratio_Y) > screen.height) {
 				ratio_Y = (ratio_Y * -1);
-				
+
 				origin_X = element.offsetLeft;
 				origin_Y = element.offsetTop;
 				i = 0;
@@ -62,7 +62,7 @@ var moveRabbit = function(ID) {
 			i++;
 			element.style.left	= origin_X+(i*ratio_X)+'px';
 			element.style.top 	= origin_Y+(i*ratio_Y)+'px';
-		},50); 
+		},50);
 	}
 	var rabbit_Origin = function(e) {
 		window.addEventListener('mouseup',rabbit_Destination,false);
@@ -72,5 +72,5 @@ var moveRabbit = function(ID) {
 		origin_X = e.pageX;
 		origin_Y = e.pageY - diff_Y;
 	}
-	element.addEventListener('mousedown',rabbit_Origin,false);	
+	element.addEventListener('mousedown',rabbit_Origin,false);
 }

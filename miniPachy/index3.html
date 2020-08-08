@@ -4,41 +4,41 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Mini Chat-Box</title>	
-	<style type="text/css"> 
-		*	{ 	
-			padding: 0px; 
+	<title>Mini Chat-Box</title>
+	<style type="text/css">
+		*	{
+			padding: 0px;
 			margin: 0px;
 		}
-		
-		body 	{	
-			background-color: black; 
+
+		body 	{
+			background-color: black;
 			color: #00cc00;
 			font-family: monospace;
 			overflow:hidden;
-		}	
-		
+		}
+
 		header	{
 			height: 6vh;
 		}
-		
+
 		footer	{
 			height: 10vh;
 			font-size: 2vh;
 		}
-		
+
 		H1	{
 			padding-top: 1.5vh;
 			text-align: center;
 			font-size: 3vh;
 		}
-		
+
 		form	{
 			position: relative;
 			top: 3vh;
 		}
-		
-		input[type="text"] { 
+
+		input[type="text"] {
 			height: 3vh;
 			background-color: #002200;
 			color: #00cc00;
@@ -48,9 +48,9 @@
 			padding-left: 0.5vw;
 			width: 40vw;
 		}
-		
-		#chatTab	{ 
-			height: 84vh; 		
+
+		#chatTab	{
+			height: 84vh;
 			font-weight: bold;
 			padding-left: 1vw;
 			opacity: 0.85;
@@ -58,9 +58,9 @@
 			font-size: 2vh;
 			overflow: hidden;
 			word-wrap:break-word;
-			white-space:pre-wrap;	
+			white-space:pre-wrap;
 		}
-		
+
 		#p2pTab {
 			position: absolute;
 			width: 40vw;
@@ -70,7 +70,7 @@
 			font-weight: bold;
 			font-size: 2vh;
 		}
-		
+
 		#p2pTitle {
 			height: 2.5vh;
 			width: 100%;
@@ -86,10 +86,10 @@
 			background-color: white;
 			cursor: no-drop;
 		}
-		
+
 		.cross:before  { content: "\2716"; }
-		
-		
+
+
 		#p2pConteiner {
 			height: 62.5vh;
 			width: 100%;
@@ -141,7 +141,7 @@
 				height: 100%;
 				overflow:hidden;
 			}
-		
+
 	</style>
 </head>
 
@@ -150,35 +150,35 @@
 		<h1>CHATBOX DU FUTUR</h1>
 	</header>
 
-	<div id="chatTab">	
-		 <noscript><H1>Javascipt doit être activé pour que la chatBox puisse fonctionner !</H1></noscript> 
+	<div id="chatTab">
+		 <noscript><H1>Javascipt doit être activé pour que la chatBox puisse fonctionner !</H1></noscript>
 	</div>
-	
+
 	<div id="p2pTab">
 		<div id='p2pCloseItem' class='cross'></div>
-	
-		<div id="p2pTitle"> 
-			P2P BOX		
+
+		<div id="p2pTitle">
+			P2P BOX
 		</div>
-		
+
 		<div id="p2pConteiner">
 			<div id='p2pLeftTab'> 		</div>
 			<div id='p2pRightTab'> 		</div>
 			<div id='p2pBottomTab'> 	</div>
 			<div id='p2pBlockBottomLeft'> </div>
 			<div id='p2pBlockBottomRight'> </div>
-			
+
 			<div id='p2pBody'>
 			</div>
 		</div>
 	</div>
-	
+
 	<footer>
 		<form method='POST' action='javascript:postMsg()'>
 			IDENTIFIEZ-VOUS: <input spellcheck='false' autocomplete='off' type='text' autofocus>
 		</form>
 	</footer>
-	
+
 	<script type="text/javascript">
 		window.ondragstart = function()  	{ return false; } 		// IMPORTANT - FIX BUG
 		document.onmousedown = function()  	{ return false; } 		// IMPORTANT - FIX BUG / DISABLE AUTOMATIC SELECT OF ELEMENT
@@ -186,23 +186,23 @@
 		var p2pTab 		= document.getElementById("p2pTab");
 		var p2pTitle 	= document.getElementById("p2pTitle");
 		var p2pConteiner	= document.getElementById("p2pConteiner");
-		
+
 		var p2pLeftTab 	= document.getElementById("p2pLeftTab");
 		var p2pRightTab 	= document.getElementById("p2pRightTab");
 		var p2pBottomTab	= document.getElementById("p2pBottomTab");
-		
+
 		var p2pBlockBottomLeft	= document.getElementById("p2pBlockBottomLeft");
 		var p2pBlockBottomRight	= document.getElementById("p2pBlockBottomRight");
-		
+
 		var diffX = null;
 		var diffY = null;
 		var temp  = null; 	// Exception pour resize-left AND resize-right
-		
+
 		var movingP2PTab = false;
 		var resizingP2PBottomTab = false;
 		var resizingP2PLeftTab = false;
 		var resizingP2PRightTab = false;
-		
+
 		p2pTitle.onmousedown = function(e) {
 			console.log('start moving');
 			console.log('window position -> top:'+p2pTab.offsetTop+' left:'+p2pTab.offsetLeft);
@@ -215,48 +215,48 @@
 			movingP2PTab = true;
 			return false;
 		}
-				
+
 		p2pBottomTab.onmousedown = function(e) {
 			console.log("start resizing bottom Tab");
 			diffY = e.pageY - p2pTab.offsetHeight;
 			resizingP2PBottomTab = true;
 		}
-		
+
 		p2pLeftTab.onmousedown = function(e) {
 			console.log("start resizing left Tab");
 			diffX = e.pageX - p2pTab.offsetLeft;
 			temp = p2pTab.offsetLeft + p2pTab.offsetWidth;
 			resizingP2PLeftTab = true;
 		}
-		
+
 		p2pRightTab.onmousedown = function(e) {
 			console.log("start resizing right Tab");
 			diffX = e.pageX - (p2pTab.offsetLeft + p2pTab.offsetWidth);
 			temp = p2pTab.offsetLeft;
 			resizingP2PRightTab = true;
 		}
-		
+
 		p2pBlockBottomLeft.onmousedown = function(e) {
 			console.log("start resizing block bottom left Tab");
 			diffY = e.pageY - p2pTab.offsetHeight;
 			diffX = e.pageX - p2pTab.offsetLeft;
 			temp = p2pTab.offsetLeft + p2pTab.offsetWidth;
-			
+
 			resizingP2PLeftTab = true;
 			resizingP2PBottomTab = true;
 		}
-		
+
 		p2pBlockBottomRight.onmousedown = function(e) {
 			console.log("start resizing block bottom right Tab");
 			diffY = e.pageY - p2pTab.offsetHeight;
 			diffX = e.pageX - (p2pTab.offsetLeft + p2pTab.offsetWidth);
 			temp = p2pTab.offsetLeft;
-			
+
 			resizingP2PRightTab = true;
 			resizingP2PBottomTab = true;
 		}
-		
-		document.onmousemove = function(e) { 
+
+		document.onmousemove = function(e) {
 			if (movingP2PTab) {
 				console.log("moving.");
 				var newTop 	= -diffY + e.pageY;
@@ -264,7 +264,7 @@
 				if (newTop < 0) newTop   = 0;
 				if (newLeft < 0) newLeft = 0;
 				if (newTop > (window.innerHeight - p2pTab.offsetHeight)) newTop = (window.innerHeight - p2pTab.offsetHeight);
-				if (newLeft > (window.innerWidth  - p2pTab.offsetWidth))  newLeft = (window.innerWidth - p2pTab.offsetWidth); 
+				if (newLeft > (window.innerWidth  - p2pTab.offsetWidth))  newLeft = (window.innerWidth - p2pTab.offsetWidth);
 				p2pTab.style.top 	= newTop+"px";
 				p2pTab.style.left = newLeft+"px";
 			}
@@ -273,8 +273,8 @@
 				var newHeight = -diffY + e.pageY;
 				if (newHeight < (p2pTitle.offsetHeight + 100)) 	newHeight = p2pTitle.offsetHeight + 100;
 				if ((newHeight + p2pTab.offsetTop) > window.innerHeight) newHeight = window.innerHeight - p2pTab.offsetTop;
-				
-				
+
+
 				p2pTab.style.height = newHeight+"px";
 				p2pConteiner.style.height = (newHeight-p2pTitle.offsetHeight)+"px";		// Patch
 			}
@@ -282,10 +282,10 @@
 				console.log("resizing left tab.");
 				var newLeft = -diffX + e.pageX;
 				if (newLeft < 0) 		newLeft = 0;
-				if (newLeft > (temp - 100)) newLeft = temp - 100; 
+				if (newLeft > (temp - 100)) newLeft = temp - 100;
 				p2pTab.style.left 	= newLeft+"px";
 				p2pTab.style.width 	= (temp-p2pTab.offsetLeft)+"px";
-				
+
 			}
 			if (resizingP2PRightTab) {
 				console.log("resizing right tab.");
@@ -296,12 +296,12 @@
 			}
 			return false;
 		}
-		
-		document.onmouseup = function(e) { 
+
+		document.onmouseup = function(e) {
 			if (movingP2PTab) {
 				console.log("stop moving");
 				console.log("style.top:"+(p2pTab.offsetTop/window.innerHeight*100)+" vh. style.Left:"+(p2pTab.offsetLeft/window.innerWidth*100)+"vw");
-				
+
 				// Conversion finale en VH et VW, BUG conversion overflow barre de scroll actives dans certaines résolutions. Désactivation overflox au niveau du Body.
 			      p2pTab.style.top = 	(p2pTab.offsetTop/window.innerHeight*100)+"vh";
 			      p2pTab.style.left = 	(p2pTab.offsetLeft/window.innerWidth*100)+"vw";
@@ -312,7 +312,7 @@
 				// Conversion
 				p2pTab.style.height 		= 	(p2pTab.offsetHeight/window.innerHeight*100)+"vh";
 				p2pConteiner.style.height 	=	(p2pConteiner.offsetHeight/window.innerHeight*100)+"vh";
-				
+
 				resizingP2PBottomTab = false;
 			}
 			if (resizingP2PLeftTab) {
@@ -328,30 +328,30 @@
 			}
 			return false;
 		}
-		
-		
-		
-		
+
+
+
+
 		var p2pBody 		= document.getElementById("p2pBody");
-		
-		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+
+		var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
 		p2pBody.addEventListener(mousewheelevt, function(e) {
 			var e = window.event || e; // old IE support
 			var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 			p2pBody.scrollTop -= delta*20;
 		}, false);
-		
-				
+
+
 		var socket  = new WebSocket('ws://192.168.43.128:8080');
 		var chatTab = document.getElementById("chatTab");
 		chatTab.innerHTML = "AZERTY\n";
-		
+
 		chatTab.addEventListener(mousewheelevt, function(e) {
 			var e = window.event || e; // old IE support
 			var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 			chatTab.scrollTop -= delta*20;
 		}, false);
-		
+
 		function onStart ( touchEvent ) {
 			console.log("OnStart launched");
 		 	if( navigator.userAgent.match(/Android/i) ) {
@@ -359,29 +359,29 @@
 		    		touchEvent.preventDefault();
 		  	}
 		}
-		
+
 		chatTab.addEventListener("touchstart", function(e){ onStart(e); }, false );
-		
+
 		var formInput = document.getElementsByTagName("input")[0];
-				
+
 		socket.onerror = function() { chatTab.innerHTML+="Aucune réponse du serveur...";  }
-		
+
 		socket.onmessage = function(str){
 			chatTab.innerHTML+=str.data;
 			chatTab.scrollTop+=10000;
 		};
- 
+
 		var identified = false;
-		
+
 		var postMsg = function()
 		{
 			socket.send(formInput.value);
-			
+
 			if (identified == false) {
 				var identify = document.getElementsByTagName("form")[0];
 				identify.removeChild(identify.firstChild);
 				formInput.setAttribute("style","width:99.5vw");
-				identified = true; 
+				identified = true;
 			}
 			formInput.value = null;
 		}

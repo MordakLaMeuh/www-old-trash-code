@@ -5,10 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Helios system WebRTC">
 	<meta name="author" content="momo">
-	
+
 	<title>Alien-WebRTC P2P Sharing File 0.21</title>
-	
-	<link rel='stylesheet' href='dom/dom.css' type='text/css' media='all' /> 
+
+	<link rel='stylesheet' href='dom/dom.css' type='text/css' media='all' />
 	<link rel="shortcut icon" href="medias/images/ours.png">
 </head>
 <body class='hideOverflow' onload='begin()'>
@@ -25,7 +25,7 @@
 	<img onclick="RTCstop();"  src='medias/images/bouton_off.gif' alt='off' class='imgBoutons'/>
 	<H1>Alien-WebRTC P2P Sharing File 0.21</H1>
 </div>
-<div id='connectTab' class='hideOverflow'> 
+<div id='connectTab' class='hideOverflow'>
 		<!-- <video id="webcam" autoplay><source src='medias/video/La_bataille_de_Farador.webm' type='video/webm' /><video>  -->
 		 <img src='medias/images/remote.png' alt='remote' id='remote'/>
 </div>
@@ -37,7 +37,7 @@
 </div>
 
 
-<div id='statusTab' class='hideOverflow'> 
+<div id='statusTab' class='hideOverflow'>
 	<img class='camera' src='medias/images/camera.png' alt='' /><p>b7c5f8</p>
 	<img class='camera' src='medias/images/camera.png' alt='' /><p>d7aa33</p>
 	<img class='camera' src='medias/images/camera.png' alt='' /><p>8fb245</p>
@@ -45,13 +45,13 @@
 	</div>
 </div>
 
-<div id='fileTab'> 
+<div id='fileTab'>
 	<label for="file-upload" class="file-upload">
 			Select file
 	</label>
 	<input id="file-upload" type="file"/>
-	<div id='fileTitle'  class='hideOverflow'> 
-	<H2>Liste des fichiers</H2> 
+	<div id='fileTitle'  class='hideOverflow'>
+	<H2>Liste des fichiers</H2>
 	</div>
 	<div id='files' class='hideOverflow'>
 	</div>
@@ -63,19 +63,19 @@
 <div id='chatTab' class='hideOverflow'>
 
 </div>
-<div id='postTab' class='hideOverflow'> 
-	<img class='elePHPant' src='medias/images/elephant.png' alt='elephant' onclick='_DOM_.sendMsg()'/> 
+<div id='postTab' class='hideOverflow'>
+	<img class='elePHPant' src='medias/images/elephant.png' alt='elephant' onclick='_DOM_.sendMsg()'/>
 	<form name='postChatbox' method='POST' action='javascript:_DOM_.sendMsg()'>
 		<input name='line_send' id='sendBox' spellcheck='false' autocomplete='off' type='text'>
             <input type='button' id='bouton_send_chat' value='OK' onclick='_DOM_.sendMsg()'>
       </form>
 </div>
 
-<script src="dom/dom.js"></script> 
-<script src="file/file.js"></script> 
-<script src="core/rtc.js"></script> 
-<script src="core/p2p.js"></script> 
-	
+<script src="dom/dom.js"></script>
+<script src="file/file.js"></script>
+<script src="core/rtc.js"></script>
+<script src="core/p2p.js"></script>
+
 <script type="text/javascript">
 
 var _DOM_;
@@ -91,8 +91,8 @@ var begin = function() {
 	_FILE_	 	= new mainFILE();
 	_RTC_CORE_ 		= new webRTC();
 	_P2P_ 		= new P2P_Channel();
-	
-	RTCstart = function() { 
+
+	RTCstart = function() {
 		console.log('Connection to server.');
 		_RTC_CORE_.addServer();
 	}
@@ -133,7 +133,7 @@ pc.addStream(stream);
 
 execute remote:
 <video id="otherPeer" autoplay></video>
- 
+
 var otherPeer = document.getElementById("otherPeer");
 pc.onaddstream = function (e) {
     otherPeer.src = URL.createObjectURL(e.stream);

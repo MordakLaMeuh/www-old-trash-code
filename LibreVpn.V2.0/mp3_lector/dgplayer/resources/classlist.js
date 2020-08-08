@@ -19,7 +19,7 @@ if (!("classList" in document.documentElement) && Object.defineProperty && typeo
                 }
             }
 
-            var ret = {                    
+            var ret = {
                 add: update(function(classes, index, value) {
                     ~index || classes.push(value);
                 }),
@@ -40,7 +40,7 @@ if (!("classList" in document.documentElement) && Object.defineProperty && typeo
                     return self.className.split(/\s+/)[i] || null;
                 }
             };
-            
+
             Object.defineProperty(ret, 'length', {
                 get: function() {
                     return self.className.split(/\s+/).length;

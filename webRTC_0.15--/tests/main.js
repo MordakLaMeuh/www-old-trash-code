@@ -1,4 +1,4 @@
-var scrollbar = (function() {    
+var scrollbar = (function() {
 	var create_div = function(c, cont, cont_clone) {			// create and append div finc
 		var o = document.createElement('div');
 		o.cont = cont;
@@ -12,7 +12,7 @@ var scrollbar = (function() {
 		var scrollContinue = 0;
 		var scrollInverseSpeed = 0;
 		var scrollingTimeout = 0;
-		
+
 		var init = function () {													// initialization
 			if (window.oper || (! window.addEventListener && ! window.attachEvent)) { return false; }
 
@@ -34,15 +34,15 @@ var scrollbar = (function() {
 			scrollContinue = 0;
 			return false;
 		}
-		// Gestion du scrolling à partir des boutons up et down: arrow_scroll && mousedown (event)				
-		var arrow_scroll = function () {				
+		// Gestion du scrolling à partir des boutons up et down: arrow_scroll && mousedown (event)
+		var arrow_scroll = function () {
 			if (scrollContinue != 0) {
 				asd.scrollTop += 6 * scrollContinue / asd.ratio;
 				scrollingTimeout = setTimeout(arrow_scroll, scrollInverseSpeed);
 				scrollInverseSpeed = 10;	// enchainement && vitesse scroll pour un appui long
 			}
 		}
-		var mousedown = function (o, s) {					// event : Scroll on mouse down 
+		var mousedown = function (o, s) {					// event : Scroll on mouse down
 			if (scrollContinue == 0) {
 				asd = o.cont;
 				scrollContinue = s;
@@ -55,23 +55,23 @@ var scrollbar = (function() {
 			mouseY = e.screenY;
 			if (asd.sg) asd.scrollTop = asd.sZ + (mouseY - asd.yZ) / asd.ratio;
 		}
-	
+
 		var onmouseup = function (e) {		// on mouseUp binded event
 			asd.sg = false;
 		}
-				     
+
 		var refresh = function () {
 			var o=cont;
 			o.ssb_onscroll();
 			o.sb.style.width = o.st.style.width = o.arrowUp.style.width = o.arrowUp.style.height = o.arrowDown.style.width = o.arrowDown.style.height = o.sw + 'px';
 			o.sb.style.height = Math.ceil(Math.max(o.sw * .5, o.ratio * o.offsetHeight) + 1) + 'px';
 		}
-		
+
 		var cont = document.getElementById(cont_id);
 
 		// perform initialization
 		if (! init()) return false;
-		
+
 		var cont_clone = cont.cloneNode(false);
 		cont_clone.style.overflow = "hidden";
 		cont.parentNode.appendChild(cont_clone);
@@ -81,7 +81,7 @@ var scrollbar = (function() {
 		cont.style.width = cont.style.height = '100%';
 
 		cont.sg = false;
-	
+
 		//creating scrollbar child elements
 		cont.st = create_div('ssb_st', cont, cont_clone);
 		cont.sb = create_div('ssb_sb', cont, cont_clone);
@@ -126,15 +126,15 @@ var scrollbar = (function() {
 		}
 		cont.sw = 20;				// scrollbar width
 		cont.ssb_onscroll();			// start scrolling
-		
+
 		refresh();
-        
-		cont.onscroll = cont.ssb_onscroll;	// EVENT --- binding own onscroll event		
+
+		cont.onscroll = cont.ssb_onscroll;	// EVENT --- binding own onscroll event
 	};
-	return makeScrollbar;	
+	return makeScrollbar;
 })();
 
-window.onload = function() 
-{	
+window.onload = function()
+{
 	var A = new scrollbar('main_content');
 }

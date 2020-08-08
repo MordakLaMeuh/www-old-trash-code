@@ -15,15 +15,15 @@
   <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
- 
+
 <p>Click anywhere to toggle the box.</p>
 <div id="toggle"></div>
- 
+
 <script>
 $( document ).click(function() {
   $("#toggle" ).toggle("bounce", { times: 3 },"slow" );
 });
 </script>
- 
+
 </body>
 </html>q

@@ -7,13 +7,13 @@ var create_New_Window = (function() {	// TODO IMPORTANT: Méthode globale de cr�
 	var imageType = /image.*/;
 	var videoType = /video.*/;
 	var audioType = /audio.*/;
-	
+
 	var constructor = function(file,meta) {		// meta est envoyé pour les fichiers recus qui devront passer en download. pour les fichiers émis.
 		file_Index++;
 		var share = (meta)?'download':'upload';
 		meta = (meta)?meta:{ 'name':file.name,
 				   'size':file.size,
-				   'type':file.type	
+				   'type':file.type
 		};
 		console.log('new incoming file of '+meta.type);
 		if (meta.type.match(imageType)) {
@@ -23,13 +23,13 @@ var create_New_Window = (function() {	// TODO IMPORTANT: Méthode globale de cr�
 			new MW('id'+file_Index,meta.name,(70-(2*(file_Index%5))),(30-(3*(file_Index%5))),30,70,'#e74c3c','black',{'type':'video','url':URL.createObjectURL(file),'ratio':true,'opacity':false,'share':share,'file':((share == 'upload')?file:meta),'sound':true});
 		}
 		else if (meta.type.match(audioType)) {
-			new MW('id'+file_Index,meta.name,(70-(2*(file_Index%5))),(30-(3*(file_Index%5))),30,70,'#e74c3c','black',{'type':'audio','url':URL.createObjectURL(file),'opacity':false,'share':share,'file':((share == 'upload')?file:meta),'sound':true});	
+			new MW('id'+file_Index,meta.name,(70-(2*(file_Index%5))),(30-(3*(file_Index%5))),30,70,'#e74c3c','black',{'type':'audio','url':URL.createObjectURL(file),'opacity':false,'share':share,'file':((share == 'upload')?file:meta),'sound':true});
 		}
-		else  console.log('format non reconnu');	
+		else  console.log('format non reconnu');
 	}
 	return constructor;
 })();
-				
+
 var MW_iFrame_Mouse_Protection;
 var MW = (function() {
 	var test = function() {}
@@ -42,30 +42,30 @@ var MW = (function() {
 				document.styleSheets[S].insertRule(class_Name+' { '+element+': '+value+'; }',document.styleSheets[S][cssRules].length);
 				console.log('MW_change_CSS: solution I avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
 				return 	function(invv) { document.styleSheets[S].insertRule(class_Name+' { '+element+': '+((invv)?value2:value)+'; }',document.styleSheets[S][cssRules].length); };
-			} 
+			}
 			catch(err) {
 				try {
 					document.styleSheets[S].addRule(class_Name,element+': '+value+';');
 					console.log('MW_change_CSS: solution II avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
 					return	 function(invv) { document.styleSheets[S].addRule(class_Name,element+': '+((invv)?value2:value)+';'); };
 				}
-				catch(err) {	
+				catch(err) {
 					console.log('MW_change_CSS: invalid combinaison !');
 					try {
 						if (document.styleSheets[S]['rules']) {
 							cssRules = 'rules';
-						} 
+						}
 						else if (document.styleSheets[S]['cssRules']) {
 							cssRules = 'cssRules';
-						} 
-						else 	{}	// Navigateur inconnu ?!? 
-						
+						}
+						else 	{}	// Navigateur inconnu ?!?
+
 						for (var R = 0; R < document.styleSheets[S][cssRules].length; R++) {
 							if (document.styleSheets[S][cssRules][R].selectorText == class_Name) {
 								if(document.styleSheets[S][cssRules][R].style[element]){
 									document.styleSheets[S][cssRules][R].style[element] = value;
 									return	function(invv) { document.styleSheets[S][cssRules][R].style[element] = ((invv)?value2:value); };
-					}}}} 
+					}}}}
 					catch (err){}
 		}}}
 		return function() {};
@@ -78,28 +78,28 @@ var MW = (function() {
 			try {
 				document.styleSheets[S].insertRule(class_Name+' { '+element+': '+value+'; }',document.styleSheets[S][cssRules].length);
 				console.log('MW_change_CSS: solution I avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
-			} 
+			}
 			catch(err) {
 				try {
 					document.styleSheets[S].addRule(class_Name,element+': '+value+';');
 					console.log('MW_change_CSS: solution II avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
 				}
-				catch(err) {	
+				catch(err) {
 					console.log('MW_change_CSS: invalid combinaison !');
 					try {
 						if (document.styleSheets[S]['rules']) {
 							cssRules = 'rules';
-						} 
+						}
 						else if (document.styleSheets[S]['cssRules']) {
 							cssRules = 'cssRules';
-						} 
+						}
 						else {}	// Navigateur inconnu ?!?
-						
+
 						for (var R = 0; R < document.styleSheets[S][cssRules].length; R++) {
 							if (document.styleSheets[S][cssRules][R].selectorText == class_Name) {
 								if(document.styleSheets[S][cssRules][R].style[element]){
 									document.styleSheets[S][cssRules][R].style[element] = value;
-					}}}} 
+					}}}}
 					catch (err){}
 	}}}}
 	var zIndex_Min = 1000000;	// Utilisé par la méchanique rudimentaire de mise en background des fenetres. 	cf. put_Backward()
@@ -110,7 +110,7 @@ var MW = (function() {
 	var resize_All_Windows = function() {
 		console.log('MW: Resize All Windows -> resizeEvent:'+resize_Event);
 		resize_Event = false;
-		
+
 		var i = 0;
 		for (i; i<objects.length; i++) objects[i].resize();
 	}
@@ -119,32 +119,32 @@ var MW = (function() {
 				resize_Event = true;
 				setTimeout(resize_All_Windows,resize_Timer);
 	}}
-	
+
 	var objects = new Array();
 	var header_Height 		= 2.5;			// predefined. VH
 	var border_Size   		= 0.2;			// predefined. VH
 	var mouse_Resize_Area_Size 	= 3.0				// predefined. VH
 	var opacity				= 0.63;			// predefined. 0 to 1
-	
+
 	var value = header_Height+'vh';
 	modify_Class_Value('.MW_Svg_Icon_Right','width',value);	// L'utilisation de cette fonction est en réalité facultative puisque header_Height est 'predefined', la classe CSS pour width aurait pu etre remplie à la main !
 	modify_Class_Value('.MW_Svg_Icon_Left','width',value);	// ca rajoute du calcul pour le pauvre processeur, mais c'est marrant.
 
 	var Modulable_Window_Constructor = function(id,title_Window,positionX,positionY,sizeX,sizeY,border_Color,body_Color,opts) {
 		objects.push(this);
-	
-        	this.id = id;		
-        				
-		this.opacity 			= opacity;				
-		this.border_Size			= border_Size;				
-		this.header_Height 		= header_Height;				
+
+        	this.id = id;
+
+		this.opacity 			= opacity;
+		this.border_Size			= border_Size;
+		this.header_Height 		= header_Height;
 		this.mouse_Resize_Area_Size  	= mouse_Resize_Area_Size;
 		this.border_Color			= border_Color;			// TODO PATCH pour la couleur dans headerLess
-		
+
 
 		(this.main = document.getElementById(id))?this.assign():this.create();
 		this.set_Property(title_Window,positionX,positionY,sizeX,sizeY,border_Color,body_Color);
-		
+
 		var obj = this;
 
 		zIndex_Max = this.put_Forward(zIndex_Max);
@@ -156,14 +156,14 @@ var MW = (function() {
 			if (obj.backroom) {					// TODO Patch conflit putForward car this.main.onmouse down est aussi activé quand la souris pointe sur minimize.
 				obj.backroom = false;
 				zIndex_Min = obj.go_To_Backroom(zIndex_Min);
-			}	
+			}
 			else 	{ zIndex_Max = obj.put_Forward(zIndex_Max); }
 			if ((e.target.tagName == 'INPUT') || (e.target.id == 'chatTab'))	return true;			// exception pour le chat (mettre en place une liste)
 			else											return false;			// return false bloque les events habituelles du navigateur.
 		}
-		
+
 		this.set_Window_Base_Selectors()												// Gestions des différents mouvements et redimentionnements de la fenetre provoqués par la souris.
-		
+
 	// gestion des clics de la souris sur les diverses icones:
 		this.hide_Header.onmousedown = function() {
 			console.log('MW: Déclenchement du header_MaskSystem:');
@@ -183,27 +183,27 @@ var MW = (function() {
 		this.opacity_Button.onmousedown = function() {
 			toggle_Opacity();
 		}
-		// Gestion des deux boutons, MAXIMIZE et MINIMIZE: (important: Afin de garantir un ajustement classique des fenetres, minimize passe à false lors d'un clic sur footer, leftDiv ou rightDiv cf. plus haut.)		
+		// Gestion des deux boutons, MAXIMIZE et MINIMIZE: (important: Afin de garantir un ajustement classique des fenetres, minimize passe à false lors d'un clic sur footer, leftDiv ou rightDiv cf. plus haut.)
 		this.minimal_Width = (obj.title.offsetWidth + obj.header.getElementsByTagName('svg').length*(obj.header_Height/100*window.innerHeight)) + 40; // taille minimale d'une fenetre exprimée en pixels.
 		this.maximize_State  = false;
 		this.minimize_State = false;
-		
-		this.maximize.onmousedown = function() { 
-			obj.toggle_FullScreen(); 
+
+		this.maximize.onmousedown = function() {
+			obj.toggle_FullScreen();
 		}
-		
-		this.minimize.onmousedown = function() { 
-			obj.toggle_Minimize(); 
+
+		this.minimize.onmousedown = function() {
+			obj.toggle_Minimize();
 		}
-		
+
 		this.last_Top, this.last_Left, this.last_Height, this.last_Width = null;
 		this.put_Backward.onmousedown = function() {
 			console.log('MW: Minimize');
 			obj.backroom = true;
 		}
-		this.transition_Token = 0;	// Puisque lorsque plusieurs transitions apparaissent en même temps, on veut limiter le nombre de calculs de redimentionnement, on ne donne qu'un seul jeton pour limiter ca !					
+		this.transition_Token = 0;	// Puisque lorsque plusieurs transitions apparaissent en même temps, on veut limiter le nombre de calculs de redimentionnement, on ne donne qu'un seul jeton pour limiter ca !
 		obj.main.addEventListener("transitionend",function(e){obj.end_Of_Transition(e);},false);
-		
+
 		this.active_Scrolling = function() {
 			this.body.addEventListener(mousewheelevt, function(e) {
 				var e = window.event || e; // old IE support
@@ -216,34 +216,34 @@ var MW = (function() {
 		opts.opacity && toggle_Opacity();
 		opts.fullscreen && obj.toggle_FullScreen();
 		opts.noheader && obj.toggle_Header(header_Height,border_Size);
-		
-		if (opts.share) {														// TODO IMPORTANT -> opts.share est une parlie liée à rtc.js qui n'est pas propre à MW version originale.				
+
+		if (opts.share) {														// TODO IMPORTANT -> opts.share est une parlie liée à rtc.js qui n'est pas propre à MW version originale.
 			if (opts.share == 'upload') 	{
 				this.upload_Tool = document.getElementById("MW_SVG_UPLOAD").cloneNode(true);
 				this.upload_Tool.classList.remove('MW_Svg_Hidden');
-				this.header.insertBefore(this.upload_Tool, this.top_Space);	
-				
+				this.header.insertBefore(this.upload_Tool, this.top_Space);
+
 				this.file = opts.file;
-				
+
 				this.upload_Tool.addEventListener('mousedown', function(){
-					RTC.sendFile(new Array(obj.file), user_To_Share);							// NOTE: RTC.sendFile se charge par lui-même de determiner si la session avec 'user_To_Share' existe. 
+					RTC.sendFile(new Array(obj.file), user_To_Share);							// NOTE: RTC.sendFile se charge par lui-même de determiner si la session avec 'user_To_Share' existe.
 				},false);
 			}
 			if (opts.share == 'download') {
 				display('reception de '+opts.file.name+'.\n');
-			
+
 				this.download_Link = document.createElement('a');
 				this.download_Link.href = opts.url;
 				this.download_Link.src = opts.file.name;
 				this.download_Link.download = opts.file.name;
 				this.header.insertBefore(this.download_Link, this.top_Space);
-				
+
 				this.download_Tool = document.getElementById("MW_SVG_DOWNLOAD").cloneNode(true);
 				this.download_Tool.classList.remove('MW_Svg_Hidden');
-				this.download_Link.appendChild(this.download_Tool);	
+				this.download_Link.appendChild(this.download_Tool);
 			}
 		}
-		
+
 		switch (opts.type) {
 			case 'video':
 				this.single_Video(opts.url,opts.ratio,opts.sound);
@@ -277,7 +277,7 @@ MW.prototype.utilize = function() {				// (EN)utilize <--> (FR)exploiter	cf. To 
 MW.prototype.change_Color	= function() {}			// TODO Fonction pouvant trouver son utilité.
 MW.prototype.change_Opacity	= function() {}		    	// TODO Fonction pouvant trouver son utilisé.
 
-MW.prototype.end_Of_Transition = function(e) {						
+MW.prototype.end_Of_Transition = function(e) {
 	if (this.transition_Token > 0) {
 		console.log("MW end_Of_Transition(e) private function: consume one token, Detected transition -> "+e.propertyName);
 		this.transition_Token--;
@@ -297,7 +297,7 @@ MW.prototype.end_Of_Transition = function(e) {
 	}
 	else console.log('MW end_Of_Transition(e) private function: No one token.');
 }
-		
+
 // Fonctions de redimentionnement évennementiel des fenetres.
 MW.prototype.put_Forward = function(zIndex_Max) {
 	zIndex_Max+=3;
@@ -310,10 +310,10 @@ MW.prototype.go_To_Backroom = function(zIndex_Min) {
 	zIndex_Min-=3;
 	this.main.style.zIndex = zIndex_Min;
 	this.bottom_Left_Div.style.zIndex = this.bottom_Right_Div.style.zIndex = zIndex_Min+1;
-	this.header.style.zIndex = zIndex_Min+2;	
+	this.header.style.zIndex = zIndex_Min+2;
 return zIndex_Min;
 }
-		
+
 MW.prototype.toggle_Header = function(header_Height,border_Size) {
 	if (this.video) 	this.video.style.display='none';
 	if (this.img)	this.img.style.display='none';
@@ -322,25 +322,25 @@ MW.prototype.toggle_Header = function(header_Height,border_Size) {
 	this.main.style.transitionDuration = '0.1s';
 	if (this.header_Height) {
 		this.header_Mask.style.height = '0px';
-		
+
 		this.header.classList.remove('MW_Visible_Header');
 		this.header.classList.add('MW_Hidden_Header');
 		this.header.style.backgroundColor='transparent';
-		
+
 		this.conteiner.style.height = ((this.conteiner.offsetHeight*100/window.innerHeight) + this.header_Height)+'vh';
 		this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = '0px';
 		this.header_Height = this.border_Size = 0;
 	}
 	else {
-		this.header_Height = header_Height;	
+		this.header_Height = header_Height;
 		this.border_Size 	 = border_Size;
-							
+
 		this.header_Mask.style.height = this.header_Height+'vh';
-		
+
 		this.header.classList.remove('MW_Hidden_Header');
 		this.header.classList.add('MW_Visible_Header');
 		this.header.style.backgroundColor = this.border_Color;						// TODO PAtCH
-		
+
 		this.conteiner.style.height = ((this.conteiner.offsetHeight*100/window.innerHeight) - this.header_Height)+'vh';
 		this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
 	}
@@ -369,7 +369,7 @@ MW.prototype.toggle_Minimize = function() {
 			this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;					// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 			this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
 			this.conteiner.style.height = (100 - this.header_Height - this.border_Size)+'vh';
-			
+
 			this.maximize_State = false;
 		}
 	}
@@ -410,7 +410,7 @@ MW.prototype.toggle_FullScreen = function() {
 	this.maximize_State = !this.maximize_State;
 }
 
-MW.prototype.switch_To_Fullscreen = function() {		
+MW.prototype.switch_To_Fullscreen = function() {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE_INVERSE").innerHTML;		// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = '100vh';
@@ -418,10 +418,10 @@ MW.prototype.switch_To_Fullscreen = function() {
 	this.main.style.top = this.main.style.left ='0px';
 
 	this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = '0px';
-	
+
 	this.conteiner.style.height=(100 - this.header_Height)+'vh';
 }
-MW.prototype.quit_Full_screen = function () {				
+MW.prototype.quit_Full_screen = function () {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;			// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = this.last_Height+'vh';
@@ -430,10 +430,10 @@ MW.prototype.quit_Full_screen = function () {
 	this.main.style.left = this.last_Left+'vw';
 
 	this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
-	
+
 	this.conteiner.style.height=(this.last_Height - this.header_Height - this.border_Size)+'vh';
 }
-		
+
 MW.prototype.resize = function() {
 	this.minimal_Width = (this.title.offsetWidth + this.header.getElementsByTagName('svg').length*(this.header_Height/100*window.innerHeight)) + 40;	// TODO patch, remise à jour de minimal width lorsque résol. change
 	this.video && this.resize_Video();
@@ -448,30 +448,30 @@ MW.prototype.assign = function() {
 																	// TODO header_MaskSystem -> this.header_Mask = this.main.getElementsByClassName('MWheader_Mask')[0]
 	this.header_Mask = this.main.getElementsByClassName("MWHeaderMask")[0];
 		this.header = this.header_Mask.getElementsByClassName("MWHeader")[0];
-		
+
 			this.top_Space = this.header.getElementsByClassName('MWTitle')[0];
-		
+
 			this.hide_Header 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 			this.opacity_Button 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 			this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 			this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
 			this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
-			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);		
-					
+			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);
+
 			this.hide_Header.classList.remove('MW_Svg_Hidden');
 			this.opacity_Button.classList.remove('MW_Svg_Hidden');
 			this.close.classList.remove('MW_Svg_Hidden');
 			this.maximize.classList.remove('MW_Svg_Hidden');
 			this.minimize.classList.remove('MW_Svg_Hidden');
 			this.put_Backward.classList.remove('MW_Svg_Hidden');
-			
+
 			this.header.insertBefore(this.close, this.top_Space);
 			this.header.insertBefore(this.minimize, this.top_Space);
 			this.header.insertBefore(this.maximize, this.top_Space);
 			this.header.insertBefore(this.put_Backward, this.top_Space);
 			this.header.insertBefore(this.opacity_Button, this.top_Space);
 			this.header.insertBefore(this.hide_Header, this.top_Space);
-		
+
 	this.conteiner = this.main.getElementsByClassName("MWConteiner")[0];
 		this.leftDiv = this.conteiner.getElementsByClassName("MWLeft")[0];
 		this.rightDiv = this.conteiner.getElementsByClassName("MWRight")[0];
@@ -489,30 +489,30 @@ MW.prototype.create = function() {
 	this.main.id = this.id;
 	this.main.className = 'MW';
 	document.getElementsByTagName('body')[0].appendChild(this.main);
-	
+
 	this.header_Mask = document.createElement('div');
 	this.header_Mask.className = 'MWHeaderMask';
 	this.main.appendChild(this.header_Mask);
 		this.header = document.createElement('div');
 		this.header.className = 'MWHeader MW_Visible_Header';
-		this.header_Mask.appendChild(this.header);								
+		this.header_Mask.appendChild(this.header);
 			this.hide_Header 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 			this.opacity_Button 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 			this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 			this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
 			this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
-			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);		
-					
+			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);
+
 			this.hide_Header.classList.remove('MW_Svg_Hidden');
 			this.opacity_Button.classList.remove('MW_Svg_Hidden');
 			this.close.classList.remove('MW_Svg_Hidden');
 			this.maximize.classList.remove('MW_Svg_Hidden');
 			this.minimize.classList.remove('MW_Svg_Hidden');
 			this.put_Backward.classList.remove('MW_Svg_Hidden');
-			
-			this.top_Space = document.createElement('div');	
+
+			this.top_Space = document.createElement('div');
 			this.top_Space.className = 'MWTitle';
-			
+
 			this.header.appendChild(this.close);
 			this.header.appendChild(this.minimize);
 			this.header.appendChild(this.maximize);
@@ -555,19 +555,19 @@ MW.prototype.set_Property = function(title_Window,positionX,positionY,sizeX,size
 	this.main.style.height = sizeY+'vh';
 
 	this.header_Mask.style.height = this.header.style.height = this.header_Height+'vh';
-	
+
 	this.title = document.createElement('span');
 	this.top_Space.appendChild(this.title);
 
 	this.title.appendChild(document.createTextNode(title_Window));
 
 	this.conteiner.style.height = (sizeY - this.header_Height - this.border_Size)+'vh';
-	
+
 	this.body.style.backgroundColor = body_Color;
 	this.body.style.opacity	= this.opacity;
 
 	this.header.style.backgroundColor = this.bottom_Div.style.backgroundColor = this.leftDiv.style.backgroundColor = this.rightDiv.style.backgroundColor = border_Color;
-	
+
 	this.footer.style.height = this.leftDiv.style.width = this.rightDiv.style.width = this.border_Size+'vh';
 
 	this.bottom_Left_Div.style.width = this.bottom_Right_Div.style.width = this.bottom_Left_Div.style.height = this.bottom_Right_Div.style.height = this.mouse_Resize_Area_Size+'vh';
@@ -799,7 +799,7 @@ MW.prototype.set_Propotions_Tool = function(proportionned_State)
 {
 	this.proportion_Tool = document.getElementById("MW_SVG_PROPORTIONS").cloneNode(true);
 	this.proportion_Tool.classList.remove('MW_Svg_Hidden');
-	
+
 	this.header.insertBefore(this.proportion_Tool, this.top_Space);				// var insertElement = parentElement.insertBefore(nouvelElement, refElement)
 
 	var obj = this;
@@ -838,7 +838,7 @@ MW.prototype.single_Video = function(url,proportionned_State,sound) {
 	this.media = this.video;
 
 	var proportionned_State = proportionned_State;
-	
+
 	this.video.addEventListener('loadedmetadata', function() {
 		obj.set_Propotions_Tool(proportionned_State);
 		obj.video.volume = (sound)?1:0;
@@ -848,13 +848,13 @@ MW.prototype.single_Video = function(url,proportionned_State,sound) {
 		obj.video.play();
 		obj.main.style.opacity = 1;
 	},false);
-	
-	this.video.volume = 0;	
+
+	this.video.volume = 0;
 	this.video.src = url;
 	this.video.className = 'MWVid';
 	this.video.type = 'video/mp4';			// TODO Est-ce que le type de la vidéo se définit vraiment ainsi en JS ?
 	this.body.appendChild(this.video);
-	
+
 	this.media_Common();
 }
 
@@ -862,7 +862,7 @@ MW.prototype.single_Audio = function(url,sound) {
 	var obj = this;
 	this.audio = new Audio();
 	this.media = this.audio;
-	
+
 	this.audio.addEventListener('loadedmetadata', function() {
 		obj.audio.volume = (sound)?1:0;
 		var a = Math.floor(obj.audio.duration/60);
@@ -871,17 +871,17 @@ MW.prototype.single_Audio = function(url,sound) {
 		obj.audio.play();
 		obj.main.style.opacity = 1;
 	},false);
-	
-	this.audio.src = url; 
+
+	this.audio.src = url;
 	this.audio.className = 'MWAudio';
 	this.audio.type = 'audio/mp3';
 	this.audio.volume = 0;
-	
-	var icon = document.getElementById("MW_SVG_MEDIA_SOUND").cloneNode(true);			
+
+	var icon = document.getElementById("MW_SVG_MEDIA_SOUND").cloneNode(true);
 	icon.classList.remove('MW_Svg_Hidden');
 	icon.style.position = 'relative';
 	this.body.appendChild(icon);
-	
+
 	this.media_Common();
 }
 
@@ -891,20 +891,20 @@ MW.prototype.media_Common = function() {
 	var media_Controls = document.createElement('div');
 	media_Controls.className = 'media_Controls';
 	this.conteiner.appendChild(media_Controls);
-	
+
 	this.media_Controls_Timeline = document.createElement('div');
 	this.media_Controls_Timeline.className = 'media_Controls_Timeline';
 	this.media_Controls_Conteiner = document.createElement('div');
 	this.media_Controls_Conteiner.className = 'media_Controls_Conteiner';
 	media_Controls.appendChild(this.media_Controls_Timeline);
 	media_Controls.appendChild(this.media_Controls_Conteiner);
-	
+
 	this.media_Time_Info = document.createElement('div');
 	this.media_Time_Info.className = 'media_Time_Info';
 
-	this.media_Play_Icon = document.getElementById("MW_SVG_MEDIA_PLAY").cloneNode(true);	
-	this.media_Pause_Icon = document.getElementById("MW_SVG_MEDIA_PAUSE").cloneNode(true);		
-	this.media_Mute_Icon = document.getElementById("MW_SVG_MEDIA_SOUND").cloneNode(true);			
+	this.media_Play_Icon = document.getElementById("MW_SVG_MEDIA_PLAY").cloneNode(true);
+	this.media_Pause_Icon = document.getElementById("MW_SVG_MEDIA_PAUSE").cloneNode(true);
+	this.media_Mute_Icon = document.getElementById("MW_SVG_MEDIA_SOUND").cloneNode(true);
 	this.media_Play_Icon.classList.remove('MW_Svg_Hidden');
 	this.media_Pause_Icon.classList.remove('MW_Svg_Hidden');
 	this.media_Mute_Icon.classList.remove('MW_Svg_Hidden');
@@ -912,7 +912,7 @@ MW.prototype.media_Common = function() {
 	this.media_Controls_Conteiner.appendChild(this.media_Pause_Icon);
 	this.media_Controls_Conteiner.appendChild(this.media_Mute_Icon);
 	this.media_Controls_Conteiner.appendChild(this.media_Time_Info);
-	
+
 	this.media_TimeLine = document.createElement('div');
 	this.media_TimeLine.className='media_Current_TimeLine';
 	this.media_Controls_Timeline.appendChild(this.media_TimeLine);
@@ -921,29 +921,29 @@ MW.prototype.media_Common = function() {
 	this.media_Pause_Icon.onmousedown = function() { 	obj.media.pause(); }
 	this.media_Mute_Icon.onmousedown = function()  { 	obj.media.volume = (obj.media.volume)?0:1; }
 
-	this.media.addEventListener('timeupdate',function() { 
+	this.media.addEventListener('timeupdate',function() {
 		var a = Math.floor(obj.media.currentTime/60);
 		var b = Math.floor(obj.media.currentTime%60);
-		
+
 		obj.media_Time_Info.innerHTML = ((a)?a+'.':'0.')+((b)?((b<10)?'0'+b:b):'00') +'/'+obj.media_Duration_String;
-		obj.media_TimeLine.style.width=(obj.media.currentTime/obj.media.duration*100)+'%'; 
+		obj.media_TimeLine.style.width=(obj.media.currentTime/obj.media.duration*100)+'%';
 	},false);
-	
-	this.media.onplay = function() { 
-		console.log('MW: MEDIA -> play media event for '+obj.id);  
-		obj.media_Play_Icon.classList.add('media_Controls_Icons_Active'); 
-		obj.media_Pause_Icon.classList.remove('media_Controls_Icons_Active'); 
+
+	this.media.onplay = function() {
+		console.log('MW: MEDIA -> play media event for '+obj.id);
+		obj.media_Play_Icon.classList.add('media_Controls_Icons_Active');
+		obj.media_Pause_Icon.classList.remove('media_Controls_Icons_Active');
 	}
-	this.media.onpause = function() { 
-		console.log('MW: MEDIA -> pause media event for '+obj.id); 
-		obj.media_Pause_Icon.classList.add('media_Controls_Icons_Active'); 
-		obj.media_Play_Icon.classList.remove('media_Controls_Icons_Active'); 
+	this.media.onpause = function() {
+		console.log('MW: MEDIA -> pause media event for '+obj.id);
+		obj.media_Pause_Icon.classList.add('media_Controls_Icons_Active');
+		obj.media_Play_Icon.classList.remove('media_Controls_Icons_Active');
 	}
-	this.media.onvolumechange = function() { 
-		console.log('MW: MEDIA -> change volume media event for '+obj.id); 
+	this.media.onvolumechange = function() {
+		console.log('MW: MEDIA -> change volume media event for '+obj.id);
 		(obj.media.volume)?obj.media_Mute_Icon.classList.add('media_Controls_Icons_Active'):obj.media_Mute_Icon.classList.remove('media_Controls_Icons_Active');
 	}
-	
+
 	var lock_Cpu_Busy = false;
 	var apply_Timeline_Change = function() {
 		console.log('MW: Apply timeline change for:'+obj.id);
@@ -954,12 +954,12 @@ MW.prototype.media_Common = function() {
 	}
 	var media_Set_Timeline = function(e) {
 		console.log('MW: set media timeline for:'+obj.id+' window offset left: '+obj.media_Controls_Timeline.offsetLeft);
-		if (!lock_Cpu_Busy) { 
+		if (!lock_Cpu_Busy) {
 			obj.diffX = e.pageX - ( obj.main.offsetLeft + obj.media_Controls_Timeline.offsetLeft);
-			lock_Cpu_Busy=true; 
-			setTimeout(apply_Timeline_Change,250); 
-	}}	
-	
+			lock_Cpu_Busy=true;
+			setTimeout(apply_Timeline_Change,250);
+	}}
+
 	this.media_Controls_Timeline.onmousedown = function(e) {
 		media_Controls.classList.add('media_Controls_Selected');
 		media_Set_Timeline(e);
@@ -983,7 +983,7 @@ MW.prototype.single_Image = function(url,proportionned_State) {
 		obj.main.style.opacity = 1;
 	}
 }
-MW.prototype.iframe = function(url) {	
+MW.prototype.iframe = function(url) {
 	this.iframe = document.createElement('iframe');
 	this.iframe.className = 'MW_Iframe';
 	this.iframe.src = url;

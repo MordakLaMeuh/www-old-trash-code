@@ -14,7 +14,7 @@ body {
 /* DÃ©gradÃ© de gauche Ã  droite du fond de page (uniquement Webkit et Firefox 3.6) */
 	background: -moz-linear-gradient(left, #6E6E6E, #FFF);
 	background-image: -webkit-gradient(linear, left top, right top,
-                   	 	  color-stop(0.00, #6E6E6E),   
+                   	 	  color-stop(0.00, #6E6E6E),
                   		  color-stop(1.00, #FFF));
 	background: linear-gradient(left, #6E6E6E, #FFF);
 /* Prise en charge du dÃ©gradÃ© par IE 6 - 8 */

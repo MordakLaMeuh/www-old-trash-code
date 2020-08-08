@@ -17,21 +17,21 @@ if (($_SESSION['droit']) == 2)
     <cite id="baba">
         <span class="LOG">En arrière toute ! Bariiii !</span>
     </cite>
-    
+
     <?php
     include 'no_script_part1.php';
-    
-                                               
-    /*** AFFICHAGE PRINCIPAL DU CONTENU. ***/    
+
+
+    /*** AFFICHAGE PRINCIPAL DU CONTENU. ***/
     echo '<div id="dynamic_list">';
-    
+
    /*** [...................................................................................] ***/
-    
+
     echo "</div>";
-    
+
     $_SESSION['link'] = "0";
-    include 'js/web_navigator.js'; 
-    
+    include 'js/web_navigator.js';
+
     include 'no_script_part2.php';
 }
 else			 /**** CAS D'ABSENCE DE DROITS SUFFISANTS. ***/
@@ -43,11 +43,11 @@ include 'src/footer.php';
 ?>
 
 <script type="text/javascript">	function main()
-{	
+{
     listing(0,0);
     music_on_line();
 }
-    
+
 </script>
 
 <div class="juke_button">
@@ -56,11 +56,11 @@ include 'src/footer.php';
 		  <button  style="background:black; cursor:hand; border:solid 1px black;" onclick="playAudio();">
 		    <!--  style="background:white; cursor:pointer; border:solid 1px black;" -->
 		    <!--  PLAY&STOP -->
-		  <img src="img/play.png" alt="play&pause" /> 
+		  <img src="img/play.png" alt="play&pause" />
 		  </button>
 		  <button  style="background:black; cursor:hand; border:solid 1px black;" onclick="restartAudio();">
 		    <!--  RESTART -->
-		  <img src="img/restart.png" alt="restart" /> 
+		  <img src="img/restart.png" alt="restart" />
 		  </button>
 	      </div>
 </div>

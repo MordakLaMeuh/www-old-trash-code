@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">			<!-- media Query portables -->
 	<meta name="description" content="Helios system WebRTC">
 	<meta name="author" content="momo">
-	
+
 	<title>Helios System-WebRTC P2P Sharing File Interface</title>
-	
+
 	<link rel="shortcut icon" href="images/ours.png">
 </head>
 <style>
@@ -48,7 +48,7 @@ display: inline-block;
    /* position: absolute; */   /* Le bouton est en position ABSOLUTE à l'intèrieur de son conteiner. */
    /* top: 20px;
     left: 20px;
-    border: none; */  
+    border: none; */
 }
 li {
     display: inline;
@@ -63,14 +63,14 @@ li a {
     color: #fff;
     font-weight: bold;
     background: #999;
-} 
+}
 A1,A2{
 	display: inline-block;
 }
 td /* Toutes les cellules des tableaux... */
 {
     border: 1px solid black; /* auront une bordure de 1px */
-} 
+}
 #scroll{
     width: 300px;
     height: 200px;
@@ -115,7 +115,7 @@ td /* Toutes les cellules des tableaux... */
        <td>Lucky Luke, seul contre tous</td>
        <td colspan="2">Pour toute la famille !</td>
    </tr>
-</table> 
+</table>
 </div>
 </div>
 <span class='A1'><br>Ceci est un test<span><span class='A2'>TEST !</span>
@@ -153,7 +153,7 @@ td /* Toutes les cellules des tableaux... */
 
 </body>
 
-<script>  
+<script>
 var speed = 0; //détermine le sens de défilement (1, -1 ou 0 pour l'arrêt)
 function scroll(to_scroll, no_speed_change){
     if(!no_speed_change) speed = to_scroll; //on ne modifie pas la vitesse si la fonction a été appelée par elle-même pour éviter une boucle infinie
@@ -175,7 +175,7 @@ function MouseWheelHandler(e) {
 	return false;
 }
 var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
- 
+
 function mugir()
 {
 	alert(this);
@@ -188,7 +188,7 @@ if (document.body.attachEvent) //if IE (and Opera depending on user setting)
    document.body.attachEvent("on"+mousewheelevt, function(){alert('meuh');})
 else if (document.body.addEventListener) //WC3 browsers
    document.body.addEventListener(mousewheelevt, mugir, false)
-   
+
 document.getElementById('scroll').onmouseover=function(){document.body.removeEventListener(mousewheelevt, mugir, false)}
 document.getElementById('scroll').onmouseout =function(){document.body.addEventListener(mousewheelevt, mugir, false)}
 </script>

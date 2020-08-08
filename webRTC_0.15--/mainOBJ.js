@@ -6,7 +6,7 @@ var scrollbar = (function() {
 	var sc = 0;
 	var sp = 0;
 	var to = 0;
-    
+
 	var init = function () {													// initialization
 		if (window.oper || (! window.addEventListener && ! window.attachEvent)) { return false; }
 
@@ -23,7 +23,7 @@ var scrollbar = (function() {
 		addEvent(window, 'resize', refresh);
 		return true;
 	}
-    
+
     // create and append div finc
 	var create_div = function(c, cont, cont_clone) {
 		var o = document.createElement('div');
@@ -88,7 +88,7 @@ var scrollbar = (function() {
 		clear();*/
 		asd.sg = false;
 	}
-    
+
 	// constructor
 	function makeScrollbar(cont_id) {
 		var cont = document.getElementById(cont_id);
@@ -108,7 +108,7 @@ var scrollbar = (function() {
 		aConts[N++] = cont;
 
 		cont.sg = false;
-	
+
 		//creating scrollbar child elements
 		cont.st = create_div('ssb_st', cont, cont_clone);
 		cont.sb = create_div('ssb_sb', cont, cont_clone);
@@ -116,7 +116,7 @@ var scrollbar = (function() {
 		cont.sd = create_div('ssb_down', cont, cont_clone);
 
 
-		
+
 		// on mouse down processing
 		cont.sb.onmousedown = function (e) {
 			if (! cont.sg) {
@@ -175,15 +175,15 @@ var scrollbar = (function() {
 		// start scrolling
 		cont.ssb_onscroll();
 		refresh();
-        
+
 		// binding own onscroll event
 		cont.onscroll = cont.ssb_onscroll;
-		//return cont;				
+		//return cont;
 	};
-	return makeScrollbar;	
+	return makeScrollbar;
 })();
 
-window.onload = function() 
-{	
+window.onload = function()
+{
 	var A = new scrollbar('main_content');
 }

@@ -107,25 +107,25 @@ function sha256(m, H) {
 self.addEventListener('message', function (event) {
 
 	self.hash = [0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19];
-	
+
 	var uint8_array = new Uint8Array(event.data);
-	
+
 	var message = Crypto.util.bytesToWords(uint8_array);
-	
+
 	var nBitsTotal = uint8_array.length * 8;
 	var nBitsLeft = nBitsTotal;
-	
+
       var nBitsTotalH = Math.floor(nBitsTotal / 0x100000000);
       var nBitsTotalL = nBitsTotal & 0xFFFFFFFF;
 
       // Padding
-      message[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsTotal % 32); 
+      message[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsTotal % 32);
       message[((nBitsLeft + 64 >>> 9) << 4) + 14] = nBitsTotalH;
       message[((nBitsLeft + 64 >>> 9) << 4) + 15] = nBitsTotalL;
 
       self.hash = sha256(message, self.hash);
 
 	var output = Crypto.util.bytesToHex(Crypto.util.wordsToBytes(self.hash));
-	
+
 	self.postMessage(output);
 }, false);

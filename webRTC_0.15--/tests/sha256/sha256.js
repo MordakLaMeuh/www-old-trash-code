@@ -60,7 +60,7 @@ function sha256_sigma1(x) {
 	return (rotateRight(17, x) ^ rotateRight(19, x) ^ (x >>> 10));
 }
 function sha256_expand(W, j) {
-	return (W[j&0x0f] += sha256_sigma1(W[(j+14)&0x0f]) + W[(j+9)&0x0f] + 
+	return (W[j&0x0f] += sha256_sigma1(W[(j+14)&0x0f]) + W[(j+9)&0x0f] +
 sha256_sigma0(W[(j+1)&0x0f]));
 }
 
@@ -88,7 +88,7 @@ var K256 = new Array(
 var ihash, count, buffer;
 var sha256_hex_digits = "0123456789abcdef";
 
-/* Add 32-bit integers with 16-bit operations (bug in some JS-interpreters: 
+/* Add 32-bit integers with 16-bit operations (bug in some JS-interpreters:
 overflow) */
 function safe_add(x, y)
 {
@@ -130,7 +130,7 @@ function sha256_transform() {
 
         /* make 32-bit words */
 	for(var i=0; i<16; i++)
-		W[i] = ((buffer[(i<<2)+3]) | (buffer[(i<<2)+2] << 8) | (buffer[(i<<2)+1] 
+		W[i] = ((buffer[(i<<2)+3]) | (buffer[(i<<2)+2] << 8) | (buffer[(i<<2)+1]
 << 16) | (buffer[i<<2] << 24));
 
         for(var j=0; j<64; j++) {
@@ -231,7 +231,7 @@ function sha256_encode_hex() {
 	return output;
 }
 
-/* Main function: returns a hex string representing the SHA256 value of the 
+/* Main function: returns a hex string representing the SHA256 value of the
 given data */
 function sha256_digest(data) {
 	sha256_init();
@@ -243,6 +243,6 @@ function sha256_digest(data) {
 /* test if the JS-interpreter is working properly */
 function sha256_self_test()
 {
-	return sha256_digest("message digest") == 
+	return sha256_digest("message digest") ==
 "f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650";
 }

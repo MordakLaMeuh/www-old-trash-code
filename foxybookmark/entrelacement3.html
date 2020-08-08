@@ -6,14 +6,14 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content='CSS effect'>
 	<meta name="author" content="secret">
-	
+
 	<title>Entrelacement III</title>
-	
+
 	<!-- <link rel='stylesheet' id='DOM'  href='foxybookmark.css' type='text/css' media='all' /> -->
 	<link rel="shortcut icon" href="ours.png">
 </head>
 
-<body> 
+<body>
 <style>
 * { margin: 0px; padding: 0px; }
 body { background-color: black; overflow: hidden;}
@@ -40,14 +40,14 @@ H3 { text-decoration: underline; }
 .yellow  	{ background-color: yellow;  	}
 .green     	{ background-color: #228B22; 	}
 .blue 	     	{ background-color: #1E90FF; 	}
-.darkMagenta 	{ background-color: #8B008B; 	} 
+.darkMagenta 	{ background-color: #8B008B; 	}
 .blueViolet  	{ background-color: #8A2BE2; 	}
 
 #header		{ width: 100vw; height: 15vh; background-color: black; color:white;}
 #footer		{ width: 100vw; height: 15vh; position:fixed; top: 85vh; background-color: black; color:white;}
 
 </style>
-<div id='header'>	
+<div id='header'>
 <H3>Entrelacement III</H3><br>
 Gestion, sélection et inversion des lignes précise avec mouvements harmonieux. <br>
 Entrelacement lignes Version 3 utilisant mousemove en paramètre event.
@@ -76,10 +76,10 @@ var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENV
 		this.class = null;
 		SUPER = this;
 		var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE -- console.log('_isGecko vaut:'+_isGecko);
-	
+
 		var evalMouse = function(e) {
-			var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris				
-				
+			var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris
+
 			SUPER.id = element.parentNode.id;
 			SUPER.class = element.className;
 			SUPER.element = element;
@@ -92,7 +92,7 @@ var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENV
 			SUPER.mouse_X = e.pageX;
 			SUPER.mouse_Y = e.pageY;
 			//console.log('Xmouse='+SUPER.mouse_X +' Ymouse='+SUPER.mouse_Y+' ID:'+SUPER.id+' parentClass:'+SUPER.class);
-		}	
+		}
 		console.log('activation de la détéction souris');
 		document.onmousemove=evalMouse;
 	}
@@ -118,17 +118,17 @@ var drawElement = (function()
 		for (var i=0;i<list.length; i++)
 		{
 			console.log("création d\'un element:");
-			
+
 			var element = document.createElement('div');
 			var area = document.createElement('div');
 			element.className  = 'boxLine '+list[i];
 			area.className  = 'areaLine';
-			
+
 			element.style.top = area.style.top = size*i+'vh';
 			element.style.height = area.style.height = size+'vh';
 			urlAreaDOM.appendChild(element);
 			urlAreaDOM.appendChild(area);
-			
+
 			var j = new elementObjet(area,element,size*i);
 			elementList.push(j);
 		}
@@ -143,7 +143,7 @@ var x = new drawElement(10,colorList);
 var currentElement;
 urlAreaDOM .addEventListener('mousedown',function(e){
 	currentElement = mouse.element;
-	var mouseUpListener   = function(e) {					// Annulation des effets mouseMove en cas de dé-clic 
+	var mouseUpListener   = function(e) {					// Annulation des effets mouseMove en cas de dé-clic
 		urlAreaDOM.removeEventListener('mousemove',mouseMoveListener,false);
 		window.removeEventListener('mouseup',mouseUpListener,false);
 	}
@@ -153,32 +153,32 @@ urlAreaDOM .addEventListener('mousedown',function(e){
 			console.log('inegal - Preparing to MOVE ! mouseClass='+mouse.element.className+' mouseID='+mouse.element.parentNode.id);
 			if (mouse.element.parentNode.id != 'urlAreaDom') 	return;		// BUG: Application d'un patch. Ne rien faire quand sortie de zone !
 			var z1, z2 =0;
-			
-			for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés 
+
+			for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés
 			{
 				if ( currentElement 	== elementList[z].area) 	z1=z;
 				if ( mouse.element 	== elementList[z].area)		z2=z;
 			}
 			console.log('detemination du vh de l\'element courant:'+elementList[z1].location);
 			console.log('detemination du vh de l\'element mouse:'+elementList[z2].location);
-			
+
 			var tempUrlLine = elementList[z1].element;		// Inversion 'logicielle' des éléments
 			elementList[z1].element = elementList[z2].element;
 			elementList[z2].element = tempUrlLine;
-			
-			var j = elementList[z1].element; 
+
+			var j = elementList[z1].element;
 			var k = elementList[z2].element;
 			j.style.top = elementList[z1].location+'vh';		// Assignation des nouvelles valeures de localisatio physique
 			k.style.top = elementList[z2].location+'vh';
-			
-			j.style.opacity, k.style.opacity = 0;			// Opacity tric 
-			setTimeout(function(){j.style.opacity = 1; k.style.opacity = 0.8;},250);	
-			
+
+			j.style.opacity, k.style.opacity = 0;			// Opacity tric
+			setTimeout(function(){j.style.opacity = 1; k.style.opacity = 0.8;},250);
+
 			currentElement = mouse.element;				// IMPORTANT: Reassignation de l'élément courant dynamique pour MouseMove()
 		}
 	}
 	e.preventDefault();
-	urlAreaDOM.addEventListener('mousemove',mouseMoveListener,false);	
+	urlAreaDOM.addEventListener('mousemove',mouseMoveListener,false);
 	window.addEventListener('mouseup',mouseUpListener,false);
 },false);
 </script>

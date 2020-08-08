@@ -37,7 +37,7 @@ avec une hauteur affichable.
 * Tant que l'état de l'image est proportionné, toutes modifications de la taille de la fenetre aura comme conséquence de laisser une image proportionné, des espaces transparant vont se créer, l'image doit cependant toujours
 rester centrée.
 * Un autre appui sur le bouton KEEP proportion fera que l'image se déproportionnera et s'étirera sur toute la taille de la fenetre.
-				
+
 * Idem pour la vidéo.
 */
 var MW = (function() {
@@ -51,7 +51,7 @@ var MW = (function() {
 	var resizeAllWindows = function() {
 		console.log('MW: Resize All Windows -> resizeEvent:'+resizeEvent);
 		resizeEvent = false;
-		
+
 		var i = 0;
 		for (i; i<windowRef.length; i++) windowRef[i].resize();
 	}
@@ -60,13 +60,13 @@ var MW = (function() {
 				resizeEvent = true;
 				setTimeout(resizeAllWindows,resizeTimer);
 	}}
-	
+
 	var windowRef = new Array();
 
 	var MudulableWindowConstructor = function(id,titleWindow,positionX,positionY,sizeX,sizeY,color,background,borderSize,opacity) {
-	
+
 		windowRef.push(this);
-	
+
         	this.id		= id;
 		this.titleWindow  = titleWindow;
 		this.positionX	= positionX;
@@ -204,8 +204,8 @@ var MW = (function() {
 		this.opacityButton.onmousedown = function() {
 			obj.body.style.opacity = (fullOpacity = !fullOpacity)?1:obj.opacity;
 		}
-		
-		
+
+
 /* TODO -> headerMaskSystem
 		var headerMaskTransition = function() {
 			if (true) {
@@ -221,19 +221,19 @@ var MW = (function() {
 
 		obj.headerMask.addEventListener("transitionend",headerMaskTransition,false);
 
-		var oldHeaderHeight = 0;		
+		var oldHeaderHeight = 0;
 		this.hideHeader.onmousedown = function() {
 			if (!oldHeaderHeight) {
 				obj.main.style.transitionProperty = 'height';												// -> Héritage de ces propriétés de translation à tous les enfants.
 				obj.main.style.transitionDuration = '0.5s';
-				obj.headerMask.style.height = '0px';													// -> engendre une diminution progressive de la taille du header 
+				obj.headerMask.style.height = '0px';													// -> engendre une diminution progressive de la taille du header
 				obj.conteiner.style.height = ((obj.conteiner.offsetHeight/window.innerHeight*100) + obj.headerHeight)+'vh';		// -> augmente progressivement la taille du conteneur
-			
-				obj.topSpace.style.backgroundColor = 'transparent';	// TODO Une transition de couleur serait souhaitable ici.																
+
+				obj.topSpace.style.backgroundColor = 'transparent';	// TODO Une transition de couleur serait souhaitable ici.
 				obj.header.style.color = obj.close.style.color = obj.minimize.style.color = obj.maximize.style.color = 'white';	// TODO Idem
-				
+
 				obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = '0px';
-				obj.mouseRightDiv.style.right = (3*obj.borderSize)+'vh';				
+				obj.mouseRightDiv.style.right = (3*obj.borderSize)+'vh';
 			}
 			else {
 				obj.main.style.transitionProperty = 'height';
@@ -281,7 +281,7 @@ this.hideHeader.onmousedown = function() {
 				}
 				else {
 					obj.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;					// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
-				
+
 					obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = obj.borderSize+'vh';
 					obj.conteiner.style.height = (100 - obj.headerHeight - obj.borderSize)+'vh';
 					maximizeState = false;
@@ -325,7 +325,7 @@ this.hideHeader.onmousedown = function() {
 
 		var switchToFullscreen = function() {
 			obj.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE_INVERSE").innerHTML;							// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
-		
+
 			obj.main.style.height = '100vh';
 			obj.main.style.width = '100vw';
 			obj.main.style.top = obj.main.style.left ='0px';
@@ -337,7 +337,7 @@ this.hideHeader.onmousedown = function() {
 		}
 		var quitFullscreen = function () {
 			obj.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;								// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
-		
+
 			obj.main.style.height = lastHeight+'vh';
 			obj.main.style.width = lastWidth+'vw';
 			obj.main.style.top = lastTop+'vh';
@@ -352,7 +352,7 @@ this.hideHeader.onmousedown = function() {
 	// afin d'éviter les déclenchements multiples, chaque méthode engendrant une ou plusieurs transitions, tel maximize ou minimize, se voit attribue un transitionToken, dès que la première transition est terminée, à ce moment
 	// les autres doivent l'être tout autant, UN SEUL CALCUL est opéré, le transitionToken est supprimé et les autres traisitions arrivant ensuites ne trouveront pas de tokens pour etre claculées.
 		var transitionToken = 0;
-		var endOfTransition = function(e) {						
+		var endOfTransition = function(e) {
 			if (transitionToken > 0) {
 				console.log("MW endOfTransition(e) private function: consume one token, Detected transition -> "+e.propertyName);
 				transitionToken--;
@@ -372,7 +372,7 @@ this.hideHeader.onmousedown = function() {
 			}
 			else console.log('MW endOfTransition(e) private function: No one token.');
 		}
-		
+
 		obj.main.addEventListener("transitionend",endOfTransition,false);
 		/*
 		this.special = function() {
@@ -429,27 +429,27 @@ MW.prototype.assign = function() {
 	console.log('MW: Assign existed window -> '+this.id);
 																// TODO HeaderMaskSystem -> this.headerMask = this.main.getElementsByClassName('MWHeaderMask')[0]
 	this.header = this.main.getElementsByClassName("MWHeader")[0];
-		
+
 		this.topSpace = this.header.getElementsByClassName('MWTitle')[0];
-		
+
 		this.hideHeader 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 		this.opacityButton 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 		this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 		this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
-		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);		
-				
+		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
+
 		this.hideHeader.classList.remove('MW_Svg_Hidden');
 		this.opacityButton.classList.remove('MW_Svg_Hidden');
 		this.close.classList.remove('MW_Svg_Hidden');
 		this.maximize.classList.remove('MW_Svg_Hidden');
 		this.minimize.classList.remove('MW_Svg_Hidden');
-		
+
 		this.header.insertBefore(this.close, this.topSpace);
 		this.header.insertBefore(this.minimize, this.topSpace);
 		this.header.insertBefore(this.maximize, this.topSpace);
 		this.header.insertBefore(this.opacityButton, this.topSpace);
 		this.header.insertBefore(this.hideHeader, this.topSpace);
-		
+
 	this.conteiner = this.main.getElementsByClassName("MWConteiner")[0];
 		this.leftDiv = this.conteiner.getElementsByClassName("MWLeft")[0];
 			this.mouseLeftDiv = this.leftDiv.getElementsByClassName("MWMouseSideDiv")[0];
@@ -480,17 +480,17 @@ MW.prototype.create = function(id) {
 		this.opacityButton 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 		this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 		this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
-		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);		
-				
+		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
+
 		this.hideHeader.classList.remove('MW_Svg_Hidden');
 		this.opacityButton.classList.remove('MW_Svg_Hidden');
 		this.close.classList.remove('MW_Svg_Hidden');
 		this.maximize.classList.remove('MW_Svg_Hidden');
 		this.minimize.classList.remove('MW_Svg_Hidden');
-		
-		this.topSpace = document.createElement('div');	
+
+		this.topSpace = document.createElement('div');
 		this.topSpace.className = 'MWTitle';
-		
+
 		this.header.appendChild(this.close);
 		this.header.appendChild(this.minimize);
 		this.header.appendChild(this.maximize);
@@ -544,7 +544,7 @@ MW.prototype.setProperty = function()
 
 												// TODO HeaderMaskSystem -> this.headerMask.style.height = this.header.style.height = this.headerHeight+'vh';
 	this.header.style.height = this.headerHeight+'vh';
-	
+
 	this.title = document.createElement('span');
 	this.topSpace.appendChild(this.title);
 	var txtNode = document.createTextNode(this.titleWindow);
@@ -553,13 +553,13 @@ MW.prototype.setProperty = function()
 	this.header.style.color = this.close.style.color = this.minimize.style.color = this.maximize.style.color = this.titleTxtColor;
 
 	this.conteiner.style.height = (this.sizeY - this.headerHeight - this.borderSize)+'vh';
-	
+
 	this.body.style.backgroundColor = this.background;
 	this.body.style.opacity	= this.opacity;
 
 	this.topSpace.style.backgroundColor = this.bottomDiv.style.backgroundColor = this.leftDiv.style.backgroundColor = this.rightDiv.style.backgroundColor = this.color;
 	this.footer.style.height = this.borderSize+'vh';
-	
+
 	this.leftDiv.style.width = this.rightDiv.style.width = this.borderSize+'vh';
 
 	this.bottomLeftDiv.style.width = this.bottomRightDiv.style.width = this.bottomLeftDiv.style.height = this.bottomRightDiv.style.height = (5*this.borderSize)+'vh';
@@ -757,7 +757,7 @@ MW.prototype.setPropotionsTool = function(proportionnedState)
 
 	this.proportionTool = document.getElementById("MW_SVG_PROPORTIONS").cloneNode(true);
 	this.proportionTool.classList.remove('MW_Svg_Icon');
-	
+
 	this.header.insertBefore(this.proportionTool, this.topSpace);				// var insertElement = parentElement.insertBefore(nouvelElement, refElement)
 
 	var obj = this;
@@ -797,7 +797,7 @@ MW.prototype.singleVideo = function(url,proportionnedState) {
 	var videoControls = document.createElement('div');
 	videoControls.className = 'videoControls';
 	this.conteiner.appendChild(videoControls);
-	
+
 	this.video.addEventListener('loadedmetadata', function() {
 		obj.setPropotionsTool(proportionnedState);
 		obj.video.play();

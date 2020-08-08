@@ -3,7 +3,7 @@ var toolbar_Obj = function(ID) {
 	var menuItem = toolbar.getElementsByClassName("menuItem")	// DOM générale	- var. globale.
 	var itemManager = (function()					// GESTION DE LA BARRE D'OUTIL:
 	{
-		var unselectedColorItem 	= 'rgb(200, 100, 0)';			// Couleur du menu déssélectionné.		
+		var unselectedColorItem 	= 'rgb(200, 100, 0)';			// Couleur du menu déssélectionné.
 		var selectedColorItem		= 'rgb(255, 255,   0)';			// Couleur du menu selectionné.
 		var i;								// Variable à la con.
 		var state;								// Aide à renvoyer l'état de la comande, enable or disable.
@@ -12,17 +12,17 @@ var toolbar_Obj = function(ID) {
 		item[1] = function(state) { console.log("Lancement des routines de l'item 2. - Etat on-off="+state);}
 		item[2] = function(state) { console.log("Lancement des routines de l'item 3. - Etat on-off="+state);}
 		item[3] = function(state) { console.log("Lancement des routines de l'item 4. - Etat on-off="+state);}
-		
+
 		function selectItem(itemObj){
-			for (i=0; i<menuItem.length; i++) if(itemObj == menuItem[i]) break;	
-			
-			if (itemObj.style.borderColor == unselectedColorItem)	{ itemObj.style.borderColor=selectedColorItem;   state=true;  } 
+			for (i=0; i<menuItem.length; i++) if(itemObj == menuItem[i]) break;
+
+			if (itemObj.style.borderColor == unselectedColorItem)	{ itemObj.style.borderColor=selectedColorItem;   state=true;  }
 			else									{ itemObj.style.borderColor=unselectedColorItem; state=false; }
-			item[i](state);           
+			item[i](state);
 		}
-			
+
 		for (i=0; i<menuItem.length; i++)	 				// Création des contours des menus selon la couleur unselected et association des events clics de souris.
-		{	
+		{
 			menuItem[i].style.borderColor = unselectedColorItem;
 			menuItem[i].onclick=function(){selectItem(this)};
 		}

@@ -4,7 +4,7 @@
 <html lang="fr">
 
 <?php include 'src/header.php'; ?>
- 
+
 <body>
 
 <?php $page3='brand'; $page1=$page2=$page4=$page5=$page6=$page7='void'; include 'src/base.php'; ?>
@@ -22,13 +22,13 @@
        				{	?>
                      <H3></H3>
                      <form name="connection" method='post' action="direct_vpn.php">
-                     <?php  
+                     <?php
                           if (($_SESSION['droit']) == 1)
-                          {  ?> 
+                          {  ?>
                              Le code d'activation : <input type="text" name="code" size="25"><br /> <?php
-                          }  
-                          else 
-                          {  ?>           	
+                          }
+                          else
+                          {  ?>
                              <H5>Le nom de votre compte     : <input type="text" name="user" size="25">	  </H5>
                              <H5>Votre password             : <input type="text" name="password" size="25"></H5> <?php
                           }  ?>
@@ -37,16 +37,16 @@
                       </form>
                  <?php
               	  }
-              	  else 
-              	  {	
+              	  else
+              	  {
               	  		echo("no accessible");
               	  }	?>
-              	  
+
                  </div>
            </div>
-     </div>    
-     
-<img class="monde" src="img/monde.png" alt="monde"/>       
+     </div>
+
+<img class="monde" src="img/monde.png" alt="monde"/>
 
 <!-- <?php include 'src/footer.part';  ?>  -->
 

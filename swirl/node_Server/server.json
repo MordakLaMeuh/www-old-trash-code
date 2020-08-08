@@ -13,7 +13,7 @@
 			"png" : "image/png",
 			"mp4" : "video/mp4"
 		},
-		"error" : 
+		"error" :
 		{
 			"404" : "404.html"
 		},

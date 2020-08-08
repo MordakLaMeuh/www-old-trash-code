@@ -9,7 +9,7 @@ function messageHandler(event) {
     var messageReturned = "Bonjour " + messageSent + " depuis un thread séparé !";
     // On renvoit le tout à la page principale
    // while (true) { }
-    
+
     this.postMessage(messageReturned);
 }
 

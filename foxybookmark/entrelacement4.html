@@ -6,14 +6,14 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content='CSS effect'>
 	<meta name="author" content="secret">
-	
+
 	<title>Entrelacement IV</title>
-	
+
 	<!-- <link rel='stylesheet' id='DOM'  href='foxybookmark.css' type='text/css' media='all' /> -->
 	<link rel="shortcut icon" href="ours.png">
 </head>
 
-<body> 
+<body>
 <style>
 * { margin: 0px; padding: 0px; }
 body { background-color: black; overflow:hidden;}
@@ -41,7 +41,7 @@ H3 { text-decoration: underline; }
 .yellow  	{ background-color: yellow;  	}
 .green     	{ background-color: #228B22; 	}
 .blue 	     	{ background-color: #1E90FF; 	}
-.darkMagenta 	{ background-color: #8B008B; 	} 
+.darkMagenta 	{ background-color: #8B008B; 	}
 .blueViolet  	{ background-color: #8A2BE2; 	}
 
 .leftBox	{ background-color:white; width:15vw; height:inherit; float: left; opacity: 0.3;}
@@ -68,10 +68,10 @@ H3 { text-decoration: underline; }
 	opacity: 1;
 	cursor:pointer;
 }
-.contextScrollbarMainDiv, 		.contextScrollbar		{ opacity:0.88;	} 
-.contextScrollbarMainDiv:hover,		.contextScrollbar:hover		{ opacity:1;	} 
+.contextScrollbarMainDiv, 		.contextScrollbar		{ opacity:0.88;	}
+.contextScrollbarMainDiv:hover,		.contextScrollbar:hover		{ opacity:1;	}
 </style>
-<div id='header'>	
+<div id='header'>
 <H3>Entrelacement IV</H3><br>
 Gestion, sélection et inversion des lignes précise avec mouvements harmonieux. <br>
 Entrelacement lignes Version 4 utilisant mousemove en paramètre event.
@@ -102,10 +102,10 @@ var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENV
 		this.id = null;
 		this.class = null;
 		var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE -- console.log('_isGecko vaut:'+_isGecko);
-	
+
 		var evalMouse = function(e) {
-			var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris				
-				
+			var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris
+
 			self.id = element.parentNode.id;
 			self.class = element.className;
 			self.element = element;
@@ -118,10 +118,10 @@ var mouseFonctions = (function() {			/*** FONCTION CONFIGUREE POUR TOUJOURS RENV
 			self.mouse_X = e.pageX;
 			self.mouse_Y = e.pageY;
 			//console.log('Xmouse='+self.mouse_X +' Ymouse='+self.mouse_Y+' ID:'+self.id+' parentClass:'+SUPER.class);
-		}	
+		}
 		console.log('activation de la détéction souris');
 		document.onmousemove=evalMouse;
-		
+
 		window.addEventListener('mouseup',function(){self.mouseLeft=false;},false);
 		window.addEventListener('mousedown',function(){self.mouseLeft=true;},false);
 	}
@@ -133,7 +133,7 @@ var urlAreaDOM = document.getElementById('urlAreaDom');
 
 var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
 
-var externScrollbar = function(ID,ratioHeight,ScrollBarwidth,symetric_H,symetric_W) {	
+var externScrollbar = function(ID,ratioHeight,ScrollBarwidth,symetric_H,symetric_W) {
 // ID			ID de la div dont il faut ajouter une scrollBar
 // ratioHeight		Taille de la scrollBar en fonction de la taille de la div(ratio 1 = identique)
 // ScrollBarwidth:	Largeur de la scrollBar en fonction du View Width
@@ -142,34 +142,34 @@ var externScrollbar = function(ID,ratioHeight,ScrollBarwidth,symetric_H,symetric
 // ATTENTION 		Utilisation de mouseLeft de l'objet mouse.
 
 	var self = this;
-	
+
 	this.contextRatio = ratioHeight;
-	this.symetric_H = symetric_H;				// ATTENTION Non utilisé ici, exprimerait si l'allignement entre la div et la scrollBar est 'parfait' 
-	
+	this.symetric_H = symetric_H;				// ATTENTION Non utilisé ici, exprimerait si l'allignement entre la div et la scrollBar est 'parfait'
+
 	this.window = document.getElementById(ID);
-	
+
 	this.scrollDiv = document.createElement('div');
 	this.scrollDiv.className = 'contextScrollbar';
-	
+
 	this.window.parentNode.insertBefore(this.scrollDiv, this.window);
-	
+
 	this.scroller	= document.createElement('div');
 	this.scroller.className= 'contextMiddle';
 	this.scroller 	= this.scrollDiv.appendChild(this.scroller);
-	
-	/* DETERMINE WIDTH VALUE && SET WIDTH PROPOTIONS*/											// Initial Width Ratio 
+
+	/* DETERMINE WIDTH VALUE && SET WIDTH PROPOTIONS*/											// Initial Width Ratio
 	this.scrollDiv.style.width = this.scroller.style.width = ScrollBarwidth+'vw';// this.scrollBarPixelSize+'px';
 	this.scrollDiv.style.left = ((this.window.offsetLeft+this.window.offsetWidth)/window.innerWidth*100)+symetric_W+'vw';
-	
+
 	this.refresh();
-	
+
 	// ATTENTION BUG -> Comme les éléments dans la DIV ont des transitions de 0.5s, un nouvel appel à refresh est executé après 0.5s au cas ou !
 	// Il se peut en effet que les éléments n'aient pas fini leurs 'translations' après le redimentionnement fenetre.
 	// ORIGINAL: window.addEventListener('resize', function(){self.refresh();}, false);
 	window.addEventListener('resize', function(){self.refresh(); setTimeout(function(){self.refresh();},500);}, false);
 	this.window.addEventListener(mousewheelevt, function(e) {self.MouseWheelHandler(e);}, false);
 	this.window.addEventListener('scroll', function(e) { self.scrolling();}, false);
-	
+
 	var localMouseLeft = false;
 	this.scrollDiv.addEventListener('mousedown',	function(e){self.moveCursor(e); localMouseLeft = true;},false);
 	this.scrollDiv.addEventListener('mousemove',	function(e){if (mouse.mouseLeft==true) self.moveCursor(e);},false);
@@ -181,37 +181,37 @@ var externScrollbar = function(ID,ratioHeight,ScrollBarwidth,symetric_H,symetric
 externScrollbar.prototype.refresh	   	= function() {
 	this.ComputedStyle = window.getComputedStyle(this.window,null).getPropertyValue("height");
 	if (this.ComputedStyle.match(/\d+\.\d/g)) 		this.realPixelHeight = Math.round(this.ComputedStyle.match(/\d+\.\d/g)[0]);
-	else 							this.realPixelHeight = this.ComputedStyle.match(/\d+/g)[0];		
-			
+	else 							this.realPixelHeight = this.ComputedStyle.match(/\d+/g)[0];
+
 	this.scrollDiv.style.height     = this.realPixelHeight*this.contextRatio+'px';
 	this.scrollDiv.style.top = (this.window.offsetTop+this.realPixelHeight*((1-this.contextRatio)/2))+'px';
-	
+
 	this.scrollDiv.style.display=(this.realPixelHeight<this.window.scrollHeight?'block':'none');
 	this.scrollHeight = this.realPixelHeight*this.contextRatio;
-	if (this.scrollHeight > 0)   	this.scroller.style.height = this.realPixelHeight / this.window.scrollHeight * 100+'%'; 
-	else 				this.scroller.style.height = '0px'; 
-	
+	if (this.scrollHeight > 0)   	this.scroller.style.height = this.realPixelHeight / this.window.scrollHeight * 100+'%';
+	else 				this.scroller.style.height = '0px';
+
 	this.scrolling();
 }
 
-externScrollbar.prototype.scrolling = function () { 			   
+externScrollbar.prototype.scrolling = function () {
 	var ratio = (this.contextRatio*this.realPixelHeight) / this.window.scrollHeight;
-			
+
 	this.scroller.style.top = (0 + this.window.scrollTop * ratio) + 'px';
-			
+
 	var math = Math.floor(this.window.scrollTop/this.window.scrollHeight*256);
 	this.scroller.style.backgroundColor='rgb('+math+', 0, '+(255-math)+')';
 }
 
 externScrollbar.prototype.MouseWheelHandler = function(e) {
 	var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-	this.window.scrollTop+=(delta >0?-20:20);	
+	this.window.scrollTop+=(delta >0?-20:20);
 }
 
 externScrollbar.prototype.moveCursor = function(e) {  // Partie '-(this.scroller.offsetHeight/2);' pour un fonctionnement agréable pointant sur la partie centrake du scroller.
-	var pageY = e.pageY-1-(this.scroller.offsetHeight/2);		
+	var pageY = e.pageY-1-(this.scroller.offsetHeight/2);
 
-	var H = this.window.offsetTop +  (this.realPixelHeight*(1-this.contextRatio)/2); 
+	var H = this.window.offsetTop +  (this.realPixelHeight*(1-this.contextRatio)/2);
 	var T = this.realPixelHeight - (this.realPixelHeight*(1-this.contextRatio));
 	var scrollHeight = this.window.scrollHeight;
 	this.window.scrollTop=((pageY-H)/T)*scrollHeight;
@@ -233,33 +233,33 @@ var drawElement = (function()
 		for (var i=0;i<list.length; i++)
 		{
 			console.log("création d\'un element:");
-			
+
 			var element = document.createElement('div');
 			var area = document.createElement('div');
 			element.className  = 'boxLine '+list[i];
 			area.className  = 'areaLine';
-			
+
 			element.style.top = area.style.top = size*i+'vh';
-			
+
 			element.style.height = area.style.height = size+'vh';
-			
+
 			var box = document.createElement('div');
 			box.className = 'leftBox';
 			element.appendChild(box);
-			
+
 			var txt = document.createTextNode('AREA '+i);
 			box.appendChild(txt);
-			
+
 			box = document.createElement('div');
 			box.className = 'rightBox';
 			element.appendChild(box);
-			
+
 			txt = document.createTextNode('Un gros Lolo !');
 			box.appendChild(txt);
-			
+
 			urlAreaDOM.appendChild(element);
 			urlAreaDOM.appendChild(area);
-			
+
 			var j = new elementObjet(area,element,size*i);
 			elementList.push(j);
 		}
@@ -281,8 +281,8 @@ urlAreaDOM.addEventListener('mousedown',function(e){
 
 	var mouseLock;
 	currentElement = mouse.element;
-		
-	var mouseUpListener   = function(e) {					// Annulation des effets mouseMove en cas de dé-clic 
+
+	var mouseUpListener   = function(e) {					// Annulation des effets mouseMove en cas de dé-clic
 		window.removeEventListener('mousemove',mouseMoveListener,false);
 		window.removeEventListener('mouseup',mouseUpListener,false);
 	}
@@ -290,16 +290,16 @@ urlAreaDOM.addEventListener('mousedown',function(e){
 		if (currentElement == mouse.element) 	console.log('egality - nobydy\'s move');
 		else 	{
 			console.log('inegal - Preparing to MOVE ! mouseClass='+mouse.element.className+' mouseID='+mouse.element.parentNode.id);
-			if (mouse.element.parentNode.id != 'urlAreaDom') 	
+			if (mouse.element.parentNode.id != 'urlAreaDom')
 			{							// Condition définissant la sortie de l'aire principale avec clic gauche restant appuyé !
 				if (mouseLock == true) return;
 				mouseLock=true;
-				
+
 				var clone;
-				for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés 
+				for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés
 				{
-					if (currentElement == elementList[z].area) { 
-						clone = elementList[z].element.cloneNode(true) 
+					if (currentElement == elementList[z].area) {
+						clone = elementList[z].element.cloneNode(true)
 						clone.style.opacity='0.5';
 						clone.style.transitionDuration='3s';
 						break;
@@ -310,63 +310,63 @@ urlAreaDOM.addEventListener('mousedown',function(e){
 				var setClonePosition = function() {
 					clone.style.left = mouse.mouse_X+'px';
 					clone.style.top = mouse.mouse_Y - (currentElement.offsetHeight/2) +'px';
-					if (mouse.mouse_Y <= urlAreaDOM.offsetTop)				urlAreaDOM.scrollTop-=10;			
+					if (mouse.mouse_Y <= urlAreaDOM.offsetTop)				urlAreaDOM.scrollTop-=10;
 					if (mouse.mouse_Y >= urlAreaDOM.offsetTop+urlAreaDOM.offsetHeight)	urlAreaDOM.scrollTop+=10;
 				}
-				
+
 				setClonePosition();
 				document.body.appendChild(clone);
-				
+
 				var clearTimeout = false;
-				var clearAutoScrollInterval = function(e) { 
+				var clearAutoScrollInterval = function(e) {
 					clearTimeout = true;			// annulation timeout, suppression clone et events associés.
 					document.body.removeChild(clone);	// if (e.type == 'mouseup') d
 					window.removeEventListener('mouseup',clearAutoScrollInterval,false);
-					//urlAreaDOM.removeEventListener('mouseover',clearAutoScrollInterval,false);	
+					//urlAreaDOM.removeEventListener('mouseover',clearAutoScrollInterval,false);
 				}
-				
+
 				// BUG Accumulation des timeOut visiblement quand la souris fait des allez-retour haut-bas bouton gauche appuyé !
 				// BUG Pour l'expliquer, présentement, seul un event mouseUp peut rompre le setInterval, et non un mouseMove sur l'area.
 				// Le mouseMove a été enlevé pour permettre de continuer d'afficher le clone de la DIV...
 				var TimingDragBox = function() {
-					if (clearTimeout == true) return; 
+					if (clearTimeout == true) return;
 					setClonePosition();
 					setTimeout(function(){TimingDragBox();},50);
 				}
 				setTimeout(function(){TimingDragBox();},50);
-		
+
 				window.addEventListener('mouseup',clearAutoScrollInterval,false); // pour haut && bas
 				//urlAreaDOM.addEventListener('mouseover',clearAutoScrollInterval,false);
 				return;		// BUG: Application d'un patch. Ne rien faire quand sortie de zone !
 			}
 			mouseLock=false;
 			var z1, z2 =0;
-			
-			for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés 
+
+			for (var z=0; z<elementList.length; z++)		// Rechercge des éléments ciblés
 			{
 				if ( currentElement 	== elementList[z].area) 	z1=z;
 				if ( mouse.element 	== elementList[z].area)		z2=z;
 			}
 			console.log('detemination du vh de l\'element courant:'+elementList[z1].location);
 			console.log('detemination du vh de l\'element mouse:'+elementList[z2].location);
-			
+
 			var tempUrlLine = elementList[z1].element;		// Inversion 'logicielle' des éléments
 			elementList[z1].element = elementList[z2].element;
 			elementList[z2].element = tempUrlLine;
-			
-			var j = elementList[z1].element; 
+
+			var j = elementList[z1].element;
 			var k = elementList[z2].element;
 			j.style.top = elementList[z1].location+'vh';		// Assignation des nouvelles valeures de localisatio physique
 			k.style.top = elementList[z2].location+'vh';
-			
-			j.style.opacity, k.style.opacity = 0;			// Opacity tric 
-			setTimeout(function(){j.style.opacity = 1; k.style.opacity = 0.8;},250);	
-			
+
+			j.style.opacity, k.style.opacity = 0;			// Opacity tric
+			setTimeout(function(){j.style.opacity = 1; k.style.opacity = 0.8;},250);
+
 			currentElement = mouse.element;				// IMPORTANT: Reassignation de l'élément courant dynamique pour MouseMove()
 		}
 	}
 	e.preventDefault();
-	window.addEventListener('mousemove',mouseMoveListener,false);	
+	window.addEventListener('mousemove',mouseMoveListener,false);
 	window.addEventListener('mouseup',mouseUpListener,false);
 },false);
 

@@ -1,6 +1,6 @@
 'use strict';
 //OBJECT NAME: Modular Window (abrev. MW)
-//OBJECT GOAL: DOM UPGRADE with many resizable/modulable Windows, like a OS desktop. achivement: 40%;	
+//OBJECT GOAL: DOM UPGRADE with many resizable/modulable Windows, like a OS desktop. achivement: 40%;
 var MW_iFrame_Mouse_Protection;
 var MW = (function() {
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
@@ -13,25 +13,25 @@ var MW = (function() {
 				document.styleSheets[S].insertRule(class_Name+' { '+element+': '+value+'; }',document.styleSheets[S][cssRules].length);
 				console.log('MW_change_CSS: solution I avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
 				custom_Function = function(invv) { document.styleSheets[S].insertRule(class_Name+' { '+element+': '+((invv)?value2:value)+'; }',document.styleSheets[S][cssRules].length); }
-				return custom_Function;	
-			} 
+				return custom_Function;
+			}
 			catch(err) {
 				try {
 					document.styleSheets[S].addRule(class_Name,element+': '+value+';');
 					console.log('MW_change_CSS: solution II avec feuille '+S+' class:'+class_Name+' element:'+element+' value:'+value+' -> Création de fonction utile');
 					custom_Function = function(invv) { document.styleSheets[S].addRule(class_Name,element+': '+((invv)?value2:value)+';'); }
-					return custom_Function;	
+					return custom_Function;
 				}
 				catch(err) {
 					console.log('MW_change_CSS: invalid combinaison !');
 					try {
 						if (document.styleSheets[S]['rules']) {
 							cssRules = 'rules';
-						} 
+						}
 						else if (document.styleSheets[S]['cssRules']) {
 							cssRules = 'cssRules';
-						} 
-						else 
+						}
+						else
 						{
 							// Navigateur inconnu ?!?
 						}
@@ -40,11 +40,11 @@ var MW = (function() {
 								if(document.styleSheets[S][cssRules][R].style[element]){
 									document.styleSheets[S][cssRules][R].style[element] = value;
 									custom_Function = function(invv) { document.styleSheets[S][cssRules][R].style[element] = ((invv)?value2:value); }
-									return custom_Function;	
-					}}}} 
+									return custom_Function;
+					}}}}
 					catch (err){}
 		}}}
-		return custom_Function;	
+		return custom_Function;
 	}
 	MW_iFrame_Mouse_Protection = switch_Css_init('.MW_Iframe_Mouse_Box','display','none','block');
 
@@ -56,7 +56,7 @@ var MW = (function() {
 	var resize_All_Windows = function() {
 		console.log('MW: Resize All Windows -> resizeEvent:'+resize_Event);
 		resize_Event = false;
-		
+
 		var i = 0;
 		for (i; i<objects.length; i++) objects[i].resize();
 	}
@@ -65,7 +65,7 @@ var MW = (function() {
 				resize_Event = true;
 				setTimeout(resize_All_Windows,resize_Timer);
 	}}
-	
+
 	var objects = new Array();
 	var header_Height = 2.5;					// predefined. VH
 	var border_Size   = 0.2;					// predefined. VH
@@ -76,19 +76,19 @@ var MW = (function() {
 
 		console.log(JSON.stringify(opts));
 		objects.push(this);
-	
-        	this.id = id;		
-        				
-		this.opacity 			= opacity;				
-		this.border_Size			= border_Size;				
-		this.header_Height 		= header_Height;				
+
+        	this.id = id;
+
+		this.opacity 			= opacity;
+		this.border_Size			= border_Size;
+		this.header_Height 		= header_Height;
 		this.window_Mouse_Border  	= mouse_Border;
 		this.border_Color			= border_Color;			// TODO PATCH pour la couleur dans headerLess
-		
+
 
 		(this.main = document.getElementById(id))?this.assign():this.create();
 		this.set_Property(title_Window,positionX,positionY,sizeX,sizeY,border_Color,body_Color);
-		
+
 		var obj = this;
 
 		zIndex_Max = this.put_Forward(zIndex_Max);
@@ -100,14 +100,14 @@ var MW = (function() {
 			if (obj.backroom) {					// TODO Patch conflit putForward car this.main.onmouse down est aussi activé quand la souris pointe sur minimize.
 				obj.backroom = false;
 				zIndex_Min = obj.go_To_Backroom(zIndex_Min);
-			}	
+			}
 			else 	{ zIndex_Max = obj.put_Forward(zIndex_Max); }
 			if ((e.target.tagName == 'INPUT') || (e.target.id == 'chatTab'))	return true;			// exception pour le chat (mettre en place une liste)
 			else											return false;			// return false bloque les events habituelles du navigateur.
 		}
-		
+
 		this.set_Window_Base_Selectors()												// Gestions des différents mouvements et redimentionnements de la fenetre provoqués par la souris.
-		
+
 	// gestion des clics de la souris sur les diverses icones:
 		this.hide_Header.onmousedown = function() {
 			console.log('MW: Déclenchement du header_MaskSystem:');
@@ -127,27 +127,27 @@ var MW = (function() {
 		this.opacity_Button.onmousedown = function() {
 			toggle_Opacity();
 		}
-		// Gestion des deux boutons, MAXIMIZE et MINIMIZE: (important: Afin de garantir un ajustement classique des fenetres, minimize passe à false lors d'un clic sur footer, leftDiv ou rightDiv cf. plus haut.)		
+		// Gestion des deux boutons, MAXIMIZE et MINIMIZE: (important: Afin de garantir un ajustement classique des fenetres, minimize passe à false lors d'un clic sur footer, leftDiv ou rightDiv cf. plus haut.)
 		this.minimal_Width = (obj.title.offsetWidth + obj.header.getElementsByTagName('svg').length*(obj.header_Height/100*window.innerHeight)) + 40; // taille minimale d'une fenetre exprimée en pixels.
 		this.maximize_State  = false;
 		this.minimize_State = false;
-		
-		this.maximize.onmousedown = function() { 
-			obj.toggle_FullScreen(); 
+
+		this.maximize.onmousedown = function() {
+			obj.toggle_FullScreen();
 		}
-		
-		this.minimize.onmousedown = function() { 
-			obj.toggle_Minimize(); 
+
+		this.minimize.onmousedown = function() {
+			obj.toggle_Minimize();
 		}
-		
+
 		this.last_Top, this.last_Left, this.last_Height, this.last_Width = null;
 		this.put_Backward.onmousedown = function() {
 			console.log('MW: Minimize');
 			obj.backroom = true;
 		}
-		this.transition_Token = 0;	// Puisque lorsque plusieurs transitions apparaissent en même temps, on veut limiter le nombre de calculs de redimentionnement, on ne donne qu'un seul jeton pour limiter ca !					
+		this.transition_Token = 0;	// Puisque lorsque plusieurs transitions apparaissent en même temps, on veut limiter le nombre de calculs de redimentionnement, on ne donne qu'un seul jeton pour limiter ca !
 		obj.main.addEventListener("transitionend",function(e){obj.end_Of_Transition(e);},false);
-		
+
 		this.active_Scrolling = function() {
 			this.body.addEventListener(mousewheelevt, function(e) {
 				var e = window.event || e; // old IE support
@@ -160,7 +160,7 @@ var MW = (function() {
 		opts.opacity && toggle_Opacity();
 		opts.fullscreen && obj.toggle_FullScreen();
 		opts.noheader && obj.toggle_Header(header_Height,border_Size);
-		
+
 		switch (opts.type) {
 			case 'video':
 				this.single_Video(opts.url, opts.ratio);
@@ -191,7 +191,7 @@ MW.prototype.utilize = function() {				// (EN)utilize <--> (FR)exploiter	cf. To 
 MW.prototype.change_Color	= function() {}			// TODO Fonction pouvant trouver son utilité.
 MW.prototype.change_Opacity	= function() {}		    	// TODO Fonction pouvant trouver son utilisé.
 
-MW.prototype.end_Of_Transition = function(e) {						
+MW.prototype.end_Of_Transition = function(e) {
 	if (this.transition_Token > 0) {
 		console.log("MW end_Of_Transition(e) private function: consume one token, Detected transition -> "+e.propertyName);
 		this.transition_Token--;
@@ -211,7 +211,7 @@ MW.prototype.end_Of_Transition = function(e) {
 	}
 	else console.log('MW end_Of_Transition(e) private function: No one token.');
 }
-		
+
 // Fonctions de redimentionnement évennementiel des fenetres.
 MW.prototype.put_Forward = function(zIndex_Max) {
 	zIndex_Max+=4;
@@ -226,10 +226,10 @@ MW.prototype.go_To_Backroom = function(zIndex_Min) {
 	this.main.style.zIndex = zIndex_Min;
 	this.mouse_Left_Div.style.zIndex = this.mouse_Right_Div.style.zIndex = zIndex_Min+1;
 	this.bottom_Left_Div.style.zIndex = this.bottom_Right_Div.style.zIndex = zIndex_Min+2;
-	this.header.style.zIndex = zIndex_Min+3;	
+	this.header.style.zIndex = zIndex_Min+3;
 return zIndex_Min;
 }
-		
+
 MW.prototype.toggle_Header = function(header_Height,border_Size) {
 	if (this.video) 	this.video.style.display='none';
 	if (this.img)	this.img.style.display='none';
@@ -238,25 +238,25 @@ MW.prototype.toggle_Header = function(header_Height,border_Size) {
 	this.main.style.transitionDuration = '0.1s';
 	if (this.header_Height) {
 		this.header_Mask.style.height = '0px';
-		
+
 		this.header.classList.remove('MW_Visible_Header');
 		this.header.classList.add('MW_Hidden_Header');
 		this.header.style.backgroundColor='transparent';
-		
+
 		this.conteiner.style.height = ((this.conteiner.offsetHeight*100/window.innerHeight) + this.header_Height)+'vh';
 		this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = '0px';
 		this.header_Height = this.border_Size = 0;
 	}
 	else {
-		this.header_Height = header_Height;	
+		this.header_Height = header_Height;
 		this.border_Size 	 = border_Size;
-							
+
 		this.header_Mask.style.height = this.header_Height+'vh';
-		
+
 		this.header.classList.remove('MW_Hidden_Header');
 		this.header.classList.add('MW_Visible_Header');
 		this.header.style.backgroundColor = this.border_Color;						// TODO PAtCH
-		
+
 		this.conteiner.style.height = ((this.conteiner.offsetHeight*100/window.innerHeight) - this.header_Height)+'vh';
 		this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
 	}
@@ -283,12 +283,12 @@ MW.prototype.toggle_Minimize = function() {
 		}
 		else {
 			this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;					// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
-			
+
 			this.mouse_Right_Div.style.right = (this.window_Mouse_Border-this.border_Size)+'vh';						// TODO Patch
-		
+
 			this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
 			this.conteiner.style.height = (100 - this.header_Height - this.border_Size)+'vh';
-			
+
 			this.maximize_State = false;
 		}
 	}
@@ -329,7 +329,7 @@ MW.prototype.toggle_FullScreen = function() {
 	this.maximize_State = !this.maximize_State;
 }
 
-MW.prototype.switch_To_Fullscreen = function() {		
+MW.prototype.switch_To_Fullscreen = function() {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE_INVERSE").innerHTML;		// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = '100vh';
@@ -337,12 +337,12 @@ MW.prototype.switch_To_Fullscreen = function() {
 	this.main.style.top = this.main.style.left ='0px';
 
 	this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = '0px';
-	
+
 	this.conteiner.style.height=(100 - this.header_Height)+'vh';
 
 	this.mouse_Right_Div.style.right = this.window_Mouse_Border+'vh';						// TODO patch mouse_Right_Div (puisqu'elle est relative à une div en float left qui perd son width lors de maximize)
 }
-MW.prototype.quit_Full_screen = function () {				
+MW.prototype.quit_Full_screen = function () {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;			// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = this.last_Height+'vh';
@@ -351,12 +351,12 @@ MW.prototype.quit_Full_screen = function () {
 	this.main.style.left = this.last_Left+'vw';
 
 	this.leftDiv.style.width = this.rightDiv.style.width = this.footer.style.height = this.border_Size+'vh';
-	
+
 	this.conteiner.style.height=(this.last_Height - this.header_Height - this.border_Size)+'vh';
 
 	this.mouse_Right_Div.style.right = (this.window_Mouse_Border-this.border_Size)+'vh';		// TODO patch mouse_Right_Div
 }
-		
+
 MW.prototype.resize = function() {
 	this.minimal_Width = (this.title.offsetWidth + this.header.getElementsByTagName('svg').length*(this.header_Height/100*window.innerHeight)) + 40;	// TODO patch, remise à jour de minimal width lorsque résol. change
 	this.video && this.resize_Video();
@@ -371,30 +371,30 @@ MW.prototype.assign = function() {
 																	// TODO header_MaskSystem -> this.header_Mask = this.main.getElementsByClassName('MWheader_Mask')[0]
 	this.header_Mask = this.main.getElementsByClassName("MWHeaderMask")[0];
 		this.header = this.header_Mask.getElementsByClassName("MWHeader")[0];
-		
+
 			this.top_Space = this.header.getElementsByClassName('MWTitle')[0];
-		
+
 			this.hide_Header 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 			this.opacity_Button 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 			this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 			this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
 			this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
-			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);		
-					
+			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);
+
 			this.hide_Header.classList.remove('MW_Svg_Hidden');
 			this.opacity_Button.classList.remove('MW_Svg_Hidden');
 			this.close.classList.remove('MW_Svg_Hidden');
 			this.maximize.classList.remove('MW_Svg_Hidden');
 			this.minimize.classList.remove('MW_Svg_Hidden');
 			this.put_Backward.classList.remove('MW_Svg_Hidden');
-			
+
 			this.header.insertBefore(this.close, this.top_Space);
 			this.header.insertBefore(this.minimize, this.top_Space);
 			this.header.insertBefore(this.maximize, this.top_Space);
 			this.header.insertBefore(this.put_Backward, this.top_Space);
 			this.header.insertBefore(this.opacity_Button, this.top_Space);
 			this.header.insertBefore(this.hide_Header, this.top_Space);
-		
+
 	this.conteiner = this.main.getElementsByClassName("MWConteiner")[0];
 		this.leftDiv = this.conteiner.getElementsByClassName("MWLeft")[0];
 			this.mouse_Left_Div = this.leftDiv.getElementsByClassName("MWMouseSideDiv")[0];
@@ -415,30 +415,30 @@ MW.prototype.create = function() {
 	this.main.id = this.id;
 	this.main.className = 'MW';
 	document.getElementsByTagName('body')[0].appendChild(this.main);
-	
+
 	this.header_Mask = document.createElement('div');
 	this.header_Mask.className = 'MWHeaderMask';
 	this.main.appendChild(this.header_Mask);
 		this.header = document.createElement('div');
 		this.header.className = 'MWHeader MW_Visible_Header';
-		this.header_Mask.appendChild(this.header);								
+		this.header_Mask.appendChild(this.header);
 			this.hide_Header 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 			this.opacity_Button 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 			this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 			this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
 			this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
-			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);		
-					
+			this.put_Backward 	= document.getElementById("MW_SVG_BACKROOM").cloneNode(true);
+
 			this.hide_Header.classList.remove('MW_Svg_Hidden');
 			this.opacity_Button.classList.remove('MW_Svg_Hidden');
 			this.close.classList.remove('MW_Svg_Hidden');
 			this.maximize.classList.remove('MW_Svg_Hidden');
 			this.minimize.classList.remove('MW_Svg_Hidden');
 			this.put_Backward.classList.remove('MW_Svg_Hidden');
-			
-			this.top_Space = document.createElement('div');	
+
+			this.top_Space = document.createElement('div');
 			this.top_Space.className = 'MWTitle';
-			
+
 			this.header.appendChild(this.close);
 			this.header.appendChild(this.minimize);
 			this.header.appendChild(this.maximize);
@@ -490,26 +490,26 @@ MW.prototype.set_Property = function(title_Window,positionX,positionY,sizeX,size
 	this.main.style.height = sizeY+'vh';
 
 	this.header_Mask.style.height = this.header.style.height = this.header_Height+'vh';
-	
+
 	this.title = document.createElement('span');
 	this.top_Space.appendChild(this.title);
 
 	this.title.appendChild(document.createTextNode(title_Window));
 
 	this.conteiner.style.height = (sizeY - this.header_Height - this.border_Size)+'vh';
-	
+
 	this.body.style.backgroundColor = body_Color;
 	this.body.style.opacity	= this.opacity;
 
 	this.header.style.backgroundColor = this.bottom_Div.style.backgroundColor = this.leftDiv.style.backgroundColor = this.rightDiv.style.backgroundColor = border_Color;
-	
+
 	this.footer.style.height = this.leftDiv.style.width = this.rightDiv.style.width = this.border_Size+'vh';
 
 	this.bottom_Left_Div.style.width = this.bottom_Right_Div.style.width = this.bottom_Left_Div.style.height = this.bottom_Right_Div.style.height = (2*this.window_Mouse_Border)+'vh';
 	this.bottom_Left_Div.style.bottom = this.bottom_Right_Div.style.bottom = (3*this.window_Mouse_Border)+'vh';
 
 	this.mouse_Right_Div.style.right = (this.window_Mouse_Border-this.border_Size)+'vh';
-	
+
 	this.mouse_Right_Div.style.width = this.mouse_Left_Div.style.width = this.window_Mouse_Border+'vh';
 
 	this.mouse_Bottom_Div.style.height = this.mouse_Bottom_Div.style.bottom = this.window_Mouse_Border+'vh';
@@ -777,7 +777,7 @@ MW.prototype.set_Propotions_Tool = function(proportionned_State)
 {
 	this.proportion_Tool = document.getElementById("MW_SVG_PROPORTIONS").cloneNode(true);
 	this.proportion_Tool.classList.remove('MW_Svg_Hidden');
-	
+
 	this.header.insertBefore(this.proportion_Tool, this.top_Space);				// var insertElement = parentElement.insertBefore(nouvelElement, refElement)
 
 	var obj = this;
@@ -818,20 +818,20 @@ MW.prototype.single_Video = function(url,proportionned_State) {
 	var video_Controls = document.createElement('div');
 	video_Controls.className = 'video_Controls';
 	this.conteiner.appendChild(video_Controls);
-	
+
 	this.video_Controls_Timeline = document.createElement('div');
 	this.video_Controls_Timeline.className = 'video_Controls_Timeline';
 	this.video_Controls_Conteiner = document.createElement('div');
 	this.video_Controls_Conteiner.className = 'video_Controls_Conteiner';
 	video_Controls.appendChild(this.video_Controls_Timeline);
 	video_Controls.appendChild(this.video_Controls_Conteiner);
-	
+
 	this.video_Time_Info = document.createElement('div');
 	this.video_Time_Info.className = 'video_Time_Info';
 
-	this.video_Play_Icon = document.getElementById("MW_SVG_VIDEO_PLAY").cloneNode(true);	
-	this.video_Pause_Icon = document.getElementById("MW_SVG_VIDEO_PAUSE").cloneNode(true);		
-	this.video_Mute_Icon = document.getElementById("MW_SVG_VIDEO_SOUND").cloneNode(true);			
+	this.video_Play_Icon = document.getElementById("MW_SVG_VIDEO_PLAY").cloneNode(true);
+	this.video_Pause_Icon = document.getElementById("MW_SVG_VIDEO_PAUSE").cloneNode(true);
+	this.video_Mute_Icon = document.getElementById("MW_SVG_VIDEO_SOUND").cloneNode(true);
 	this.video_Play_Icon.classList.remove('MW_Svg_Hidden');
 	this.video_Pause_Icon.classList.remove('MW_Svg_Hidden');
 	this.video_Mute_Icon.classList.remove('MW_Svg_Hidden');
@@ -839,7 +839,7 @@ MW.prototype.single_Video = function(url,proportionned_State) {
 	this.video_Controls_Conteiner.appendChild(this.video_Pause_Icon);
 	this.video_Controls_Conteiner.appendChild(this.video_Mute_Icon);
 	this.video_Controls_Conteiner.appendChild(this.video_Time_Info);
-	
+
 	this.video_TimeLine = document.createElement('div');
 	this.video_TimeLine.className='video_Current_TimeLine';
 	this.video_Controls_Timeline.appendChild(this.video_TimeLine);
@@ -853,7 +853,7 @@ MW.prototype.single_Video = function(url,proportionned_State) {
 		obj.video.play();
 		obj.main.style.opacity = 1;
 	},false);
-	
+
 	this.video.src = url;
 	this.video.className = 'MWVid';
 	this.video.type = 'video/mp4';			// TODO Est-ce que le type de la vidéo se définit vraiment ainsi en JS ?
@@ -863,29 +863,29 @@ MW.prototype.single_Video = function(url,proportionned_State) {
 	this.video_Pause_Icon.onmousedown = function() { 	obj.video.pause(); }
 	this.video_Mute_Icon.onmousedown = function()  { 	obj.video.volume = (obj.video.volume)?0:1; }
 
-	this.video.addEventListener('timeupdate',function() { 
+	this.video.addEventListener('timeupdate',function() {
 		var a = Math.floor(obj.video.currentTime/60);
 		var b = Math.floor(obj.video.currentTime%60);
-		
+
 		obj.video_Time_Info.innerHTML = ((a)?a+'.':'0.')+((b)?((b<10)?'0'+b:b):'00') +'/'+obj.video_Duration_String;
-		obj.video_TimeLine.style.width=(obj.video.currentTime/obj.video.duration*100)+'%'; 
+		obj.video_TimeLine.style.width=(obj.video.currentTime/obj.video.duration*100)+'%';
 	},false);
-	
-	this.video.onplay = function() { 
-		console.log('MW: VIDEO -> play video event for '+obj.id);  
-		obj.video_Play_Icon.classList.add('video_Controls_Icons_Active'); 
-		obj.video_Pause_Icon.classList.remove('video_Controls_Icons_Active'); 
+
+	this.video.onplay = function() {
+		console.log('MW: VIDEO -> play video event for '+obj.id);
+		obj.video_Play_Icon.classList.add('video_Controls_Icons_Active');
+		obj.video_Pause_Icon.classList.remove('video_Controls_Icons_Active');
 	}
-	this.video.onpause = function() { 
-		console.log('MW: VIDEO -> pause video event for '+obj.id); 
-		obj.video_Pause_Icon.classList.add('video_Controls_Icons_Active'); 
-		obj.video_Play_Icon.classList.remove('video_Controls_Icons_Active'); 
+	this.video.onpause = function() {
+		console.log('MW: VIDEO -> pause video event for '+obj.id);
+		obj.video_Pause_Icon.classList.add('video_Controls_Icons_Active');
+		obj.video_Play_Icon.classList.remove('video_Controls_Icons_Active');
 	}
-	this.video.onvolumechange = function() { 
-		console.log('MW: VIDEO -> change volume video event for '+obj.id); 
+	this.video.onvolumechange = function() {
+		console.log('MW: VIDEO -> change volume video event for '+obj.id);
 		(obj.video.volume)?obj.video_Mute_Icon.classList.add('video_Controls_Icons_Active'):obj.video_Mute_Icon.classList.remove('video_Controls_Icons_Active');
 	}
-	
+
 	var lock_Cpu_Busy = false;
 	var apply_Timeline_Change = function() {
 		console.log('MW: Apply timeline change for:'+obj.id);
@@ -896,12 +896,12 @@ MW.prototype.single_Video = function(url,proportionned_State) {
 	}
 	var video_Set_Timeline = function(e) {
 		console.log('MW: set video timeline for:'+obj.id+' window offset left: '+obj.video_Controls_Timeline.offsetLeft);
-		if (!lock_Cpu_Busy) { 
+		if (!lock_Cpu_Busy) {
 			obj.diffX = e.pageX - ( obj.main.offsetLeft + obj.video_Controls_Timeline.offsetLeft);
-			lock_Cpu_Busy=true; 
-			setTimeout(apply_Timeline_Change,250); 
-	}}	
-	
+			lock_Cpu_Busy=true;
+			setTimeout(apply_Timeline_Change,250);
+	}}
+
 	this.video_Controls_Timeline.onmousedown = function(e) {
 		video_Controls.classList.add('video_Controls_Selected');
 		video_Set_Timeline(e);
@@ -925,7 +925,7 @@ MW.prototype.single_Image = function(url,proportionned_State) {
 		obj.main.style.opacity = 1;
 	}
 }
-MW.prototype.iframe = function(url) {	
+MW.prototype.iframe = function(url) {
 	this.iframe = document.createElement('iframe');
 	this.iframe.className = 'MW_Iframe';
 	this.iframe.src = url;
@@ -1002,14 +1002,14 @@ TODO mouveMove sur iframe																				STATE -> OK
 
 Dynamic JS function -> A tester impérativement:
 	var test = function(i) {
-		var Z = (i)?13:7; 
+		var Z = (i)?13:7;
 		var a = function(j) { console.log('meuuuuh:'+((j)?Z:(Z*2))); }
 		return a;
 	}
-	
+
 	var I = test(true);
 	var J = test(false);
-	
+
 	I(false);
 	J(true);
 	I(true);

@@ -1,20 +1,20 @@
 
 <?php
     session_start();
-        
+
     header("Content-Type: text/plain"); // il s'agit juste de texte brut (text/plain).
-    
+
     $id=(isset($_GET["ID"])) ? $_GET["ID"] : NULL;
     $type=(isset($_GET["type"])) ? $_GET["type"] : NULL;
 
     //echo ("ID=".$id." &type=".$type);
-   
+
     $nb_fichier = 0;   							/*** Sera utilisé comme compteur du nombre de fichiers. ***/
     /*** Routine utilisée pour l'initialisation au stade de la première connexion à la page. ***/
     if (empty ($_SESSION['directory']))
     {
         $_SESSION['directory']="/var/www/.acc_1309_rt8_mv/";
-        chdir("/".$_SESSION['directory']); 
+        chdir("/".$_SESSION['directory']);
     }
     else
     {
@@ -33,7 +33,7 @@
             $link = ereg_replace("/var/www/", "./",$link);
 
             echo ('<div class="big_red"><a href="'.$link.'" download=\"'.$_SESSION['TAB_DIRECTORY'][$id].'">Téléchargez moi !</a></div>');
-            
+
             if (ereg(".mp3",$link)) $_SESSION['link'] = $link;
         }
         else
@@ -57,11 +57,11 @@
     {
         echo('<div class="little_red">"'.ereg_replace("home/frank", "",$_SESSION['directory'] ).'"</div>');
     }
-    
+
     //echo("dossier = ".$_SESSION['directory']);
-    
+
     echo '<div id="navigator"><ul>';
-    
+
     if($dossier = opendir($_SESSION['directory']))
     {
         /*** Lecture du dossier courant à l'aide du pointeur. ***/
@@ -96,8 +96,8 @@
     {
       echo("Erreure JS de derrière les fagots... sorry ;(");
     }
-    
+
     echo "</ul></div>";
-    
+
     echo ('<h5>Nombre d\'éléments au total :<span class="plain_red">'.$nb_fichier.'</span></h5>')
 ?>

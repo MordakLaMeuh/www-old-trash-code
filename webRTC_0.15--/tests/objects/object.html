@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content="Helios system WebRTC">
 	<meta name="author" content="momo">
-	
+
 	<title>Helios System-WebRTC P2P Sharing File Interface</title>
 	<link rel="shortcut icon" href="images/ours.png">
 </head>
@@ -42,10 +42,10 @@ var objA = (function() {
 	}
 	return instanceConstructor;
 })();
-	
+
 var objB = (function() {
 	function instanceConstructor(z) {
-		this.R = 'polux';	
+		this.R = 'polux';
 		mother.call(this,z);
 		this.getValue = function(){ console.log('value:'+this.x); }
 	}
@@ -70,7 +70,7 @@ A.getZ();
 B.changeZ();			// CREER UNE COLLISION DUE AU FAIT QUE Z N'EST DEFINI NI AVEC VAR, NI AVEC THIS !!!
 A.getZ();
 
-var ZZZ = function(){console.log('meuh meuh meuh');} 
+var ZZZ = function(){console.log('meuh meuh meuh');}
 A.getUser = ZZZ;
 
 A.getUser();

@@ -14,17 +14,17 @@
 var texte = document.getElementById('texte');
 
 var is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
-	
+
 if (is_crypto) 	console.log('is_crypto vaut TRUE: CONTINUE...');
 else 		  	console.log('is_crypto vaut FALSE: BUG !');
 
 /* Fonction de hash total sur fichier : ATTENTION limitation taille du blob MAX ! */
-function handle_total_file_select(event) {				
+function handle_total_file_select(event) {
 	event.stopPropagation();
 	event.preventDefault();
 
 	var files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-		
+
 	var reader = new FileReader();
 	reader.onload = function(event) {
 		window.crypto.subtle.digest({name: "SHA-256"}, event.target.result)
@@ -44,13 +44,13 @@ function handle_total_file_select(event) {
 }
 
 /* Fonction de hash sur parties de 512ko sur fichier : ATTENTION limitation taille du blob MAX ! */
-function handle_identity_file_select(event) {				
+function handle_identity_file_select(event) {
 	event.stopPropagation();
 	event.preventDefault();
 
 	var files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
 	var file = files[0];
-		
+
 	var reader = new FileReader();
 	reader.onload = function(event) {
 		window.crypto.subtle.digest({name: "SHA-256"}, event.target.result)
@@ -67,7 +67,7 @@ function handle_identity_file_select(event) {
 		});
 		currentSegment++;
 		if ( currentSegment < segmentNeeded) {
-			begin+=segmentSize; 
+			begin+=segmentSize;
 			end+=segmentSize;
 			reader.readAsArrayBuffer(file.slice(begin,end));
 		}
@@ -80,7 +80,7 @@ function handle_identity_file_select(event) {
 	texte.innerHTML+=' '+segmentNeeded+' segments finded.';
 	var begin 	= 0;
 	var end 	= segmentSize;
-	
+
 	reader.readAsArrayBuffer(file.slice(begin,end));
 }
 

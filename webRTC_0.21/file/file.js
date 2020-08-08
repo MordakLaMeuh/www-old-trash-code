@@ -1,10 +1,10 @@
 'use strict';
-var mainFILE = function() {	
+var mainFILE = function() {
 	/* Links to DOM functions */
 	var console	=_DOM_.console;
 	var fileTab	=_DOM_.fileTab;				// graphic mode
 	//console.fileLog = console.log;			// console mode
-		
+
 /*********************************************************************************************************************************************************************************************************************/
 /******************************************** Gestion de l'affichage de la liste des fichiers: ATTENTION utilise div fileTab *****************************************************************************************/
 	var fileObject = function(file) {
@@ -17,43 +17,43 @@ var mainFILE = function() {
 			return;
 		}
 		this.file = file;
-		
+
 		this.status = 'LOCAL';
 		this.ownerList.push(_RTC_CORE_.getLocalUser());	// WARNING Si la logique _RTC_CORE_ change, il faudra changer ici !
 		this.file.owner = this.ownerList[0];
 		console.fileLog('incoming file \''+this.file.name+'\' size:'+this.file.size+' fingerprint:'+this.file.fingerprint+' seg_size:'+this.file.seg_size+' status:'+this.status);
 		this.initialize();
 	}
-	
-	fileObject.prototype.setMetaData = function(data) {		
+
+	fileObject.prototype.setMetaData = function(data) {
 		this.file.seg_size	= data.seg_size;
 		this.file.name	 	= data.fileName;
 		this.file.size 	 	= data.fileSize;
 		this.file.type		= data.fileType;
-		this.status			= 'REMOTE';	
+		this.status			= 'REMOTE';
 		this.initialize();
 	}
-	
+
 	fileObject.prototype.initialize = function() {
 		var self = this;
 		this.IDENTITY_CARD = new Array();
-		
+
 		this.deleteEntry 	 = null;
-		this.statusEntry   = null;			
-		this.nameEntry     = null;	
-		
+		this.statusEntry   = null;
+		this.nameEntry     = null;
+
 		var fileA 		= document.createElement('a');
 		var fileP	 	= document.createElement('p');
-		var fileDiv		= document.createElement('div') 
-			
+		var fileDiv		= document.createElement('div')
+
 		fileA.className 		= 'sharingButton';
 		fileP.innerHTML  		= this.file.name;
-			
+
 		fileDiv.className		= 'deleteFile';
 		fileDiv.innerHTML	 	= 'DEL'
-			
-		fileDiv.onclick   	= function(e) { self.delete(); return false; }	
-				
+
+		fileDiv.onclick   	= function(e) { self.delete(); return false; }
+
 		if (!this.file.fingerprint) {
 			fileA.innerHTML 		= 'LOCAL';
 			fileA.href			= URL.createObjectURL(this.file);
@@ -64,21 +64,21 @@ var mainFILE = function() {
 		{
 			fileA.innerHTML 		= 'REMOTE';
 			fileA.onclick		= function(e) { self.downloadFile(); return false;}
-		}			
-		this.deleteEntry 		= fileTab.utilize().appendChild(fileDiv);	
+		}
+		this.deleteEntry 		= fileTab.utilize().appendChild(fileDiv);
 		this.statusEntry   	= fileTab.utilize().appendChild(fileA);
 		this.nameEntry     	= fileTab.utilize().appendChild(fileP);
-		
-		fileTab.refreshWindow();	
+
+		fileTab.refreshWindow();
 	}
-	
+
 /* List of fileObject prototypes: Tous les prototypes semblent evoluer dans des contextes différents. util° of this. && var [...] */
 	fileObject.prototype.stateSeed = function() {
 		this.status = 'SEED';
 		this.statusEntry.innerHTML = 'SEED';
 		this.statusEntry.classList.remove("generatingHash");
 		this.statusEntry.style.color = '#FFA500';
-		this.statusEntry.onclick = null; 
+		this.statusEntry.onclick = null;
 	}
 	fileObject.prototype.stateHash = function() {
 		this.statusEntry.innerHTML = 'GENERATING HASH';
@@ -91,16 +91,16 @@ var mainFILE = function() {
 	}
 	fileObject.prototype.fullFileReceived = function() {
 		var self = this;
-		
+
 		this.statusEntry.innerHTML 		= 'LOCAL';
 		this.statusEntry.href			= URL.createObjectURL(this.file);
 		this.statusEntry.download  		= '';
-			
+
 		this.deleteEntry  = statusEntry.parentNode.insertBefore(document.createElement('div'), this.statusEntry);
-					
+
 		this.deleteEntry.className		= 'deleteFile';
 		this.deleteEntry.innerHTML	 	= 'DEL'
-		this.deleteEntry.onclick   		= function(e) { self.delete(); return false; }		
+		this.deleteEntry.onclick   		= function(e) { self.delete(); return false; }
 	}
 	fileObject.prototype.delete = function() {
 		this.nameEntry.remove();
@@ -128,7 +128,7 @@ var mainFILE = function() {
 	/*						fONCTIONS DE GÉNÉRATIONS DES fingerprint									*/
 	var is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
 	var buffer_size = 1024*1024;
-	
+
 	var fastHashGenerating =  function(file) {
 		console.fileLog('fast cryptographic api sha256 prototype enable');
 		var self=this;
@@ -145,10 +145,10 @@ var mainFILE = function() {
 				}
 				self.IDENTITY_CARD.push(hexString);
 				console.fileLog(hexString);
-				
+
 				currentSegment++;
 				if ( currentSegment < requireSegment) {
-					begin+=buffer_size; 
+					begin+=buffer_size;
 					end+=buffer_size;
 					reader.readAsArrayBuffer(file.slice(begin,end));
 				}
@@ -183,29 +183,29 @@ var mainFILE = function() {
 		console.fileLog('GENERATE IDENTITY CARD of '+file.name+' SIZE:'+file.size+' '+requireSegment+' segments finded.');
 
 		reader.readAsArrayBuffer(file.slice(begin,end));
-	}	
-	
+	}
+
 	var slowHashGenerating = function(file) {
 		console.fileLog('slow manual worker sha256 prototype enable');
 		var self=this;
 		file.seg_size = buffer_size;
 		this.stateHash();
-			
+
 		var worker = new Worker('file/sha256/sha256Worker.js');
 		var reader = new FileReader();
 
 		reader.onload = function (event) 	{ worker.postMessage(event.target.result, [event.target.result]); };
-	
+
 		var handle_hash_block = function (event) {
 			console.fileLog(event.data);
 			self.IDENTITY_CARD.push(event.data);
-			
+
 			block.currentSegment++;
 			if (block.currentSegment < block.requireSegment) {
 				var begin = block.currentSegment*buffer_size;
 				var end = begin + buffer_size;
-				if (end > file.size)			end = file.size;	
-				
+				if (end > file.size)			end = file.size;
+
 				reader.readAsArrayBuffer(file.slice(begin, end));
 			}
 			else {
@@ -231,31 +231,31 @@ var mainFILE = function() {
 		var end = (block.currentSegment+1)*buffer_size;
 		if (end > file.size) end = file.size; 
 		console.fileLog('GENERATE IDENTITY CARD of '+file.name+' SIZE:'+file.size+' '+block.requireSegment+' segments finded.');
-			
+
 		reader.readAsArrayBuffer(file.slice(0, end));
 	}
-	
+
 	fileObject.prototype.generateHash = (is_crypto)?fastHashGenerating:slowHashGenerating;
-	
+
 	/******************************************************************************************************************************/
 	/*						fONCTIONS CREATE PEER INSTANCE (se chargent du dl du fichier)					*/
-	
+
 	var currentEventID = 0;
 	fileObject.prototype.createPeerInstance = function (file) {
 			this.IDENTITY_CARD		= file.IDENTITY_CARD.slice(0);
-			this.status				= 'DOWNLOADING';	
+			this.status				= 'DOWNLOADING';
 			this.statusEntry.innerHTML 	= 'DOWNLOADING';
 			this.statusEntry.className	= 'downloading';
-			
+
 			var self = this;
 			this.channels = new Array();
-	
+
 			var eventID = currentEventID;
 			currentEventID++;
-			
+
 			var Xchan = document.createEvent('Event');
 			Xchan.initEvent(eventID, true, true);
-		
+
 			var runningChannel = function(obj) {
 				console.fileLog('Event triggered -> Seeds channels available.');
 				for (var i=0; i<self.channels.length; i++) {
@@ -267,34 +267,34 @@ var mainFILE = function() {
 				}}
 				//removeEventListener('waitForChannel', runningChannel, false);
 			}
-		
+
 			addEventListener(eventID,runningChannel);
-	
+
 			for (var i=0; i<this.ownerList.length; i++) {
 				this.channels.push(_RTC_CORE_.createFileChannel(this.ownerList[i],Xchan));
 			}
-			
+
 			console.fileLog('createPeerInstance: Got '+this.channels.length+' peers channels');
-			
+
 	/* WARNING Utilisation d'un objet channel */
 			//var channel = _RTC_CORE_.returnP2PChannel(file.owner);
 			//channel.open();
 			//channel.close();										*/
-			
-			
+
+
 			/* channel.open();		-> Procède à l'ouverture du channel.
 			 * channel.querySegment(x); 	-> envoi ordre via le canal 0 d'envoyer un segement donné.
 			 * channel.close();		-> Demande fermeture du canal au seed.
-			 * 
+			 *
 			 */
 	//Object { owner: "33af2d", fingerprint: "383fa9211634038c89a7daae1ebd81842e70e57f2e0f60fecd2a236a7cd7185b", rtcDataType: "HASH_TABLE", IDENTITY_CARD: Array[1] }
 	}
-	
+
 /*********************************************************************************************************************************************************************************************************************/
 /****************************************************** PUBLICS METHODES OF _FILE_ ***********************************************************************************************************************************/
-	
+
 	var fileList = new Array();
-	
+
 	this.getP2PChannelById = function (session, id) {	// Methode de secours en cas de conflit de canaux: demande simultanées P2P.
 		for (var i=0; i<fileList.length; i++) {
 			for (var j=0; j<fileList[i].channels.length; j++) {
@@ -304,21 +304,21 @@ var mainFILE = function() {
 	/* WARNING Pour fonctionner la liste des fichiers 'fileList' ainsi que celle des canaux 'channels' doivent être cohérentes.
 	 * 	-> OKAY pour "fileList'
 	 * 	-> A FAIRE pour 'channels' ~~ event de destruction du channel ?!? */
-	
+
 	this.startPeerDownload = function(file) {
 		for (var i=0; i<fileList.length; i++) {
 			if (file.fingerprint == fileList[i].file.fingerprint)	{
-				fileList[i].createPeerInstance(file);		
+				fileList[i].createPeerInstance(file);
 				return true;
 	}}}
-	
+
 	this.queryFileHashTable = function(file) {
 		for (var i=0; i<fileList.length; i++) {
 			if (file.fingerprint == fileList[i].file.fingerprint)	{
 				file.IDENTITY_CARD = fileList[i].IDENTITY_CARD;
 				return true;
 	}}}
-	
+
 	this.createMultiplesAnnounces = function() {
 		var announce = new Array();
 		for (var i=0; i<fileList.length; i++) {
@@ -327,7 +327,7 @@ var mainFILE = function() {
 		if (announce.length)	return "{\"type\":\"ANNOUNCE\",\"owner\":\""+_RTC_CORE_.getLocalUser()+"\",\"fingerprint\":[\""+announce.join('\",\"')+"\"]}";
 		return false;
 	}
-	
+
 	this.addAnnounce = function(data) {		// {{'type':'announce'}{'owner':'B7CD15'}{'fingerprint':'fg44','fa8k','ijkn'}}
 		var token = false;
 		var wish = new Array();
@@ -340,14 +340,14 @@ var mainFILE = function() {
 							token = true;
 							break;
 					}}
-					if (token == true) break; 
+					if (token == true) break;
 					fileList[j].ownerList.push(data.owner);
 					console.fileLog('announce-> KNOWN FILE -Add user '+data.owner+' into the ownerList');
 					token = true;
 					break;
 			}}
 			if (token == true) { token=false; continue; }
-			
+
 			console.fileLog('announce-> NEW file:Creating new object of REMOTE && Asking for MetaData.');
 			var file = {
 				fingerprint	: data.fingerprint[i],
@@ -358,7 +358,7 @@ var mainFILE = function() {
 		}
 		if (wish.length > 0) return wish;
 	}
-	
+
 	this.getMetaData = function(data) {
 		var wish = new Array();
 		for (var i=0; i<data.fingerprint.length; i++) {
@@ -367,22 +367,22 @@ var mainFILE = function() {
 		}}
 		if (wish.length) return wish;
 	}
-	
-	this.addLocalFile = function(files) 
-	{	
+
+	this.addLocalFile = function(files)
+	{
 		for (var i=0; i<fileList.length; i++) {
 			if (fileList[i].file.name == files[0].name) {
 				console.fileLog(files[0].name+' existe déjà dans la base de donnée.',true);
 				if (fileList[i].status == 'LOCAL' || fileList[i].status == 'SEED') return;
-				
+
 				// WARNING: Proposer vérification du hash
 				console.fileLog('négociation possible',true);
 				return;
 		}}
 		fileList.push(new fileObject(files[0]));
 	}
-	
-	this.addRemoteFile = function(files) { 
+
+	this.addRemoteFile = function(files) {
 		var token = false;
 		for (var i=0; i<files.data.length; i++) {
 			console.fileLog('Remote reception of \"'+files.data[i].fileName+'\"');
@@ -409,8 +409,8 @@ var mainFILE = function() {
 			if (token == true) { token=false; continue; }
 			console.fileLog('No solicited file received\''+files.data[i].fileName+'\' !',true);
 	}}
-	
+
 /*********************************************************************************************************************************************************************************************************************/
 /*********************************************************************************************************************************************************************************************************************/
 	console.log('_FILE_ system successfully loaded.',1);
-}	
+}

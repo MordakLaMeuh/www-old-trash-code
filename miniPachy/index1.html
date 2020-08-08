@@ -4,41 +4,41 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Mini Chat-Box</title>	
-	
-	<style type="text/css"> 
-		*	{ 	
-			padding: 0px; 
+	<title>Mini Chat-Box</title>
+
+	<style type="text/css">
+		*	{
+			padding: 0px;
 			margin: 0px;
 		}
-		
-		body 	{	
-			background-color: black; 
+
+		body 	{
+			background-color: black;
 			color: #00cc00;
 			font-family: monospace;
-		}	
-		
+		}
+
 		header	{
 			height: 6vh;
 		}
-		
+
 		footer	{
 			height: 10vh;
 			font-size: 2vh;
 		}
-		
+
 		H1	{
 			padding-top: 1.5vh;
 			text-align: center;
 			font-size: 3vh;
 		}
-		
+
 		form	{
 			position: relative;
 			top: 3vh;
 		}
-		
-		input[type="text"] { 
+
+		input[type="text"] {
 			height: 3vh;
 			background-color: #002200;
 			color: #00cc00;
@@ -47,9 +47,9 @@
 			padding-left: 0.5vw;
 			width: 40vw;
 		}
-		
-		#chatTab	{ 
-			height: 84vh; 		
+
+		#chatTab	{
+			height: 84vh;
 			font-weight: bold;
 			padding-left: 1vw;
 			opacity: 0.85;
@@ -66,24 +66,24 @@
 		<h1>CHATBOX</h1>
 	</header>
 
-	<div id="chatTab">	
+	<div id="chatTab">
 		<noscript><H1>Javascipt doit être activé pour que la chatBox puisse fonctionner !</H1></noscript>
 	</div>
-	
+
 	<footer>
 		<form method='POST' action='javascript:postMsg()'>
 			IDENTIFIEZ-VOUS: <input spellcheck='false' autocomplete='off' type='text' autofocus>
 		</form>
 	</footer>
-	
+
 	<script type="text/javascript">
 
 		var socket = new WebSocket('ws://192.168.43.128:8080');
 		var chatTab = document.getElementById("chatTab");
 		var formInput = document.getElementsByTagName("input")[0];
-				
+
 		socket.onerror = function() { chatTab.innerHTML+="Aucune réponse du serveur..."; }
-		
+
 		socket.onmessage = function(str){
 			var p = document.createElement("p");
 			p.appendChild(document.createTextNode(str.data));
@@ -92,16 +92,16 @@
 		};
 
 		var identified = false;
-		
+
 		var postMsg = function()
 		{
 			socket.send(formInput.value);
-			
+
 			if (identified == false) {
 				var identify = document.getElementsByTagName("form")[0];
 				identify.removeChild(identify.firstChild);
 				formInput.setAttribute("style","width:99.5vw");
-				identified = true; 
+				identified = true;
 			}
 			formInput.value = null;
 		}

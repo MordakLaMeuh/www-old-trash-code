@@ -5,7 +5,7 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="chatbox html 1.0">
-	<meta name="author" content="mordak">	
+	<meta name="author" content="mordak">
 </head>
 
 <body>
@@ -69,15 +69,15 @@ var OBJ = function() {
 		common.call(this,j);
 		this.create();
 	}
-	
+
 	//image.prototype = new common();
 	//video.prototype = new common();
-	
+
 	image.prototype = common.prototype;
-	
+
 	image.prototype.constructor = image;
 	video.prototype.constructor = video;
-	
+
 	image.prototype.create = function() {
 		console.log('appel du prototype image : '+this.x);
 	}

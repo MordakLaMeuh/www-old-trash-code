@@ -9,7 +9,7 @@
 
     <script type="text/javascript">
         // On instantie le Worker
-        
+
         console.log('démarage');
         var monWorker = new Worker('helloworkers.js');
         var monWorker2 = new Worker('helloworkers.js');
@@ -19,7 +19,7 @@
             document.getElementById("output").textContent += event.data;
             console.log('data:'+event.data);
         }, false);
-        
+
         monWorker2.addEventListener("message", function (event) {
             document.getElementById("output").textContent += event.data;
             console.log('data:'+event.data);

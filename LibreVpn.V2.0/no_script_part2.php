@@ -1,8 +1,8 @@
-<noscript>  
+<noscript>
 <?php
-    
+
     echo '<div id="navigator"><ul>';
-    
+
     if($dossier = opendir($_SESSION['directory']))
     {
         /*** Lecture du dossier courant à l'aide du pointeur. ***/
@@ -35,10 +35,10 @@
     {
       echo("Erreure JS de derrière les fagots... sorry ;(");
     }
-    
+
     echo "</ul></div>";
-    
+
     echo ('<h5>Nombre d\'éléments au total :<span class="plain_red">'.$nb_fichier.'</span></h5>')
-    
-    ?> 
+
+    ?>
     </noscript>

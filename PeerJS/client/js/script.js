@@ -1,7 +1,7 @@
 
 /***************
 	ROOM INIT & functionality
-	
+
 	Copyright 2013 Samuel Erb
 
 	This file is part of webRTCCopy.
@@ -20,7 +20,7 @@
 	along with webRTCCopy.  If not, see <http://www.gnu.org/licenses/>.
 
 	http://www.tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)
-	
+
 ****************/
 
 var ROOM_TITLE = "WebRTC Copy - Room "; /* constant - room title bar string */
@@ -58,7 +58,7 @@ function initRTCCopy() {
 
 	var button = document.getElementById("newRoom");
 
-	/* create a new room when button is clicked */ 
+	/* create a new room when button is clicked */
 	button.addEventListener('click', function(event) {
 		var chars = "2345689ABCDEFGHJKMNPQRSTUVWXTZabcdefghkmnpqrstuvwxyz";
 		var string_length = 8;//53^8 = 62259690411361, lots of room for everyone!
@@ -71,7 +71,7 @@ function initRTCCopy() {
 		window.location.hash = randomstring;
 		location.reload();
 	});
-	
+
 	/* handle crypto type input */
 	$("#encryption_type").change(function() {
 		if (document.getElementById("encryption_type").value == "NONE") {
@@ -82,27 +82,27 @@ function initRTCCopy() {
 			$("#encryption_key").show();
 		}
 	});
-	
+
 	if ($.browser.name != "chrome" && $.browser.name != "firefox") {
 		$(".support").show();
 	}
-	
+
 	/* handle & intercept connect button/form submission */
 	document.getElementById('webrtc_input_form').addEventListener("submit", function(event) {
 		if (event.preventDefault) {
 			event.preventDefault();
 		}
-		
+
 		transition_from_username_to_main();
 		return false;
 	});
-  
+
 	/* initial create room/username logic */
 	var r = window.location.hash.slice(1);
 	if (r != 0){
 		/* we have a room #, so lets get some information on this room */
 		rtc.room_info(rtccopy_server, r); /* This sends a request (logic processed via 'recieve room info' cb) */
-		
+
 		/* let's update the title bar as well */
 		document.title = ROOM_TITLE+sanitize(r);
 
@@ -111,17 +111,17 @@ function initRTCCopy() {
 	} else {
 		/* no room number? lets make one*/
 		$("#roomprompt").show();
-	
+
 		/* allow entering a room number */
 		document.getElementById('webrtc_room_form').addEventListener("submit", function(event) {
 			var existing_input = document.getElementById("existing");
-			
+
 			event.preventDefault();
 			window.location.hash = existing_input.value;
 			location.reload();
 		});
 	}
-	
+
 	/* let's run a quick check before we begin to make sure we have rtc datachannel support */
 	var rtc_status = rtc.checkDataChannelSupport();
 	if (rtc_status != reliable_true) {
@@ -137,20 +137,20 @@ function process_room_state(data) {
 	if (data.browser != "") { /* will be blank if new room */
 		var browser_color = 'red';
 		if ((browser_name == "chrome" || browser_name == "firefox") && (data.browser == "chrome" || data.browser == "firefox")) { browser_color = 'green'; }
-		
+
 		if (data.encryption == "NONE") {
 			$("#room_state").append('This room already exists and the creator used:<br /> <span style="color:'+browser_color+'">'+ sanitize(data.browser) + '</span> <span style="color:'+browser_color+'">' + sanitize(data.browserVer) + '</span> without OTR.<br /><br />');
 		} else {
 			$("#room_state").append('This room already exists and the creator used:<br /> <span style="color:'+browser_color+'">'+ sanitize(data.browser) + '</span> <span style="color:'+browser_color+'">' + sanitize(data.browserVer) + '</span> with OTR encryption.<br /><br />');
 		}
-		
+
 		/* set the dropdown box to default to the encryption value */
 		$("#encryption_type").val(data.encryption);
 		if (document.getElementById("encryption_type").value != "NONE") {
 			$("#encryption_note").show();
 			$("#encryption_key").show();
 		}
-		
+
 	}
 }
 
@@ -159,10 +159,10 @@ function transition_from_username_to_main() {
 	username = document.getElementById("username").value;
 	encryption_type = document.getElementById("encryption_type").value;
 	encryption_key = document.getElementById("encryption_key").value;
-	
+
 	/* clear out any warnings that may have popped up previously */
 	$("#alerts").empty();
-	
+
 	/* check for empty input */
 	if (username == "") {
 		boot_alert("Please enter a username.");
@@ -172,7 +172,7 @@ function transition_from_username_to_main() {
 		boot_alert("Please specify a encryption key.");
 		return;
 	}
-	
+
 	$("#userprompt").hide(); // hide the login!
 	init(); /* THIS IS THE MAIN CONNECTING FUNCTION CALL! */
 	$("#chat_display").show();
@@ -258,13 +258,13 @@ function init() {
 	display_error();
 	return;
   }
-  
+
   /* the room # is taken from the url */
   var room = window.location.hash.slice(1);
-  
+
   /* Add an entry to the username list at id=0 with your name */
   create_or_clear_container(0,username);
-  
+
   /* If crypto enabled, create OTR key */
   if (encryption_type != "NONE") {
 	otr_init_function();
@@ -272,15 +272,15 @@ function init() {
   } else {
 	$('#OTRWarning').html("You are not using OTR, therefore anyone with this link can join this room and other users identities cannot be verified.<br />");
   }
-  
+
   if (room != 0) {
-	  
+
 	  /* the important call */
 	  rtc.connect(rtccopy_server, room, username, encryption_type);
 
 	  /* fire when ready to init chat & communication! */
 	  rtc.on('ready', function(my_socket, usernames) {
-		
+
 		/* first, print out the usernames in the room */
 		var username_arr = [];//convert to array
 		for (var x in usernames) {
@@ -298,7 +298,7 @@ function init() {
 			systemMessage("There are no other users currently in this room!");
 		}
 	  });
-	  
+
 	  /* when a new user's data channel is opened and we are offering a file, tell them */
 	  rtc.on('data stream open', function(id, username) {
 	    /* add to usernames list */
@@ -314,16 +314,16 @@ function init() {
 			otr_connect_buddy(id);
 		}
 	  });
-	  
+
 	  /* when another user disconnects */
 	  rtc.on('disconnect stream', function(disconnecting_socket, disconnecting_username) {
 		systemMessage(disconnecting_username + " has left the room");
 		remove_container(disconnecting_socket);
 	  });
-	  
+
 	  /* start the chat box */
 	  initChat();
-	  
+
 	  /* add Room Name */
 	  var roomname = document.getElementById('roomname');
 	  roomname.innerHTML = sanitize(room);
@@ -336,7 +336,7 @@ function initChat() {
 
   console.log('initializing data channel chat');
   chat = dataChannelChat;
-  
+
   var input = document.getElementById("chatinput");
   var room = window.location.hash.slice(1);
   var color = hsv_random_color(Math.random(), .5, .7); /* This values appear to make all text readable - test via /test/color_tester.html */
@@ -356,12 +356,12 @@ function initChat() {
       input.value = "";
     }
   }, false);
-  
+
   /* this function is called with every data packet recieved */
   rtc.on(chat.event, function(conn, data, id, username) {
     /* decode and append to data */
     data = chat.recv.apply(this, arguments);
-	
+
 	if (encryption_type != "NONE") {
 		/* encrpyted file chunk inbound! (a bit of hack, but crpyto-js doesn't support native array buffer crypto, so we keep things as a JSON string through here */
 		if (data.charAt(0) == "{") {
@@ -384,10 +384,10 @@ function packet_inbound(id, message) {
 		process_binary(id,message,0); /* no reason to hash here */
 	} else {
 		data = JSON.parse(message).data;
-		
+
 		data.id = id;
 		data.username = rtc.usernames[id]; /* username lookup */
-		
+
 		/* pass data along */
 		if (data.messages) {
 			/* chat */

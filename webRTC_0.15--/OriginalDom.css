@@ -1,5 +1,5 @@
 *	{ 	padding: 0px; margin: 0px;}
-body 	{	background-color: #002200; 
+body 	{	background-color: #002200;
 		color: #00cc00;	}
 
 #header	{ height: 3vh; background-color: #00cc00; color: green;}
@@ -25,8 +25,8 @@ body 	{	background-color: #002200;
 	input[type="file"] {
 		display: none;
 	}
-	#files      { height: 44vh;  
-		padding-left:3vw; 
+	#files      { height: 44vh;
+		padding-left:3vw;
 		font-size: 2.5vh;
 		font-family: garamond, sans-serif;
 		position:relative;
@@ -34,9 +34,9 @@ body 	{	background-color: #002200;
 		top:1.5vh;
 	}
 #statusTab	{ width: 20vw; height: 53vh; background-color: #00cc00; float:right;}
-	
+
 #chatTitle  { height: 3vh; background-color: #00cc00; color: green; }
-#chatTab	{ height: 22vh; 
+#chatTab	{ height: 22vh;
 	background:#BEF781;
 	background-image:url("images/chatbox_pachyderme.png");
 	background-repeat: repeat;
@@ -49,11 +49,11 @@ body 	{	background-color: #002200;
 	padding-left: 1vw;
 	opacity: 0.85;
 	word-wrap:break-word;}
-	
+
 .commentChatbox	{color:white;}
 .userSpeakChatbox {color:black;}
 
-#postTab	{ height: 5vh; background-color: #001100; 
+#postTab	{ height: 5vh; background-color: #001100;
 	color: #ffffff; }
 	#send_box
 	{
@@ -78,7 +78,7 @@ body 	{	background-color: #002200;
 	position:absolute;
 	opacity: 0;
 	right:0.0vw;			/* 2 fois border 4px */
-	z-index:999;  
+	z-index:999;
 	width:1vw;
 	transition-duration: 1s;
 }
@@ -89,12 +89,12 @@ body 	{	background-color: #002200;
 	-ms-transform: translate(-7.8vw,0px);	 /* IE 9 */
    	-webkit-transform: translate(-7.8vw,0px);  /* Safari */
 	transform: translate(-7.8vw,0px);
-} 
+}
 .menuItem	{
 	border-width: 4px;
 	border-style: solid;
 	width:8vw;}
-  
+
 H1 { position: relative;
 	left:25vw;
 	font-family: Verdana, sans-serif;
@@ -112,24 +112,24 @@ video { position: relative;
 
 .imgFile   { float: right; width: 2vw; height: 2vh; padding-right: 1vw; padding-left: 1vw; cursor: pointer;}
 
-.downloadButton { float: right; 
-			cursor: pointer; 
-			padding-right: 1vw; 
-			padding-left: 1vw; 
-			color:red; 
+.downloadButton { float: right;
+			cursor: pointer;
+			padding-right: 1vw;
+			padding-left: 1vw;
+			color:red;
 			font-family: helvetica, sans-serif;
 			font-size:2vh;}
-.downloadButton:hover { color:#FFA500;} 
+.downloadButton:hover { color:#FFA500;}
 /*.downloadButton:hover + p { color:blue;}*/
 
 .sharingButton  { float: right;
 			cursor: pointer;
-			padding-right: 1vw; 
-			padding-left: 1vw; 	
-			color:#FFA500; 
+			padding-right: 1vw;
+			padding-left: 1vw;
+			color:#FFA500;
 			font-family: helvetica, sans-serif;
 			font-size:2vh;}
-.sharingButton:hover { color:red;} 
+.sharingButton:hover { color:red;}
 /*.sharingButton:hover + p { color: blue; }*/
 
 bouton:hover + p { color: blue; }

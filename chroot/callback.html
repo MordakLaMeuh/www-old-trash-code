@@ -1,6 +1,6 @@
 <script>
 var p=new Promise(
-	function myPromiseLogic(success,error,progress) 
+	function myPromiseLogic(success,error,progress)
 	{
 		success(1);
 	})
@@ -11,7 +11,7 @@ var p=new Promise(
 	.then(function(value) {
 		console.log(value);
 	});
-	
+
 var p=new Promise(function myPromiseLogic(success,error,progress) { success(1);})
 .then(function(value){
 	return new Promise(function myPromiseLogic(success,error,progress) {

@@ -1,5 +1,5 @@
 function messageHandler(event) {
-	
+
     var uInt8View = new Uint8Array(event.data);
     console.log(uInt8View.length);
     console.log(uInt8View[12345]);

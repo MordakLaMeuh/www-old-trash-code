@@ -9,7 +9,7 @@
 <?php $page4='brand'; $page1=$page2=$page3=$page5=$page6=$page7='void'; include 'src/base.php'; ?>
 
 <div class="CGU">
-   
+
 	<H2 class>Conditions d'utilisations des services</H2>
 
 	<H4>Article n°1: Acceptation des Conditions</H4>

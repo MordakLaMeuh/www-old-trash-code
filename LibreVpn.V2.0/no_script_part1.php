@@ -1,12 +1,12 @@
 
- <noscript> 
+ <noscript>
  <?php
     $nb_fichier = 0;   							/*** Sera utilisé comme compteur du nombre de fichiers. ***/
     /*** Routine utilisée pour l'initialisation au stade de la première connexion à la page. ***/
     if (empty ($_SESSION['directory']))
     {
         $_SESSION['directory']="/var/www/.acc_1309_rt8_mv/";
-        chdir("/".$_SESSION['directory']); 
+        chdir("/".$_SESSION['directory']);
     }
     else
     {
@@ -48,6 +48,6 @@
     {
         echo('<div class="little_red">"'.ereg_replace("home/frank", "",$_SESSION['directory'] ).'"</div>');
     }
-    
+
     ?>
-    </noscript> 
+    </noscript>

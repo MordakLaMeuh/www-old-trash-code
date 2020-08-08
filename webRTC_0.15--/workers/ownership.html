@@ -11,11 +11,11 @@ var worker = new Worker('Array.js');
 
 worker.addEventListener("message", function (event) {
 	//console.log('data:'+event.data);
-	
+
 	var uInt8View = new Uint8Array(event.data);
 	//console.log('TERMINATED:'+uInt8View.length);
 	//console.log('checksum:'+uInt8View[67]);
-	
+
 }, false);
 
 //console.log('création du tableau');

@@ -29,7 +29,7 @@ H3 { text-decoration: underline; text-align: center; font-family: monospace; fon
 .yellow  	{ background-color: yellow;  	}
 .green     	{ background-color: #228B22; 	}
 .blue 	     	{ background-color: #1E90FF; 	}
-.darkMagenta 	{ background-color: #8B008B; 	} 
+.darkMagenta 	{ background-color: #8B008B; 	}
 .blueViolet  	{ background-color: #8A2BE2; 	}
 
 .leftBox	{ background-color:white; width:15vw; height:inherit; float: left; opacity: 0.3;}
@@ -53,7 +53,7 @@ H3 { text-decoration: underline; text-align: center; font-family: monospace; fon
 	opacity: 1;
 	cursor:pointer;
 }
-.contextScrollbarMainDiv, 		.contextScrollbar		{ opacity:0.88;	} 
+.contextScrollbarMainDiv, 		.contextScrollbar		{ opacity:0.88;	}
 .contextScrollbarMainDiv:hover,		.contextScrollbar:hover		{ opacity:1;	}
 
 /*** Texte Area ***/
@@ -78,7 +78,7 @@ H3 { text-decoration: underline; text-align: center; font-family: monospace; fon
 	top: 1.5vh;
 	right: 0px;
 	width: 12vw;
-	
+
 	z-index: 1000;
 }
 
@@ -103,7 +103,7 @@ img   { width: inherit; }
 	top:0px;
 	right:-7.8vw;
 	width:8.2vw;
-	z-index:999; 
+	z-index:999;
 	transition-duration: 1s;
 }
 #toolbar:hover {
@@ -112,9 +112,8 @@ img   { width: inherit; }
 	-ms-transform: translate(-7.8vw,0px);	 /* IE 9 */
    	-webkit-transform: translate(-7.8vw,0px);  /* Safari */
 	transform: translate(-7.8vw,0px);
-} 
+}
 .menuItem	{
 	border: solid white 0.1vw;
-	width:8vw;	
+	width:8vw;
 }
-  

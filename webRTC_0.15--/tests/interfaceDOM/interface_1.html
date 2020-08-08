@@ -5,16 +5,16 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content="Helios system WebRTC">
 	<meta name="author" content="momo">
-	
+
 	<title>Helios System-WebRTC P2P Sharing File Interface</title>
-	
+
 <!--	<link rel='stylesheet' id='DOM'  href='dom.css' type='text/css' media='all' /> -->
 	<link rel="shortcut icon" href="images/ours.png">
 </head>
 
 <style>
 * { padding: 0px; margin: 0px;}
-body { background-color: black; 
+body { background-color: black;
 	 color: #00cc00;	}
 
 #consoleTab { width: 80vw; height: 20vh; background-color: green; }
@@ -49,16 +49,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <script type="text/javascript">
 var manageScroll = function() {
 	var _isGecko=window.Event?1:0; 	// navigateurs Gecko ou IE
-	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" 
+	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
 	var mouseId=null;
-	
+
 	var whereTheMouse = function(e) {
 		var element=_isGecko?e.target:event.srcElement;		 //objet sous la souris
 		if(!element.tagName)	element=element.parentNode;	 // noeud #text
 		mouseId = element.id;
 	}
 	document.onmousemove=whereTheMouse;
-	
+
 	var scroll = function (direction) {
 		document.getElementById(mouseId).scrollTop += (direction*20); //le défilement se fait par 10px
 		//setTimeout('scroll('+to_scroll+', '+true+')', 10);
@@ -66,11 +66,11 @@ var manageScroll = function() {
 	var MouseWheelHandler = function(e) {
 		var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
 		if (delta > 0) 	scroll(-1);
-		else			scroll(+1); 
+		else			scroll(+1);
 		return false;
 	}
 	document.addEventListener(mousewheelevt, MouseWheelHandler, false);
 }
-	
+
 var Z = new manageScroll();
 </script>

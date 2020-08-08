@@ -1,7 +1,7 @@
 
-<?php   
+<?php
    }
-        
+
   if (!empty ($_SESSION['user']))
   {
      if ($_SESSION['droit'] == 2)
@@ -20,19 +20,19 @@
               $response = null;
               # Code erreur
               $error = null;
-              
-              if (isset($_POST["captchme_response_field"])) 
+
+              if (isset($_POST["captchme_response_field"]))
               {
                  $remoteIp = $_SERVER['REMOTE_ADDR'];
                  # Controle du captcha
-                 $response = captchme_verify 
+                 $response = captchme_verify
                               ($privateKey,
                               $_POST["captchme_challenge_field"],
                               $_POST["captchme_response_field"],
                               $remoteIp,
                               $authenKey);
                  if ($response->is_valid)
-                 { 
+                 {
                      $_SESSION['capchat']=true; ?>
                      <div class="container-fluid">
                           <div class="row-fluid">
@@ -47,17 +47,17 @@
                                     </form>
                                </div>
                           </div>
-                     </div>    
-                     <?php                                
+                     </div>
+                     <?php
                  }
                  else
                  {
                     $error = $response->error;
                  }
-              } 
+              }
          if (! $response->is_valid)
              {
-             ?> 
+             ?>
              <!-- MEDIA QUERY QUASI OBLIGE ICI POUR PETITES RESOLUTIONS -->
              <div id="publinotice">
                    <H4>"Mon royaume pour un Capchat !"</H4>
@@ -66,14 +66,14 @@
              <div id="publicapchat">    <?php
                   // Génération du Capchat
                   echo captchme_generate_html($publicKey, $error); ?>
-             <!-- *** VERSION ANCIEN FORMULAIRE qui execute une fonction ***                  
+             <!-- *** VERSION ANCIEN FORMULAIRE qui execute une fonction ***
                   <input type="hidden" name="addblock" id="addblock" value="">
                   <a href="#" onclick="verify();">Valider</a>              -->
                   <input type="submit" value="Valider"/>
-                  </form>                               
+                  </form>
              </div>                     <?php
              }
-             ?>   
+             ?>
         <?php
         }
         else
@@ -98,12 +98,12 @@
                        <form name="detection" method="post" action="index.php">
                        <input type="hidden" name="addblock" id="addblock" value="réiinit">
                        <input type="submit" value="J'ai compris..."/>
-        					  </form>  
+        					  </form>
                   </div>
              </div>
-        </div>         
-        <?php	
+        </div>
+        <?php
      }
      }
-  }					
+  }
 ?>

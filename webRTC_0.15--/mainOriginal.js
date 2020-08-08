@@ -91,7 +91,7 @@ var ssb = {
         // start scrolling
         cont.ssb_onscroll();
         ssb.refresh();
-        
+
         // binding own onscroll event
         cont.onscroll = cont.ssb_onscroll;
         return cont;

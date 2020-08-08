@@ -9,15 +9,15 @@
 <body>
 	<div id='banane'>
 	</div>
-	
-	<div id='01'> 
+
+	<div id='01'>
 	</div>
 <script>
 	var a = document.getElementById("banane").cloneNode(true);
 	document.body.removeChild(document.getElementById("banane"));
 	document.getElementById('01').appendChild(a);
 	document.getElementById('banane').innerHTML = "AZERTY";
-	
+
 	document.getElementById('banane').onmousedown = function() { alert('meuh'); }
 </script>
 </body>

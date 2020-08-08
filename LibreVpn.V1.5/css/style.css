@@ -7,20 +7,20 @@ mark
     background-color: white;
 }
 
-img.elePHPhant 
+img.elePHPhant
 {
 border: 15px solid black;
 }
 
 img.monde
 {
-  
+
 }
 
 header
 {
    width: 100%;
-   border: 1px solid black; 
+   border: 1px solid black;
    background-color: white;
 }
 section
@@ -31,22 +31,22 @@ section
    display: inline-block;
    vertical-align: top;
 
-/*   border: 1px solid black; */  
+/*   border: 1px solid black; */
 }
 cite
-{  
-   max-width: 50%; 
+{
+   max-width: 50%;
    margin-top: 10px;
    margin-left: 10px;
    background-color: white;
  /*  padding: 2px; */
    padding: 2px 1.5em;
-   border-radius: 10px;    
-   border: 1px solid black; 
+   border-radius: 10px;
+   border: 1px solid black;
 
    display: inline-block;
    vertical-align: top;
-}  
+}
 #cgu
 {
    font-size: 0.7em;
@@ -54,7 +54,7 @@ cite
    margin-right: 10px;
    padding: 10px;
    height: 280px;
-/*   border: 1px dotted blue; */  
+/*   border: 1px dotted blue; */
    overflow: auto;
    text-align: justify;
 
@@ -87,8 +87,8 @@ footer
 
 h1
 {
-   font-size: 1.4em;  
-   font-weight: normal; 
+   font-size: 1.4em;
+   font-weight: normal;
    font-family: "Times New Roman",sans-serif;
    text-align: center;
 }

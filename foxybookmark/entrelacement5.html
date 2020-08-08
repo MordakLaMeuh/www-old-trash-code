@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr-FR">			
+<html lang="fr-FR">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content='CSS effect'>
 	<meta name="author" content="secret">
-	
+
 	<title>Entrelacement V</title>
-	
-	<link rel='stylesheet' id='DOM'  href='entrelacement5.css' type='text/css' media='all' /> 
+
+	<link rel='stylesheet' id='DOM'  href='entrelacement5.css' type='text/css' media='all' />
 	<link rel="shortcut icon" href="ours.png">
 </head>
 
-<body> 
-<div id='header'>	
+<body>
+<div id='header'>
  	<div id='mainTexte'>
 	<H3>Entrelacement V</H3> <br>
 Gestion, sélection et inversion des lignes précise avec mouvements harmonieux. <br>
@@ -41,31 +41,31 @@ set to:<pre>	'true'</pre>
 - Multi inside box et Algo complexe à améliorer encore cependant...
 </div>
 
-<div id='toolbar' class='hideOverflow'>	
-	<img src="Elephant-icon.png" alt="elephant"/> 
+<div id='toolbar' class='hideOverflow'>
+	<img src="Elephant-icon.png" alt="elephant"/>
 	<img src="Dolphin-icon.png" alt="dophin"/>
 	<img src="Panda-icon.png" alt="panda"/>
-	<img src="Hippopotamus-icon.png" alt="hippopotame"/> 
+	<img src="Hippopotamus-icon.png" alt="hippopotame"/>
 </div>
 
 <div id='macaron'>
 	<img src='macaron.jpg' alt='macaron' class='macaron'/>
-</div> 
+</div>
 <div id='rabbit'>
 	<img src='runrabbit.gif' alt='rabbit' class='rabbit'/>
 </div>
 
 
 <script src="mouse.js"></script>
-<script src="scrollbar.js"></script> 
-<script src="X_Window.js"></script> 
-<script src="toolbar_2.js"></script> 
+<script src="scrollbar.js"></script>
+<script src="X_Window.js"></script>
+<script src="toolbar_2.js"></script>
 <script src="moveObj.js"></script>
 
 <script>
 
 window.addEventListener('mousedown',function(e){e.preventDefault();},false);	// ATTENTION Empeche selection du texte avec clic gauche appuyé.
-	
+
 new X_Window(document.getElementById('urlAreaDom'),new Array('red','orange','yellow','green','blue','darkMagenta','blueViolet'),2,80);
 new externScrollbar(document.getElementById('urlAreaDom'),0.9,1.6,0,-3);
 

@@ -13,27 +13,27 @@
 </div>
 
 <script>
-function getXMLHttpRequest() 
+function getXMLHttpRequest()
 {
-    var xhr = null;    
-    if (window.XMLHttpRequest || window.ActiveXObject) 
+    var xhr = null;
+    if (window.XMLHttpRequest || window.ActiveXObject)
     {
-        if (window.ActiveXObject) 
+        if (window.ActiveXObject)
         {
-            try 
+            try
             {
                 xhr = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch(e) 
+            } catch(e)
             {
                 xhr = new ActiveXObject("Microsoft.XMLHTTP");
             }
-        } 
-        else 
-        {
-            xhr = new XMLHttpRequest(); 
         }
-    } 
-    else 
+        else
+        {
+            xhr = new XMLHttpRequest();
+        }
+    }
+    else
     {
         alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
         return null;
@@ -54,7 +54,7 @@ truc.style.backgroundColor = "blue";
 function clic(a)
 {
   document.body.appendChild( truc );
-  
+
 var banane = document.getElementById( "test" );
 banane.style.backgroundColor = "yellow";
   document.body.appendChild( banane );
@@ -63,7 +63,7 @@ banane.style.backgroundColor = "yellow";
   xhr.open("GET", "inout.php?variable1=" + a, true);
   alert("inout.php?variable1=" + a);
 
-  xhr.onreadystatechange = function() 
+  xhr.onreadystatechange = function()
   {
     if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
 	var monDOM = document.getElementById("baba");

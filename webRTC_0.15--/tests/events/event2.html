@@ -9,31 +9,31 @@
 
 var peerInstance = (function(){
 	// statics variables...
-	
+
 	function peerConstuctor(init) {
-	
+
 		var All_Candidates_Receved_for_send_offer = new Event('make_offer');
-		
+
 		var z;
-		
+
 		this.a = init;
 		this.b = 0;
-		
+
 		this.add = function(x) {
-			this.b = this.a * x; 
+			this.b = this.a * x;
 		}
-		
+
 		this.armEvent = function() {
 		z=addEventListener('make_offer', function (){
 			console.log('meuh');
 									})
 						   }
 		this.launchEvent = function() {
-			dispatchEvent(All_Candidates_Receved_for_send_offer); 
+			dispatchEvent(All_Candidates_Receved_for_send_offer);
 			z=null;
 			}
-									
-						
+
+
 	}
 	return peerConstuctor;
 })();
@@ -48,7 +48,7 @@ instance.launchEvent();
 {
 	instance=new peerInstance(9);
 	console.log(instance.a);
-	
+
 	setTimeout(function(){instance.launchEvent();},1000);
 }
 

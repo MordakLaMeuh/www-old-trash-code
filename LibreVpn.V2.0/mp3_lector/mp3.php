@@ -7,13 +7,13 @@
 <!DOCTYPE html>
 
 
-	
+
 
 
 
 <html>
 <head>
-	<meta charset="utf-8"> 
+	<meta charset="utf-8">
 	<title>MP3 &mdash; Audiocogs</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -56,10 +56,10 @@
 
 		<article>
 			<header>
-				
+
 				<h1 id="article_title">MP3</h1>
-				
-				
+
+
 			</header>
 
 
@@ -111,7 +111,7 @@ try these demos in Chrome 15+ or Firefox 8+ or watch a <a href="http://vimeo.com
         </div>
         <span>-0:00</span>
     </div>
-    
+
     <div class="file_button"></div>
     <span class="file_description">Choose an MP3 file on your computer</span>
 </div>
@@ -127,36 +127,36 @@ var _sampleRate = (function() {
     var AudioContext = (window.AudioContext || window.webkitAudioContext);
     if (!AudioContext)
         return 44100;
-    
+
     return new AudioContext().sampleRate;
 }());
 
 (function(DGPlayer){
     if (unsupported) return;
-    
+
     DGPlayer.volume = 100;
-    
+
     var player, onplay;
     var url = '';
-    
+
     DGPlayer.on('play', onplay = function(){
         if (player)
             player.disconnect();
-            
+
         player = new DGAuroraPlayer(AV.Player.fromURL(url), DGPlayer);
         DGPlayer.off('play', onplay);
     });
-    
-    DGPlayer.on('file', function(file) {        
+
+    DGPlayer.on('file', function(file) {
         if (file) {
             if (player)
                 player.disconnect();
-                
+
             player = new DGAuroraPlayer(AV.Player.fromFile(file), DGPlayer);
             DGPlayer.off('play', onplay);
         }
     });
-    
+
 }(DGPlayer(document.getElementById('dgplayer'))));
 </script>
 

@@ -35,9 +35,9 @@ exec("echo $name > pipe_in");
 exec("cat pipe_out > response_from_server");
 
 $file = fopen('response_from_server', 'r');
- 
+
 $out = fgets($file);
- 
+
 fclose($file);
 echo $out;
 

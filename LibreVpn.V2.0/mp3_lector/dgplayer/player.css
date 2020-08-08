@@ -63,7 +63,7 @@
 .player::selection {
     background:transparent
 }
-        
+
 .player .avatar {
     position: relative;
     width: 130px;

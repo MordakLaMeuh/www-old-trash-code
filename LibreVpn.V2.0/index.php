@@ -5,10 +5,10 @@
 
 <?php include 'src/header.php'; ?>
 
-<!-- <audio controls> 
+<!-- <audio controls>
   <source src="son.mp3" />
   <p class="warning">Le format *.ogg n'est pas pris en charge par votre navigateur</p>
-</audio>   --> 
+</audio>   -->
 
 <body>
 
@@ -16,15 +16,15 @@
 <a href="https://www.grosdada.eu" id="linux"></a>
 
 <?php $page1='brand'; $page2=$page3=$page4=$page5=$page6=$page7='void'; include 'src/base.php'; ?>
-   
+
 <h3 class="text-center">LibreVPN, un concept de discrétion par hotspot....</h3>
 
-<div class="container-fluid"> 
-      <div class="row-fluid">  
+<div class="container-fluid">
+      <div class="row-fluid">
            <div class="span2">
-                 <!--Sidebar content--> 
-           </div>						
-           <H6 class="span7">									
+                 <!--Sidebar content-->
+           </div>
+           <H6 class="span7">
                  Internet via les hotspots est quelque chose de facilement accessible. Partout ou presque, il est possible de surfer, de taper ses mails, etc,etc...
                  Mais quid de la sécurité ? En effet, lorsqu'on se connecte à un hotspot,les <b>données transitent en clair.</b> Pas très rassurant, n'est-ce pas ?
 	              C'est à ce niveau que le LibreVPN intervient. En effet, le VPN( Virtual Private Network) va créer une sorte de tunnel crypté entre votre machine et le serveur VPN, le notre donc.<br>
@@ -32,11 +32,11 @@
                  <br>
 	              <img src="img/Libre-vpn.jpg" class="img-polaroid" alt="pirate"/>
 	              <br><br>
-	              Vous voulez faire un achat sur le net et vous hésitez à mettre votre N° CB? Passez par le LibreVPN... Vous voulez jouer on-line et votre Hotspot ne l'autorise pas? Passez par le LibreVPN...¹<br>     
-                 <br>¹ sous certaines conditions			
-           </H6>			
+	              Vous voulez faire un achat sur le net et vous hésitez à mettre votre N° CB? Passez par le LibreVPN... Vous voulez jouer on-line et votre Hotspot ne l'autorise pas? Passez par le LibreVPN...¹<br>
+                 <br>¹ sous certaines conditions
+           </H6>
       </div>
-</div>   
+</div>
 
 <?php  	if (empty ($_SESSION['user']))
          {  ?>
@@ -46,10 +46,10 @@
    					<a href=direct_vpn.php>Je suis intéressé !</a>
    				</H3>
 				</form>
-	<?php } ?>    
-    
-<?php include 'src/footer.php'; ?>   
-    
+	<?php } ?>
+
+<?php include 'src/footer.php'; ?>
+
 </body>
 
 </html>

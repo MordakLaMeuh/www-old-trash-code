@@ -1,4 +1,4 @@
 <?php
-session_start();  
+session_start();
 $_SESSION['test'] = $_GET['xSS'];
 ?>

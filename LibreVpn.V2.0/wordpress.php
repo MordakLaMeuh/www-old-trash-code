@@ -10,7 +10,7 @@
 <link rel="pingback" href="http://maroni.pics/xmlrpc.php" />
 
 
- 
+
 
 
 <meta name='robots' content='noindex,follow' />
@@ -26,7 +26,7 @@
 <script type='text/javascript' src='http://maroni.pics/wp-includes/js/jquery/jquery.js?ver=1.11.1'></script>
 <script type='text/javascript' src='http://maroni.pics/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://maroni.pics/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://maroni.pics/wp-includes/wlwmanifest.xml" /> 
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://maroni.pics/wp-includes/wlwmanifest.xml" />
 <meta name="generator" content="WordPress 4.0.1" />
 <link rel='canonical' href='http://maroni.pics/' />
 <link rel='shortlink' href='http://maroni.pics/' />
@@ -39,29 +39,29 @@
 	<input type="hidden" id="pp_enable_dragging" name="pp_enable_dragging" value="true"/>
 	<input type="hidden" id="pp_image_path" name="pp_image_path" value="http://maroni.pics/wp-content/themes/stellar/images/"/>
 	<input type="hidden" id="pp_homepage_url" name="pp_homepage_url" value="http://maroni.pics"/>
-	
+
 	<input type="hidden" id="pp_menu_display" name="pp_menu_display" value=""/>
-	
+
 		<input type="hidden" id="pp_footer_style" name="pp_footer_style" value=""/>
-	
+
 	<div id="menu_close_icon">
 		<div id="menu_toggle"></div>
-		<div id="menu_title">Menu</div>	
+		<div id="menu_title">Menu</div>
 	</div>
-	
+
 	<!--Begin Template Menu -->
 	<div class="top_bar">
-	
+
 	<div class="top_bar_wrapper">
-	
+
 		<div id="menu_wrapper">
-			
-			<!-- Begin logo -->	
+
+			<!-- Begin logo -->
 						    <a id="custom_logo" class="logo_wrapper" href="http://maroni.pics">
 			    	<img src="http://maroni.pics/wp-content/uploads/Logo01.jpg" alt=""/>
 			    </a>
 						<!-- End logo -->
-			
+
 		    <!-- Begin main nav -->
 		    <div id="nav_wrapper">
 		    	<div class="nav_wrapper_inner">
@@ -82,23 +82,23 @@
 </ul></div>		    		</div>
 		    	</div>
 		    </div>
-		    
+
 		    <div class="social_wrapper">
 			    <ul>
 			    				    				    				    				    				    				    				    				    				    				    				    </ul>
 			</div>
-		    
+
 		    <!-- End main nav -->
-		    
+
 			<div class="footer_bar">
 				<div class="footer_bar_wrapper">
 				    <div id="copyright">copyright@maroni.pics</div>				</div>
 			</div>
 
-		</div> 
+		</div>
 	</div>
-	
-	</div> 
+
+	</div>
 
 	<!-- Begin template wrapper -->
 	<div id="wrapper">
@@ -110,18 +110,18 @@
     	    	    	<div class="page_tagline">
     		PHOTOGRAPHY|BLOG    	</div>
     	    </div>
-    
+
     </div>
 
 <!-- Begin content -->
 <div id="page_content_wrapper" class="two nopadding gallery">
-    
+
     <div class="inner">
 
     	<div class="inner_wrapper">
-		
+
 			<div id="blog_grid_wrapper">
-						
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=playground">
@@ -135,7 +135,7 @@
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_5007-485x485.jpg" alt="" class="static"/></li>
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_4801-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>playground</h6>
@@ -146,10 +146,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=shoes">
@@ -159,7 +159,7 @@
 						    								    <ul class="gallery_img_slides">
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_4773-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>shoes</h6>
@@ -170,10 +170,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=craft">
@@ -185,7 +185,7 @@
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_4794-485x485.jpg" alt="" class="static"/></li>
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/DSC_0286-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>craft</h6>
@@ -196,10 +196,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=nature">
@@ -209,7 +209,7 @@
 						    								    <ul class="gallery_img_slides">
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_4417-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>nature</h6>
@@ -220,10 +220,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=urban">
@@ -237,7 +237,7 @@
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_5087-485x485.jpg" alt="" class="static"/></li>
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/40202MT-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>urban</h6>
@@ -248,10 +248,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=private">
@@ -261,7 +261,7 @@
 						    								    <ul class="gallery_img_slides">
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/902MT-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>family</h6>
@@ -272,10 +272,10 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
-						
+
+
 			<div class="wall_entry type-post post gallery masonry element">
 			    			    <div class="wall_thumbnail">
 			    	<a href="http://maroni.pics/?galleries=new-zealand">
@@ -285,7 +285,7 @@
 						    								    <ul class="gallery_img_slides">
 							    							    <li><img src="http://maroni.pics/wp-content/uploads/D71_6747-485x485.jpg" alt="" class="static"/></li>
 							    							    </ul>
-							    						    
+
 						    	<div class="mask_image_content hascycle">
 						    		<div class="mask_image_content_frame">
 						    			<h6>new zealand</h6>
@@ -296,16 +296,16 @@
 						</div>
 					</a>
 			    </div>
-			    			
+
 			</div>
-			
+
 						</div>
 
 		</div>
 
 	</div>
 
-	
+
 
 </div>
 

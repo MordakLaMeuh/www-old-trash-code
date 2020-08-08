@@ -1,4 +1,4 @@
-<?php 
+<?php
 header("Content-Type: text/plain");
 
 if (!empty ($_POST['exit']))

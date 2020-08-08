@@ -1,6 +1,6 @@
 /***************
 	CLIENT
-	
+
 Copyright (C) 2013 Samuel Erb
 
 Same License list below. As this code is a modification of the project https://github.com/webRTC/webRTC.io it is required to maintain the following license:
@@ -15,12 +15,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ****************/
 
-/* 
+/*
  * 2 implementation notes:
  *	This is currently configured to fail on unreliable connections (see below ~line 438)
  *  This has the function boot_alert undefined. Change these two calls to alert or define boot_alert if needed.
  */
- 
+
 /* Fallbacks for vendor-specific variables until the spec is finalized.
  * Going to use jquery.browser to detect major version # (to help compatibiliity
  * and to allow later versions of chrome to support stateful connections).
@@ -38,7 +38,7 @@ var room_info_socket = {};
 if (is_chrome) {
 	var PeerConnection =  window.PeerConnection || window.webkitPeerConnection00 || window.webkitRTCPeerConnection;
 	var SessionDescription = RTCSessionDescription;
-	var iceCanidate = RTCIceCandidate; 
+	var iceCanidate = RTCIceCandidate;
 } else {
 	if (browser_name == "firefox") {
 		var iceCanidate = mozRTCIceCandidate;
@@ -126,19 +126,19 @@ function sanitize(msg) {
 
   /* returns what is supported by trying reliable first, then unreliable */
   rtc.checkDataChannelSupport = function() {
-	
+
 	try {
       /* first try reliable */
       var pc = new PeerConnection(rtc.SERVER, rtc.dataChannelConfig);
-      channel = pc.createDataChannel('supportCheck', {reliable: true}); 
+      channel = pc.createDataChannel('supportCheck', {reliable: true});
       channel.close();
 	  console.log('data channel reliability set to true!');
       return reliable_true;
-    } catch(e) {	
+    } catch(e) {
 		try {
 		  /* then unreliable */
 		  var pc = new PeerConnection(rtc.SERVER, rtc.dataChannelConfig);
-		  channel = pc.createDataChannel('supportCheck', {reliable: false}); 
+		  channel = pc.createDataChannel('supportCheck', {reliable: false});
 		  channel.close();
 		  console.log('data channel reliability set to false!');
 		  return reliable_false;
@@ -157,7 +157,7 @@ function sanitize(msg) {
    * REQUIRED: a function called process_room_state(data) to handle cb data
    */
 	rtc.room_info = function(server, room) {
-	
+
 		// Holds a connection to the server.
 		room_info_socket._socket = null;
 
@@ -180,7 +180,7 @@ function sanitize(msg) {
 		};
 		room_info_socket._socket.onclose = function(data) {};
 	};
-   
+
 
   /**
    * Connects to the websocket server.
@@ -223,17 +223,17 @@ function sanitize(msg) {
         rtc.connections = data.connections;
         rtc.usernames = data.usernames;
         rtc._me = data.you;
-		
+
 		/* we already sanitize everything later, but rather be safe than sorry */
 		for (var i = 0, len = rtc.usernames.length; i < len; i++) {
 		  rtc.usernames[i] = sanitize(rtc.usernames[i]);
 		}
-		
+
 		/* Display warning about room we are entering */
 		if (data.encryption != encryption_type) {
 			boot_alert("Warning!\n The room you are entering was started by someone with a different encryption type.\nYou: "+encryption_type+"\nRoom creator: "+sanitize(data.encryption));
 		}
-		
+
         // fire connections event and pass peers
         rtc.fire('connections', rtc.connections);
         // at this point, our connections are ready, fire ready!
@@ -250,7 +250,7 @@ function sanitize(msg) {
         //add username
         console.log(data.username+" has joined the room.");
         rtc.usernames[data.socketId] = sanitize(data.username);
-        
+
         //add socket and create streams
         rtc.connections.push(data.socketId);
         var pc = rtc.createPeerConnection(data.socketId);
@@ -309,19 +309,19 @@ function sanitize(msg) {
     if (rtc.dataChannelSupport != rtc_unsupported) {
       config = rtc.dataChannelConfig;
 	}
- 
+
 	/* create a new peer connection! */
     var pc = rtc.peerConnections[id] = new PeerConnection(rtc.SERVER, config);
-	
-	
+
+
     pc.onicecandidate = function(event) {
 		if (event.candidate == null) { return }
-		
+
 		//TODO - does chrome want this only after onicecandidate ?? rtc.createDataChannel(id);
 		//if (!rtc.dataChannels[id]) {
 		//	rtc.createDataChannel(id);
 		//}
-		
+
 		rtc._socket.send(JSON.stringify({
 			"eventName": "send_ice_candidate",
 			"data": {
@@ -333,8 +333,8 @@ function sanitize(msg) {
 
 		rtc.fire('ice candidate', event.candidate);
 		//console.log(event.candidate);
-		
-		
+
+
 
 		/* bloody hell chrome, we have to remove this handler as you send a ton of ice canidates & we only need one */
 		pc.onicecandidate = null;
@@ -349,7 +349,7 @@ function sanitize(msg) {
       // TODO: Finalize this API
       rtc.fire('add remote stream', event.stream, id);
     };
-	
+
 	pc.oniceconnectionstatechange = function(event) {
 		console.log("new ICE state:"+event.target.iceConnectionState);
 		if (event.target.iceConnectionState == 'connected') {
@@ -370,10 +370,10 @@ function sanitize(msg) {
 
   rtc.sendOffer = function(socketId) {
     var pc = rtc.peerConnections[socketId];
-    
+
 	//console.log('creating offer');
 	pc.createOffer( function(session_description) {
-		
+
 		//description callback? not currently supported - http://www.w3.org/TR/webrtc/#dom-peerconnection-setlocaldescription
 		pc.setLocalDescription(session_description, function() { //console.log('setLocalDescription success');
 																}, function(err) { console.error(err); } );
@@ -401,17 +401,17 @@ function sanitize(msg) {
 	},function(err){
         console.error(err);
     });
-	
+
   };
 
 
   rtc.sendAnswer = function(socketId) {
     var pc = rtc.peerConnections[socketId];
-	
+
     pc.createAnswer( function(session_description) {
-	
-		pc.setLocalDescription(session_description, function() { 
-		
+
+		pc.setLocalDescription(session_description, function() {
+
 			//console.log('setLocalDescription Success calling send_answer');
 			rtc._socket.send(JSON.stringify({
 			"eventName": "send_answer",
@@ -420,7 +420,7 @@ function sanitize(msg) {
 				"sdp": JSON.stringify(session_description)
 				}
 			}));
-		
+
 		},function(err) {console.error(err);});
 
     }, function(e) {
@@ -432,7 +432,7 @@ function sanitize(msg) {
   rtc.receiveAnswer = function(socketId, sdp_in) {
     var pc = rtc.peerConnections[socketId];
 	var sdp = new SessionDescription(sdp_in);
-	
+
     pc.setRemoteDescription(sdp, function() { //console.log('setRemoteDescription Success');
 											},function(err) {console.error(err);});
   };
@@ -452,14 +452,14 @@ function sanitize(msg) {
 
 
   rtc.createDataChannel = function(pcOrId, label) {
-    
+
     id = pcOrId;
     pc = rtc.peerConnections[pcOrId];
 
     if (!id) {
       throw new Error ('attempt to createDataChannel with unknown id');
 	}
- 
+
     // need a label
     label = label || 'fileTransfer' || String(id);
 
@@ -468,7 +468,7 @@ function sanitize(msg) {
 	}else{
 		options = {reliable: true}; /* reliability true!! */
     }
-	
+
     try {
       console.log('createDataChannel ' + id);
       channel = pc.createDataChannel(label, options);

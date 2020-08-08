@@ -1,7 +1,7 @@
 *	{ 	padding: 0px; margin: 0px;}
-body 	{	background-color: #002200; 
+body 	{	background-color: #002200;
 		color: #00cc00;	}
-		
+
 /* DEFINITIONS OF SCROLLBAR */
 .scrollbar {
 	float: right;
@@ -35,8 +35,8 @@ body 	{	background-color: #002200;
 }
 
 /* HOVER EFFECTS */
-.normalScrollbarMainDiv, 	.contextScrollbarMainDiv, 		.contextScrollbar 	,#sendBox		,#statusTab	{ opacity:0.88; } 
-.normalScrollbarMainDiv:hover,.contextScrollbarMainDiv:hover,	.contextScrollbar:hover	,#sendBox:hover	,#statusTab:hover { opacity:1;} 
+.normalScrollbarMainDiv, 	.contextScrollbarMainDiv, 		.contextScrollbar 	,#sendBox		,#statusTab	{ opacity:0.88; }
+.normalScrollbarMainDiv:hover,.contextScrollbarMainDiv:hover,	.contextScrollbar:hover	,#sendBox:hover	,#statusTab:hover { opacity:1;}
 
 /* MAIN CSS DESCRIPTION */
 #header	{ height: 3vh; background-color: #00cc00; color: green;}
@@ -47,13 +47,13 @@ H1 { position: absolute;
 	left:25vw;
 	font-family: Verdana, sans-serif;
 	font-size: 3vh; }
-	
+
 /* Anciennement consoleTab */
-#consoleTab  { 	
+#consoleTab  {
 		height: 17vh;
 		font-family: monospace;
 		font-size: 0.9em;
-		text-align: justify; 
+		text-align: justify;
 		padding-left:1vw;
 		color: #0f0;
 		background-color: #111;
@@ -66,7 +66,7 @@ H1 { position: absolute;
 #connectTab { width: 20vw; height: 17vh; background-color: black; float:right;}
 #remote 	{ height: 17vh;  width:20vw;}
 
-#fileTab	{ height: 50vh; background-color: #003300;}	
+#fileTab	{ height: 50vh; background-color: #003300;}
 	#fileTitle  { width: 63vw; height: 3vh; background-color: #00cc00; color: green;}
 	.file-upload {
 		width: 20vw;
@@ -83,8 +83,8 @@ H1 { position: absolute;
 	input[type="file"] {
 		display: none;
 	}
-	#files     { height: 47vh; 				/* anciennement files && height 44 BUG !*/ 
-		padding-left:3vw; 
+	#files     { height: 47vh; 				/* anciennement files && height 44 BUG !*/
+		padding-left:3vw;
 		font-size: 1em;
 		font-family: monospace;
 		position:relative;
@@ -97,7 +97,7 @@ H1 { position: absolute;
 		border-top: 0,2vh;
 		border-bottom-left-radius: 1vh;
 		border-bottom-right-radius: 1vh;
-		border-color: #FFA500; 
+		border-color: #FFA500;
 		border-style: solid;
 		font-family: monospace;
 		font-size: 3vh;
@@ -110,7 +110,7 @@ H1 { position: absolute;
 .camera:hover { cursor:pointer; }
 .camera:hover + p { color: #FFA500; }
 #statusTab:hover > p:hover {color: #FFA500;  cursor:pointer; }
-	
+
 #chatTitle  { height: 3vh; background-color: #00cc00; color: green; }
 #chatTab	{ height: 22vh; 		/* Anciennement chatTab */
 	background:#BEF781;
@@ -125,11 +125,11 @@ H1 { position: absolute;
 	padding-left: 1vw;
 	opacity: 0.85;
 	word-wrap:break-word;}
-	
+
 .commentChatbox	{color:white;}
 .userSpeakChatbox {color:black;}
 
-#postTab	{ height: 5vh; background-color: #001100; 
+#postTab	{ height: 5vh; background-color: #001100;
 	color: #ffffff; }
 	#sendBox
 	{
@@ -155,7 +155,7 @@ H1 { position: absolute;
 	position:absolute;
 	opacity: 0;
 	right:0.0vw;			/* 2 fois border 4px */
-	z-index:999;  
+	z-index:999;
 	width:1vw;
 	transition-duration: 1s;
 }
@@ -166,12 +166,12 @@ H1 { position: absolute;
 	-ms-transform: translate(-7.8vw,0px);	 /* IE 9 */
    	-webkit-transform: translate(-7.8vw,0px);  /* Safari */
 	transform: translate(-7.8vw,0px);
-} 
+}
 .menuItem	{
 	border-width: 4px;
 	border-style: solid;
 	width:8vw;}
-  
+
 H2 { position: relative;
 	left:5vw;
 	font-family: Arial, sans-serif;
@@ -184,37 +184,37 @@ video { position: relative;
 
 .imgFile   { float: right; width: 2vw; height: 2vh; padding-right: 1vw; padding-left: 1vw; cursor: pointer;}
 
-.downloadButton { float: right; 
-			cursor: pointer; 
-			padding-right: 1vw; 
-			padding-left: 1vw; 
+.downloadButton { float: right;
+			cursor: pointer;
+			padding-right: 1vw;
+			padding-left: 1vw;
 			color:red; }
-.downloadButton:hover { color:#FFA500;} 
+.downloadButton:hover { color:#FFA500;}
 /*.downloadButton:hover + p { color:blue;}*/
 
 .sharingButton  { float: right;
 			cursor: pointer;
-			padding-right: 1vw; 
-			padding-left: 1vw; 	
+			padding-right: 1vw;
+			padding-left: 1vw;
 			color: #00CC22;
 			text-decoration:none;
 }
 
-.sharingButton:hover { color:red;} 
+.sharingButton:hover { color:red;}
 
 .sharingButton:hover + p { color: blue; }
 
-.deleteFile	{ 
-	color: red; 
+.deleteFile	{
+	color: red;
 	float: right;
-	padding-right: 1vw; 
-	padding-left: 1vw; 
+	padding-right: 1vw;
+	padding-left: 1vw;
 	cursor: pointer;
 }
 .downloading {
-	float: right; 
-	cursor: pointer; 
-	padding-right: 1vw; 
+	float: right;
+	cursor: pointer;
+	padding-right: 1vw;
 	padding-left: 1vw;
 	color: purple;
 }
@@ -224,24 +224,24 @@ video { position: relative;
 
 .elePHPant:hover { cursor:pointer; }
 
-.generatingHash {	
+.generatingHash {
 	animation: 1s linear 0s infinite none alternate JauneRougeDoux;
 	webkitAnimation: 1s linear 0s infinite none alternate JauneRougeDoux;
 	mozAnimation:  1s linear 0s infinite none alternate JauneRougeDoux;
 }
 
-@keyframes JauneRougeDoux{ 
-    from{color:yellow;}  
-    to{color:red;}  
-}  
-@-webkit-keyframes JauneRougeDoux{ 
-    from{color:yellow;}  
-    to{color:red;}  
-} 
-@-moz-keyframes JauneRougeDoux{ 
-    from{color:yellow;}  
-    to{color:red;}  
-} 
+@keyframes JauneRougeDoux{
+    from{color:yellow;}
+    to{color:red;}
+}
+@-webkit-keyframes JauneRougeDoux{
+    from{color:yellow;}
+    to{color:red;}
+}
+@-moz-keyframes JauneRougeDoux{
+    from{color:yellow;}
+    to{color:red;}
+}
 
 .consoleImportantInformation  { color: #FFA500; font-weight: bold; }
 .criticalWarning			{ color: red; font-style: italic;}

@@ -4,7 +4,7 @@
 if (!empty ($_POST['exit']))
 {
    $_SESSION['test']=0;
-}  
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -13,12 +13,12 @@ if (!empty ($_POST['exit']))
 <script>
 function send()
 {
-	
-} 	
+
+}
 function getXMLHttpRequest()
 {
 	var xhr = null;
-	
+
 	if (window.XMLHttpRequest || window.ActiveXObject)
 	{
 		if (window.ActiveXObject)
@@ -26,25 +26,25 @@ function getXMLHttpRequest()
 			try
 		   {
 				xhr = new ActiveXObject("Msxml2.XMLHTTP");
-			} 
+			}
 			catch(e)
 			{
 				xhr = new ActiveXObject("Microsoft.XMLHTTP");
 			}
-		} 
-		else 
-		{
-			xhr = new XMLHttpRequest(); 
 		}
-	} 
+		else
+		{
+			xhr = new XMLHttpRequest();
+		}
+	}
 	else
 	{
 		alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
 		return null;
-	}	
+	}
 	return xhr;
 }
-document.write("SCRIPT 1 VALID");	
+document.write("SCRIPT 1 VALID");
 </script>
 
 <script>

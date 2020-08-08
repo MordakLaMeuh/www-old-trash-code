@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1;">
 	<meta name="description" content="Helios system WebRTC">
 	<meta name="author" content="momo">
-	
+
 	<title>Helios System-WebRTC P2P Sharing File Interface</title>
 	<link rel="shortcut icon" href="images/ours.png">
 	<style>
@@ -46,22 +46,22 @@
 
 <div id='chat'></div>
 </body>
-<script>  
+<script>
 
 var img = document.createElement('img');
 //img.src = 'macaron.jpg';
 //document.getElementById('image').appendChild(img);
 
 var is_chrome = (navigator.userAgent.indexOf("Chrome") > 0)?true:false;
-  
+
 var chromeRegex = new RegExp(/Chrome\/(\d+)/);
 var firefoxRegex = new RegExp(/Firefox\/(\d+)/);
-  
-if (is_chrome == true)  var browser_ver = chromeRegex.exec(navigator.userAgent)[1]; 
-else			  var browser_ver = firefoxRegex.exec(navigator.userAgent)[1]; 
-  
+
+if (is_chrome == true)  var browser_ver = chromeRegex.exec(navigator.userAgent)[1];
+else			  var browser_ver = firefoxRegex.exec(navigator.userAgent)[1];
+
 var browser_name = (is_chrome == true)?'chrome':'firefox';
-  
+
 document.getElementById('info').innerHTML+="JS is_chrome="+is_chrome+
 		"<br>JS version="+browser_ver+
 		"<br>JS browser name="+browser_name+
@@ -70,7 +70,7 @@ document.getElementById('info').innerHTML+="JS is_chrome="+is_chrome+
 		"<br>platform="+navigator.platform+
 		"<br>appVersion="+navigator.appVersion+
 		"<br>AppName="+navigator.appName;
-		
+
 var debugConsole=document.getElementById('debugConsole');
 
 var PeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;	// Choisis le constructeur approprié pour PeerConnection selon chrome ou mozilla. PeerConnection est un archétype objet.
@@ -105,46 +105,46 @@ var errorHandler = function (err){console.error(err);}					// Fonction en charge
 
 var peerInstance = (function(){
 	// statics variables...
-	
+
 	function peerConstuctor(socket, channel) {
 		var pc = new PeerConnection(servers, options);						// Objet principal peer connexion.
-	
+
 		pc.socket = socket;
 		pc.candidateList = new Array;
-		
+
 		pc.IceCollectionEvent = document.createEvent('Event');					// *** Définition de l'évent d'application des paquets ICE collecté pour l'enregistrement de la réponse ICE ***
 		pc.IceCollectionEvent.initEvent('iceCollect', true, true);
-		
+
 		var iceCollecting = (function () {
 			var eventLaunched=0;
-		
+
 			pc.iceCollectionListener = function () {
 				eventLaunched++;
 				if ( eventLaunched != 2 ) { console.log ('All ice event triggered; Launcher Insuffisant'); return; }
-				
+
 				eventLaunched=0;
 				console.log('* ALL_ICE_COLLECTED_EVENT TRIGGERED *');
 				if (pc.candidateList.length == 0) 	console.log('____NO_ICE_CANDIDATE____');
 				else						console.log('Recovery List contain '+pc.candidateList.length+' ice candidates.');
-				for (var i=0; i<pc.candidateList.length; i++)	{ 
+				for (var i=0; i<pc.candidateList.length; i++)	{
 					pc.addIceCandidate(pc.candidateList[i],function(){},errorHandler);
 					console.log('ice success applied:'+pc.candidateList[i].candidate);
 												}
 				removeEventListener('iceCollect', pc.iceCollectionListener, false);
 			};
 		})();
-		
+
 		pc.sendIcePaquetsEvent = document.createEvent('Event');					// *** Définition de l'évent d'envoi des IPs stun/ice collectées. ***
 		pc.sendIcePaquetsEvent.initEvent('IceSending', true, true);
 		pc.sendIcePaquetsListener = function () {
 			console.log('EVENT TRIGGERED: All_Candidates_Receved_for_send_offer. Envoi de:'+JSON.stringify(pc.localDescription));
 			pc.socket.send(JSON.stringify	({
-				msg_type: "OFFER",	
+				msg_type: "OFFER",
 				data    : pc.localDescription
 								}))
 			removeEventListener('IceSending', pc.sendIcePaquetsListener);
 		};
-		
+
 		pc.onicecandidate = function(){								// EVENT candidats recus du serveur STUN, ne peux etre déclencher que par une création d'offre ou une demande d'answer à l'offre.
 			var numberOfCandidates=0;																		// Static variable inside event. Count of candidates.
 			return function(ice){
@@ -156,57 +156,57 @@ var peerInstance = (function(){
 						data    : ice.candidate
 										}))
 				}
-				else	
+				else
 				{
 					pc.socket.send(JSON.stringify	({					// Envoit d'un candidat spécial NO_MORe lorsque tous les candidats ont été découverts. Important  pour le déclenchement de l'event ICE
 						msg_type: "CANDIDATE",
 						data    : "NO_MORE"
-										}))	
-					console.log('gathering ice:'+pc.iceGatheringState);						// ATTENTION 	GOOGLE CHROME n'envoi( aucun ICE candidat dans son offre. (ils seront envoyés (a coté) ici. 
+										}))
+					console.log('gathering ice:'+pc.iceGatheringState);						// ATTENTION 	GOOGLE CHROME n'envoi( aucun ICE candidat dans son offre. (ils seront envoyés (a coté) ici.
 					console.log('null candidate detected. Number of ICE candidates:'+numberOfCandidates);			// Il semble que celà devienne la même chose avec les nouvelles version de firefox.
-					if (numberOfCandidates==0) console.log('ICE Candidates may be already in browser cache !');  
+					if (numberOfCandidates==0) console.log('ICE Candidates may be already in browser cache !');
 					pc.onicecandate=null;							// Termine une fois pour toute l'event ICE.
-					
+
 					if (pc.seed)	dispatchEvent(pc.sendIcePaquetsEvent);	// pc.mode=offer quand le serveur a demandé de créer une offre. un event est déclenché dans ce cas, ne se fait
-																			// qu'une fois que TOUS les candidats ICE ont été pris en compte 
+																			// qu'une fois que TOUS les candidats ICE ont été pris en compte
 				}};
 			}();
-			
+
 		var dataChannel = null;				// -> objet du channel initié par le seed.
 		//var receiveChannel = null;			// -> objet du channel recu par le peer.
 		var dataChannelOpen = false;			// (commun) -> Etat de la connexion, prévient des envois prématurés.
 		pc.seed=false;					// (commun) -> Prend la valeur de true spécialement pour le seed.
-		
+
 		this.createOffer = function()	{		// createOffer est appelé à la reception d'un ordre de création d'offre venant du server, celui qui fait l'offre sera nommé 'seed'.
-		
+
 			pc.seed=true;
 			dataChannel = pc.createDataChannel('hulk',{			// ! ARCHITECHTURE ! SEUL le 'seed' va créer le datachannel, le 'peer' ne fera que l'utiliser dans l'autre sens:
 							reliable: true
 										});
-			dataChannel.onopen = function() {console.log('opening sendChannel'); dataChannelOpen=true; }		// Création des enevements associés au dataChannel.	
+			dataChannel.onopen = function() {console.log('opening sendChannel'); dataChannelOpen=true; }		// Création des enevements associés au dataChannel.
 			dataChannel.onclose = function() {console.log('send channel disable');}
 			dataChannel.onerror = function(event) {console.log('EROOR on sendChannel :'+event);}
 			dataChannel.onmessage = function(event) { interpreterPaquet(event); }
-										
+
 			pc.createOffer(function(offer){	 				//create an offer sdp
-				pc.setLocalDescription(offer, 
+				pc.setLocalDescription(offer,
 				function(){}
 				, errorHandler);
 			console.log('native offer='+JSON.stringify(offer));
-		
+
 			addEventListener('IceSending', pc.sendIcePaquetsListener);
 			}, errorHandler);
 			addEventListener('iceCollect', pc.iceCollectionListener);	// Préparation à l'écoute des candidats ICe qui viendront avec la réponse du peer.
-		}	
-		
+		}
+
 		var echoSending = null;				// -> Permet de couper le setInterval(sendEcho) en cas d'inverssementseed/peer (déconnexion, reconnexion etc...)
 		this.createAnswer = function(data) {
 			pc.ondatachannel = function (event) {										 	// (cas peer) Création des evenements associés au channel pour le peer
 				dataChannel = event.channel;
 				console.log('etat premier:'+dataChannel.readyState);
 
-				dataChannel.onmessage = function(event){interpreterPaquet(event);}; 
-			
+				dataChannel.onmessage = function(event){interpreterPaquet(event);};
+
 				dataChannel.onopen 	= function() {console.log('Ouverture du data Channel'+event);  dataChannelOpen=true; echoSending=setInterval(function(){dataChannel.send(JSON.stringify	({
 							msg_type: 'ECHO',
 							data    : 'echo'
@@ -214,9 +214,9 @@ var peerInstance = (function(){
 				dataChannel.onclose 	= function(event) {console.log('fermeture du data channel');}
 				dataChannel.onerror	= function(event) {alert(event);}
 			};
-			
+
 			var remoteDescription = new RTCSessionDescription(data);
-			pc.setRemoteDescription(remoteDescription,function(){},errorHandler);		
+			pc.setRemoteDescription(remoteDescription,function(){},errorHandler);
 			pc.createAnswer(function(answer){
 				pc.setLocalDescription(answer,
 				function(){
@@ -226,12 +226,12 @@ var peerInstance = (function(){
 						data    : answer
 										}));
 					console.log('Native Answer='+JSON.stringify(answer));
-				}, errorHandler);}, errorHandler);		
+				}, errorHandler);}, errorHandler);
 		}
 		this.receaveAnswer = function(data)	{
 			var remote = new RTCSessionDescription(data);
 			pc.setRemoteDescription(remote,function(){
-				console.log('Answer received:'+JSON.stringify(data)); 
+				console.log('Answer received:'+JSON.stringify(data));
 				dispatchEvent(pc.IceCollectionEvent);			// Double EVENT, l'autre consiste à attendre l'enregistrement en dur de la réponse du peer.
 				},errorHandler);
 		}
@@ -252,42 +252,42 @@ var peerInstance = (function(){
 			removeEventListener('IceSending', pc.sendIcePaquetsListener, false);
 			removeEventListener('iceCollect', pc.iceCollectionListener, false);
 			pc=null;
-		}	
+		}
 		this.send = function(data) {
 			if (dataChannelOpen == false) { console.log('data-channel not opened'); return; }
-			dataChannel.send(data); 
+			dataChannel.send(data);
 		}
-		
+
 		var file = new Object;
 		var downloadDiv = document.getElementById('downloadedFiles');
 		var receiveBuffer = [];
-		
+
 		var fileDOM = new Array;
-		var interpreterPaquet = function(jsonpaquet)		
+		var interpreterPaquet = function(jsonpaquet)
 		{
 			//console.log("Got Data Channel Message:"+Object.prototype.toString.call(jsonpaquet.data));
 			if (jsonpaquet.data == '[object ArrayBuffer]' || jsonpaquet.data =='[object Blob]') {					// Firefox - Chrome
 				console.log("Got Data Channel Message:"+Object.prototype.toString.call(jsonpaquet.data));
-				
+
 				if (is_chrome) 	file.receavedBytes += jsonpaquet.data.byteLength;							// -> FIREFOX
 				else 			file.receavedBytes += jsonpaquet.data.size;								// -> CHROME
-					
+
 				receiveBuffer.push(jsonpaquet.data);
-					
+
 				if (file.receavedBytes >= file.size) {
 					var received = new window.Blob(receiveBuffer);			// blob limit to 500mo in chrome !
 					receiveBuffer.length=0;
-					
+
 					fileDOM[file.id].href=URL.createObjectURL(received);
 					fileDOM[file.id].download = file.name;
 					fileDOM[file.id].style.display = 'block';
-					
+
 					img.src = fileDOM[file.id].href;						// TODO AJOUT
 					document.getElementById('image').appendChild(img);
-										}}							
+										}}
 			else						{
 				var data = JSON.parse(jsonpaquet.data);
-					
+
 				if (data.rtcDataType == 'META')		{
 					console.log('Extraction des meta données:');
 					file.name = data.fileName;
@@ -295,7 +295,7 @@ var peerInstance = (function(){
 					file.type = data.fileType;
 					file.receavedBytes = 0;
 					console.log('fileName:'+file.name+' size:'+file.size+' type:'+file.type);
-					
+
 					file.id = fileDOM.length;
 					downloadDiv.innerHTML+="<a class='received'></a>";
 					fileDOM[fileDOM.length]=downloadDiv.getElementsByClassName('received')[fileDOM.length];
@@ -306,13 +306,13 @@ var peerInstance = (function(){
 					else 				document.getElementById('chat').innerHTML+=data.msg+'<br>';
 											}}
 		}
-		
+
 		document.getElementById('select_file').onchange = function() {
 			console.log(this.files[0]);
-			
+
 			var file = this.files[0];
 			var reader = new window.FileReader();
-	
+
 			console.log('Name:'+ file.name+' size:'+file.size+' type:'+file.type+' last modified:'+file.lastModifiedDate);
 			instance.send(JSON.stringify	({
 				rtcDataType: 'META',
@@ -320,42 +320,42 @@ var peerInstance = (function(){
 				fileSize	: file.size,
 				fileType	: file.type
 								}));
-	
+
 			reader.onload = function(segment) {
-			
-			
+
+
 					//img.src = segment;						// TODO AJOUT
 					//document.getElementById('image').appendChild(img);
 					//return;
-			
-			
-			
+
+
+
 				console.log('Taille du segment émis:'+segment.target.result.byteLength);
-				
+
 				//var received = new window.Blob(segment.target.result);
-				
+
 				//var fileDOM = new Array();
 				//fileDOM[0].href=URL.createObjectURL(segment);
-				
-				
-				
+
+
+
 				img.src = URL.createObjectURL(segment.target.result);
 				document.getElementById('image').appendChild(img);
-				
-						
+
+
 				return;
-				
+
 				instance.send(segment.target.result);
-					
+
 				offset+=chunkSize;
 				slice = file.slice(offset, offset + chunkSize);
-						
+
 				if (offset < file.size) {
 					if (dataChannel.bufferedAmount <= 16000000) {
 						console.log('buffer='+dataChannel.bufferedAmount);
 						reader.readAsArrayBuffer(slice);
 					}
-					else 
+					else
 					{
 						function timeout() {
 							console.log('buffer='+dataChannel.bufferedAmount);
@@ -363,20 +363,20 @@ var peerInstance = (function(){
 							else 	setTimeout(function(){timeout()},50);
 						}
 						console.log('*** risk of buffer overflow ***');
-						timeout(); 
+						timeout();
 						//setTimeout(function(){reader.readAsArrayBuffer(slice)},80);
-					}					
+					}
 				}
 			}
-      
+
 			var offset = 0;
 			if (is_chrome) var chunkSize = 64000;
 			else 		   var chunkSize = 16000;
-      
+
 			//var slice = file.slice(offset, offset + chunkSize);
 			//reader.readAsArrayBuffer(slice);
 			reader.readAsArrayBuffer(file);
-		}		
+		}
 	}
 	return peerConstuctor;
 })();
@@ -389,7 +389,7 @@ socket.onmessage = function(){
 		console.log(str);
 		var data=JSON.parse(str.data);		// Penser à .data pour lire le contenu de la chaine recue (ou le payload, la charge)
 		switch(data.msg_type)	{
-			case 'MAKE OFFER':	
+			case 'MAKE OFFER':
 				console.log('MAKE OFFER RECEIVED.');
 				instance.createOffer();
 				break;
@@ -411,17 +411,17 @@ socket.onmessage = function(){
 				console.log('RESET: reseting connexion');
 				instance.delete();
 				instance=new peerInstance(socket,'');
-				if (data.data == 'MAKE OFFER')	
+				if (data.data == 'MAKE OFFER')
 				{
 					console.log('RESET: New Seed');
 					instance.createOffer();
 				}
-				break;	
+				break;
 			default:
 				console.log('DEFAULT: Incomprehensibles words received !');
 				break;	}}
 	}();
-				
+
 socket.onopen=function(){								// Dès que le socket est dispoanible avec le serveur, la première chose que fait le client est d'envoyer HELO.
 	socket.send(JSON.stringify({
 		msg_type: "HELO",
@@ -431,4 +431,4 @@ socket.onopen=function(){								// Dès que le socket est dispoanible avec le s
 
 </html>
 
-<script> 
+<script>

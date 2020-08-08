@@ -1,7 +1,7 @@
-<VirtualHost *:80> 
+<VirtualHost *:80>
         ServerName www.grosdada.eu
-	ServerAlias grosdada.eu	
-	Redirect / https://www.grosdada.eu/ 
+	ServerAlias grosdada.eu
+	Redirect / https://www.grosdada.eu/
 </VirtualHost>
 
 <IfModule mod_ssl.c>
@@ -32,12 +32,12 @@
 		Allow from all
 	</Directory>
 
-	SSLEngine on 
+	SSLEngine on
 	SSLProtocol all -SSLv2
-	SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM 
-	
-	SSLCertificateFile /home/certificats/grosdada.eu.crt 
-	SSLCertificateKeyFile /home/certificats/grosdada.eu.key 
+	SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM
+
+	SSLCertificateFile /home/certificats/grosdada.eu.crt
+	SSLCertificateKeyFile /home/certificats/grosdada.eu.key
 	SSLCertificateChainFile /home/certificats/sub.class1.server.ca.pem
 
 	ErrorLog ${APACHE_LOG_DIR}/error.log

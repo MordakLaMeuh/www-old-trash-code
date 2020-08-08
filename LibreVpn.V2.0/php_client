@@ -15,7 +15,7 @@ do
     echo -e "Nouveau compte à créer : $client"
     echo -e "ID special du client : $id"
     echo -e "Dossier : $directory"
-    
+
     if [ 0$client = 0 ]
     then
 	echo "Mauvais client ! Reception erronée !"
@@ -52,7 +52,7 @@ do
 	    cd /root/vpn/
 	    cp ca.crt ta.key $client_vpn/$client/
 	    cd /root/vpn/config/keys/
-    
+
 	    cp $client.crt $client_vpn/$client/$client.crt
 	    cp $client.key $client_vpn/$client/$client.key
 
@@ -86,7 +86,7 @@ do
                 mkdir  $zip_bank/$directory
 	    	cp $client.zip $zip_bank/$directory/librevpn.zip
 	    	chown www-data:www-data $zip_bank/$directory $zip_bank/$directory/librevpn.zip
-       
+
 	    else
 	    	echo -e "Fichier déjà présent dans la zip_bank"
 	    fi

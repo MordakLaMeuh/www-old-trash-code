@@ -14,7 +14,7 @@
   </label>
 	<input type="checkbox" id="hash_sha256" title="Check this to calculate SHA2 (SHA-256) file hash" checked/>
 	SHA-256&nbsp;
-  
+
 	<input type="file" id="files" name="files[]" multiple />
 </div>
 
@@ -22,7 +22,7 @@
 (function () {
 	"use strict";
 
-	var file_id = 1; 
+	var file_id = 1;
 	var is_crypto = false;
 
 /*
@@ -35,7 +35,7 @@
         File.prototype.slice = File.prototype.mozSlice;
       }
     }
-    
+
     if (!window.File || !window.FileReader || !window.FileList || !window.Blob || !File.prototype.slice) {
       alert('File APIs are not fully supported in this browser. Please use latest Mozilla Firefox or Google Chrome.');
     }
@@ -45,14 +45,14 @@
 	is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
 	if (is_crypto) {									console.log('is_crypto vaut TRUE');
 		document.getElementById('crypto').disabled = false;
-		document.getElementById('crypto').checked = true; 
+		document.getElementById('crypto').checked = true;
 
 		document.getElementById('crypto').addEventListener("click", function() {
 			is_crypto = document.getElementById('crypto').checked;
 		});
 	}
 	else console.log('is_crypto vaut FALSE');
-    
+
 /* Fonction utilisée avec ET sans API cryptanalyse */
 	function handle_file_select(event) {				console.log('function handle_file_select');
 		event.stopPropagation();
@@ -68,7 +68,7 @@
 			workers = [];
 			crypto_algos = [];
 
-	
+
 			if (document.getElementById('hash_sha256').checked) {
 
 				if (is_crypto && file.size < max_crypto_file_size) {
@@ -91,7 +91,7 @@
 		handle_crypto_files(crypto_files);
 		}
 	}
-	
+
 /* Fonction utilisée dans les deux cas */
 	function hash_file(file, workers) {						console.log('function hash_file(file, workers)');
 		var i, buffer_size, block, threads, reader, blob, handle_hash_block, handle_load_block;
@@ -203,7 +203,7 @@
 			handle_crypto_file(crypto_file.file, crypto_file.algos);
 		}
 	}
-	
+
 /* Fonction utilisée en absence de l'api cryptanalyse. */
 	function handle_worker_event(id) {					console.log('function handle_worker_event(id)');
 		return function (event) {
@@ -215,8 +215,8 @@
 			}
 		};
 	}
-	
-	
+
+
 	document.getElementById('files').addEventListener('change', handle_file_select, false);
 }());
 </script>

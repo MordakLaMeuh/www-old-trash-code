@@ -51,7 +51,7 @@ function InitDetachedPlayerFunc() {
 	}
 
 	var p = window[cObjectName].parameters;
-	
+
 	if (!p.version) {
 		p.version = '1.0';
 	}
@@ -73,7 +73,7 @@ function InitDetachedPlayerFunc() {
 	urlInfo.setAttribute('href', p.src)
 	//hostUrl = urlInfo.protocol + '//' + urlInfo.hostname;
 	hostUrl = 'https://radionomy.com';
-	
+
 	if (hostUrl.indexOf('radionomy.com', hostUrl.length - 'radionomy.com'.length) == -1) {
 		console.log('Error: ' + hostUrl + ' is not an authorized host');
 		return;
@@ -120,14 +120,14 @@ function InitDetachedPlayerFunc() {
 					}), '*');
 				}
 				else {
-						
+
 					var rplayer = window.document.createElement('div');
 					rplayer.className = 'radionomy-player';
 
 					var rframe = window.document.getElementById('_radionomy_player_iframe');
 					rframe.parentNode.insertBefore(rplayer, rframe.nextSibling);
 					rframe.parentNode.removeChild(rframe);
-						
+
 					window.RadionomyPlayerObject = [cObjectName];
 					InitDetachedPlayerFunc();
 				}		*/

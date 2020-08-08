@@ -10,7 +10,7 @@ var MW = (function() {
 	var resizeAllWindows = function() {
 		console.log('MW: Resize All Windows -> resizeEvent:'+resizeEvent);
 		resizeEvent = false;
-		
+
 		var i = 0;
 		for (i; i<windowRef.length; i++) windowRef[i].resize();
 	}
@@ -19,13 +19,13 @@ var MW = (function() {
 				resizeEvent = true;
 				setTimeout(resizeAllWindows,resizeTimer);
 	}}
-	
+
 	var windowRef = new Array();
 
 	var MudulableWindowConstructor = function(id,titleWindow,positionX,positionY,sizeX,sizeY,color,background,opacity) {
-	
+
 		windowRef.push(this);
-	
+
         	this.id		= id;						// utilisé un peu partout pour le débugage
 		this.opacity 	= opacity;					// necessaire pour la fonction de mise en opacité pleine des fenetres. utilisé aussi dans setProperty()
 
@@ -35,7 +35,7 @@ var MW = (function() {
 
 		(this.main = document.getElementById(id))?this.assign():this.create();
 		this.setProperty(titleWindow,positionX,positionY,sizeX,sizeY,color,background);
-		
+
 		var obj = this;
 
 		// fonction privée de mise en avant de la fenetre.
@@ -173,7 +173,7 @@ var MW = (function() {
 				}
 				else {
 					obj.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;					// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
-				
+
 					obj.leftDiv.style.width = obj.rightDiv.style.width = obj.footer.style.height = obj.borderSize+'vh';
 					obj.conteiner.style.height = (100 - obj.headerHeight - obj.borderSize)+'vh';
 					maximizeState = false;
@@ -214,11 +214,11 @@ var MW = (function() {
 
 			maximizeState = !maximizeState;
 		}
-		
+
 	// afin d'éviter les déclenchements multiples, chaque méthode engendrant une ou plusieurs transitions, tel maximize ou minimize, se voit attribue un transitionToken, dès que la première transition est terminée, à ce moment
 	// les autres doivent l'être tout autant, UN SEUL CALCUL est opéré, le transitionToken est supprimé et les autres traisitions arrivant ensuites ne trouveront pas de tokens pour etre claculées.
 		var transitionToken = 0;					// TODO possible to get prototype : apparement NON !
-		var endOfTransition = function(e) {						
+		var endOfTransition = function(e) {
 			if (transitionToken > 0) {
 				console.log("MW endOfTransition(e) private function: consume one token, Detected transition -> "+e.propertyName);
 				transitionToken--;
@@ -238,9 +238,9 @@ var MW = (function() {
 			}
 			else console.log('MW endOfTransition(e) private function: No one token.');
 		}
-		
+
 		obj.main.addEventListener("transitionend",endOfTransition,false);
-		
+
 		this.activeScrolling = function() {
 			this.body.addEventListener(mousewheelevt, function(e) {
 				var e = window.event || e; // old IE support
@@ -262,7 +262,7 @@ MW.prototype.changeOpacity	= function() {}		    	// TODO Fonction pouvant trouve
 
 // Fonctions de redimentionnement évennementiel des fenetres.
 
-MW.prototype.switchToFullscreen = function() {		
+MW.prototype.switchToFullscreen = function() {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE_INVERSE").innerHTML;		// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = '100vh';
@@ -274,7 +274,7 @@ MW.prototype.switchToFullscreen = function() {
 
 	this.mouseRightDiv.style.right = (3*this.borderSize)+'vh';							// TODO patch mouseRightDiv (puisqu'elle est relative à une div en float left qui perd son width lors de maximize)
 }
-MW.prototype.quitFullscreen = function () {				
+MW.prototype.quitFullscreen = function () {
 	this.maximize.innerHTML = document.getElementById("MW_SVG_MAXIMIZE").innerHTML;			// TODO Patch: il y a mieux que innerHTML pour changer d'icone.
 
 	this.main.style.height = this.lastHeight+'vh';
@@ -287,7 +287,7 @@ MW.prototype.quitFullscreen = function () {
 
 	this.mouseRightDiv.style.right = (2*this.borderSize)+'vh';							// TODO patch mouseRightDiv
 }
-		
+
 MW.prototype.resize = function() {
 	this.video && this.resizeVideo();
 	this.img && this.resizeImage();
@@ -300,27 +300,27 @@ MW.prototype.assign = function() {
 	console.log('MW: Assign existed window -> '+this.id);
 																	// TODO HeaderMaskSystem -> this.headerMask = this.main.getElementsByClassName('MWHeaderMask')[0]
 	this.header = this.main.getElementsByClassName("MWHeader")[0];
-		
+
 		this.topSpace = this.header.getElementsByClassName('MWTitle')[0];
-		
+
 		this.hideHeader 		= document.getElementById("MW_SVG_HEADERLESS").cloneNode(true);
 		this.opacityButton 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 		this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 		this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
-		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);		
-				
+		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
+
 		this.hideHeader.classList.remove('MW_Svg_Hidden');
 		this.opacityButton.classList.remove('MW_Svg_Hidden');
 		this.close.classList.remove('MW_Svg_Hidden');
 		this.maximize.classList.remove('MW_Svg_Hidden');
 		this.minimize.classList.remove('MW_Svg_Hidden');
-		
+
 		this.header.insertBefore(this.close, this.topSpace);
 		this.header.insertBefore(this.minimize, this.topSpace);
 		this.header.insertBefore(this.maximize, this.topSpace);
 		this.header.insertBefore(this.opacityButton, this.topSpace);
 		this.header.insertBefore(this.hideHeader, this.topSpace);
-		
+
 	this.conteiner = this.main.getElementsByClassName("MWConteiner")[0];
 		this.leftDiv = this.conteiner.getElementsByClassName("MWLeft")[0];
 			this.mouseLeftDiv = this.leftDiv.getElementsByClassName("MWMouseSideDiv")[0];
@@ -349,17 +349,17 @@ MW.prototype.create = function() {
 		this.opacityButton 	= document.getElementById("MW_SVG_OPACITY").cloneNode(true);
 		this.close 			= document.getElementById("MW_SVG_CLOSE").cloneNode(true);
 		this.maximize 		= document.getElementById("MW_SVG_MAXIMIZE").cloneNode(true);
-		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);		
-				
+		this.minimize 		= document.getElementById("MW_SVG_MINIMIZE").cloneNode(true);
+
 		this.hideHeader.classList.remove('MW_Svg_Hidden');
 		this.opacityButton.classList.remove('MW_Svg_Hidden');
 		this.close.classList.remove('MW_Svg_Hidden');
 		this.maximize.classList.remove('MW_Svg_Hidden');
 		this.minimize.classList.remove('MW_Svg_Hidden');
-		
-		this.topSpace = document.createElement('div');	
+
+		this.topSpace = document.createElement('div');
 		this.topSpace.className = 'MWTitle';
-		
+
 		this.header.appendChild(this.close);
 		this.header.appendChild(this.minimize);
 		this.header.appendChild(this.maximize);
@@ -411,7 +411,7 @@ MW.prototype.setProperty = function(titleWindow,positionX,positionY,sizeX,sizeY,
 
 												// TODO HeaderMaskSystem -> this.headerMask.style.height = this.header.style.height = this.headerHeight+'vh';
 	this.header.style.height = this.headerHeight+'vh';
-	
+
 	this.title = document.createElement('span');
 	this.topSpace.appendChild(this.title);
 	var txtNode = document.createTextNode(titleWindow);
@@ -420,12 +420,12 @@ MW.prototype.setProperty = function(titleWindow,positionX,positionY,sizeX,sizeY,
 	this.header.style.color = this.close.style.color = this.minimize.style.color = this.maximize.style.color = this.titleTxtColor;
 
 	this.conteiner.style.height = (sizeY - this.headerHeight - this.borderSize)+'vh';
-	
+
 	this.body.style.backgroundColor = background;
 	this.body.style.opacity	= this.opacity;
 
 	this.topSpace.style.backgroundColor = this.bottomDiv.style.backgroundColor = this.leftDiv.style.backgroundColor = this.rightDiv.style.backgroundColor = color;
-	
+
 	this.footer.style.height = this.leftDiv.style.width = this.rightDiv.style.width = this.borderSize+'vh';
 
 	this.bottomLeftDiv.style.width = this.bottomRightDiv.style.width = this.bottomLeftDiv.style.height = this.bottomRightDiv.style.height = (5*this.borderSize)+'vh';
@@ -623,7 +623,7 @@ MW.prototype.setPropotionsTool = function(proportionnedState)
 
 	this.proportionTool = document.getElementById("MW_SVG_PROPORTIONS").cloneNode(true);
 	this.proportionTool.classList.remove('MW_Svg_Hidden');
-	
+
 	this.header.insertBefore(this.proportionTool, this.topSpace);				// var insertElement = parentElement.insertBefore(nouvelElement, refElement)
 
 	var obj = this;
@@ -664,7 +664,7 @@ MW.prototype.singleVideo = function(url,proportionnedState) {
 	var videoControls = document.createElement('div');
 	videoControls.className = 'videoControls';
 	this.conteiner.appendChild(videoControls);
-	
+
 
 	this.videoControlsTimeline = document.createElement('div');
 	this.videoControlsTimeline.className = 'videoControlsTimeline';
@@ -674,16 +674,16 @@ MW.prototype.singleVideo = function(url,proportionnedState) {
 	videoControls.appendChild(this.videoControlsConteiner);
 
 
-	this.videoPlayIcon = document.getElementById("MW_SVG_VIDEO_PLAY").cloneNode(true);	
-	this.videoPauseIcon = document.getElementById("MW_SVG_VIDEO_PAUSE").cloneNode(true);		
-	this.videoMuteIcon = document.getElementById("MW_SVG_VIDEO_SOUND").cloneNode(true);			
+	this.videoPlayIcon = document.getElementById("MW_SVG_VIDEO_PLAY").cloneNode(true);
+	this.videoPauseIcon = document.getElementById("MW_SVG_VIDEO_PAUSE").cloneNode(true);
+	this.videoMuteIcon = document.getElementById("MW_SVG_VIDEO_SOUND").cloneNode(true);
 	this.videoPlayIcon.classList.remove('MW_Svg_Hidden');
 	this.videoPauseIcon.classList.remove('MW_Svg_Hidden');
 	this.videoMuteIcon.classList.remove('MW_Svg_Hidden');
 	this.videoControlsConteiner.appendChild(this.videoPlayIcon);
 	this.videoControlsConteiner.appendChild(this.videoPauseIcon);
 	this.videoControlsConteiner.appendChild(this.videoMuteIcon);
-	
+
 	var A = document.createElement('div');
 	A.className='videoTest';
 	this.videoControlsTimeline.appendChild(A);
@@ -693,7 +693,7 @@ MW.prototype.singleVideo = function(url,proportionnedState) {
 		obj.video.play();
 		obj.main.style.opacity = 1;
 	},false);
-	
+
 	this.video.src = url;
 	this.video.className = 'MWVid';
 	this.video.type = 'video/mp4';			// TODO Est-ce que le type de la vidéo se définit vraiment ainsi en JS ?
@@ -704,7 +704,7 @@ MW.prototype.singleVideo = function(url,proportionnedState) {
 	this.videoPauseIcon.onmousedown = function() { obj.video.pause(); 	}
 	this.videoMuteIcon.onmousedown = function() { obj.video.volume = (obj.video.volume)?0:1; }
 
-	this.video.ontimeupdate = function() { 
+	this.video.ontimeupdate = function() {
 		A.style.width=(obj.video.currentTime/obj.video.duration*100)+'%';
 	}
 	this.videoControlsTimeline.onmousedown = function(e) {

@@ -9,7 +9,7 @@
     <pubDate>Sun, 01 Jun 2014 04:55:28 -0700</pubDate>
     <lastBuildDate>Sun, 01 Jun 2014 04:55:28 -0700</lastBuildDate>
 
-    
+
     <item>
       <title>Moving on: the end of Official.fm Labs and the beginning of Audiocogs</title>
       <link>http://ofmlabs.org/articles/2013/03/18/moving-on/</link>
@@ -24,7 +24,7 @@
 
 &lt;p&gt;We are looking forward to continuing our open source work through Audiocogs in the future, and continuing to make audio on the web better. Please help us by contributing and using our code, and of course, reporting bugs.&lt;/p&gt;</description>
     </item>
-    
+
     <item>
       <title>Adding AAC.js to Our Codecs Arsenal</title>
       <link>http://ofmlabs.org/articles/2012/07/09/adding-aac-js/</link>
@@ -47,7 +47,7 @@
 
 &lt;p&gt;Be sure to &lt;a href=&quot;http://audiocogs.org/codecs/aac/&quot;&gt;check out the demo&lt;/a&gt;, to which we’ve added the ability to play music off of your own hard drive, and also the code for AAC.js on &lt;a href=&quot;https://github.com/audiocogs/aac.js&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
+
     <item>
       <title>Introducing FLAC.js: A Pure JavaScript FLAC Decoder</title>
       <link>http://ofmlabs.org/articles/2012/06/15/flac-and-aurora/</link>
@@ -86,7 +86,7 @@
 
 &lt;p&gt;The Web Audio API opens up many doors to us to build amazing audio applications in the browser. Many of those applications will need to use compressed audio data, and we’ve been implementing the codecs to make that happen. Be sure to check out the &lt;a href=&quot;http://audiocogs.org/codecs/flac/&quot;&gt;demo&lt;/a&gt; of &lt;a href=&quot;https://github.com/audiocogs/flac.js&quot;&gt;FLAC.js&lt;/a&gt; and write your own decoders using &lt;a href=&quot;https://github.com/audiocogs/aurora.js&quot;&gt;Aurora.js&lt;/a&gt;. We’re excited to see the amazing apps you build!&lt;/p&gt;</description>
     </item>
-    
+
     <item>
       <title>Problems with a 'pure Javascript' implementation of H.264</title>
       <link>http://ofmlabs.org/articles/2012/05/09/broadway-and-h264/</link>
@@ -135,7 +135,7 @@
 
 &lt;p&gt;And while I would love to be proved wrong about this, I don’t think I will be for a long while, and at that point, there will be more advanced codecs and higher resolutions around to target.&lt;/p&gt;</description>
     </item>
-    
+
     <item>
       <title>Why HTML5 Media is not Enough</title>
       <link>http://ofmlabs.org/articles/2011/11/30/dublin/</link>
@@ -206,7 +206,7 @@
 
 &lt;p&gt;You can also read &lt;a href=&quot;http://happyworm.com/blog/2011/11/15/html5-audio-apis-how-low-can-we-go/&quot;&gt;Mark Boas’s article about low-level audio APIs&lt;/a&gt;, published earlier this year, which covers the same substance with a different prose.&lt;/p&gt;</description>
     </item>
-    
+
     <item>
       <title>Genesis</title>
       <link>http://ofmlabs.org/articles/2011/08/02/genesis/</link>
@@ -239,7 +239,7 @@
 
 &lt;p&gt;&lt;strong&gt;EDIT (2013-03-18):&lt;/strong&gt; we no longer hang out on the #ofmlabs IRC channel. You can find us on #audiocogs on Freenode.&lt;/p&gt;</description>
     </item>
-    
+
 
   </channel>
 </rss>

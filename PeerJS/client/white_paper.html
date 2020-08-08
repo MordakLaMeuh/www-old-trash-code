@@ -1,12 +1,12 @@
 <html>
   <head>
     <title>WebRTC Copy</title>
-	
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Crypto Implementation of rtccopy.com">
     <meta name="author" content="erbbysam">
     <link rel="shortcut icon" href="images/favicon.ico">
-    
+
 	<!-- jquery -->
     <script src="ext-js/jquery.js"></script>
     <script src="ext-js/jquery.browser.min.js"></script>
@@ -19,11 +19,11 @@
 	<script src="ext-js/otr/eventemitter.js"></script>
 	<script src="ext-js/otr/otr.js"></script>
 	<!-- additional crypto-js -->
-	<script src="ext-js/crypto-js/core.js"></script> 
-	<script src="ext-js/crypto-js/rabbit.js"></script> 
+	<script src="ext-js/crypto-js/core.js"></script>
+	<script src="ext-js/crypto-js/rabbit.js"></script>
 	<!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet"> <!-- min. -->
-	
+
 	<!-- site CSS -->
     <link type="text/css" href="style.css" rel="stylesheet"></link>
 	<!--  site js  -->
@@ -53,27 +53,27 @@
 <a href="/">Click here to return to the main page</a> <br />
 <h3>Cryptology Details</h3>
 <div>
-WebRTC already mandates encryption over DTLS, and this website does not disable that functionality. However, <a href="http://chimera.labs.oreilly.com/books/1230000000545/ch18.html#_secure_communication_with_dtls">there is no authentication scheme 
+WebRTC already mandates encryption over DTLS, and this website does not disable that functionality. However, <a href="http://chimera.labs.oreilly.com/books/1230000000545/ch18.html#_secure_communication_with_dtls">there is no authentication scheme
 built into this DTLS implementation</a>.<br />
 <br />
-While <a href="http://www.matasano.com/articles/javascript-cryptography/" target="_blank">javascript cryptology is less than ideal in the browser</a>, 
-this website uses OTR(or Off The Record) in order to add an additional layer of security, as well as verify the authorization of the other users in the 
+While <a href="http://www.matasano.com/articles/javascript-cryptography/" target="_blank">javascript cryptology is less than ideal in the browser</a>,
+this website uses OTR(or Off The Record) in order to add an additional layer of security, as well as verify the authorization of the other users in the
 rtccopy.com room. <br />
 <br />
 How does OTR verify identity of other users?<br />
-OTR offers a feature called <a href="http://en.wikipedia.org/wiki/Socialist_millionaire" target="_blank">SMP</a> which, once an OTR connection has been 
+OTR offers a feature called <a href="http://en.wikipedia.org/wiki/Socialist_millionaire" target="_blank">SMP</a> which, once an OTR connection has been
 established, can be used check if other users entered the same password, without sharing <i>any</i> information about that password.<br />
 <br />
 Why not just use a third party to verify authorization?<br />
 Then we would be trusting a third party's login system, which this implementation aims to avoid.<br />
 <br />
 I don't trust this site. What can I do?<br />
-Don't trust it. Host at least the client portion of this site yourself. You are free to use the node.js server (used to setup and manage rooms and user connections) on rtccopy.com in order to facilitate  
-connections and hold room information. The server does not ever get sent or store the OTR password (see Privacy section in "About" above) and users would be able 
+Don't trust it. Host at least the client portion of this site yourself. You are free to use the node.js server (used to setup and manage rooms and user connections) on rtccopy.com in order to facilitate
+connections and hold room information. The server does not ever get sent or store the OTR password (see Privacy section in "About" above) and users would be able
 to connect between versions of this site hosted on multiple websites (even over OTR), as long as the same node.js server is used.<br />
 <br />
 Why not just verify authorization with OTR, then send everything over the DTLS connection?<br />
-A malicious third party could just blindly forward the OTR packets back and forth after establishing a DTLS connection with both users. If the OTR traffic 
+A malicious third party could just blindly forward the OTR packets back and forth after establishing a DTLS connection with both users. If the OTR traffic
 is then sent in the clear, they would not be authorized, but would be able to see all plaintext traffic.<br />
 <br />
 OK, so how is OTR implemented?<br />
@@ -136,10 +136,10 @@ Questions?<br />
 
 	<!-- Bootstrap core js -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-    
+
 	<!-- more site js -->
    	<script src="js/file-io.js"></script>
 	<script src="js/script.js"></script>
-	
+
   </body>
 </html>

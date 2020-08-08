@@ -3,23 +3,23 @@ var mainFILE = function() {
 	var console	=_DOM_.console;
 	var fileTab	=_DOM_.fileTab;				// graphic mode
 	//console.fileLog = console.log;			// console mode
-		
+
 /*********************************************************************************************************************************************************************************************************************/
 /******************************************** Gestion de l'affichage de la liste des fichiers: ATTENTION utilise div fileTab *****************************************************************************************/
-	var fileObject = function(file) {		
+	var fileObject = function(file) {
 		this.deleteEntry 	 	= null;
-		this.statusEntry   	= null;			
-		this.nameEntry     	= null;	
-	
+		this.statusEntry   	= null;
+		this.nameEntry     	= null;
+
 		this.file				= file;
 		this.IDENTITY_CARD 		= new Array();
 		this.file.fingerprint		= (file.fingerprint)?file.fingerprint:false;
 		this.file.owner			= (file.owner)?file.owner:false;
-		
+
 		this.createElements();
-				
+
 		/*("{\"from\":\"SERVER\",\"to\":\""+hexID+"\",\"msg\":\"HELO\",\"data\":[\""+IDENTITY_CARD.join('\",\"')+"\"]}")*/
-	
+
 		fileTab.refreshWindow();
 	}
 /* List of fileObject prototypes: Tous les prototypes semblent evoluer dans des contextes différents. util° of this. && var [...] */
@@ -27,7 +27,7 @@ var mainFILE = function() {
 		this.statusEntry.innerHTML = 'SEED';
 		this.statusEntry.classList.remove("generatingHash");
 		this.statusEntry.style.color = '#FFA500';
-		this.statusEntry.onclick = null; 
+		this.statusEntry.onclick = null;
 	}
 	fileObject.prototype.stateHash = function() {
 		this.statusEntry.innerHTML = 'GENERATING HASH';
@@ -35,19 +35,19 @@ var mainFILE = function() {
 	}
 	fileObject.prototype.createElements = function () {
 		var SUPER = this;
-		
+
 		var fileA 		= document.createElement('a');
 		var fileP	 	= document.createElement('p');
-		var fileDiv		= document.createElement('div') 
-			
+		var fileDiv		= document.createElement('div')
+
 		fileA.className 		= 'sharingButton';
 		fileP.innerHTML  		= this.file.name;
-			
+
 		fileDiv.className		= 'deleteFile';
 		fileDiv.innerHTML	 	= 'DEL'
-			
-		fileDiv.onclick   	= function(e) { SUPER.delete(); return false; }	
-				
+
+		fileDiv.onclick   	= function(e) { SUPER.delete(); return false; }
+
 		if (!this.file.fingerprint) {
 			fileA.innerHTML 		= 'LOCAL';
 			fileA.href			= URL.createObjectURL(this.file);
@@ -58,8 +58,8 @@ var mainFILE = function() {
 		{
 			fileA.innerHTML 		= 'REMOTE';
 			fileA.onclick		= function(e) { SUPER.downloadFile(); return false;}
-		}			
-		this.deleteEntry 		= fileTab.utilize().appendChild(fileDiv);	
+		}
+		this.deleteEntry 		= fileTab.utilize().appendChild(fileDiv);
 		this.statusEntry   	= fileTab.utilize().appendChild(fileA);
 		this.nameEntry     	= fileTab.utilize().appendChild(fileP);
 	}
@@ -73,16 +73,16 @@ var mainFILE = function() {
 	}
 	fileObject.prototype.fullFileReceived = function() {
 		var SUPER = this;
-		
+
 		this.statusEntry.innerHTML 		= 'LOCAL';
 		this.statusEntry.href			= URL.createObjectURL(this.file);
 		this.statusEntry.download  		= '';
-			
+
 		this.deleteEntry  = statusEntry.parentNode.insertBefore(document.createElement('div'), this.statusEntry);
-					
+
 		this.deleteEntry.className		= 'deleteFile';
 		this.deleteEntry.innerHTML	 	= 'DEL'
-		this.deleteEntry.onclick   		= function(e) { SUPER.delete(); return false; }		
+		this.deleteEntry.onclick   		= function(e) { SUPER.delete(); return false; }
 	}
 	fileObject.prototype.delete = function() {
 		this.nameEntry.remove();
@@ -101,7 +101,7 @@ var mainFILE = function() {
 	fileObject.prototype.sendMetaData = function() {
 		if (_RTC_CORE_) {
 			var obj = {
-				name: this.file.name,    
+				name: this.file.name,
 				size: this.file.size,
 				type: this.file.type,
 				fingerprint: this.file.fingerprint };
@@ -110,12 +110,12 @@ var mainFILE = function() {
 		}
 		else	console.fileLog('_RTC_CORE_ DOWN: unable to send meta-data',2);
 	}
-	
+
 	/******************************************************************************************************************************/
 	/*						fONCTIONS DE GÉNÉRATIONS DES fingerprint									*/
 	var is_crypto = window.crypto && window.crypto.subtle && window.crypto.subtle.digest;
 	var buffer_size = 1024*1024;
-	
+
 	var fastHashGenerating =  function(file) {
 		console.fileLog('fast cryptographic api sha256 prototype enable');
 		var SUPER=this;
@@ -131,10 +131,10 @@ var mainFILE = function() {
 				}
 				SUPER.IDENTITY_CARD.push(hexString);
 				console.fileLog(hexString);
-				
+
 				currentSegment++;
 				if ( currentSegment < requireSegment) {
-					begin+=buffer_size; 
+					begin+=buffer_size;
 					end+=buffer_size;
 					reader.readAsArrayBuffer(file.slice(begin,end));
 				}
@@ -170,28 +170,28 @@ var mainFILE = function() {
 		console.fileLog('GENERATE IDENTITY CARD of '+file.name+' SIZE:'+file.size+' '+requireSegment+' segments finded.');
 
 		reader.readAsArrayBuffer(file.slice(begin,end));
-	}	
-	
+	}
+
 	var slowHashGenerating = function(file) {
 		console.fileLog('slow manual worker sha256 prototype enable');
 		var SUPER=this;
 		this.stateHash();
-			
+
 		var worker = new Worker('file/sha256/sha256Worker.js');
 		var reader = new FileReader();
 
 		reader.onload = function (event) 	{ worker.postMessage(event.target.result, [event.target.result]); };
-	
+
 		var handle_hash_block = function (event) {
 			console.fileLog(event.data);
 			SUPER.IDENTITY_CARD.push(event.data);
-			
+
 			block.currentSegment++;
 			if (block.currentSegment < block.requireSegment) {
 				var begin = block.currentSegment*buffer_size;
 				var end = begin + buffer_size;
-				if (end > file.size)			end = file.size;	
-				
+				if (end > file.size)			end = file.size;
+
 				reader.readAsArrayBuffer(file.slice(begin, end));
 			}
 			else {
@@ -218,17 +218,17 @@ var mainFILE = function() {
 		var end = (block.currentSegment+1)*buffer_size;
 		if (end > file.size) end = file.size; 
 		console.fileLog('GENERATE IDENTITY CARD of '+file.name+' SIZE:'+file.size+' '+block.requireSegment+' segments finded.');
-			
+
 		reader.readAsArrayBuffer(file.slice(0, end));
 	}
-	
+
 	fileObject.prototype.generateHash = (is_crypto)?fastHashGenerating:slowHashGenerating;
-	
+
 /*********************************************************************************************************************************************************************************************************************/
 /****************************************************** PUBLICS METHODES OF _FILE_ ***********************************************************************************************************************************/
-	
+
 	var fileList = new Array();
-	
+
 	this.queryFileHashTable = function(file) {
 		for (var i=0; i<fileList.length; i++) {
 			if (file.fingerprint == fileList[i].file.fingerprint)	{
@@ -239,14 +239,14 @@ var mainFILE = function() {
 		return true;
 	}
 
-	this.addLocalFile = function(files) 
-	{	
+	this.addLocalFile = function(files)
+	{
 		console.fileLog(files.length+' files selected. name:'+files[0].name);
 		fileList.push(new fileObject(files[0]));
 	}
-	
+
 	this.addRemoteFile = function(file) { fileList.push(new fileObject(file)); }
 /*********************************************************************************************************************************************************************************************************************/
 /*********************************************************************************************************************************************************************************************************************/
 	console.log('_FILE_ system successfully loaded.',1);
-}	
+}

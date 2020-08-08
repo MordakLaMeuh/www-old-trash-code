@@ -1,6 +1,6 @@
 // SCRIPT JS DE DETECTION D'ADDBLOCK. (testé sur Firefox 01/2014)
 // Fiche de style de #s660 <STYLE> déclaré dans css/SSblock.css
-// Et <DIV id="s660"></DIV> Déclaration necessaire juste avant le script. 
+// Et <DIV id="s660"></DIV> Déclaration necessaire juste avant le script.
 // Envois des données addblock à php/verify.php : qui modifie $_SESSION['addblock'] : Fonction send();
 // Et enfin, réinitialisation de $_SESSION['addblock'] dans php/logique.php.
 
@@ -10,11 +10,11 @@ function send()
 	var xhr = getXMLHttpRequest();
 	xhr.open("GET", "php/verify.php?addblock=1", true);
 	xhr.send(null);
-} 	
+}
 function getXMLHttpRequest()
 {
 	var xhr = null;
-	
+
 	if (window.XMLHttpRequest || window.ActiveXObject)
 	{
 		if (window.ActiveXObject)
@@ -22,22 +22,22 @@ function getXMLHttpRequest()
 			try
 		   {
 				xhr = new ActiveXObject("Msxml2.XMLHTTP");
-			} 
+			}
 			catch(e)
 			{
 				xhr = new ActiveXObject("Microsoft.XMLHTTP");
 			}
-		} 
-		else 
-		{
-			xhr = new XMLHttpRequest(); 
 		}
-	} 
+		else
+		{
+			xhr = new XMLHttpRequest();
+		}
+	}
 	else
 	{
 		alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
 		return null;
-	}	
+	}
 	return xhr;
 }
 function add()
@@ -76,17 +76,17 @@ window.document.getElementById("s660").parentNode.removeChild(window.document.ge
 				e.setAttribute("id",b);
 				g.margin=g.padding=0;g.height="100%";
 				for(c=this.rand(c);f<c;f++)1==d.childNodes[f].nodeType&&(k=Math.max(k,parseFloat(this.getStyle(d.childNodes[f]).zIndex)||0));
-				k&&(e.style.zIndex=k+1);c++	
-			}			
+				k&&(e.style.zIndex=k+1);c++
+			}
 			e.innerHTML=a;d.insertBefore(e,d.childNodes[c-1])
-      }				
+      }
 		,displayMessage:function(a)
 		{
 			var b=this;
 		   send();
 			a="abisuq".charAt(b.rand(5));
 			h.addEventListener&&b.deferExecution(function()
-			{	
+			{
 				b.getElementBy("s660").addEventListener("DOMNodeRemoved",function()
 				{
 					b.displayMessage()
@@ -104,7 +104,7 @@ window.document.getElementById("s660").parentNode.removeChild(window.document.ge
 				for(c=0;c<b;c++)if(null==d.getElementBy(a[c]).offsetParent||"none"==d.getStyle(d.getElementBy(a[c])).display)return d.displayMessage("#"+a[c]+"("+c+")");
 				d.nextFunction()
 			})
-		}	
+		}
 		,s:function()
 		{
 			var a=
@@ -134,14 +134,14 @@ window.document.getElementById("s660").parentNode.removeChild(window.document.ge
 				return
 			}
 			b.nextFunction()
-		}	
+		}
 		,u:function()
 		{
 			var a="/adflashes/ad,/admain.,/adtago.,/affilinet/ad,/freead2.,/headerads.,/housead/ad,/~cdn/ads/ad,_ad2.,/468x60_".split(","),b=this,e=b.getElementBy(0,"img"),d,c;e[0]!==m&&e[0].src!==m&&(d=new Image,d.onload=function()
 			{
 	 			c=this;
 				c.onload=null;
-				c.onerror=function()		
+				c.onerror=function()
 				{
 					p=null;b.displayMessage(c.src)
 				};
