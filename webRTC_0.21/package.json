@@ -1,0 +1,9 @@
+{
+  "name": "webRTC",
+  "version": "0.0.21",
+  "private": true,
+  "dependencies": {
+    "ip": "^1.1.5",
+    "ws": "^7.3.1"
+  }
+}
